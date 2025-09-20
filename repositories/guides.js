@@ -6,6 +6,17 @@ const getAllGuides = async () => {
   return res
 }
 
+const postGuide = async (payload) => {
+  const res = await Guide.create({
+    author: payload.author,
+    title: payload.title,
+    content: payload.content
+  })
+
+  return res
+}
+
 module.exports = {
-  getAllGuides
+  getAllGuides,
+  postGuide
 }
