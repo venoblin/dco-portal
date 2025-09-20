@@ -14,6 +14,21 @@ const getAllGuides = async (req, res) => {
   }
 }
 
+const getSingleGuide = async (req, res) => {
+  try {
+    const { id } = req.params
+    const guide = await repo.getSingleGuide(id)
+
+    res.status(200).json({
+      guide: guide
+    })
+  } catch {
+    res.status(500).json({
+      error: 'Failed to get guide'
+    })
+  }
+}
+
 const postGuide = async (req, res) => {
   try {
     const guide = await repo.postGuide(req.body)
@@ -51,6 +66,7 @@ const deleteGuide = async (req, res) => {
 
 module.exports = {
   getAllGuides,
+  getSingleGuide,
   postGuide,
   deleteGuide
 }

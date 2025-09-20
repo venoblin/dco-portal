@@ -16,6 +16,12 @@ const postGuide = async (payload) => {
   return guide
 }
 
+const getSingleGuide = async (id) => {
+  const guide = await Guide.findByPk(id)
+
+  return guide
+}
+
 const deleteGuide = async (id) => {
   const count = await Guide.destroy({
     where: {
@@ -28,6 +34,7 @@ const deleteGuide = async (id) => {
 
 module.exports = {
   getAllGuides,
+  getSingleGuide,
   postGuide,
   deleteGuide
 }
