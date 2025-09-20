@@ -29,6 +29,29 @@ const getSingleGuide = async (req, res) => {
   }
 }
 
+const patchGuide = async (req, res) => {
+  try {
+    const { id } = req.params
+    const count = await repo.patchGuide(id, req.body)
+
+    if (count === 1) {
+      const guide = await getSingleGuide(req, res)
+
+      res.status(201).json({
+        guide: guide
+      })
+    } else {
+      res.status(404).json({
+        error: 'Guide not found'
+      })
+    }
+  } catch {
+    res.status(500).json({
+      error: 'Failed to create guide'
+    })
+  }
+}
+
 const postGuide = async (req, res) => {
   try {
     const guide = await repo.postGuide(req.body)
@@ -50,11 +73,11 @@ const deleteGuide = async (req, res) => {
 
     if (count === 1) {
       res.status(200).json({
-        message: 'Successfully deleted user'
+        message: 'Successfully deleted guide'
       })
     } else {
       res.status(404).json({
-        error: 'User not found'
+        error: 'Guide not found'
       })
     }
   } catch {
@@ -67,6 +90,7 @@ const deleteGuide = async (req, res) => {
 module.exports = {
   getAllGuides,
   getSingleGuide,
+  patchGuide,
   postGuide,
   deleteGuide
 }

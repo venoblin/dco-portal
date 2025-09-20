@@ -6,18 +6,28 @@ const getAllGuides = async () => {
   return guides
 }
 
+const getSingleGuide = async (id) => {
+  const guide = await Guide.findByPk(id)
+
+  return guide
+}
+
+const patchGuide = async (id, payload) => {
+  const [count] = await Guide.update(payload, {
+    where: {
+      id: id
+    }
+  })
+
+  return count
+}
+
 const postGuide = async (payload) => {
   const guide = await Guide.create({
     author: payload.author,
     title: payload.title,
     content: payload.content
   })
-
-  return guide
-}
-
-const getSingleGuide = async (id) => {
-  const guide = await Guide.findByPk(id)
 
   return guide
 }
@@ -35,6 +45,7 @@ const deleteGuide = async (id) => {
 module.exports = {
   getAllGuides,
   getSingleGuide,
+  patchGuide,
   postGuide,
   deleteGuide
 }
