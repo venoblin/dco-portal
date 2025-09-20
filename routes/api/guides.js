@@ -5,5 +5,6 @@ const router = Router()
 
 router.get('/', controller.getAllGuides)
 router.post('/', controller.postGuide)
+router.delete('/:id', controller.deleteGuide)
 
 module.exports = router

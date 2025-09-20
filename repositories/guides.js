@@ -1,22 +1,33 @@
 const { Guide } = require('../models')
 
 const getAllGuides = async () => {
-  const res = await Guide.findAll()
+  const guides = await Guide.findAll()
 
-  return res
+  return guides
 }
 
 const postGuide = async (payload) => {
-  const res = await Guide.create({
+  const guide = await Guide.create({
     author: payload.author,
     title: payload.title,
     content: payload.content
   })
 
-  return res
+  return guide
+}
+
+const deleteGuide = async (id) => {
+  const count = await Guide.destroy({
+    where: {
+      id: id
+    }
+  })
+
+  return count
 }
 
 module.exports = {
   getAllGuides,
-  postGuide
+  postGuide,
+  deleteGuide
 }

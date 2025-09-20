@@ -7,9 +7,9 @@ const getAllGuides = async (req, res) => {
     res.status(200).json({
       guides: guides
     })
-  } catch (error) {
+  } catch {
     res.status(500).json({
-      error: error.message
+      error: 'Failed to get all guides'
     })
   }
 }
@@ -21,14 +21,36 @@ const postGuide = async (req, res) => {
     res.status(201).json({
       guide: guide
     })
-  } catch (error) {
+  } catch {
     res.status(500).json({
-      error: error.message
+      error: 'Failed to create guide'
+    })
+  }
+}
+
+const deleteGuide = async (req, res) => {
+  try {
+    const { id } = req.params
+    const count = await repo.deleteGuide(id)
+
+    if (count === 1) {
+      res.status(200).json({
+        message: 'Successfully deleted user'
+      })
+    } else {
+      res.status(404).json({
+        error: 'User not found'
+      })
+    }
+  } catch {
+    res.status(500).json({
+      error: 'Failed to delete user'
     })
   }
 }
 
 module.exports = {
   getAllGuides,
-  postGuide
+  postGuide,
+  deleteGuide
 }
