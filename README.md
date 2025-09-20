@@ -83,7 +83,7 @@ Describe prerequisites and how to complete them, this example we're installing n
 1. **Clone the repository**
 
    ```sh
-   npm i express sequelize sqlite
+   npm i express sequelize sqlite3
    npm i cors dotenv
    git clone --recurse-submodules https://github.com/venoblin/scripts
    ```
