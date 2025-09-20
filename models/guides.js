@@ -1,6 +1,6 @@
-const { Model } = require('sequelize')
+const { Model, DataTypes } = require('sequelize')
 
-module.exports = (db, DataTypes) => {
+module.exports = (sequelize) => {
   class Guide extends Model {}
 
   Guide.init(
@@ -19,7 +19,7 @@ module.exports = (db, DataTypes) => {
       }
     },
     {
-      db,
+      sequelize,
       modelName: 'Guide'
     }
   )

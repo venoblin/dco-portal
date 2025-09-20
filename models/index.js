@@ -1,13 +1,13 @@
 const { Sequelize } = require('sequelize')
 
-const db = {}
-
 const sequelize = new Sequelize({
   dialect: 'sqlite',
   storage: './db.sqlite'
 })
 
-db.sequelize = sequelize
-db.Sequelize = Sequelize
+const Guide = require('./guides')(sequelize)
 
-module.exports = db
+module.exports = {
+  sequelize,
+  Guide
+}
