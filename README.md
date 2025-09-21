@@ -85,6 +85,8 @@ Describe prerequisites and how to complete them, this example we're installing n
    ```sh
    npm i express sequelize sqlite3
    npm i cors dotenv
+   npm install svelte @sveltejs/kit
+   npm install --save-dev @sveltejs/adapter-static vite nodemon
    git clone --recurse-submodules https://github.com/venoblin/scripts
    ```
 
