@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
   import { goto } from '$app/navigation'
-  import { postGuide } from '$lib/service/guidesService'
+  import { postGuide } from '$lib/services/guides'
 
   let author = $state('')
   let title = $state('')

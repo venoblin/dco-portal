@@ -99,10 +99,10 @@ const getBySearch = async (req, res) => {
       })
     }
 
-    const guide = await repo.getGuideByTitle(title)
+    const guides = await repo.getGuideByTitle(title)
 
     res.status(200).json({
-      guide: guide
+      guides: guides
     })
   } catch {
     res.status(500).json({

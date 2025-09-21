@@ -1,4 +1,4 @@
-import { API } from '../repository/api'
+import { API } from '../repositories/api'
 
 export const postGuide = async (payload) => {
   try {
@@ -6,7 +6,7 @@ export const postGuide = async (payload) => {
 
     return res
   } catch (error) {
-    throw new Error()
+    throw new Error(error)
   }
 }
 
@@ -16,7 +16,7 @@ export const getGuides = async (fetch) => {
 
     return res
   } catch (error) {
-    throw new Error()
+    throw new Error(error)
   }
 }
 
@@ -26,6 +26,16 @@ export const getSingleGuide = async (id, fetch) => {
 
     return res
   } catch (error) {
-    throw new Error()
+    throw new Error(error)
+  }
+}
+
+export const getGuidesByTitle = async (title) => {
+  try {
+    const res = await API.get(`/guides/search?title=${title}`)
+
+    return res
+  } catch (error) {
+    throw new Error(error)
   }
 }

@@ -1,12 +1,17 @@
 <script>
+  import { getGuidesByTitle } from '$lib/services/guides'
   import Panel from '$lib/components/ui/Panel.svelte'
   import GuideCard from '$lib/components/GuideCard.svelte'
 
   let { data } = $props()
+  let guides = $state(data.guides)
   let search = $state('')
 
-  const onSearch = (event) => {
+  const onSearch = async (event) => {
     event.preventDefault()
+
+    const res = await getGuidesByTitle(search)
+    guides = res.guides
   }
 
 </script>
@@ -21,7 +26,7 @@
         id="search"
         type="text"
         name="search"
-        placeholder="Title"
+        placeholder="Search by title..."
         bind:value={search}
       />
 
@@ -35,7 +40,7 @@
 </header>
 
 <Panel>
-  {#await data.guides}
+  {#await guides}
     <p class="msg">Loading guides...</p>
   {:then guides}
     {#if guides && guides.length > 0}
