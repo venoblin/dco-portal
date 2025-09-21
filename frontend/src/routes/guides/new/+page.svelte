@@ -8,7 +8,7 @@
   let quill
   const toolbarOptions = [
     [
-      { header: [1, 2, 3, 4, 5, 6, false] },
+      { header: [2, 3, 4, 5, 6, false] },
       { size: ['small', false, 'large', 'huge'] }
     ],
 
@@ -131,6 +131,9 @@
       font-family: var(--body-font-family);
       height: 550px;
       overflow-y: scroll;
+    }
+    .ql-editor h2 {
+      border: none;
     }
     .editor-container .ql-container.ql-snow {
       font-family: var(--body-font-family);

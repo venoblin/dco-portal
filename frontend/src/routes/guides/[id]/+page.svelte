@@ -27,6 +27,10 @@
     .content * {
       max-width: 100%;
     }
+
+    .content h2 {
+      border: none;
+    }
   }
 
 </style>

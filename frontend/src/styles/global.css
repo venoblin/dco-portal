@@ -60,12 +60,12 @@ p {
 }
 
 h1 {
-  font-size: 1.5em;
+  font-size: 1.75em;
   margin-bottom: var(--default-spacing);
 }
 
 h2 {
-  font-size: 1.25em;
+  font-size: 1.5em;
   width: fit-content;
   padding-bottom: var(--default-spacing);
   margin-bottom: var(--default-spacing);
