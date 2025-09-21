@@ -3,11 +3,31 @@
   import GuideCard from '$lib/components/GuideCard.svelte'
 
   let { data } = $props()
+  let search = $state('')
+
+  const onSearch = (event) => {
+    event.preventDefault()
+  }
 
 </script>
 
 <header>
   <h1>Guides</h1>
+
+  <div>
+    <form onsubmit={(event) => onSearch(event)}>
+      <label for="search"></label>
+      <input 
+        id="search"
+        type="text"
+        name="search"
+        placeholder="Title"
+        bind:value={search}
+      />
+
+      <button class="search">Search</button>
+    </form>
+  </div>
 
   <div>
     <a class="btn" href="/guides/new">Create Guide</a>
@@ -29,3 +49,9 @@
     <p class="error">An error occurred: {error.message}</p>
   {/await}
 </Panel>
+
+<style>
+  form {
+    display: flex;
+  }
+</style>

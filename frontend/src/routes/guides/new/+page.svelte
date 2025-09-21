@@ -5,7 +5,6 @@
 
   let author = $state('')
   let title = $state('')
-
   let quill
   const toolbarOptions = [
     [
