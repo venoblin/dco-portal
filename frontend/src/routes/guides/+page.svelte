@@ -15,11 +15,17 @@
 </header>
 
 <Panel>
-  {#if data.guides.length > 0}
-    {#each data.guides as g}
-      <GuideCard guide={g} />
-    {/each}
-  {:else}
-    <p class="msg">There are no guides!</p>
-  {/if}
+  {#await data.guides}
+    <p class="msg">Loading guides...</p>
+  {:then guides}
+    {#if guides && guides.length > 0}
+      {#each guides as g}
+        <GuideCard guide={g} />
+      {/each}
+    {:else}
+      <p class="msg">There are no guides!</p>
+    {/if}
+  {:catch error}
+    <p class="error">An error occurred: {error.message}</p>
+  {/await}
 </Panel>

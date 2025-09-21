@@ -2,6 +2,7 @@
   import { cleanTime } from '$lib/utils'
   
   let { guide } = $props() 
+
 </script>
 
 <div class="guide-card">
