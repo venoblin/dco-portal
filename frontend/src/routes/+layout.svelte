@@ -1,6 +1,7 @@
 <script>
 	import NavBar from '$lib/components/NavBar.svelte'
 	import favicon from '$lib/assets/favicon.svg'
+	import 'quill/dist/quill.snow.css'
 	import '../styles/global.css'
 
 	let { children } = $props()

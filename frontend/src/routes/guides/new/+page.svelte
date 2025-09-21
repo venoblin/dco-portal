@@ -45,8 +45,7 @@
   }
   
   onMount(async () => {
-    const { default: Quill } = await import('quill');
-    import('quill/dist/quill.snow.css');
+    const { default: Quill } = await import('quill')
     
     quill = new Quill('#editor', {
       modules: {

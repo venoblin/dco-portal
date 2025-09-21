@@ -16,7 +16,7 @@
   </div>
 </header>
 
-<div class="content">{@html data.guide.content}</div>
+<div class="content ql-editor">{@html data.guide.content}</div>
 
 <style>
   h1 {
