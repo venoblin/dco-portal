@@ -3,15 +3,8 @@
 </header>
 
 <div>
-  <div class="links">
-    <a href="/tools/triage-manager">Triage Manager →</a>
-    <a href="/tools/incident-manager">Incident Manager →</a>
+  <div>
+    <a class="block-link" href="/tools/triage-manager">Triage Manager →</a>
+    <a class="block-link" href="/tools/incident-manager">Incident Manager →</a>
   </div>
 </div>
-
-<style>
-  .links a {
-    display: block;
-    width: fit-content;
-  }
-</style>

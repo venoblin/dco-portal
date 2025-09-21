@@ -66,9 +66,13 @@ h1 {
 
 h2 {
   font-size: 1.25em;
+  width: fit-content;
   padding-bottom: var(--default-spacing);
   margin-bottom: var(--default-spacing);
   border-bottom: var(--default-border);
+}
+
+.panel h2 {
   border-color: var(--bg-color);
 }
 
@@ -111,6 +115,11 @@ textarea {
 input:focus,
 textarea:focus {
   border-color: var(--accent-color);
+}
+
+.block-link {
+  display: block;
+  width: fit-content;
 }
 
 a {
