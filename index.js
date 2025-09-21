@@ -16,7 +16,7 @@ app.use(express.static(frontendPath))
 
 app.use('/api', apiRoutes)
 
-app.get('/*rest', (req, res) => {
+app.get('/*web', (req, res) => {
   res.sendFile(path.join(frontendPath, 'index.html'))
 })
 

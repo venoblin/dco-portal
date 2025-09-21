@@ -6,6 +6,7 @@
 
 <header>
   <div>
+    <a href="/guides">← Back</a>
     <h1>{data.guide.title}</h1>
     <p class="muted-text">By {data.guide.author}</p>
     <p class="muted-text">Created {cleanTime(data.guide.createdAt)}</p>
