@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
   import { onMount } from 'svelte'
   import { goto } from '$app/navigation'
   import { postGuide } from '$lib/service/guidesService'
@@ -6,7 +6,7 @@
   let author = $state('')
   let title = $state('')
 
-  let quill: any
+  let quill
   const toolbarOptions = [
     [
       { header: [1, 2, 3, 4, 5, 6, false] },
@@ -26,7 +26,7 @@
     ['clean']
   ]
 
-  const onSubmit = async (event: Event) => {
+  const onSubmit = async (event) => {
     event.preventDefault()
     const newGuide = {
       author: author,

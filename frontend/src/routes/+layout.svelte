@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 	import NavBar from '$lib/components/NavBar.svelte'
 	import favicon from '$lib/assets/favicon.svg'
 	import '../styles/global.css'

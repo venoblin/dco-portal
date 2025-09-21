@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
   import { cleanTime } from "$lib/utils"
   
   let { data } = $props()
