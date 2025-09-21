@@ -64,7 +64,7 @@
   </div>
 
   <div>
-    <button form="new-guide-form">Create</button>
+    <button form="new-guide-form">Submit</button>
   </div>
 </header>
 
