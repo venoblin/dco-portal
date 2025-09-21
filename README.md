@@ -87,7 +87,7 @@ Describe prerequisites and how to complete them, this example we're installing n
    npm i cors dotenv
    npm install svelte @sveltejs/kit
    npm install --save-dev @sveltejs/adapter-static vite nodemon
-   git clone --recurse-submodules https://github.com/venoblin/scripts
+   npm install --save-dev @sveltejs/vite-plugin-svelte
    ```
 
 2. **Create settings file (for [ezdownloadsorter](https://github.com/venoblin/download-file-sorter))**

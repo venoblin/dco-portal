@@ -1,0 +1,162 @@
+:root {
+  --bg-color: #171c1b;
+  --text-color: #f6f7eb;
+  --muted-text-color: #989898;
+  --overlay-bg-color: #262424;
+  --accent-color: #2175d9;
+  --danger-color: #c13642;
+  --border-width: 1px;
+  --nav-width: 200px;
+  --nav-height: 100px;
+  --default-transition: 0.1s ease-in-out;
+  --default-spacing: 1rem;
+  --default-border-radius: 1rem;
+  --default-border: var(--border-width) solid var(--overlay-bg-color);
+  --body-font-family: 'Poppins-Regular', Helvetica, Arial, sans-serif;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Poppins-Regular';
+  src: url('../../static/fonts/Poppins-Regular.ttf');
+}
+@font-face {
+  font-family: 'Mozilla-Regular';
+  src: url('../../static/fonts/MozillaHeadline-Regular.ttf');
+}
+
+body {
+  font-family: var(--body-font-family);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-color);
+  color: var(--text-color);
+  max-width: 2000px;
+}
+
+path {
+  transition: fill var(--default-transition), opacity var(--default-transition);
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Mozilla-Regular', Helvetica, Arial, sans-serif;
+}
+
+button,
+a,
+input,
+textarea,
+p {
+  font-size: 1em;
+}
+
+h1 {
+  font-size: 1.5em;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.25em;
+  margin-bottom: 0.5rem;
+}
+
+label {
+  position: absolute;
+  left: -999999px;
+}
+
+.btn,
+button {
+  cursor: pointer;
+  display: block;
+  border: none;
+  text-decoration: none;
+  background: var(--accent-color);
+  color: var(--bg-color);
+  width: fit-content;
+  padding: 0.25rem 0.5rem;
+  border-radius: 10px;
+  transition: opacity var(--default-transition);
+}
+
+.btn:hover,
+button:hover {
+  opacity: 0.8;
+  margin-left: 0;
+}
+
+input,
+textarea {
+  padding: 0.75rem 1rem;
+  border-radius: var(--default-border-radius);
+  outline: none;
+  border: var(--border-width) solid var(--overlay-bg-color);
+  background: var(--text-color);
+  color: var(--bg-color);
+  transition: border var(--default-transition), color var(--default-transition);
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--accent-color);
+}
+
+a {
+  text-decoration: none;
+  color: var(--accent-color);
+  border-bottom: var(--border-width) solid transparent;
+  transition: opacity var(--default-transition),
+    border-color var(--default-transition);
+}
+
+a:hover {
+  opacity: 0.8;
+  border-color: var(--accent-color);
+}
+main header {
+  width: 100%;
+  height: var(--nav-height);
+  background: var(--bg-color);
+  border-bottom: var(--default-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: calc(var(--default-spacing) * 2);
+  position: sticky;
+  top: 0;
+}
+
+main header div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main header div a {
+  margin-right: var(--default-spacing);
+}
+
+main header div p {
+  margin-right: calc(var(--default-spacing) / 2);
+}
+
+main header div p:last-of-type {
+  margin-right: 0;
+}
+
+main header h1 {
+  margin-bottom: 0;
+}
+
+.muted-text {
+  color: var(--muted-text-color);
+}
