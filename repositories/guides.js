@@ -1,3 +1,4 @@
+const { Op } = require('sequelize')
 const { Guide } = require('../models')
 
 const getAllGuides = async () => {
@@ -43,10 +44,23 @@ const deleteGuide = async (id) => {
   return count
 }
 
+const getGuideByTitle = async (title) => {
+  const guide = await Guide.findAll({
+    where: {
+      title: {
+        [Op.like]: `%${title}%`
+      }
+    }
+  })
+
+  return guide
+}
+
 module.exports = {
   getAllGuides,
   getSingleGuide,
   patchGuide,
   postGuide,
-  deleteGuide
+  deleteGuide,
+  getGuideByTitle
 }

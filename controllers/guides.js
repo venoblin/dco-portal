@@ -87,10 +87,35 @@ const deleteGuide = async (req, res) => {
   }
 }
 
+const getBySearch = async (req, res) => {
+  try {
+    const title = req.query.title
+
+    if (title === '') {
+      const guides = await repo.getAllGuides()
+
+      res.status(200).json({
+        guides: guides
+      })
+    }
+
+    const guide = await repo.getGuideByTitle(title)
+
+    res.status(200).json({
+      guide: guide
+    })
+  } catch {
+    res.status(500).json({
+      error: 'Failed searching for guides'
+    })
+  }
+}
+
 module.exports = {
   getAllGuides,
   getSingleGuide,
   patchGuide,
   postGuide,
-  deleteGuide
+  deleteGuide,
+  getBySearch
 }

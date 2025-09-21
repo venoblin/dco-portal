@@ -4,6 +4,7 @@ const controller = require('../../controllers/guides')
 const router = Router()
 
 router.get('/', controller.getAllGuides)
+router.get('/search', controller.getBySearch)
 router.get('/:id', controller.getSingleGuide)
 router.patch('/:id', controller.patchGuide)
 router.post('/', controller.postGuide)
