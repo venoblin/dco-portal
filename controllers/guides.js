@@ -2,9 +2,16 @@ const repo = require('../repositories/guides')
 
 const getAllGuides = async (req, res) => {
   try {
-    const guides = await repo.getAllGuides({
+    const limit = req.query.limit
+    const options = {
       order: [['createdAt', 'DESC']]
-    })
+    }
+
+    if (limit) {
+      options.limit = limit
+    }
+
+    const guides = await repo.getAllGuides(options)
 
     res.status(200).json({
       guides: guides
