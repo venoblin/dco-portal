@@ -2,7 +2,9 @@ const repo = require('../repositories/guides')
 
 const getAllGuides = async (req, res) => {
   try {
-    const guides = await repo.getAllGuides()
+    const guides = await repo.getAllGuides({
+      order: [['createdAt', 'DESC']]
+    })
 
     res.status(200).json({
       guides: guides
@@ -92,7 +94,9 @@ const getBySearch = async (req, res) => {
     const title = req.query.title
 
     if (title === '') {
-      const guides = await repo.getAllGuides()
+      const guides = await repo.getAllGuides({
+        order: [['createdAt', 'DESC']]
+      })
 
       res.status(200).json({
         guides: guides

@@ -1,8 +1,13 @@
 const { Op } = require('sequelize')
 const { Guide } = require('../models')
 
-const getAllGuides = async () => {
-  const guides = await Guide.findAll()
+const getAllGuides = async (options) => {
+  let guides
+  if (options) {
+    guides = await Guide.findAll(options)
+  } else {
+    guides = await Guide.findAll()
+  }
 
   return guides
 }
