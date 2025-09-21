@@ -133,6 +133,7 @@ main header {
   margin-bottom: calc(var(--default-spacing) * 2);
   position: sticky;
   top: 0;
+  z-index: 10;
 }
 
 main header div {

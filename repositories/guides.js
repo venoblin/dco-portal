@@ -26,7 +26,8 @@ const postGuide = async (payload) => {
   const guide = await Guide.create({
     author: payload.author,
     title: payload.title,
-    content: payload.content
+    content: payload.content,
+    shortDescription: payload.shortDescription
   })
 
   return guide

@@ -35,14 +35,14 @@
       shortDescription: quill.root.innerText.slice(0, 255)
     }
 
-    const guide = await postGuide(newGuide)
+    const res = await postGuide(newGuide)
 
     author = ''
     title = ''
     quill.root.innerHTML = ''
     quill.root.innerText = ''
 
-    goto(`/guides/${guide.id}`)
+    goto(`/guides/${res.guide.id}`)
   }
   
   onMount(async () => {

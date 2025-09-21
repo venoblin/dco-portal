@@ -27,7 +27,7 @@
 		display: grid;
 		grid-template-columns: 1fr 2fr;
 		gap: var(--default-spacing);
-		height: 150px;
+		height: 200px;
 		overflow: hidden;
 	}
 	.guide-card div:first-of-type {
