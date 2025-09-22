@@ -12,7 +12,9 @@
 
 <div class="dashboard">
   <Panel>
-    <h2>Quick Links</h2>
+    <header>
+      <h2>Quick Links</h2>
+    </header>
 
     <div>
       <a class="block-link" href="/tools/triage-manager">Tools/Triage Manager →</a>
@@ -21,7 +23,10 @@
   </Panel>
 
   <Panel>
-    <h2>Recent Guides</h2>
+    <header>
+      <h2>Recent Guides</h2>
+      <a class="block-link" href="/guides">View More →</a>
+    </header>
     {#await data.guides}
       <p class="msg">Loading guides...</p>
     {:then guides}

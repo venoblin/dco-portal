@@ -8,6 +8,8 @@
 </header>
 
 <Panel>
-  <h2>User Guides</h2>
+  <header>
+    <h2>User Guides</h2>
+  </header>
   <p>User guides go here</p>
 </Panel>
