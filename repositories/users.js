@@ -2,7 +2,13 @@ const { User } = require('../models')
 
 const exports = {}
 
-exports.postUser = async (payload) => {
+exports.findUserById = async (id) => {
+  const user = await User.findByPk(id)
+
+  return user
+}
+
+exports.createUser = async (payload) => {
   const user = await User.create({
     username: payload.username,
     password: payload.password
@@ -11,7 +17,7 @@ exports.postUser = async (payload) => {
   return user
 }
 
-exports.patchUser = async (id, payload) => {
+exports.updateUser = async (id, payload) => {
   const [count] = await User.update(payload, {
     where: {
       id: id
@@ -21,7 +27,7 @@ exports.patchUser = async (id, payload) => {
   return count
 }
 
-exports.deleteUser = async (id) => {
+exports.destroyUser = async (id) => {
   const count = await User.destroy({
     where: {
       id: id

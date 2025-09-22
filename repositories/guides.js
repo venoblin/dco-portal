@@ -3,7 +3,7 @@ const { Guide } = require('../models')
 
 const exports = {}
 
-exports.getAllGuides = async (options) => {
+exports.findAllGuides = async (options) => {
   let guides
   if (options) {
     guides = await Guide.findAll(options)
@@ -14,13 +14,13 @@ exports.getAllGuides = async (options) => {
   return guides
 }
 
-exports.getSingleGuide = async (id) => {
+exports.findSingleGuide = async (id) => {
   const guide = await Guide.findByPk(id)
 
   return guide
 }
 
-exports.patchGuide = async (id, payload) => {
+exports.updateGuide = async (id, payload) => {
   const [count] = await Guide.update(payload, {
     where: {
       id: id
@@ -30,7 +30,7 @@ exports.patchGuide = async (id, payload) => {
   return count
 }
 
-exports.postGuide = async (payload) => {
+exports.createGuide = async (payload) => {
   const guide = await Guide.create({
     author: payload.author,
     title: payload.title,
@@ -41,7 +41,7 @@ exports.postGuide = async (payload) => {
   return guide
 }
 
-exports.deleteGuide = async (id) => {
+exports.destroyGuide = async (id) => {
   const count = await Guide.destroy({
     where: {
       id: id
@@ -51,7 +51,7 @@ exports.deleteGuide = async (id) => {
   return count
 }
 
-exports.getGuideByTitle = async (title) => {
+exports.findGuideByTitle = async (title) => {
   const guide = await Guide.findAll({
     where: {
       title: {

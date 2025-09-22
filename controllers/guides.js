@@ -13,7 +13,7 @@ exports.getAllGuides = async (req, res) => {
       options.limit = limit
     }
 
-    const guides = await repo.getAllGuides(options)
+    const guides = await repo.findAllGuides(options)
 
     res.status(200).json({
       guides: guides
@@ -28,7 +28,7 @@ exports.getAllGuides = async (req, res) => {
 exports.getSingleGuide = async (req, res) => {
   try {
     const { id } = req.params
-    const guide = await repo.getSingleGuide(id)
+    const guide = await repo.findSingleGuide(id)
 
     res.status(200).json({
       guide: guide
@@ -43,12 +43,12 @@ exports.getSingleGuide = async (req, res) => {
 exports.patchGuide = async (req, res) => {
   try {
     const { id } = req.params
-    const count = await repo.patchGuide(id, req.body)
+    const count = await repo.updateGuide(id, req.body)
 
     if (count === 1) {
       const guide = await getSingleGuide(req, res)
 
-      res.status(201).json({
+      res.status(200).json({
         guide: guide
       })
     } else {
@@ -65,7 +65,7 @@ exports.patchGuide = async (req, res) => {
 
 exports.postGuide = async (req, res) => {
   try {
-    const guide = await repo.postGuide(req.body)
+    const guide = await repo.createGuide(req.body)
 
     res.status(201).json({
       guide: guide
@@ -80,7 +80,7 @@ exports.postGuide = async (req, res) => {
 exports.deleteGuide = async (req, res) => {
   try {
     const { id } = req.params
-    const count = await repo.deleteGuide(id)
+    const count = await repo.destroyGuide(id)
 
     if (count === 1) {
       res.status(200).json({
@@ -103,7 +103,7 @@ exports.getBySearch = async (req, res) => {
     const title = req.query.title
 
     if (title === '') {
-      const guides = await repo.getAllGuides({
+      const guides = await repo.findAllGuides({
         order: [['createdAt', 'DESC']]
       })
 
@@ -112,7 +112,7 @@ exports.getBySearch = async (req, res) => {
       })
     }
 
-    const guides = await repo.getGuideByTitle(title)
+    const guides = await repo.findGuideByTitle(title)
 
     res.status(200).json({
       guides: guides
