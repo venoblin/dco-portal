@@ -5,9 +5,14 @@ const sequelize = new Sequelize({
   storage: './db.sqlite'
 })
 
+const User = require('./users')(sequelize)
 const Guide = require('./guides')(sequelize)
+
+User.hasMany(Guide)
+Guide.belongsTo(User)
 
 module.exports = {
   sequelize,
-  Guide
+  Guide,
+  User
 }

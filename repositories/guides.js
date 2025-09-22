@@ -1,7 +1,9 @@
 const { Op } = require('sequelize')
 const { Guide } = require('../models')
 
-const getAllGuides = async (options) => {
+const exports = {}
+
+exports.getAllGuides = async (options) => {
   let guides
   if (options) {
     guides = await Guide.findAll(options)
@@ -12,13 +14,13 @@ const getAllGuides = async (options) => {
   return guides
 }
 
-const getSingleGuide = async (id) => {
+exports.getSingleGuide = async (id) => {
   const guide = await Guide.findByPk(id)
 
   return guide
 }
 
-const patchGuide = async (id, payload) => {
+exports.patchGuide = async (id, payload) => {
   const [count] = await Guide.update(payload, {
     where: {
       id: id
@@ -28,7 +30,7 @@ const patchGuide = async (id, payload) => {
   return count
 }
 
-const postGuide = async (payload) => {
+exports.postGuide = async (payload) => {
   const guide = await Guide.create({
     author: payload.author,
     title: payload.title,
@@ -39,7 +41,7 @@ const postGuide = async (payload) => {
   return guide
 }
 
-const deleteGuide = async (id) => {
+exports.deleteGuide = async (id) => {
   const count = await Guide.destroy({
     where: {
       id: id
@@ -49,7 +51,7 @@ const deleteGuide = async (id) => {
   return count
 }
 
-const getGuideByTitle = async (title) => {
+exports.getGuideByTitle = async (title) => {
   const guide = await Guide.findAll({
     where: {
       title: {
@@ -61,11 +63,4 @@ const getGuideByTitle = async (title) => {
   return guide
 }
 
-module.exports = {
-  getAllGuides,
-  getSingleGuide,
-  patchGuide,
-  postGuide,
-  deleteGuide,
-  getGuideByTitle
-}
+module.exports = exports

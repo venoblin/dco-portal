@@ -22,10 +22,7 @@ module.exports = (sequelize) => {
         allowNull: false
       }
     },
-    {
-      sequelize,
-      modelName: 'Guide'
-    }
+    { sequelize, modelName: 'Guide' }
   )
 
   return Guide
