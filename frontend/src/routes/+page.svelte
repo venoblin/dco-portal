@@ -32,7 +32,7 @@
     {:then guides}
       {#if guides && guides.length > 0}
         {#each guides as g}
-          <GuideCard guide={g} />
+          <GuideCard guide={g} isMini={true} />
         {/each}
       {:else}
         <p class="msg">There are no guides!</p>

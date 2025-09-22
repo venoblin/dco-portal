@@ -1,22 +1,30 @@
 <script>
   import { cleanTime } from '$lib/utils'
   
-  let { guide } = $props() 
+  const { guide, isMini } = $props() 
+
+	console.log(isMini)
 
 </script>
 
-<div class="guide-card">
+<div class={`guide-card${isMini ? ' mini' : ''}`}>
   <div>
     <a class="title" href={`/guides/${guide.id}`}>{guide.title} →</a>
-    <p class="author muted-text">By {guide.author}</p>
-    <p class="created-at muted-text">Created {cleanTime(guide.createdAt)}</p>
-    {#if guide.updatedAt !== guide.createdAt}
+
+		<div>
+			<p class="author muted-text">By {guide.author}</p>
+			<p class="created-at muted-text">Created {cleanTime(guide.createdAt)}</p>
+			{#if guide.updatedAt !== guide.createdAt}
       <p class="updated-at muted-text">Updated {cleanTime(guide.updatedAt)}</p>
-    {/if}
+			{/if}
+		</div>
   </div>
-  <div>
-    <p class="shortDescription">{guide.shortDescription}...</p>
-  </div>
+
+	{#if !isMini}
+		<div>
+			<p class="shortDescription">{guide.shortDescription}...</p>
+		</div>
+	{/if}
 </div>
 
 <style>
@@ -30,6 +38,17 @@
 		height: 200px;
 		overflow: hidden;
 	}
+
+	.guide-card.mini {
+		height: 160px;
+		grid-template-columns: 1fr;
+	}
+
+	.guide-card.mini div:first-of-type {
+		border-right: none;
+		padding-right: 0;
+	}
+
 	.guide-card div:first-of-type {
 		border-right: var(--border-width) solid var(--bg-color);
 		padding-right: var(--default-spacing);
