@@ -3,8 +3,6 @@
   
   const { guide, isMini } = $props() 
 
-	console.log(isMini)
-
 </script>
 
 <div class={`guide-card${isMini ? ' mini' : ''}`}>
