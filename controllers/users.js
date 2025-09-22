@@ -1,8 +1,8 @@
 const repo = require('../repositories/users')
 
-const exports = {}
+const funcs = {}
 
-exports.getUserById = async (req, res) => {
+funcs.getUserById = async (req, res) => {
   try {
     const { id } = req.params
     const user = await repo.findUserById(id)
@@ -17,7 +17,7 @@ exports.getUserById = async (req, res) => {
   }
 }
 
-exports.postUser = async (req, res) => {
+funcs.postUser = async (req, res) => {
   try {
     const user = await repo.createUser(req.body)
 
@@ -31,7 +31,7 @@ exports.postUser = async (req, res) => {
   }
 }
 
-exports.patchUser = async (req, res) => {
+funcs.patchUser = async (req, res) => {
   try {
     const { id } = req.params
     const [count] = await repo.updateUser(id, req.body)
@@ -54,7 +54,7 @@ exports.patchUser = async (req, res) => {
   }
 }
 
-exports.deleteUser = async (req, res) => {
+funcs.deleteUser = async (req, res) => {
   try {
     const { id } = req.params
     const count = await repo.destroyUser(id)
@@ -75,4 +75,4 @@ exports.deleteUser = async (req, res) => {
   }
 }
 
-module.exports = exports
+module.exports = funcs

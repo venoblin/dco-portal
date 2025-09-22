@@ -1,14 +1,14 @@
 const { User } = require('../models')
 
-const exports = {}
+const funcs = {}
 
-exports.findUserById = async (id) => {
+funcs.findUserById = async (id) => {
   const user = await User.findByPk(id)
 
   return user
 }
 
-exports.createUser = async (payload) => {
+funcs.createUser = async (payload) => {
   const user = await User.create({
     username: payload.username,
     password: payload.password
@@ -17,7 +17,7 @@ exports.createUser = async (payload) => {
   return user
 }
 
-exports.updateUser = async (id, payload) => {
+funcs.updateUser = async (id, payload) => {
   const [count] = await User.update(payload, {
     where: {
       id: id
@@ -27,7 +27,7 @@ exports.updateUser = async (id, payload) => {
   return count
 }
 
-exports.destroyUser = async (id) => {
+funcs.destroyUser = async (id) => {
   const count = await User.destroy({
     where: {
       id: id
@@ -37,4 +37,4 @@ exports.destroyUser = async (id) => {
   return count
 }
 
-module.exports = exports
+module.exports = funcs
