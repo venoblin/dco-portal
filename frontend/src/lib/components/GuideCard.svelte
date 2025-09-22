@@ -10,14 +10,11 @@
 <div class={`guide-card${isMini ? ' mini' : ''}`}>
   <div>
     <a class="title" href={`/guides/${guide.id}`}>{guide.title} →</a>
-
-		<div>
-			<p class="author muted-text">By {guide.author}</p>
-			<p class="created-at muted-text">Created {cleanTime(guide.createdAt)}</p>
-			{#if guide.updatedAt !== guide.createdAt}
-      <p class="updated-at muted-text">Updated {cleanTime(guide.updatedAt)}</p>
-			{/if}
-		</div>
+		<p class="author muted-text">By {guide.author}</p>
+		<p class="created-at muted-text">Created {cleanTime(guide.createdAt)}</p>
+		{#if guide.updatedAt !== guide.createdAt}
+    <p class="updated-at muted-text">Updated {cleanTime(guide.updatedAt)}</p>
+		{/if}
   </div>
 
 	{#if !isMini}
