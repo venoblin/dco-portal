@@ -1,5 +1,9 @@
 <script>
+  import GuideCard from '$lib/components/GuideCard.svelte'
   import Panel from '$lib/components/ui/Panel.svelte'
+
+  const { data } = $props()
+  
 </script>
 
 <header>
@@ -18,6 +22,19 @@
 
   <Panel>
     <h2>Recent Guides</h2>
+    {#await data.guides}
+      <p class="msg">Loading guides...</p>
+    {:then guides}
+      {#if guides && guides.length > 0}
+        {#each guides as g}
+          <GuideCard guide={g} />
+        {/each}
+      {:else}
+        <p class="msg">There are no guides!</p>
+      {/if}
+    {:catch error}
+      <p class="error">An error occurred: {error.message}</p>
+    {/await}
   </Panel>
 </div>
 

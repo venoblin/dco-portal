@@ -1,7 +1,7 @@
 <script>
   import { cleanTime } from "$lib/utils"
   
-  let { data } = $props()
+  const { data } = $props()
 </script>
 
 <header>

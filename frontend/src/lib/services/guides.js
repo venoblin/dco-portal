@@ -10,9 +10,14 @@ export const postGuide = async (payload) => {
   }
 }
 
-export const getGuides = async (fetch) => {
+export const getGuides = async (fetch, query) => {
   try {
-    const res = await API.get('/guides', fetch)
+    let res
+    if (query) {
+      res = await API.get(`/guides?${query}`, fetch)
+    } else {
+      res = await API.get('/guides', fetch)
+    }
 
     return res
   } catch (error) {
@@ -20,7 +25,7 @@ export const getGuides = async (fetch) => {
   }
 }
 
-export const getSingleGuide = async (id, fetch) => {
+export const getSingleGuide = async (fetch, id) => {
   try {
     const res = await API.get(`/guides/${id}`, fetch)
 

@@ -4,7 +4,7 @@
 	import 'quill/dist/quill.snow.css'
 	import '../styles/global.css'
 
-	let { children } = $props()
+	const { children } = $props()
 </script>
 
 <svelte:head>

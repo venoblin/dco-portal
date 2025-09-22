@@ -3,7 +3,7 @@
   import Panel from '$lib/components/ui/Panel.svelte'
   import GuideCard from '$lib/components/GuideCard.svelte'
 
-  let { data } = $props()
+  const { data } = $props()
   let guides = $state(data.guides)
   let search = $state('')
 
