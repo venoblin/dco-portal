@@ -1,6 +1,8 @@
 const repo = require('../repositories/guides')
 
-const getAllGuides = async (req, res) => {
+const exports = {}
+
+exports.getAllGuides = async (req, res) => {
   try {
     const limit = req.query.limit
     const options = {
@@ -23,7 +25,7 @@ const getAllGuides = async (req, res) => {
   }
 }
 
-const getSingleGuide = async (req, res) => {
+exports.getSingleGuide = async (req, res) => {
   try {
     const { id } = req.params
     const guide = await repo.getSingleGuide(id)
@@ -38,7 +40,7 @@ const getSingleGuide = async (req, res) => {
   }
 }
 
-const patchGuide = async (req, res) => {
+exports.patchGuide = async (req, res) => {
   try {
     const { id } = req.params
     const count = await repo.patchGuide(id, req.body)
@@ -61,7 +63,7 @@ const patchGuide = async (req, res) => {
   }
 }
 
-const postGuide = async (req, res) => {
+exports.postGuide = async (req, res) => {
   try {
     const guide = await repo.postGuide(req.body)
 
@@ -75,7 +77,7 @@ const postGuide = async (req, res) => {
   }
 }
 
-const deleteGuide = async (req, res) => {
+exports.deleteGuide = async (req, res) => {
   try {
     const { id } = req.params
     const count = await repo.deleteGuide(id)
@@ -96,7 +98,7 @@ const deleteGuide = async (req, res) => {
   }
 }
 
-const getBySearch = async (req, res) => {
+exports.getBySearch = async (req, res) => {
   try {
     const title = req.query.title
 
@@ -122,11 +124,4 @@ const getBySearch = async (req, res) => {
   }
 }
 
-module.exports = {
-  getAllGuides,
-  getSingleGuide,
-  patchGuide,
-  postGuide,
-  deleteGuide,
-  getBySearch
-}
+module.exports = exports
