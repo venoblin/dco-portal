@@ -15,9 +15,9 @@ class Client {
     return `${this.#baseUrl}/${cleanedEndpoint}`
   }
 
-  async post(endpoint, payload, passedFetch = fetch) {
+  async post(endpoint, payload) {
     try {
-      const res = await passedFetch(`${this.#constructUrl(endpoint)}`, {
+      const res = await fetch(`${this.#constructUrl(endpoint)}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -33,9 +33,9 @@ class Client {
     }
   }
 
-  async get(endpoint, passedFetch = fetch) {
+  async get(endpoint) {
     try {
-      const res = await passedFetch(`${this.#constructUrl(endpoint)}`)
+      const res = await fetch(`${this.#constructUrl(endpoint)}`)
 
       if (res.ok) {
         return res.json()

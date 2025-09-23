@@ -1,0 +1,35 @@
+.GuideCard {
+  padding-bottom: var(--default-spacing);
+  margin-top: var(--default-spacing);
+  border-bottom: var(--border-width) solid var(--bg-color);
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--default-spacing);
+  height: 200px;
+  overflow: hidden;
+}
+
+.GuideCard.mini {
+  height: 160px;
+  grid-template-columns: 1fr;
+}
+
+.GuideCard.mini div:first-of-type {
+  border-right: none;
+  padding-right: 0;
+}
+
+.GuideCard div:first-of-type {
+  border-right: var(--border-width) solid var(--bg-color);
+  padding-right: var(--default-spacing);
+}
+.GuideCard:first-of-type {
+  margin-top: 0;
+}
+.GuideCard:last-of-type {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.GuideCard .title {
+  font-size: 1.35em;
+}

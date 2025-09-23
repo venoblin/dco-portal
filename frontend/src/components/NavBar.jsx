@@ -9,7 +9,7 @@ const NavBar = () => {
 
   useEffect(() => {
     setBasePath(getBasePathname(location.pathname))
-  })
+  }, [location.pathname])
 
   return (
     <nav>
