@@ -1,7 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
 import NavBar from './components/NavBar'
-import Dashboard from './routes/dashboard'
+import Dashboard from './routes/Dashboard'
 import Guides from './routes/Guides'
+import Tools from './routes/Tools'
+import Profile from './routes/Profile'
 
 const App = () => {
   return (
@@ -11,6 +13,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/guides" element={<Guides />} />
+        <Route path="/tools" element={<Tools />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   )
