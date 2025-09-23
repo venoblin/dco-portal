@@ -19,24 +19,7 @@
 <header>
   <h1>Guides</h1>
 
-  <div>
-    <form onsubmit={(event) => onSearch(event)}>
-      <label for="search"></label>
-      <input 
-        id="search"
-        type="text"
-        name="search"
-        placeholder="Search by title..."
-        bind:value={search}
-      />
-
-      <button class="search">Search</button>
-    </form>
-  </div>
-
-  <div>
-    <a class="btn" href="/guides/new">Create Guide</a>
-  </div>
+  
 </header>
 
 <Panel>

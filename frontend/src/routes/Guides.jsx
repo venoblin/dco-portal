@@ -1,5 +1,7 @@
+import './Guides.css'
 import { useEffect, useState } from 'react'
-import { getAllGuides } from '../services/guides'
+import { Link } from 'react-router-dom'
+import { getAllGuides, getGuidesByTitle } from '../services/guides'
 import Panel from '../components/ui/Panel'
 import GuideCard from '../components/GuideCard'
 
@@ -16,6 +18,13 @@ const Guides = () => {
     }
   }
 
+  const onSearch = async (event) => {
+    event.preventDefault()
+
+    const res = await getGuidesByTitle(search)
+    setGuides(res.guides)
+  }
+
   useEffect(() => {
     getGuides()
   }, [])
@@ -24,6 +33,26 @@ const Guides = () => {
     <div>
       <header>
         <h1>Guides</h1>
+
+        <div>
+          <form className="search" onSubmit={(event) => onSearch(event)}>
+            <label htmlFor="search"></label>
+            <input
+              id="search"
+              type="text"
+              name="search"
+              placeholder="Search by title..."
+            />
+
+            <button className="search">Search</button>
+          </form>
+        </div>
+
+        <div>
+          <Link to="/guides/new" className="btn">
+            Create Guide
+          </Link>
+        </div>
       </header>
 
       <Panel>
