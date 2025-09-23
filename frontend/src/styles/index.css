@@ -129,41 +129,6 @@ a:hover {
   opacity: 0.8;
   border-color: var(--accent-color);
 }
-main header {
-  width: 100%;
-  height: var(--nav-height);
-  background: var(--bg-color);
-  border-bottom: var(--default-border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: calc(var(--default-spacing) * 2);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-main header div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-main header div a {
-  margin-right: var(--default-spacing);
-}
-
-main header div p {
-  margin-right: calc(var(--default-spacing) / 2);
-}
-
-main header div p:last-of-type {
-  margin-right: 0;
-}
-
-main header h1 {
-  margin-bottom: 0;
-}
 
 .muted-text {
   color: var(--muted-text-color);
