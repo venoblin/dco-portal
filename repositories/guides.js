@@ -30,9 +30,9 @@ funcs.updateGuide = async (id, payload) => {
   return count
 }
 
-funcs.createGuide = async (payload) => {
+funcs.createGuide = async (payload, user) => {
   const guide = await Guide.create({
-    author: payload.author,
+    UserId: user.id,
     title: payload.title,
     content: payload.content,
     shortDescription: payload.shortDescription

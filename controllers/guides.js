@@ -70,7 +70,8 @@ funcs.postGuide = async (req, res) => {
     res.status(201).json({
       guide: guide
     })
-  } catch {
+  } catch (error) {
+    console.log(error)
     res.status(500).json({
       error: 'Failed to create guide'
     })

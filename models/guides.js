@@ -5,10 +5,6 @@ module.exports = (sequelize) => {
 
   Guide.init(
     {
-      author: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
       title: {
         type: DataTypes.STRING,
         allowNull: false
