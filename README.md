@@ -88,6 +88,7 @@ Describe prerequisites and how to complete them, this example we're installing n
    npm install svelte @sveltejs/kit
    npm install --save-dev @sveltejs/adapter-static vite nodemon
    npm install --save-dev @sveltejs/vite-plugin-svelte
+   npm install express-session passport passport-local
    ```
 
 2. **Create settings file (for [ezdownloadsorter](https://github.com/venoblin/download-file-sorter))**

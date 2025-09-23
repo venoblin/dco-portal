@@ -8,6 +8,16 @@ funcs.findUserById = async (id) => {
   return user
 }
 
+funcs.findUserByUsername = async (username) => {
+  const user = await User.findOne({
+    where: {
+      username: username
+    }
+  })
+
+  return user
+}
+
 funcs.createUser = async (payload) => {
   const user = await User.create({
     username: payload.username,
