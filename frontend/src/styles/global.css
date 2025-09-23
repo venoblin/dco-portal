@@ -23,11 +23,11 @@
 
 @font-face {
   font-family: 'Poppins-Regular';
-  src: url('/fonts/Poppins-Regular.ttf');
+  src: url('../../public/fonts/Poppins-Regular.ttf');
 }
 @font-face {
   font-family: 'Mozilla-Regular';
-  src: url('/fonts/MozillaHeadline-Regular.ttf');
+  src: url('../../public/fonts/MozillaHeadline-Regular.ttf');
 }
 
 body {
