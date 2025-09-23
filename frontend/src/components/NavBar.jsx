@@ -1,8 +1,15 @@
 import './NavBar.css'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { getBasePathname } from '../utils'
 
 const NavBar = () => {
-  const basePath = ''
+  const location = useLocation()
+  const [basePath, setBasePath] = useState('')
+
+  useEffect(() => {
+    setBasePath(getBasePathname(location.pathname))
+  })
 
   return (
     <nav>

@@ -1,5 +1,9 @@
 const Tools = () => {
-  return <div>Tools</div>
+  return (
+    <header>
+      <h1>Tools</h1>
+    </header>
+  )
 }
 
 export default Tools

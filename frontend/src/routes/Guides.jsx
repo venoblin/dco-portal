@@ -1,5 +1,9 @@
 const Guides = () => {
-  return <div>Guides</div>
+  return (
+    <header>
+      <h1>Guides</h1>
+    </header>
+  )
 }
 
 export default Guides
