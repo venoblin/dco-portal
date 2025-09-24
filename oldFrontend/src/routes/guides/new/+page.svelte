@@ -56,44 +56,7 @@
   })
 </script>
 
-<header>
-  <div>
-    <a href="/guides">← Back</a>
-    <h1>New Guide</h1>
-  </div>
 
-  <div>
-    <button form="new-guide-form">Submit</button>
-  </div>
-</header>
-
-<form class="new-guide-form" id="new-guide-form" onsubmit={(event) => onSubmit(event)}>
-  <div>
-    <label for="author">Author</label>
-    <input
-      required
-      type="text"
-      name="author"
-      id="author"
-      placeholder="Author"
-      bind:value={author}
-    />
-  </div>
-  <div>
-    <label for="title">Title</label>
-    <input
-      required
-      type="text"
-      name="title"
-      id="title"
-      placeholder="Title"
-      bind:value={title}
-    />
-  </div>
-  <div class="editor-container">
-    <div id="editor"></div>
-  </div>
-</form>
 
 <style>
   .new-guide-form {
