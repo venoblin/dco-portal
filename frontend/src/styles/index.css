@@ -12,7 +12,7 @@
   --default-spacing: 1rem;
   --default-border-radius: 1rem;
   --default-border: var(--border-width) solid var(--overlay-bg-color);
-  --body-font-family: 'Poppins-Regular', Helvetica, Arial, sans-serif;
+  --body-font-family: 'Poppins', Helvetica, Arial, sans-serif;
 }
 
 * {
@@ -22,12 +22,40 @@
 }
 
 @font-face {
-  font-family: 'Poppins-Regular';
+  font-family: 'Poppins';
   src: url('../../public/fonts/Poppins-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
 }
 @font-face {
-  font-family: 'Mozilla-Regular';
+  font-family: 'Poppins';
+  src: url('../../public/fonts/Poppins-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('../../public/fonts/Poppins-Italic.ttf');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('../../public/fonts/Poppins-BoldItalic.ttf');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Mozilla';
   src: url('../../public/fonts/MozillaHeadline-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Mozilla';
+  src: url('../../public/fonts/MozillaHeadline-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
 }
 
 body {
@@ -48,7 +76,7 @@ path {
 h1,
 h2,
 h3 {
-  font-family: 'Mozilla-Regular', Helvetica, Arial, sans-serif;
+  font-family: 'Mozilla', Helvetica, Arial, sans-serif;
 }
 
 button,
