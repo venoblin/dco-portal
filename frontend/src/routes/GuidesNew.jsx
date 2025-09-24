@@ -1,6 +1,7 @@
 import './GuidesNew.css'
 import { Link, useNavigate } from 'react-router-dom'
 import useFormState from '../hooks/useFormState'
+import ContentEditor from '../components/ContentEditor'
 
 const GuidesNew = () => {
   const navigate = useNavigate()
@@ -9,21 +10,25 @@ const GuidesNew = () => {
 
   const onSubmit = async (event) => {
     event.preventDefault()
-    const newGuide = {
-      author: author,
-      title: title
-      // content: quill.root.innerHTML,
-      // shortDescription: quill.root.innerText.slice(0, 255)
+    try {
+      const newGuide = {
+        author: author,
+        title: title
+        // content: quill.root.innerHTML,
+        // shortDescription: quill.root.innerText.slice(0, 255)
+      }
+
+      const res = await postGuide(newGuide)
+
+      resetAuthor()
+      resetTitle()
+      // quill.root.innerHTML = ''
+      // quill.root.innerText = ''
+
+      navigate(`/guides/${res.guide.id}`)
+    } catch (error) {
+      console.log(error)
     }
-
-    const res = await postGuide(newGuide)
-
-    resetAuthor()
-    resetTitle()
-    // quill.root.innerHTML = ''
-    // quill.root.innerText = ''
-
-    navigate(`/guides/${res.guide.id}`)
   }
 
   return (
@@ -67,9 +72,7 @@ const GuidesNew = () => {
           />
         </div>
 
-        <div className="editor-container">
-          <div id="editor"></div>
-        </div>
+        <ContentEditor />
       </form>
     </div>
   )
