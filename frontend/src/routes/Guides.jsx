@@ -2,11 +2,13 @@ import './Guides.css'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getAllGuides, getGuidesByTitle } from '../services/guides'
+import { useFormState } from '../hooks/useFormState'
 import Panel from '../components/ui/Panel'
 import GuideCard from '../components/GuideCard'
 
 const Guides = () => {
   const [guides, setGuides] = useState([])
+  const [search, onSearchChange] = useFormState('')
 
   const getGuides = async () => {
     try {
@@ -21,8 +23,13 @@ const Guides = () => {
   const onSearch = async (event) => {
     event.preventDefault()
 
-    const res = await getGuidesByTitle(search)
-    setGuides(res.guides)
+    try {
+      const res = await getGuidesByTitle(search)
+
+      setGuides(res.guides)
+    } catch (error) {
+      console.log(error.message)
+    }
   }
 
   useEffect(() => {
@@ -42,6 +49,8 @@ const Guides = () => {
               type="text"
               name="search"
               placeholder="Search by title..."
+              value={search}
+              onChange={(event) => onSearchChange(event)}
             />
 
             <button className="search">Search</button>
