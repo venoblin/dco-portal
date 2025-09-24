@@ -3,6 +3,8 @@ import { Route, Routes } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import Dashboard from './routes/Dashboard'
 import Guides from './routes/Guides'
+import GuidesNew from './routes/GuidesNew'
+import GuideSingle from './routes/GuideSingle'
 import Tools from './routes/Tools'
 import Profile from './routes/Profile'
 
@@ -15,6 +17,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/guides" element={<Guides />} />
+          <Route path="/guides/new" element={<GuidesNew />} />
+          <Route path="/guides/:id" element={<GuideSingle />} />
           <Route path="/tools" element={<Tools />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
