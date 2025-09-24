@@ -20,8 +20,6 @@ const GuidesNew = () => {
 
     resetAuthor()
     resetTitle()
-    // quill.root.innerHTML = ''
-    // quill.root.innerText = ''
 
     navigate(`/guides/${res.guide.id}`)
   }
