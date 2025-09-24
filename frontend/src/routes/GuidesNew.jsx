@@ -1,3 +1,4 @@
+import './GuidesNew.css'
 import { Link, useNavigate } from 'react-router-dom'
 import useFormState from '../hooks/useFormState'
 
@@ -10,17 +11,17 @@ const GuidesNew = () => {
     event.preventDefault()
     const newGuide = {
       author: author,
-      title: title,
-      content: quill.root.innerHTML,
-      shortDescription: quill.root.innerText.slice(0, 255)
+      title: title
+      // content: quill.root.innerHTML,
+      // shortDescription: quill.root.innerText.slice(0, 255)
     }
 
     const res = await postGuide(newGuide)
 
     resetAuthor()
     resetTitle()
-    quill.root.innerHTML = ''
-    quill.root.innerText = ''
+    // quill.root.innerHTML = ''
+    // quill.root.innerText = ''
 
     navigate(`/guides/${res.guide.id}`)
   }
