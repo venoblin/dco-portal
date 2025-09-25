@@ -47,14 +47,8 @@
 }
 @font-face {
   font-family: 'Mozilla';
-  src: url('../../public/fonts/MozillaHeadline-Regular.ttf');
+  src: url('../../public/fonts/MozillaHeadline.ttf');
   font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Mozilla';
-  src: url('../../public/fonts/MozillaHeadline-Bold.ttf');
-  font-weight: 700;
   font-style: normal;
 }
 
