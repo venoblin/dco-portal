@@ -30,6 +30,9 @@ const ContentEditor = () => {
         <button type="button" onClick={() => onToggleInlineStyle('ITALIC')}>
           Italic
         </button>
+        <button type="button" onClick={() => onToggleInlineStyle('UNDERLINE')}>
+          Underline
+        </button>
       </div>
 
       <Editor

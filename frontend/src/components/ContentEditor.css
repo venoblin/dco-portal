@@ -1,6 +1,19 @@
 .ContentEditor {
+  position: relative;
   background: var(--text-color);
   color: var(--bg-color);
   border-radius: var(--default-border-radius);
   padding: var(--default-spacing);
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.ContentEditor .toolbar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  border-bottom: var(--default-border);
+  padding-bottom: var(--default-spacing);
+  margin-bottom: var(--default-spacing);
 }
