@@ -12,6 +12,10 @@ const ContentEditor = () => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle))
   }
 
+  const onToggleBlockStyle = (blockStyle) => {
+    setEditorState(RichUtils.toggleBlockType(editorState, blockStyle))
+  }
+
   const handleKeyCommand = (command) => {
     const newState = RichUtils.handleKeyCommand(editorState, command)
     if (newState) {
@@ -24,15 +28,26 @@ const ContentEditor = () => {
   return (
     <div className="ContentEditor">
       <div className="toolbar">
-        <button type="button" onClick={() => onToggleInlineStyle('BOLD')}>
-          Bold
-        </button>
-        <button type="button" onClick={() => onToggleInlineStyle('ITALIC')}>
-          Italic
-        </button>
-        <button type="button" onClick={() => onToggleInlineStyle('UNDERLINE')}>
-          Underline
-        </button>
+        <div>
+          <button type="button" onClick={() => onToggleInlineStyle('BOLD')}>
+            Bold
+          </button>
+          <button type="button" onClick={() => onToggleInlineStyle('ITALIC')}>
+            Italic
+          </button>
+          <button
+            type="button"
+            onClick={() => onToggleInlineStyle('UNDERLINE')}
+          >
+            Underline
+          </button>
+          <button
+            type="button"
+            onClick={() => onToggleInlineStyle('STRIKETHROUGH')}
+          >
+            Strikethrough
+          </button>
+        </div>
       </div>
 
       <Editor

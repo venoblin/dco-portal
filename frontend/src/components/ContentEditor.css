@@ -13,11 +13,15 @@
   z-index: 5;
   position: sticky;
   top: 0;
-  display: flex;
-  flex-direction: row;
   border-bottom: var(--default-border);
   padding-bottom: var(--default-spacing);
   padding-top: var(--default-spacing);
   margin-bottom: var(--default-spacing);
   background: var(--text-color);
+}
+
+.ContentEditor .toolbar div {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0;
 }
