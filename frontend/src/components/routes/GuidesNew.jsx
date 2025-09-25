@@ -1,7 +1,7 @@
 import './GuidesNew.css'
 import { Link, useNavigate } from 'react-router-dom'
-import useFormState from '../hooks/useFormState'
-import ContentEditor from '../components/ContentEditor'
+import useFormState from '../../hooks/useFormState'
+import ContentEditor from '../ContentEditor'
 
 const GuidesNew = () => {
   const navigate = useNavigate()

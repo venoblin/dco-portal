@@ -1,10 +1,10 @@
 import './Guides.css'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getAllGuides, getGuidesByTitle } from '../services/guides'
-import useFormState from '../hooks/useFormState'
-import Panel from '../components/ui/Panel'
-import GuideCard from '../components/GuideCard'
+import { getAllGuides, getGuidesByTitle } from '../../services/guides'
+import useFormState from '../../hooks/useFormState'
+import Panel from '../ui/Panel'
+import GuideCard from '../GuideCard'
 
 const Guides = () => {
   const [guides, setGuides] = useState([])
