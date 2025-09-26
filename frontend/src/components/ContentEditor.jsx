@@ -50,16 +50,14 @@ const ContentEditor = () => {
   }
 
   const handleWindowClick = (event) => {
-    if (isTextColorPicker || isBgColorPicker) {
-      const target = event.target
-      const isTextColorPicker = textColorPickerRef.current.contains(target)
-      const isBgColorPicker = bgColorPickerRef.current.contains(target)
+    const target = event.target
+    const isTextColor = textColorPickerRef.current.contains(target)
+    const isBgColor = bgColorPickerRef.current.contains(target)
 
-      if (!isTextColorPicker) {
-        toggleIsTextColorPicker()
-      } else if (!isBgColorPicker) {
-        toggleIsBgColorPicker()
-      }
+    if (!isTextColor && isTextColorPicker) {
+      toggleIsTextColorPicker()
+    } else if (!isBgColor && isBgColorPicker) {
+      toggleIsBgColorPicker()
     }
   }
 
