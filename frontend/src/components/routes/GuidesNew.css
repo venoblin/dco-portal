@@ -3,12 +3,12 @@
   width: 100%;
 }
 
-.new-guide-form div {
+.new-guide-form .input-wrap {
   display: flex;
   flex-direction: column;
   margin-bottom: 0.5rem;
 }
 
-.new-guide-form div:last-of-type {
+.new-guide-form .input-wrap:last-of-type {
   margin-bottom: var(--default-spacing);
 }

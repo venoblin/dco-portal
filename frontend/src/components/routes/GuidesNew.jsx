@@ -47,7 +47,7 @@ const GuidesNew = () => {
         id="new-guide-form"
         onSubmit={(event) => onSubmit(event)}
       >
-        <div>
+        <div className="input-wrap">
           <label htmlFor="author">Author</label>
           <input
             required
@@ -59,7 +59,7 @@ const GuidesNew = () => {
             onChange={(event) => onAuthorChange(event)}
           />
         </div>
-        <div>
+        <div className="input-wrap">
           <label htmlFor="title">Title</label>
           <input
             required
