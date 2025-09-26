@@ -1,6 +1,6 @@
 import 'draft-js/dist/Draft.css'
 import './ContentEditor.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Editor, EditorState, RichUtils } from 'draft-js'
 import editorStyleMaps from '../utils/editorStyleMaps'
 import useToggle from '../hooks/useToggle'
@@ -12,6 +12,7 @@ const ContentEditor = () => {
     EditorState.createEmpty()
   )
   const [isTextColorPicker, toggleIsTextColorPicker] = useToggle(false)
+  const [isBgColorPicker, toggleIsBgColorPicker] = useToggle(false)
 
   const onToggleInlineStyle = (inlineStyle) => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle))
@@ -29,6 +30,39 @@ const ContentEditor = () => {
     }
     return 'not-handled'
   }
+
+  const toggleColorPicker = (type) => {
+    if (!isTextColorPicker || !isBgColorPicker) {
+      switch (type) {
+        case 'TEXT':
+          toggleIsTextColorPicker()
+
+          if (isBgColorPicker) toggleIsBgColorPicker()
+          break
+        case 'BACKGROUND':
+          toggleIsBgColorPicker()
+          if (isTextColorPicker) toggleIsTextColorPicker()
+          break
+      }
+    }
+  }
+
+  const handleWindowClick = (event) => {
+    if (isTextColorPicker || isBgColorPicker) {
+      const isColorPicker = event.target.classList.contains('EditorColorPicker')
+      if (!isColorPicker) {
+        toggleIsTextColorPicker()
+      }
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('click', handleWindowClick)
+
+    return () => {
+      window.removeEventListener('click', handleWindowClick)
+    }
+  }, [handleWindowClick])
 
   return (
     <div className="ContentEditor">
@@ -54,10 +88,10 @@ const ContentEditor = () => {
             onClick={() => onToggleInlineStyle('STRIKETHROUGH')}
           />
 
-          <div>
+          <div className="color-picker">
             <EditorBtn
               btnFor="textColor"
-              onClick={() => onToggleInlineStyle('TEXT_RED')}
+              onClick={() => toggleColorPicker('TEXT')}
             />
 
             {isTextColorPicker === true && <EditorColorPicker />}

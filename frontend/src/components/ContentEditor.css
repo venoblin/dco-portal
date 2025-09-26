@@ -25,3 +25,13 @@
   flex-direction: row;
   margin-bottom: 0;
 }
+
+.ContentEditor .toolbar .color-picker {
+  flex-direction: column;
+  position: relative;
+}
+
+.ContentEditor .EditorColorPicker {
+  position: absolute;
+  margin-top: 2rem;
+}

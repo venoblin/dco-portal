@@ -1,4 +1,4 @@
-export default styleMap = {
+const styleMap = {
   TEXT_BLACK: {
     color: '#000000'
   },
@@ -96,3 +96,5 @@ export default styleMap = {
     background: '#FFFFFF'
   }
 }
+
+export default styleMap
