@@ -1,6 +1,6 @@
 import 'draft-js/dist/Draft.css'
 import './ContentEditor.css'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Editor, EditorState, RichUtils } from 'draft-js'
 import editorStyleMaps from '../utils/editorStyleMaps'
 import useToggle from '../hooks/useToggle'
@@ -12,6 +12,7 @@ const ContentEditor = () => {
     EditorState.createEmpty()
   )
   const [isTextColorPicker, toggleIsTextColorPicker] = useToggle(false)
+  const textColorPickerRef = useRef()
   const [isBgColorPicker, toggleIsBgColorPicker] = useToggle(false)
 
   const onToggleInlineStyle = (inlineStyle) => {
@@ -49,7 +50,9 @@ const ContentEditor = () => {
 
   const handleWindowClick = (event) => {
     if (isTextColorPicker || isBgColorPicker) {
-      const isColorPicker = event.target.classList.contains('EditorColorPicker')
+      const target = event.target
+      const isColorPicker = textColorPickerRef.current.contains(target)
+
       if (!isColorPicker) {
         toggleIsTextColorPicker()
       }
@@ -88,7 +91,7 @@ const ContentEditor = () => {
             onClick={() => onToggleInlineStyle('STRIKETHROUGH')}
           />
 
-          <div className="color-picker">
+          <div className="color-picker" ref={textColorPickerRef}>
             <EditorBtn
               btnFor="textColor"
               onClick={() => toggleColorPicker('TEXT')}
