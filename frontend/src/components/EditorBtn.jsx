@@ -4,7 +4,7 @@ const EditorBtn = (props) => {
   const classes = `EditorBtn ${props.className ? props.className : ''}`
 
   const svgs = {
-    bold: (
+    BOLD: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={15}
@@ -20,7 +20,7 @@ const EditorBtn = (props) => {
         </g>
       </svg>
     ),
-    italic: (
+    ITALIC: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={15}
@@ -36,7 +36,7 @@ const EditorBtn = (props) => {
         </g>
       </svg>
     ),
-    underline: (
+    UNDERLINE: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={15}
@@ -52,7 +52,7 @@ const EditorBtn = (props) => {
         </g>
       </svg>
     ),
-    strikethrough: (
+    STRIKETHROUGH: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={15}
@@ -68,7 +68,7 @@ const EditorBtn = (props) => {
         </g>
       </svg>
     ),
-    textColor: (
+    TEXT_COLOR: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={15}
@@ -84,7 +84,7 @@ const EditorBtn = (props) => {
         </g>
       </svg>
     ),
-    background: (
+    BACKGROUND: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={15}

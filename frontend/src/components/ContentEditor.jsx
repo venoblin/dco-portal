@@ -33,6 +33,11 @@ const ContentEditor = () => {
     return 'not-handled'
   }
 
+  const isStyleActive = (style) => {
+    const currentStyle = editorState.getCurrentInlineStyle()
+    return currentStyle.has(style)
+  }
+
   const addColor = (colorKey) => {
     onToggleInlineStyle(colorKey)
 
@@ -84,28 +89,32 @@ const ContentEditor = () => {
       <div className="toolbar">
         <div className="btns-wrap">
           <EditorBtn
-            btnFor="bold"
+            className={isStyleActive('BOLD') ? 'active' : ''}
+            btnFor="BOLD"
             onMouseDown={() => onToggleInlineStyle('BOLD')}
           />
 
           <EditorBtn
-            btnFor="italic"
+            className={isStyleActive('ITALIC') ? 'active' : ''}
+            btnFor="ITALIC"
             onMouseDown={() => onToggleInlineStyle('ITALIC')}
           />
 
           <EditorBtn
-            btnFor="underline"
+            className={isStyleActive('UNDERLINE') ? 'active' : ''}
+            btnFor="UNDERLINE"
             onMouseDown={() => onToggleInlineStyle('UNDERLINE')}
           />
 
           <EditorBtn
-            btnFor="strikethrough"
+            className={isStyleActive('STRIKETHROUGH') ? 'active' : ''}
+            btnFor="STRIKETHROUGH"
             onMouseDown={() => onToggleInlineStyle('STRIKETHROUGH')}
           />
 
           <div className="color-picker" ref={textColorPickerRef}>
             <EditorBtn
-              btnFor="textColor"
+              btnFor="TEXT_COLOR"
               onMouseDown={() => toggleColorPicker('TEXT')}
             />
 
@@ -116,7 +125,7 @@ const ContentEditor = () => {
 
           <div className="color-picker" ref={bgColorPickerRef}>
             <EditorBtn
-              btnFor="background"
+              btnFor="BACKGROUND"
               onMouseDown={() => toggleColorPicker('BACKGROUND')}
             />
 
