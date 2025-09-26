@@ -14,6 +14,7 @@ const ContentEditor = () => {
   const [isTextColorPicker, toggleIsTextColorPicker] = useToggle(false)
   const textColorPickerRef = useRef()
   const [isBgColorPicker, toggleIsBgColorPicker] = useToggle(false)
+  const bgColorPickerRef = useRef()
 
   const onToggleInlineStyle = (inlineStyle) => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle))
@@ -51,10 +52,13 @@ const ContentEditor = () => {
   const handleWindowClick = (event) => {
     if (isTextColorPicker || isBgColorPicker) {
       const target = event.target
-      const isColorPicker = textColorPickerRef.current.contains(target)
+      const isTextColorPicker = textColorPickerRef.current.contains(target)
+      const isBgColorPicker = bgColorPickerRef.current.contains(target)
 
-      if (!isColorPicker) {
+      if (!isTextColorPicker) {
         toggleIsTextColorPicker()
+      } else if (!isBgColorPicker) {
+        toggleIsBgColorPicker()
       }
     }
   }
@@ -98,6 +102,15 @@ const ContentEditor = () => {
             />
 
             {isTextColorPicker === true && <EditorColorPicker />}
+          </div>
+
+          <div className="color-picker" ref={bgColorPickerRef}>
+            <EditorBtn
+              btnFor="background"
+              onClick={() => toggleColorPicker('BACKGROUND')}
+            />
+
+            {isBgColorPicker === true && <EditorColorPicker />}
           </div>
         </div>
       </div>
