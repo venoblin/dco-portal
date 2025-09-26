@@ -2,6 +2,7 @@ import 'draft-js/dist/Draft.css'
 import './ContentEditor.css'
 import { useState } from 'react'
 import { Editor, EditorState, RichUtils } from 'draft-js'
+import EditorBtn from './EditorBtn'
 
 const ContentEditor = () => {
   const [editorState, setEditorState] = useState(() =>
@@ -28,26 +29,31 @@ const ContentEditor = () => {
   return (
     <div className="ContentEditor">
       <div className="toolbar">
-        <div>
-          <button type="button" onClick={() => onToggleInlineStyle('BOLD')}>
+        <div className="btns-wrap">
+          <EditorBtn btnFor="bold" onClick={() => onToggleInlineStyle('BOLD')}>
             Bold
-          </button>
-          <button type="button" onClick={() => onToggleInlineStyle('ITALIC')}>
+          </EditorBtn>
+          <EditorBtn
+            btnFor="italic"
+            onClick={() => onToggleInlineStyle('ITALIC')}
+          >
             Italic
-          </button>
-          <button
-            type="button"
+          </EditorBtn>
+          <EditorBtn
+            btnFor="underline"
             onClick={() => onToggleInlineStyle('UNDERLINE')}
           >
             Underline
-          </button>
-          <button
-            type="button"
+          </EditorBtn>
+          <EditorBtn
+            btnFor="strikethrough"
             onClick={() => onToggleInlineStyle('STRIKETHROUGH')}
           >
             Strikethrough
-          </button>
+          </EditorBtn>
         </div>
+
+        <div className="btns-wrap"></div>
       </div>
 
       <Editor
