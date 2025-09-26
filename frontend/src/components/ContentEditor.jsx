@@ -58,6 +58,7 @@ const ContentEditor = () => {
           break
         case 'BACKGROUND':
           toggleIsBgColorPicker()
+
           if (isTextColorPicker) toggleIsTextColorPicker()
           break
       }
