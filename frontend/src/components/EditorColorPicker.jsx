@@ -12,7 +12,7 @@ const EditorColorPicker = (props) => {
                 key={key + value.color}
                 type="button"
                 className="color"
-                onMouseDown={() => props.onClick(key)}
+                onMouseDown={() => props.onMouseDown(key)}
                 style={{ background: value.color }}
               ></button>
             )
@@ -26,7 +26,7 @@ const EditorColorPicker = (props) => {
                 key={key + value.background}
                 type="button"
                 className="color"
-                onMouseDown={() => props.onClick(key)}
+                onMouseDown={() => props.onMouseDown(key)}
                 style={{ background: value.background }}
               ></button>
             )

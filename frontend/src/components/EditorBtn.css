@@ -1,0 +1,24 @@
+.EditorBtn {
+  background: none;
+}
+
+.EditorBtn:hover {
+  opacity: 1;
+}
+
+.EditorBtn:hover path {
+  fill: var(--accent-color);
+}
+
+.EditorBtn.active path {
+  fill: var(--accent-color);
+}
+
+.EditorBtn path {
+  transition: fill var(--default-transition);
+}
+
+.EditorBtn svg {
+  width: 20px;
+  height: 20px;
+}

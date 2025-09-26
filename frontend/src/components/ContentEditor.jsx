@@ -85,43 +85,43 @@ const ContentEditor = () => {
         <div className="btns-wrap">
           <EditorBtn
             btnFor="bold"
-            onClick={() => onToggleInlineStyle('BOLD')}
+            onMouseDown={() => onToggleInlineStyle('BOLD')}
           />
 
           <EditorBtn
             btnFor="italic"
-            onClick={() => onToggleInlineStyle('ITALIC')}
+            onMouseDown={() => onToggleInlineStyle('ITALIC')}
           />
 
           <EditorBtn
             btnFor="underline"
-            onClick={() => onToggleInlineStyle('UNDERLINE')}
+            onMouseDown={() => onToggleInlineStyle('UNDERLINE')}
           />
 
           <EditorBtn
             btnFor="strikethrough"
-            onClick={() => onToggleInlineStyle('STRIKETHROUGH')}
+            onMouseDown={() => onToggleInlineStyle('STRIKETHROUGH')}
           />
 
           <div className="color-picker" ref={textColorPickerRef}>
             <EditorBtn
               btnFor="textColor"
-              onClick={() => toggleColorPicker('TEXT')}
+              onMouseDown={() => toggleColorPicker('TEXT')}
             />
 
             {isTextColorPicker === true && (
-              <EditorColorPicker type="TEXT" onClick={addColor} />
+              <EditorColorPicker type="TEXT" onMouseDown={addColor} />
             )}
           </div>
 
           <div className="color-picker" ref={bgColorPickerRef}>
             <EditorBtn
               btnFor="background"
-              onClick={() => toggleColorPicker('BACKGROUND')}
+              onMouseDown={() => toggleColorPicker('BACKGROUND')}
             />
 
             {isBgColorPicker === true && (
-              <EditorColorPicker type="BACKGROUND" onClick={addColor} />
+              <EditorColorPicker type="BACKGROUND" onMouseDown={addColor} />
             )}
           </div>
         </div>

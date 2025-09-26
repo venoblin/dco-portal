@@ -1,6 +1,8 @@
 import './EditorBtn.css'
 
 const EditorBtn = (props) => {
+  const classes = `EditorBtn ${props.className ? props.className : ''}`
+
   const svgs = {
     bold: (
       <svg
@@ -101,7 +103,7 @@ const EditorBtn = (props) => {
   }
 
   return (
-    <button type="button" className="EditorBtn" onClick={props.onClick}>
+    <button type="button" className={classes} onMouseDown={props.onMouseDown}>
       {svgs[props.btnFor]}
     </button>
   )
