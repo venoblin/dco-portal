@@ -13,6 +13,7 @@
   z-index: 5;
   position: sticky;
   top: 0;
+  display: flex;
   border-bottom: var(--default-border);
   padding-bottom: var(--default-spacing);
   padding-top: var(--default-spacing);

@@ -15,6 +15,7 @@ const ContentEditor = () => {
   const [isBgColorPicker, toggleIsBgColorPicker] = useToggle(false)
   const textColorPickerRef = useRef()
   const bgColorPickerRef = useRef()
+  const INLINE_TYPES = ['BOLD', 'ITALIC', 'UNDERLINE', 'STRIKETHROUGH']
 
   const onToggleInlineStyle = (inlineStyle) => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle))
@@ -33,7 +34,19 @@ const ContentEditor = () => {
     return 'not-handled'
   }
 
-  const isStyleActive = (style) => {
+  const handleFontSizeChange = (event) => {
+    onToggleBlockStyle(event.target.value)
+  }
+
+  const getActiveBlockType = () => {
+    const selection = editorState.getSelection()
+
+    const contentState = editorState.getCurrentContent()
+    const block = contentState.getBlockForKey(selection.getStartKey())
+
+    return block.getType()
+  }
+  const isInlineStyleActive = (style) => {
     const currentStyle = editorState.getCurrentInlineStyle()
     return currentStyle.has(style)
   }
@@ -89,29 +102,23 @@ const ContentEditor = () => {
     <div className="ContentEditor">
       <div className="toolbar">
         <div className="btns-wrap">
-          <EditorBtn
-            className={isStyleActive('BOLD') ? 'active' : ''}
-            btnFor="BOLD"
-            onMouseDown={() => onToggleInlineStyle('BOLD')}
-          />
+          <select value={getActiveBlockType()} onChange={handleFontSizeChange}>
+            <option value="header-one">Header 1</option>
+            <option value="header-two">Header 2</option>
+            <option value="header-three">Header 3</option>
+            <option value="paragraph">Normal</option>
+          </select>
+        </div>
 
-          <EditorBtn
-            className={isStyleActive('ITALIC') ? 'active' : ''}
-            btnFor="ITALIC"
-            onMouseDown={() => onToggleInlineStyle('ITALIC')}
-          />
-
-          <EditorBtn
-            className={isStyleActive('UNDERLINE') ? 'active' : ''}
-            btnFor="UNDERLINE"
-            onMouseDown={() => onToggleInlineStyle('UNDERLINE')}
-          />
-
-          <EditorBtn
-            className={isStyleActive('STRIKETHROUGH') ? 'active' : ''}
-            btnFor="STRIKETHROUGH"
-            onMouseDown={() => onToggleInlineStyle('STRIKETHROUGH')}
-          />
+        <div className="btns-wrap">
+          {INLINE_TYPES.map((stlye) => (
+            <EditorBtn
+              key={stlye}
+              className={isInlineStyleActive(stlye) ? 'active' : ''}
+              btnFor={stlye}
+              onMouseDown={() => onToggleInlineStyle(stlye)}
+            />
+          ))}
 
           <div className="color-picker" ref={textColorPickerRef}>
             <EditorBtn
