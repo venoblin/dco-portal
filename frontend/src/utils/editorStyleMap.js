@@ -1,6 +1,6 @@
 const styleMap = {
   TEXT_BLACK: {
-    color: '#000000'
+    color: '#171c1b'
   },
   TEXT_RED: {
     color: '#D93025'
@@ -45,10 +45,10 @@ const styleMap = {
     color: '#3F51B5'
   },
   TEXT_WHITE: {
-    color: '#FFFFFF'
+    color: '#f6f7eb'
   },
   BACKGROUND_BLACK: {
-    background: '#000000'
+    background: '#171c1b'
   },
   BACKGROUND_RED: {
     background: '#D93025'
@@ -93,7 +93,7 @@ const styleMap = {
     background: '#3F51B5'
   },
   BACKGROUND_WHITE: {
-    background: '#FFFFFF'
+    background: '#f6f7eb'
   }
 }
 

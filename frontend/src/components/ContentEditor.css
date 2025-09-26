@@ -20,7 +20,7 @@
   background: var(--text-color);
 }
 
-.ContentEditor .toolbar div {
+.ContentEditor .btns-wrap {
   display: flex;
   flex-direction: row;
   margin-bottom: 0;
@@ -33,5 +33,5 @@
 
 .ContentEditor .EditorColorPicker {
   position: absolute;
-  margin-top: 2rem;
+  margin-top: 0.5rem;
 }

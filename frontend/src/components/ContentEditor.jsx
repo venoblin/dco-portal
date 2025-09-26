@@ -2,7 +2,7 @@ import 'draft-js/dist/Draft.css'
 import './ContentEditor.css'
 import { useState, useEffect, useRef } from 'react'
 import { Editor, EditorState, RichUtils } from 'draft-js'
-import editorStyleMaps from '../utils/editorStyleMaps'
+import editorStyleMap from '../utils/editorStyleMap'
 import useToggle from '../hooks/useToggle'
 import EditorBtn from './EditorBtn'
 import EditorColorPicker from './EditorColorPicker'
@@ -12,8 +12,8 @@ const ContentEditor = () => {
     EditorState.createEmpty()
   )
   const [isTextColorPicker, toggleIsTextColorPicker] = useToggle(false)
-  const textColorPickerRef = useRef()
   const [isBgColorPicker, toggleIsBgColorPicker] = useToggle(false)
+  const textColorPickerRef = useRef()
   const bgColorPickerRef = useRef()
 
   const onToggleInlineStyle = (inlineStyle) => {
@@ -31,6 +31,16 @@ const ContentEditor = () => {
       return 'handled'
     }
     return 'not-handled'
+  }
+
+  const addColor = (colorKey) => {
+    onToggleInlineStyle(colorKey)
+
+    if (isTextColorPicker) {
+      toggleIsTextColorPicker()
+    } else if (isBgColorPicker) {
+      toggleIsBgColorPicker()
+    }
   }
 
   const toggleColorPicker = (type) => {
@@ -99,7 +109,9 @@ const ContentEditor = () => {
               onClick={() => toggleColorPicker('TEXT')}
             />
 
-            {isTextColorPicker === true && <EditorColorPicker />}
+            {isTextColorPicker === true && (
+              <EditorColorPicker type="TEXT" onClick={addColor} />
+            )}
           </div>
 
           <div className="color-picker" ref={bgColorPickerRef}>
@@ -108,7 +120,9 @@ const ContentEditor = () => {
               onClick={() => toggleColorPicker('BACKGROUND')}
             />
 
-            {isBgColorPicker === true && <EditorColorPicker />}
+            {isBgColorPicker === true && (
+              <EditorColorPicker type="BACKGROUND" onClick={addColor} />
+            )}
           </div>
         </div>
       </div>
@@ -117,7 +131,7 @@ const ContentEditor = () => {
         editorState={editorState}
         onChange={setEditorState}
         handleKeyCommand={handleKeyCommand}
-        customStyleMap={editorStyleMaps}
+        customStyleMap={editorStyleMap}
       />
     </div>
   )

@@ -1,3 +1,24 @@
 .EditorColorPicker {
-  background: var(--overlay-color);
+  background: var(--text-color);
+  padding: var(--default-spacing);
+  border-radius: var(--default-border-radius);
+  -webkit-box-shadow: 1px 2px 15px -5px #000000;
+  box-shadow: 1px 2px 15px -5px #000000;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: calc(var(--default-spacing) / 2);
+  z-index: 5;
+}
+
+.EditorColorPicker .color {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.EditorColorPicker .color:hover {
+  -webkit-box-shadow: 1px 2px 7px 0px rgba(0, 0, 0, 0.44);
+  box-shadow: 1px 2px 7px 0px rgba(0, 0, 0, 0.44);
+  opacity: 1;
 }
