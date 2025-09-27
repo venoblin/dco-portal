@@ -16,6 +16,12 @@ const ContentEditor = () => {
   const textColorPickerRef = useRef()
   const bgColorPickerRef = useRef()
   const INLINE_TYPES = ['BOLD', 'ITALIC', 'UNDERLINE', 'STRIKETHROUGH']
+  const BLOCK_TYPES = [
+    'unordered-list-item',
+    'ordered-list-item',
+    'blockquote',
+    'code-block'
+  ]
 
   const onToggleInlineStyle = (inlineStyle) => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle))
@@ -141,6 +147,17 @@ const ContentEditor = () => {
               <EditorColorPicker type="BACKGROUND" onMouseDown={addColor} />
             )}
           </div>
+        </div>
+
+        <div className="btns-wrap">
+          {BLOCK_TYPES.map((style) => (
+            <EditorBtn
+              key={style}
+              className={isInlineStyleActive(style) ? 'active' : ''}
+              btnFor={style.replaceAll('-', '_')}
+              onMouseDown={() => onToggleBlockStyle(style)}
+            />
+          ))}
         </div>
       </div>
 
