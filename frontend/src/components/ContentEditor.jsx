@@ -1,5 +1,5 @@
 import './ContentEditor.css'
-import { useState, forwardRef, useImperativeHandle } from 'react'
+import { forwardRef, useImperativeHandle } from 'react'
 
 const ContentEditor = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => ({
