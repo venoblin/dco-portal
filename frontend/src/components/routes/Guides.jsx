@@ -5,6 +5,7 @@ import { getAllGuides, getGuidesByTitle } from '../../services/guides'
 import useFormState from '../../hooks/useFormState'
 import Panel from '../ui/Panel'
 import GuideCard from '../GuideCard'
+import Loading from '../Loading'
 
 const Guides = () => {
   const [guides, setGuides] = useState([])
@@ -35,6 +36,10 @@ const Guides = () => {
   useEffect(() => {
     getGuides()
   }, [])
+
+  if (!guides) {
+    return <Loading />
+  }
 
   return (
     <div>

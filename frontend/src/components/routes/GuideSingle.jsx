@@ -3,6 +3,7 @@ import { cleanTime } from '../../utils'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getSingleGuide } from '../../services/guides'
+import Loading from '../Loading'
 
 const GuideSingle = () => {
   const { id } = useParams()
@@ -23,11 +24,7 @@ const GuideSingle = () => {
   }, [])
 
   if (!guide) {
-    return (
-      <div className="GuideSingle">
-        <h1>Loading Guide...</h1>
-      </div>
-    )
+    return <Loading />
   }
 
   return (
