@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import Quill from 'quill'
 import useFormState from '../../hooks/useFormState'
+import { postGuide } from '../../services/guides'
 
 const GuidesNew = () => {
   const navigate = useNavigate()
@@ -40,19 +41,25 @@ const GuidesNew = () => {
 
   const onSubmit = async (event) => {
     event.preventDefault()
-    const newGuide = {
-      author: author,
-      title: title
-      // content: quill.root.innerHTML,
-      // shortDescription: quill.root.innerText.slice(0, 255)
+
+    try {
+      const newGuide = {
+        author: author,
+        title: title,
+        content: content,
+        shortDescription: quillInstance.root.innerText.slice(0, 255)
+      }
+
+      const res = await postGuide(newGuide)
+
+      resetAuthor()
+      resetTitle()
+      setContent('')
+
+      navigate(`/guides/${res.guide.id}`)
+    } catch (error) {
+      console.log(error)
     }
-
-    const res = await postGuide(newGuide)
-
-    resetAuthor()
-    resetTitle()
-
-    navigate(`/guides/${res.guide.id}`)
   }
 
   useEffect(() => {
