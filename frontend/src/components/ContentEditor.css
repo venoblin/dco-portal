@@ -24,7 +24,17 @@
 .ContentEditor .btns-wrap {
   display: flex;
   flex-direction: row;
+  align-items: center;
   margin-bottom: 0;
+  padding-right: var(--default-spacing);
+  margin-right: var(--default-spacing);
+  border-right: var(--default-border);
+}
+
+.ContentEditor .btns-wrap:last-of-type {
+  padding-right: 0;
+  margin-right: 0;
+  border-right: none;
 }
 
 .ContentEditor .toolbar .color-picker {
@@ -34,5 +44,4 @@
 
 .ContentEditor .EditorColorPicker {
   position: absolute;
-  margin-top: 0.5rem;
 }
