@@ -1,4 +1,3 @@
-import 'quill/dist/quill.snow.css'
 import './styles/App.css'
 import { Route, Routes } from 'react-router-dom'
 import NavBar from './components/NavBar'

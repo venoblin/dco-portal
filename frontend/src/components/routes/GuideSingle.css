@@ -1,0 +1,7 @@
+.GuideSingle h1 {
+  margin-right: var(--default-spacing);
+}
+
+.GuideSingle .content * {
+  max-width: 100%;
+}

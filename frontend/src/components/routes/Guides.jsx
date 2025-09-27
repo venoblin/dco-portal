@@ -12,9 +12,9 @@ const Guides = () => {
 
   const getGuides = async () => {
     try {
-      const allGuides = await getAllGuides()
+      const res = await getAllGuides()
 
-      setGuides(allGuides)
+      setGuides(res.guides)
     } catch (error) {
       console.log(error.message)
     }
@@ -66,9 +66,7 @@ const Guides = () => {
 
       <Panel>
         {guides && guides.length > 0 ? (
-          guides.map((g) => {
-            ;<GuideCard guide={g} key={g.id} />
-          })
+          guides.map((g) => <GuideCard guide={g} key={g.id} />)
         ) : (
           <p>No guides found!</p>
         )}
