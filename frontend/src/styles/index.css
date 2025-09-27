@@ -134,6 +134,10 @@ textarea:focus {
   border-color: var(--accent-color);
 }
 
+input:disabled {
+  opacity: 0.5;
+}
+
 select {
   background-color: transparent;
   border-radius: var(--default-border-radius);

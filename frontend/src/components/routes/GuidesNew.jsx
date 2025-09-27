@@ -5,7 +5,7 @@ import ContentEditor from '../ContentEditor'
 
 const GuidesNew = () => {
   const navigate = useNavigate()
-  const [author, onAuthorChange, resetAuthor] = useFormState('')
+  const [author, onAuthorChange, resetAuthor] = useFormState('Admin')
   const [title, onTitleChange, resetTitle] = useFormState('')
 
   const onSubmit = async (event) => {
@@ -57,6 +57,7 @@ const GuidesNew = () => {
             placeholder="Author"
             value={author}
             onChange={(event) => onAuthorChange(event)}
+            disabled
           />
         </div>
         <div className="input-wrap">
