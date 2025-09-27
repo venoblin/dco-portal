@@ -52,6 +52,13 @@ const ContentEditor = () => {
 
     return block.getType()
   }
+
+  const isBlockStyleActive = (style) => {
+    const type = getActiveBlockType()
+
+    return type === style
+  }
+
   const isInlineStyleActive = (style) => {
     const currentStyle = editorState.getCurrentInlineStyle()
     return currentStyle.has(style)
@@ -153,7 +160,7 @@ const ContentEditor = () => {
           {BLOCK_TYPES.map((style) => (
             <EditorBtn
               key={style}
-              className={isInlineStyleActive(style) ? 'active' : ''}
+              className={isBlockStyleActive(style) ? 'active' : ''}
               btnFor={style.replaceAll('-', '_')}
               onMouseDown={() => onToggleBlockStyle(style)}
             />
