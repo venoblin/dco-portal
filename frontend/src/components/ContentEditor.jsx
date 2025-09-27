@@ -1,13 +1,19 @@
 import 'draft-js/dist/Draft.css'
 import './ContentEditor.css'
-import { useState, useEffect, useRef } from 'react'
-import { Editor, EditorState, RichUtils } from 'draft-js'
+import {
+  useState,
+  useEffect,
+  useRef,
+  forwardRef,
+  useImperativeHandle
+} from 'react'
+import { convertToRaw, Editor, EditorState, RichUtils } from 'draft-js'
 import editorStyleMap from '../utils/editorStyleMap'
 import useToggle from '../hooks/useToggle'
 import EditorBtn from './EditorBtn'
 import EditorColorPicker from './EditorColorPicker'
 
-const ContentEditor = () => {
+const ContentEditor = forwardRef((props, ref) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   )
@@ -22,6 +28,14 @@ const ContentEditor = () => {
     'blockquote',
     'code-block'
   ]
+
+  useImperativeHandle(ref, () => ({
+    getContent: () => {
+      const contentState = editorState.getCurrentContent()
+      return convertToRaw(contentState)
+    },
+    getEditorState: () => editorState
+  }))
 
   const onToggleInlineStyle = (inlineStyle) => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle))
@@ -176,6 +190,6 @@ const ContentEditor = () => {
       />
     </div>
   )
-}
+})
 
 export default ContentEditor
