@@ -1,4 +1,3 @@
-import 'quill/dist/quill.snow.css'
 import './GuidesNew.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'

@@ -1,4 +1,3 @@
-import 'quill/dist/quill.snow.css'
 import './GuideSingle.css'
 import { cleanTime } from '../../utils'
 import { useEffect, useState } from 'react'
@@ -48,7 +47,7 @@ const GuideSingle = () => {
       </header>
 
       <div
-        className="content"
+        className="content ql-editor"
         dangerouslySetInnerHTML={{ __html: guide.content }}
       ></div>
     </div>
