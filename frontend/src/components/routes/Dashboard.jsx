@@ -1,8 +1,41 @@
+import './Dashboard.css'
+import Panel from '../ui/Panel'
+import { Link } from 'react-router-dom'
+import Loading from '../Loading'
+
 const Dashboard = () => {
   return (
-    <header>
-      <h1>Dashboard</h1>
-    </header>
+    <div className="Dashboard">
+      <header>
+        <h1>Dashboard</h1>
+      </header>
+
+      <div className="dashboard">
+        <Panel>
+          <header>
+            <h2>Quick Links</h2>
+          </header>
+
+          <div>
+            <Link className="block-link" to="/tools/triage-manager">
+              Tools/Triage Manager →
+            </Link>
+            <Link className="block-link" to="/tools/incident-manager">
+              Tools/Incident Manager →
+            </Link>
+          </div>
+        </Panel>
+
+        <Panel>
+          <header>
+            <h2>Recent Guides</h2>
+            <Link className="block-link" href="/guides">
+              View More →
+            </Link>
+          </header>
+        </Panel>
+      </div>
+    </div>
   )
 }
 
