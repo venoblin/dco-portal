@@ -11,17 +11,17 @@ const GuidesNew = () => {
   const onSubmit = async (event) => {
     event.preventDefault()
     try {
-      const newGuide = {
-        author: author,
-        title: title
-        // content: quill.root.innerHTML,
-        // shortDescription: quill.root.innerText.slice(0, 255)
-      }
+      // const newGuide = {
+      //   author: author,
+      //   title: title
+      //   content: quill.root.innerHTML,
+      //   shortDescription: quill.root.innerText.slice(0, 255)
+      // }
 
-      const res = await postGuide(newGuide)
+      // const res = await postGuide(newGuide)
 
-      resetAuthor()
-      resetTitle()
+      // resetAuthor()
+      // resetTitle()
       // quill.root.innerHTML = ''
       // quill.root.innerText = ''
 
