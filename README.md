@@ -86,7 +86,7 @@ Describe prerequisites and how to complete them, this example we're installing n
    npm install express sequelize sqlite3 cors dotenv bcrypt
    npm install --save-dev nodemon
 
-   npm install react react-dom react-router-dom@6 @tiptap/react @tiptap/core @tiptap/starter-kit @tiptap/pm
+   npm install react react-dom react-router-dom@6 quill
    npm install --save-dev parcel
    ```
 

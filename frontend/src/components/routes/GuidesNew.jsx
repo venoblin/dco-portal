@@ -1,40 +1,77 @@
 import './GuidesNew.css'
-import { useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import Quill from 'quill'
 import useFormState from '../../hooks/useFormState'
-import ContentEditor from '../ContentEditor'
 
 const GuidesNew = () => {
   const navigate = useNavigate()
   const [author, onAuthorChange, resetAuthor] = useFormState('Admin')
   const [title, onTitleChange, resetTitle] = useFormState('')
-  const editorRef = useRef()
+  const [quillInstance, setQuillInstance] = useState(null)
+  const [content, setContent] = useState('')
+  const editorRef = useRef(null)
+
+  const toolbarOptions = [
+    [
+      { header: [2, 3, 4, 5, 6, false] },
+      { size: ['small', false, 'large', 'huge'] }
+    ],
+
+    [
+      'bold',
+      'italic',
+      'underline',
+      'strike',
+      { color: [] },
+      { background: [] }
+    ],
+
+    ['link', 'image', 'video', 'formula', 'blockquote', 'code-block'],
+
+    [{ align: [] }, { direction: 'rtl' }, { indent: '-1' }, { indent: '+1' }],
+
+    [{ list: 'ordered' }, { list: 'bullet' }, { list: 'check' }],
+
+    [{ script: 'sub' }, { script: 'super' }],
+
+    ['clean']
+  ]
 
   const onSubmit = async (event) => {
     event.preventDefault()
-    try {
-      // const newGuide = {
-      //   author: author,
-      //   title: title
-      //   content: quill.root.innerHTML,
-      //   shortDescription: quill.root.innerText.slice(0, 255)
-      // }
-      // const res = await postGuide(newGuide)
-      // resetAuthor()
-      // resetTitle()
-      // quill.root.innerHTML = ''
-      // quill.root.innerText = ''
-      // navigate(`/guides/${res.guide.id}`)
-
-      if (editorRef.current) {
-        const content = editorRef.current.getContent()
-
-        console.log(content)
-      }
-    } catch (error) {
-      console.log(error)
+    const newGuide = {
+      author: author,
+      title: title
+      // content: quill.root.innerHTML,
+      // shortDescription: quill.root.innerText.slice(0, 255)
     }
+
+    const res = await postGuide(newGuide)
+
+    resetAuthor()
+    resetTitle()
+
+    navigate(`/guides/${res.guide.id}`)
   }
+
+  useEffect(() => {
+    if (editorRef.current && !quillInstance) {
+      const editor = new Quill(editorRef.current, {
+        theme: 'snow',
+        placeholder: 'Enter content...',
+        modules: {
+          toolbar: toolbarOptions
+        }
+      })
+
+      setQuillInstance(editor)
+
+      editor.on('text-change', () => {
+        setContent(editor.root.innerHTML)
+      })
+    }
+  }, [quillInstance])
 
   return (
     <div>
@@ -52,7 +89,7 @@ const GuidesNew = () => {
         id="new-guide-form"
         onSubmit={(event) => onSubmit(event)}
       >
-        <div className="input-wrap">
+        <div>
           <label htmlFor="author">Author</label>
           <input
             required
@@ -65,7 +102,7 @@ const GuidesNew = () => {
             disabled
           />
         </div>
-        <div className="input-wrap">
+        <div>
           <label htmlFor="title">Title</label>
           <input
             required
@@ -78,7 +115,9 @@ const GuidesNew = () => {
           />
         </div>
 
-        <ContentEditor ref={editorRef} />
+        <div className="editor-container">
+          <div ref={editorRef}></div>
+        </div>
       </form>
     </div>
   )
