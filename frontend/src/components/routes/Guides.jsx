@@ -8,7 +8,7 @@ import GuideCard from '../GuideCard'
 import Loading from '../Loading'
 
 const Guides = () => {
-  const [guides, setGuides] = useState([])
+  const [guides, setGuides] = useState(null)
   const [search, onSearchChange] = useFormState('')
 
   const getGuides = async () => {

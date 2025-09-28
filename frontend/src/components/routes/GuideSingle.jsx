@@ -7,7 +7,7 @@ import Loading from '../Loading'
 
 const GuideSingle = () => {
   const { id } = useParams()
-  const [guide, setGuide] = useState()
+  const [guide, setGuide] = useState(null)
 
   const getGuide = async () => {
     try {

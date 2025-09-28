@@ -6,16 +6,18 @@ import { useEffect, useState } from 'react'
 import { getAllGuides } from '../../services/guides'
 import GuideCard from '../GuideCard'
 
-const Dashboard = () => {
-  const [guides, setGuides] = useState()
+const Dashboard = (props) => {
+  const [guides, setGuides] = useState(null)
 
   const getRecentGuides = async () => {
     try {
-      const res = await getAllGuides('limit=5')
+      // const res = await getAllGuides('limit=5')
 
-      setGuides(res.guides)
+      // setGuides(res.guides)
+
+      throw new Error('error')
     } catch (error) {
-      console.log(error)
+      props.togglePopup(error.message)
     }
   }
 
@@ -23,7 +25,7 @@ const Dashboard = () => {
     getRecentGuides()
   }, [])
 
-  if (!guides) {
+  if (!guides && !props.isPopup) {
     return <Loading />
   }
 
@@ -57,7 +59,7 @@ const Dashboard = () => {
             </Link>
           </header>
 
-          {guides.length > 0 ? (
+          {guides && guides.length > 0 ? (
             guides.map((g) => <GuideCard key={g.id} guide={g} isMini={true} />)
           ) : (
             <p>No guides found!</p>
