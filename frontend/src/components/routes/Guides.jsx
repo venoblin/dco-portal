@@ -37,10 +37,6 @@ const Guides = () => {
     getGuides()
   }, [])
 
-  if (!guides) {
-    return <Loading />
-  }
-
   return (
     <div>
       <header>

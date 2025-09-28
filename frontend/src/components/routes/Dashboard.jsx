@@ -11,23 +11,19 @@ const Dashboard = (props) => {
 
   const getRecentGuides = async () => {
     try {
-      // const res = await getAllGuides('limit=5')
+      const res = await getAllGuides('limit=5')
 
-      // setGuides(res.guides)
+      setGuides(res.guides)
 
-      throw new Error('error')
+      throw new Error()
     } catch (error) {
-      props.togglePopup(error.message)
+      props.popupToggle('error.message')
     }
   }
 
   useEffect(() => {
     getRecentGuides()
   }, [])
-
-  if (!guides && !props.isPopup) {
-    return <Loading />
-  }
 
   return (
     <div className="Dashboard">

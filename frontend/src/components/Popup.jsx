@@ -1,7 +1,9 @@
 import './Popup.css'
 
 const Popup = (props) => {
-  const onClickHandler = () => {}
+  const onClickHandler = () => {
+    props.popupToggle('')
+  }
 
   return (
     <div className="Popup">

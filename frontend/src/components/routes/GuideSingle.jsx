@@ -23,10 +23,6 @@ const GuideSingle = () => {
     getGuide()
   }, [])
 
-  if (!guide) {
-    return <Loading />
-  }
-
   return (
     <div className="GuideSingle">
       <header>

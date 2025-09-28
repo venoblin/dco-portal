@@ -13,13 +13,22 @@ import Profile from './components/routes/Profile'
 import Popup from './components/Popup'
 
 const App = () => {
+  const [msg, setMsg] = useState('')
+  const [isPopup, toggleIsPopup] = useToggle(false)
+
+  const popupToggle = (msg) => {
+    setMsg(msg)
+    toggleIsPopup()
+  }
+
   return (
     <div className="App">
+      {isPopup === true && <Popup popupToggle={popupToggle} />}
       <NavBar />
 
       <main>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<Dashboard popupToggle={popupToggle} />} />
           <Route path="/guides" element={<Guides />} />
           <Route path="/guides/new" element={<GuidesNew />} />
           <Route path="/guides/:id" element={<GuideSingle />} />
