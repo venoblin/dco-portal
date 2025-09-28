@@ -7,18 +7,22 @@ export const AppContext = createContext()
 export const AppProvider = (props) => {
   const [isLoading, toggleIsLoading] = useToggle(false)
   const [popupMsg, setPopupMsg] = useState('')
-  const [isPopup, toggleIsPopup] = useToggle(false)
+  const [isPopup, setIsPopup] = useState(false)
 
   const popupToggle = (msg) => {
     setPopupMsg(msg)
-    toggleIsPopup()
+
+    if (msg) {
+      setIsPopup(true)
+    } else {
+      setIsPopup(false)
+    }
   }
 
   return (
     <AppContext.Provider value={{ popupToggle }}>
+      {isPopup === true && <Popup msg={popupMsg} popupToggle={popupToggle} />}
       {props.children}
-
-      {isPopup === true && <Popup msg={popupMsg} onClose={popupToggle} />}
     </AppContext.Provider>
   )
 }

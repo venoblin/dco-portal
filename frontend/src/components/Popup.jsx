@@ -6,7 +6,7 @@ const Popup = (props) => {
   const appContext = useContext(AppContext)
 
   const onClickHandler = () => {
-    appContext.onClose()
+    appContext.popupToggle()
   }
 
   return (

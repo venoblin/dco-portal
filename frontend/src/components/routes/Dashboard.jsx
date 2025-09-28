@@ -12,13 +12,10 @@ const Dashboard = (props) => {
 
   const getRecentGuides = async () => {
     try {
-      // const res = await getAllGuides('limit=5')
+      const res = await getAllGuides('limit=5')
 
-      // setGuides(res.guides)
-
-      throw new Error('ERROR')
+      setGuides(res.guides)
     } catch (error) {
-      console.log('error')
       appContext.popupToggle(error.message)
     }
   }
