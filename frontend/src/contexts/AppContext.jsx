@@ -10,6 +10,7 @@ export const AppProvider = (props) => {
   const [isPopup, setIsPopup] = useState(false)
 
   const popupToggle = (msg) => {
+    document.body.style.overflow = 'hidden'
     setPopupMsg(msg)
 
     if (msg) {

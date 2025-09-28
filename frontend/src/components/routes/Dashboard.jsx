@@ -12,6 +12,7 @@ const Dashboard = (props) => {
 
   const getRecentGuides = async () => {
     try {
+      throw new Error('error')
       const res = await getAllGuides('limit=5')
 
       setGuides(res.guides)
@@ -49,7 +50,7 @@ const Dashboard = (props) => {
         <Panel>
           <header>
             <h2>Recent Guides</h2>
-            <Link className="block-link" href="/guides">
+            <Link className="block-link" to="/guides">
               View More →
             </Link>
           </header>

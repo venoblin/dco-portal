@@ -7,11 +7,12 @@ const Popup = (props) => {
 
   const onClickHandler = () => {
     appContext.popupToggle()
+    document.body.style.overflow = 'initial'
   }
 
   return (
     <div className="Popup">
-      <p>{props.msg ? props.msg : 'Something happened!'}</p>
+      <h2>{props.msg ? props.msg : 'Something happened!'}</h2>
       <button type="button" onClick={onClickHandler}>
         Ok
       </button>

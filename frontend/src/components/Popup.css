@@ -6,5 +6,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.5);
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.Popup button {
+  margin-top: 2rem;
 }
