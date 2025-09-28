@@ -7,7 +7,7 @@ import { AppContext } from '../../contexts/AppContext'
 import GuideCard from '../GuideCard'
 import Loading from '../Loading'
 
-const Dashboard = (props) => {
+const Dashboard = () => {
   const appContext = useContext(AppContext)
   const [guides, setGuides] = useState(null)
 
