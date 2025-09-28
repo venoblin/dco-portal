@@ -1,23 +1,25 @@
 import './Dashboard.css'
 import Panel from '../ui/Panel'
 import { Link } from 'react-router-dom'
-import Loading from '../Loading'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { getAllGuides } from '../../services/guides'
+import { AppContext } from '../../contexts/AppContext'
 import GuideCard from '../GuideCard'
 
 const Dashboard = (props) => {
+  const appContext = useContext(AppContext)
   const [guides, setGuides] = useState(null)
 
   const getRecentGuides = async () => {
     try {
-      const res = await getAllGuides('limit=5')
+      // const res = await getAllGuides('limit=5')
 
-      setGuides(res.guides)
+      // setGuides(res.guides)
 
-      throw new Error()
+      throw new Error('ERROR')
     } catch (error) {
-      props.popupToggle('error.message')
+      console.log('error')
+      appContext.popupToggle(error.message)
     }
   }
 

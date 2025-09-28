@@ -1,8 +1,12 @@
 import './Popup.css'
+import { useContext } from 'react'
+import { AppContext } from '../contexts/AppContext'
 
 const Popup = (props) => {
+  const appContext = useContext(AppContext)
+
   const onClickHandler = () => {
-    props.popupToggle('')
+    appContext.onClose()
   }
 
   return (
