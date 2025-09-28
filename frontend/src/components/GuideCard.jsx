@@ -1,13 +1,14 @@
 import './GuideCard.css'
+import { Link } from 'react-router-dom'
 import { cleanTime } from '../utils'
 
 const GuideCard = (props) => {
   return (
     <div className={`GuideCard${props.isMini ? ' mini' : ''}`}>
       <div>
-        <a className="title" href={`/guides/${props.guide.id}`}>
+        <Link className="title" to={`/guides/${props.guide.id}`}>
           {props.guide.title} →
-        </a>
+        </Link>
         <p className="author muted-text">By {props.guide.author}</p>
         <p className="created-at muted-text">
           Created {cleanTime(props.guide.createdAt)}

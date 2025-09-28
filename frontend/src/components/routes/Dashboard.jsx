@@ -2,8 +2,31 @@ import './Dashboard.css'
 import Panel from '../ui/Panel'
 import { Link } from 'react-router-dom'
 import Loading from '../Loading'
+import { useEffect, useState } from 'react'
+import { getAllGuides } from '../../services/guides'
+import GuideCard from '../GuideCard'
 
 const Dashboard = () => {
+  const [guides, setGuides] = useState()
+
+  const getRecentGuides = async () => {
+    try {
+      const res = await getAllGuides('limit=5')
+
+      setGuides(res.guides)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getRecentGuides()
+  }, [])
+
+  if (!guides) {
+    return <Loading />
+  }
+
   return (
     <div className="Dashboard">
       <header>
@@ -33,6 +56,12 @@ const Dashboard = () => {
               View More →
             </Link>
           </header>
+
+          {guides.length > 0 ? (
+            guides.map((g) => <GuideCard key={g.id} guide={g} isMini={true} />)
+          ) : (
+            <p>No guides found!</p>
+          )}
         </Panel>
       </div>
     </div>
