@@ -1,13 +1,14 @@
 import './Guides.css'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { AppContext } from '../../contexts/AppContext'
 import { getAllGuides, getGuidesByTitle } from '../../services/guides'
 import useFormState from '../../hooks/useFormState'
 import Panel from '../ui/Panel'
 import GuideCard from '../GuideCard'
-import Loading from '../Loading'
 
 const Guides = () => {
+  const appContext = useContext(AppContext)
   const [guides, setGuides] = useState(null)
   const [search, onSearchChange] = useFormState('')
 
@@ -17,7 +18,7 @@ const Guides = () => {
 
       setGuides(res.guides)
     } catch (error) {
-      console.log(error.message)
+      appContext.popupToggle(error.message)
     }
   }
 
@@ -29,7 +30,7 @@ const Guides = () => {
 
       setGuides(res.guides)
     } catch (error) {
-      console.log(error.message)
+      appContext.popupToggle(error.message)
     }
   }
 

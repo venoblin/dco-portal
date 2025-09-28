@@ -1,11 +1,12 @@
 import './GuideSingle.css'
-import { cleanTime } from '../../utils'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { AppContext } from '../../contexts/AppContext'
+import { cleanTime } from '../../utils'
 import { getSingleGuide } from '../../services/guides'
-import Loading from '../Loading'
 
 const GuideSingle = () => {
+  const appContext = useContext(AppContext)
   const { id } = useParams()
   const [guide, setGuide] = useState(null)
 
@@ -15,7 +16,7 @@ const GuideSingle = () => {
 
       setGuide(() => res.guide)
     } catch (error) {
-      console.log(error)
+      appContext.popupToggle(error.message)
     }
   }
 

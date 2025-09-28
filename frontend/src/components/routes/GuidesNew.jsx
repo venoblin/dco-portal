@@ -1,11 +1,13 @@
 import './GuidesNew.css'
-import { Link, useNavigate } from 'react-router-dom'
-import { useEffect, useRef, useState } from 'react'
 import Quill from 'quill'
+import { useContext, useEffect, useRef, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { AppContext } from '../../contexts/AppContext'
 import useFormState from '../../hooks/useFormState'
 import { postGuide } from '../../services/guides'
 
 const GuidesNew = () => {
+  const appContext = useContext(AppContext)
   const navigate = useNavigate()
   const [author, onAuthorChange, resetAuthor] = useFormState('Admin')
   const [title, onTitleChange, resetTitle] = useFormState('')
@@ -58,7 +60,7 @@ const GuidesNew = () => {
 
       navigate(`/guides/${res.guide.id}`)
     } catch (error) {
-      console.log(error)
+      appContext.popupToggle(error.message)
     }
   }
 
