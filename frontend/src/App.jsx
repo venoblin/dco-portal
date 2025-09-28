@@ -8,6 +8,7 @@ import GuidesNew from './components/routes/GuidesNew'
 import GuideSingle from './components/routes/GuideSingle'
 import Tools from './components/routes/Tools'
 import Profile from './components/routes/Profile'
+import IncidentManager from './components/routes/IncidentManager'
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/guides/new" element={<GuidesNew />} />
           <Route path="/guides/:id" element={<GuideSingle />} />
           <Route path="/tools" element={<Tools />} />
+          <Route path="/tools/incident-manager" element={<IncidentManager />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </main>
