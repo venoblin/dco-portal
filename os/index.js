@@ -1,3 +1,5 @@
+import { spawn } from 'child_process'
+
 export const execCommand = (command, commandArgs = null) => {
   return new Promise((resolve, reject) => {
     let exec = null
@@ -5,9 +7,9 @@ export const execCommand = (command, commandArgs = null) => {
     let errOutput = ''
 
     if (commandArgs) {
-      exec = spawn(command, [...commandArgs])
+      exec = spawn(command, [...commandArgs], { shell: true })
     } else {
-      exec = spawn(command, [])
+      exec = spawn(command, [], { shell: true })
     }
 
     exec.stdout.on('data', (data) => {

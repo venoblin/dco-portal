@@ -22,15 +22,6 @@
     "url": "https://github.com/venoblin/dco-portal/issues"
   },
   "homepage": "https://github.com/venoblin/dco-portal#readme",
-  "dependencies": {
-    "bcrypt": "^5.1.1",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.2",
-    "express": "^5.1.0",
-    "sequelize": "^6.37.7",
-    "sqlite3": "^5.1.6"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.10"
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }

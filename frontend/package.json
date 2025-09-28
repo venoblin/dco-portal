@@ -7,14 +7,6 @@
     "dev": "parcel index.html",
     "build": "parcel build index.html"
   },
-  "devDependencies": {
-    "parcel": "^2.15.4",
-    "process": "^0.11.10"
-  },
-  "dependencies": {
-    "quill": "^2.0.3",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "react-router-dom": "^6.30.1"
-  }
+  "devDependencies": {},
+  "dependencies": {}
 }
