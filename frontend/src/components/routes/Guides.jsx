@@ -18,7 +18,7 @@ const Guides = () => {
 
       setGuides(res.guides)
     } catch (error) {
-      appContext.popupToggle(error.message)
+      appContext.showPopup(error.message)
     }
   }
 
@@ -30,7 +30,7 @@ const Guides = () => {
 
       setGuides(res.guides)
     } catch (error) {
-      appContext.popupToggle(error.message)
+      appContext.showPopup(error.message)
     }
   }
 

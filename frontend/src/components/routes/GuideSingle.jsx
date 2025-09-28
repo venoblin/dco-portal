@@ -16,7 +16,7 @@ const GuideSingle = () => {
 
       setGuide(() => res.guide)
     } catch (error) {
-      appContext.popupToggle(error.message)
+      appContext.showPopup(error.message)
     }
   }
 

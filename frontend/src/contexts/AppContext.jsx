@@ -9,7 +9,23 @@ export const AppProvider = (props) => {
   const [popupMsg, setPopupMsg] = useState('')
   const [isPopup, setIsPopup] = useState(false)
 
-  const popupToggle = (msg) => {
+  const load = (promise) => {
+    toggleIsLoading()
+
+    return promise()
+      .then((res) => {
+        toggleIsLoading()
+
+        return res
+      })
+      .catch((err) => {
+        toggleIsLoading()
+
+        showPopup(<p>{err.message}</p>)
+      })
+  }
+
+  const showPopup = (msg) => {
     document.body.style.overflow = 'hidden'
     setPopupMsg(msg)
 
@@ -21,8 +37,10 @@ export const AppProvider = (props) => {
   }
 
   return (
-    <AppContext.Provider value={{ popupToggle }}>
-      {isPopup === true && <Popup msg={popupMsg} popupToggle={popupToggle} />}
+    <AppContext.Provider value={{ showPopup, isLoading, load }}>
+      {isPopup === true && !isLoading && (
+        <Popup msg={popupMsg} showPopup={showPopup} />
+      )}
       {props.children}
     </AppContext.Provider>
   )

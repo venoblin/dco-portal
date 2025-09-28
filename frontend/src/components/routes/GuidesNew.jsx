@@ -60,7 +60,7 @@ const GuidesNew = () => {
 
       navigate(`/guides/${res.guide.id}`)
     } catch (error) {
-      appContext.popupToggle(error.message)
+      appContext.showPopup(error.message)
     }
   }
 

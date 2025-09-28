@@ -6,7 +6,7 @@ const Popup = (props) => {
   const appContext = useContext(AppContext)
 
   const onClickHandler = () => {
-    appContext.popupToggle()
+    appContext.showPopup()
     document.body.style.overflow = 'initial'
   }
 
