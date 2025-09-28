@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../contexts/AppContext'
 import useFormState from '../../hooks/useFormState'
 import { postGuide } from '../../services/guides'
+import Loading from '../Loading'
 
 const GuidesNew = () => {
   const appContext = useContext(AppContext)
@@ -52,7 +53,7 @@ const GuidesNew = () => {
         shortDescription: quillInstance.root.innerText.slice(0, 255)
       }
 
-      const res = await postGuide(newGuide)
+      const res = await appContext.load(() => postGuide(newGuide))
 
       resetAuthor()
       resetTitle()
@@ -84,50 +85,56 @@ const GuidesNew = () => {
 
   return (
     <div>
-      <header>
+      {!appContext.isLoading ? (
         <div>
-          <Link to="/guides">← Back</Link>
-          <h1>New Guide</h1>
-        </div>
+          <header>
+            <div>
+              <Link to="/guides">← Back</Link>
+              <h1>New Guide</h1>
+            </div>
 
-        <button form="new-guide-form">Submit</button>
-      </header>
+            <button form="new-guide-form">Submit</button>
+          </header>
 
-      <form
-        className="new-guide-form"
-        id="new-guide-form"
-        onSubmit={(event) => onSubmit(event)}
-      >
-        <div>
-          <label htmlFor="author">Author</label>
-          <input
-            required
-            type="text"
-            name="author"
-            id="author"
-            placeholder="Author"
-            value={author}
-            onChange={(event) => onAuthorChange(event)}
-            disabled
-          />
-        </div>
-        <div>
-          <label htmlFor="title">Title</label>
-          <input
-            required
-            type="text"
-            name="title"
-            id="title"
-            placeholder="Title"
-            value={title}
-            onChange={(event) => onTitleChange(event)}
-          />
-        </div>
+          <form
+            className="new-guide-form"
+            id="new-guide-form"
+            onSubmit={(event) => onSubmit(event)}
+          >
+            <div>
+              <label htmlFor="author">Author</label>
+              <input
+                required
+                type="text"
+                name="author"
+                id="author"
+                placeholder="Author"
+                value={author}
+                onChange={(event) => onAuthorChange(event)}
+                disabled
+              />
+            </div>
+            <div>
+              <label htmlFor="title">Title</label>
+              <input
+                required
+                type="text"
+                name="title"
+                id="title"
+                placeholder="Title"
+                value={title}
+                onChange={(event) => onTitleChange(event)}
+              />
+            </div>
 
-        <div className="editor-container">
-          <div ref={editorRef}></div>
+            <div className="editor-container">
+              <div ref={editorRef}></div>
+            </div>
+          </form>
         </div>
-      </form>
+      ) : (
+        <Loading />
+      )}
     </div>
   )
 }

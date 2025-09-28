@@ -6,6 +6,7 @@ import { getAllGuides, getGuidesByTitle } from '../../services/guides'
 import useFormState from '../../hooks/useFormState'
 import Panel from '../ui/Panel'
 import GuideCard from '../GuideCard'
+import Loading from '../Loading'
 
 const Guides = () => {
   const appContext = useContext(AppContext)
@@ -14,7 +15,7 @@ const Guides = () => {
 
   const getGuides = async () => {
     try {
-      const res = await getAllGuides()
+      const res = await appContext.load(getAllGuides)
 
       setGuides(res.guides)
     } catch (error) {
@@ -26,7 +27,7 @@ const Guides = () => {
     event.preventDefault()
 
     try {
-      const res = await getGuidesByTitle(search)
+      const res = await appContext.load(() => getGuidesByTitle(search))
 
       setGuides(res.guides)
     } catch (error) {
@@ -67,10 +68,14 @@ const Guides = () => {
       </header>
 
       <Panel>
-        {guides && guides.length > 0 ? (
-          guides.map((g) => <GuideCard guide={g} key={g.id} />)
+        {!appContext.isLoading ? (
+          guides && guides.length > 0 ? (
+            guides.map((g) => <GuideCard guide={g} key={g.id} />)
+          ) : (
+            <p>No guides found!</p>
+          )
         ) : (
-          <p>No guides found!</p>
+          <Loading />
         )}
       </Panel>
     </div>

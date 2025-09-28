@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 import { getAllGuides } from '../../services/guides'
 import { AppContext } from '../../contexts/AppContext'
 import GuideCard from '../GuideCard'
+import Loading from '../Loading'
 
 const Dashboard = (props) => {
   const appContext = useContext(AppContext)
@@ -12,7 +13,7 @@ const Dashboard = (props) => {
 
   const getRecentGuides = async () => {
     try {
-      const res = await getAllGuides('limit=5')
+      const res = await appContext.load(() => getAllGuides('limit=5'))
 
       setGuides(res.guides)
     } catch (error) {
@@ -54,10 +55,16 @@ const Dashboard = (props) => {
             </Link>
           </header>
 
-          {guides && guides.length > 0 ? (
-            guides.map((g) => <GuideCard key={g.id} guide={g} isMini={true} />)
+          {!appContext.isLoading ? (
+            guides && guides.length > 0 ? (
+              guides.map((g) => (
+                <GuideCard key={g.id} guide={g} isMini={true} />
+              ))
+            ) : (
+              <p>No guides found!</p>
+            )
           ) : (
-            <p>No guides found!</p>
+            <Loading />
           )}
         </Panel>
       </div>

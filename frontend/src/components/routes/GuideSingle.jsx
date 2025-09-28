@@ -1,9 +1,10 @@
 import './GuideSingle.css'
 import { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { AppContext } from '../../contexts/AppContext'
 import { cleanTime } from '../../utils'
 import { getSingleGuide } from '../../services/guides'
+import Loading from '../Loading'
 
 const GuideSingle = () => {
   const appContext = useContext(AppContext)
@@ -12,7 +13,7 @@ const GuideSingle = () => {
 
   const getGuide = async () => {
     try {
-      const res = await getSingleGuide(id)
+      const res = await appContext.load(() => getSingleGuide(id))
 
       setGuide(() => res.guide)
     } catch (error) {
@@ -26,24 +27,34 @@ const GuideSingle = () => {
 
   return (
     <div className="GuideSingle">
-      <header>
-        <div>
-          <a href="/guides">← Back</a>
-          <h1>{guide.title}</h1>
-          <p className="muted-text">By {guide.author}</p>
-          <p className="muted-text">Created {cleanTime(guide.createdAt)}</p>
-          {guide.updatedAt !== guide.createdAt && (
-            <p className="updated-at muted-text">
-              Updated {cleanTime(guide.updatedAt)}
-            </p>
-          )}
-        </div>
-      </header>
+      {!appContext.isLoading ? (
+        guide && (
+          <div>
+            <header>
+              <div>
+                <Link to="/guides">← Back</Link>
+                <h1>{guide.title}</h1>
+                <p className="muted-text">By {guide.author}</p>
+                <p className="muted-text">
+                  Created {cleanTime(guide.createdAt)}
+                </p>
+                {guide.updatedAt !== guide.createdAt && (
+                  <p className="updated-at muted-text">
+                    Updated {cleanTime(guide.updatedAt)}
+                  </p>
+                )}
+              </div>
+            </header>
 
-      <div
-        className="content ql-editor"
-        dangerouslySetInnerHTML={{ __html: guide.content }}
-      ></div>
+            <div
+              className="content ql-editor"
+              dangerouslySetInnerHTML={{ __html: guide.content }}
+            ></div>
+          </div>
+        )
+      ) : (
+        <Loading />
+      )}
     </div>
   )
 }
