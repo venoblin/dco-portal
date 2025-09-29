@@ -1,5 +1,5 @@
 .IncidentCard {
-  padding: 5rem 0;
+  padding: 3rem 0;
   border-bottom: var(--border-width) solid var(--bg-color);
   display: flex;
   justify-content: space-between;
