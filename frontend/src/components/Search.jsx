@@ -3,7 +3,9 @@ import useFormState from '../hooks/useFormState'
 
 const Search = (props) => {
   const [search, onSearchChange] = useFormState('')
-  const [activeFilter, setActiveFilter] = useFormState(props.filters[0] || null)
+  const [activeFilter, setActiveFilter] = useFormState(
+    props.filters ? props.filters[0] : null
+  )
 
   const cleanFilter = (filter) => {
     const cleaned = filter.replace('_', ' ')
