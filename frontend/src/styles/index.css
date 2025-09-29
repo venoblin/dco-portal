@@ -185,3 +185,15 @@ a:hover {
 .muted-text {
   color: var(--muted-text-color);
 }
+
+.svg-btn {
+  background: none;
+}
+
+.svg-btn:hover {
+  opacity: 1;
+}
+
+.svg-btn:hover .accent {
+  fill: var(--accent-color);
+}

@@ -2,6 +2,8 @@
   padding-bottom: var(--default-spacing);
   margin-top: var(--default-spacing);
   border-bottom: var(--border-width) solid var(--bg-color);
+  display: flex;
+  justify-content: space-between;
 }
 
 .IncidentCard:first-of-type {
@@ -27,4 +29,12 @@
   border-color: var(--bg-color);
   padding-right: var(--default-spacing);
   margin-right: var(--default-spacing);
+}
+
+.IncidentCard .svg-btn {
+  transform: transform var(--default-transition);
+}
+
+.IncidentCard .svg-btn.showing {
+  transform: rotate(180deg);
 }
