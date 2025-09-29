@@ -1,0 +1,30 @@
+.IncidentCard {
+  padding-bottom: var(--default-spacing);
+  margin-top: var(--default-spacing);
+  border-bottom: var(--border-width) solid var(--bg-color);
+}
+
+.IncidentCard:first-of-type {
+  margin-top: 0;
+}
+.IncidentCard:last-of-type {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.IncidentCard .incident-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--default-spacing);
+}
+
+.IncidentCard .incident-info h3 {
+  margin-bottom: calc(var(--default-spacing) / 2);
+}
+
+.IncidentCard .incident-header h2 {
+  border-right: var(--default-border);
+  border-color: var(--bg-color);
+  padding-right: var(--default-spacing);
+  margin-right: var(--default-spacing);
+}
