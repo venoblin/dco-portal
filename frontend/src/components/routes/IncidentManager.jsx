@@ -56,7 +56,6 @@ const IncidentManager = () => {
           <button onClick={handleUpload} disabled={!selectedFile}>
             Upload File
           </button>
-          {selectedFile && <p>Selected file: {selectedFile.name}</p>}
         </div>
       </header>
 
