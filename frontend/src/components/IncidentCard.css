@@ -1,6 +1,5 @@
 .IncidentCard {
-  padding-bottom: var(--default-spacing);
-  margin-top: var(--default-spacing);
+  padding: 3rem 0;
   border-bottom: var(--border-width) solid var(--bg-color);
   display: flex;
   justify-content: space-between;
@@ -10,7 +9,6 @@
   margin-top: 0;
 }
 .IncidentCard:last-of-type {
-  padding-bottom: 0;
   border-bottom: none;
 }
 
@@ -18,10 +16,6 @@
   display: flex;
   align-items: center;
   margin-bottom: var(--default-spacing);
-}
-
-.IncidentCard .incident-info h3 {
-  margin-bottom: calc(var(--default-spacing) / 2);
 }
 
 .IncidentCard .incident-header h2 {

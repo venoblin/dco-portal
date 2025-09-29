@@ -18,7 +18,7 @@ const IncidentCard = (props) => {
         </div>
 
         <div className="incident-info">
-          <h3>{props.incident.short_description}</h3>
+          <p>{props.incident.short_description}</p>
 
           {isShowingDesc === true && (
             <p className="muted-text">{props.incident.description}</p>
