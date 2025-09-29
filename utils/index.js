@@ -14,7 +14,9 @@ export const parseCsv = (csvFilePath) => {
         columns: true,
         delimiter: ',',
         skip_empty_lines: true,
-        trim: true
+        trim: true,
+        bom: true,
+        relax_column_count: true
       })
     )
 

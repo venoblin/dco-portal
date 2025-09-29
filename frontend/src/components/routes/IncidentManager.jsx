@@ -1,10 +1,14 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../contexts/AppContext'
 import { uploadCsv } from '../../services/tools'
+import { storageSet, storageGet } from '../../utils/localStorage'
+import Panel from '../ui/Panel'
+import IncidentCard from '../IncidentCard'
 
 const IncidentManager = () => {
   const appContext = useContext(AppContext)
   const [selectedFile, setSelectedFile] = useState(null)
+  const [incidents, setIncidents] = useState(null)
 
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0])
@@ -21,11 +25,24 @@ const IncidentManager = () => {
 
       const res = await uploadCsv(formData)
 
-      console.log(res)
+      setIncidents(res.data)
+      storageSet('incidents', res.data)
     } catch (error) {
       appContext.showPopup(error.message)
     }
   }
+
+  const checkOnMount = () => {
+    const items = storageGet('incidents')
+
+    if (items) {
+      setIncidents(items)
+    }
+  }
+
+  useEffect(() => {
+    checkOnMount()
+  }, [])
 
   return (
     <div>
@@ -42,6 +59,14 @@ const IncidentManager = () => {
           {selectedFile && <p>Selected file: {selectedFile.name}</p>}
         </div>
       </header>
+
+      <Panel>
+        {incidents ? (
+          incidents.map((i, idx) => <IncidentCard key={idx} incident={i} />)
+        ) : (
+          <p>There are no incidents!</p>
+        )}
+      </Panel>
     </div>
   )
 }
