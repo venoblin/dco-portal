@@ -6,9 +6,9 @@ const Search = (props) => {
   const [activeFilter, setActiveFilter] = useFormState(props.filters[0] || null)
 
   const cleanFilter = (filter) => {
-    const cleanedFilter = filter.replace('_', ' ')
+    const cleaned = filter.replace('_', ' ')
 
-    return cleanedFilter
+    return cleaned
   }
 
   const onSearch = (event) => {
