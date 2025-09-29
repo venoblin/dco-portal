@@ -83,10 +83,10 @@ Describe prerequisites and how to complete them, this example we're installing n
 1. **Clone the repository**
 
    ```sh
-   npm install express sequelize sqlite3 cors dotenv bcrypt
+   npm install express sequelize sqlite3 cors dotenv bcrypt multer csv-parse
    npm install --save-dev nodemon
 
-   npm install react react-dom react-router-dom@6 quill csv-parse
+   npm install react react-dom react-router-dom@6 quill
    npm install --save-dev parcel
    ```
 
