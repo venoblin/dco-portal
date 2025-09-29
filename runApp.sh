@@ -8,4 +8,6 @@ cd frontend
 npm install react react-dom react-router-dom@6 quill
 npm install --save-dev parcel
 
+cd ..
+
 npm start
