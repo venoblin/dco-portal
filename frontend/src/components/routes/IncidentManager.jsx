@@ -34,11 +34,20 @@ const IncidentManager = () => {
     }
   }
 
-  const onSearch = (search) => {
-    console.log(search)
+  const onSearch = (search, filter) => {
+    let searchedIncidents
+
+    if (search !== '') {
+      searchedIncidents = incidents.filter((i) =>
+        i[filter].toLowerCase().includes(search.toLowerCase())
+      )
+      setIncidents(searchedIncidents)
+    } else {
+      populateIncidents()
+    }
   }
 
-  const checkOnMount = () => {
+  const populateIncidents = () => {
     const items = storageGet('incidents')
 
     if (items) {
@@ -47,7 +56,7 @@ const IncidentManager = () => {
   }
 
   useEffect(() => {
-    checkOnMount()
+    populateIncidents()
   }, [])
 
   return (
@@ -85,7 +94,7 @@ const IncidentManager = () => {
       </header>
 
       <Panel>
-        {incidents ? (
+        {incidents && incidents.length > 0 ? (
           incidents.map((i, idx) => <IncidentCard key={idx} incident={i} />)
         ) : (
           <p>There are no incidents!</p>

@@ -14,7 +14,7 @@ const Search = (props) => {
   const onSearch = (event) => {
     event.preventDefault()
 
-    props.onSearch(search)
+    props.onSearch(search, activeFilter)
   }
 
   const handleFilterChange = (event) => {
