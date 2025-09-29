@@ -231,3 +231,7 @@ a:hover {
   width: 20px;
   height: 20px;
 }
+
+input[type='checkbox'] {
+  cursor: pointer;
+}
