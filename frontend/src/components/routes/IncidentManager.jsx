@@ -89,7 +89,18 @@ const IncidentManager = () => {
         </div>
 
         <div className="filter-wrap">
-          <Search onSearch={onSearch} filters={['assigned_to', 'incident']} />
+          {checkedIncidents.length > 0 ? (
+            <div className="selection">
+              <p>Selected Incidents: {checkedIncidents.length}</p>
+
+              <div className="inputs">
+                <button>De-Select All</button>
+                <button>Print All</button>
+              </div>
+            </div>
+          ) : (
+            <Search onSearch={onSearch} filters={['assigned_to', 'incident']} />
+          )}
         </div>
 
         <div>
