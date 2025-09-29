@@ -11,7 +11,7 @@
 }
 
 .IncidentManager .selection .inputs {
-  margin-left: var(--default-spacing);
+  margin-right: var(--default-spacing);
 }
 
 .IncidentManager .selection .inputs button {

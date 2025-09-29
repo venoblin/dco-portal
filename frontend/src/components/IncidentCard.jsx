@@ -1,10 +1,8 @@
 import './IncidentCard.css'
-import { useState } from 'react'
 import useToggle from '../hooks/useToggle'
 
 const IncidentCard = (props) => {
   const [isShowingDesc, toggleIsShowingDesc] = useToggle(false)
-  const [isChecked, setIsChecked] = useState(false)
 
   const onCheckChange = (event) => {
     setIsChecked(event.target.checked)
