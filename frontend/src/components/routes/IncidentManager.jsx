@@ -10,6 +10,7 @@ const IncidentManager = () => {
   const appContext = useContext(AppContext)
   const [selectedFile, setSelectedFile] = useState(null)
   const [incidents, setIncidents] = useState(null)
+  const [search, setSearch] = useState('')
 
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0])
@@ -52,6 +53,22 @@ const IncidentManager = () => {
           <h1>Incident Manager</h1>
         </div>
 
+        <div className="filter-wrap">
+          <form className="search" onSubmit={(event) => onSearch(event)}>
+            <label htmlFor="search"></label>
+            <input
+              id="search"
+              type="text"
+              name="search"
+              placeholder="Search by title..."
+              value={search}
+              onChange={(event) => onSearchChange(event)}
+            />
+
+            <button className="search">Search</button>
+          </form>
+        </div>
+
         <div>
           <div className="file-wrap">
             <label htmlFor="file" className="file-label">
@@ -60,7 +77,7 @@ const IncidentManager = () => {
             {selectedFile ? (
               <p>{selectedFile.name}</p>
             ) : (
-              <p>No file selected</p>
+              <p className="muted-text">No file selected</p>
             )}
             <input
               id="file"
