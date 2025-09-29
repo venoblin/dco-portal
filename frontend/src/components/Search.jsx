@@ -7,7 +7,7 @@ const Search = (props) => {
   const onSearch = (event) => {
     event.preventDefault()
 
-    props.onSearch()
+    props.onSearch(search)
   }
 
   return (

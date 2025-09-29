@@ -5,12 +5,12 @@ import { uploadCsv } from '../../services/tools'
 import { storageSet, storageGet } from '../../utils/localStorage'
 import Panel from '../ui/Panel'
 import IncidentCard from '../IncidentCard'
+import Search from '../Search'
 
 const IncidentManager = () => {
   const appContext = useContext(AppContext)
   const [selectedFile, setSelectedFile] = useState(null)
   const [incidents, setIncidents] = useState(null)
-  const [search, setSearch] = useState('')
 
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0])
@@ -34,6 +34,10 @@ const IncidentManager = () => {
     }
   }
 
+  const onSearch = (search) => {
+    console.log(search)
+  }
+
   const checkOnMount = () => {
     const items = storageGet('incidents')
 
@@ -54,19 +58,7 @@ const IncidentManager = () => {
         </div>
 
         <div className="filter-wrap">
-          <form className="search" onSubmit={(event) => onSearch(event)}>
-            <label htmlFor="search"></label>
-            <input
-              id="search"
-              type="text"
-              name="search"
-              placeholder="Search by title..."
-              value={search}
-              onChange={(event) => onSearchChange(event)}
-            />
-
-            <button className="search">Search</button>
-          </form>
+          <Search onSearch={onSearch} />
         </div>
 
         <div>
