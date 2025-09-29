@@ -115,7 +115,7 @@ button,
   color: var(--bg-color);
   width: fit-content;
   padding: 0.5rem 0.75rem;
-  border-radius: 10px;
+  border-radius: var(--default-border-radius);
   transition: opacity var(--default-transition);
 }
 
@@ -143,7 +143,7 @@ input[type='file'] {
 
 .file-wrap {
   border: var(--default-border);
-  border-radius: 10px;
+  border-radius: var(--default-border-radius);
   padding-right: 0.75rem;
 }
 
