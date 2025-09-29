@@ -29,6 +29,7 @@ const IncidentManager = () => {
 
       setIncidents(res.data)
       storageSet('incidents', res.data)
+      storageSet('incidents-file-name', selectedFile.name)
     } catch (error) {
       appContext.showPopup(error.message)
     }
@@ -55,8 +56,17 @@ const IncidentManager = () => {
     }
   }
 
+  const populateSelectedFile = () => {
+    const name = storageGet('incidents-file-name')
+
+    if (name) {
+      setSelectedFile({ name: name })
+    }
+  }
+
   useEffect(() => {
     populateIncidents()
+    populateSelectedFile()
   }, [])
 
   return (
