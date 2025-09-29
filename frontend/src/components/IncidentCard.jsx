@@ -8,6 +8,7 @@ const IncidentCard = (props) => {
 
   const onCheckChange = (event) => {
     setIsChecked(event.target.checked)
+    props.onCheck(props.incident, event.target.checked)
   }
 
   const showDescHandler = () => {

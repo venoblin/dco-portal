@@ -12,6 +12,7 @@ const IncidentManager = () => {
   const [selectedFile, setSelectedFile] = useState(null)
   const [incidents, setIncidents] = useState(null)
   const [searchedIncidents, setSearchedIncidents] = useState(null)
+  const [checkedIncidents, setCheckedIncidents] = useState([])
 
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0])
@@ -44,6 +45,18 @@ const IncidentManager = () => {
       setSearchedIncidents(searchedIncidents)
     } else {
       setSearchedIncidents(null)
+    }
+  }
+
+  const onCheck = (incident, isChecked) => {
+    if (isChecked) {
+      setCheckedIncidents([...checkedIncidents, incident])
+    } else {
+      const updated = checkedIncidents.filter(
+        (i) => i.number !== incident.number
+      )
+
+      setCheckedIncidents([...updated])
     }
   }
 
@@ -104,10 +117,12 @@ const IncidentManager = () => {
 
       <Panel>
         {incidents && incidents.length > 0 && !searchedIncidents ? (
-          incidents.map((i, idx) => <IncidentCard key={idx} incident={i} />)
+          incidents.map((i, idx) => (
+            <IncidentCard key={idx} incident={i} onCheck={onCheck} />
+          ))
         ) : searchedIncidents && searchedIncidents.length > 0 ? (
           searchedIncidents.map((i, idx) => (
-            <IncidentCard key={idx} incident={i} />
+            <IncidentCard key={idx} incident={i} onCheck={onCheck} />
           ))
         ) : (
           <p>There are no incidents!</p>
