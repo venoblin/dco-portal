@@ -138,7 +138,8 @@ textarea:focus {
   border-color: var(--accent-color);
 }
 
-input:disabled {
+input:disabled,
+button:disabled {
   opacity: 0.5;
 }
 
