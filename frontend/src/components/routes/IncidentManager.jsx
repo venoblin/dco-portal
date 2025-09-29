@@ -58,10 +58,7 @@ const IncidentManager = () => {
         </div>
 
         <div className="filter-wrap">
-          <Search
-            onSearch={onSearch}
-            filters={['assigned_to', 'incident', 'number']}
-          />
+          <Search onSearch={onSearch} filters={['assigned_to', 'incident']} />
         </div>
 
         <div>
