@@ -53,9 +53,24 @@ const IncidentManager = () => {
         </div>
 
         <div>
-          <input type="file" onChange={onFileChange} accept=".csv" />
+          <div className="file-wrap">
+            <label htmlFor="file" className="file-label">
+              Select CSV File
+            </label>
+            {selectedFile ? (
+              <p>{selectedFile.name}</p>
+            ) : (
+              <p>No file selected</p>
+            )}
+            <input
+              id="file"
+              type="file"
+              onChange={onFileChange}
+              accept=".csv"
+            />
+          </div>
           <button onClick={handleUpload} disabled={!selectedFile}>
-            Upload File
+            Upload
           </button>
         </div>
       </header>

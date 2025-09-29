@@ -81,7 +81,9 @@ button,
 a,
 input,
 textarea,
-p {
+p,
+label,
+.file-label {
   font-size: 1em;
 }
 
@@ -103,21 +105,23 @@ label {
 }
 
 .btn,
-button {
+button,
+.file-label {
   cursor: pointer;
-  display: block;
+  display: inline-block;
   border: none;
   text-decoration: none;
   background: var(--accent-color);
   color: var(--bg-color);
   width: fit-content;
-  padding: 0.25rem 0.5rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 10px;
   transition: opacity var(--default-transition);
 }
 
 .btn:hover,
-button:hover {
+button:hover,
+.file-label:hover {
   opacity: 0.8;
   margin-left: 0;
 }
@@ -133,6 +137,25 @@ textarea {
   transition: border var(--default-transition), color var(--default-transition);
 }
 
+input[type='file'] {
+  display: none;
+}
+
+.file-wrap {
+  border: var(--default-border);
+  border-radius: 10px;
+  padding-right: 0.75rem;
+}
+
+.file-wrap .file-label {
+  margin-right: 0.25rem;
+}
+
+.file-label {
+  position: initial;
+  left: initial;
+}
+
 input:focus,
 textarea:focus {
   border-color: var(--accent-color);
@@ -141,6 +164,7 @@ textarea:focus {
 input:disabled,
 button:disabled {
   opacity: 0.5;
+  cursor: default;
 }
 
 select {
