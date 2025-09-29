@@ -1,3 +1,11 @@
 .IncidentManager .file-wrap {
   margin-right: 0.5rem;
 }
+
+.IncidentManager .IncidentCard {
+  margin-top: var(--default-spacing);
+}
+
+.IncidentManager .IncidentCard:first-of-type {
+  margin-top: 0;
+}
