@@ -1,3 +1,4 @@
+import './IncidentManager.css'
 import { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../contexts/AppContext'
 import { uploadCsv } from '../../services/tools'
@@ -45,7 +46,7 @@ const IncidentManager = () => {
   }, [])
 
   return (
-    <div>
+    <div className="IncidentManager">
       <header>
         <div>
           <h1>Incident Manager</h1>
