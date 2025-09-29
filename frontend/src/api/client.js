@@ -44,6 +44,26 @@ class Client {
       throw new Error(error)
     }
   }
+
+  async upload(endpoint, formData) {
+    try {
+      const res = await fetch(this.#constructUrl(endpoint), {
+        method: 'POST',
+        body: formData
+      })
+
+      if (res.ok) {
+        return res.json()
+      } else {
+        const errorBody = await res
+          .json()
+          .catch(() => ({ message: res.statusText }))
+        throw new Error(`API Error ${res.status}: ${errorBody.message}`)
+      }
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
 }
 
 export default Client

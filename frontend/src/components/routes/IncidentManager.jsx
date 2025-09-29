@@ -16,7 +16,10 @@ const IncidentManager = () => {
         throw new Error('File is not a CSV file')
       }
 
-      const res = await uploadCsv(selectedFile)
+      const formData = new FormData()
+      formData.append('csvFile', selectedFile)
+
+      const res = await uploadCsv(formData)
 
       console.log(res)
     } catch (error) {

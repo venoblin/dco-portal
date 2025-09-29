@@ -1,32 +1,36 @@
 import * as fs from 'fs'
 import { parse } from 'csv-parse'
 
-export const parseCsv = (csvFile) => {
-  const records = []
+export const parseCsv = (csvFilePath) => {
+  return new Promise((resolve, reject) => {
+    const records = []
 
-  const parser = fs
-    .createReadStream(csvFile)
+    const readStream = fs.createReadStream(csvFilePath).on('error', (err) => {
+      reject(new Error(`File stream error: ${err.message}`))
+    })
 
-    .pipe(
+    const parser = readStream.pipe(
       parse({
         columns: true,
-        delimiter: ','
+        delimiter: ',',
+        skip_empty_lines: true,
+        trim: true
       })
     )
 
-  parser.on('readable', function () {
-    let record
-    while ((record = parser.read()) !== null) {
-      records.push(record)
-    }
-  })
+    parser.on('readable', function () {
+      let record
+      while ((record = parser.read()) !== null) {
+        records.push(record)
+      }
+    })
 
-  parser.on('end', function () {
-    console.log('CSV file successfully processed.')
-    console.log('Total records:', records.length)
-  })
+    parser.on('end', function () {
+      resolve(records)
+    })
 
-  parser.on('error', function (error) {
-    console.error('An error occurred during parsing:', error.message)
+    parser.on('error', function (error) {
+      reject(new Error(`Parsing error: ${error.message}`))
+    })
   })
 }
