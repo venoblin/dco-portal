@@ -83,7 +83,9 @@ input,
 textarea,
 p,
 label,
-.file-label {
+.file-label,
+select,
+option {
   font-size: 1em;
 }
 
@@ -168,24 +170,27 @@ button:disabled {
 }
 
 select {
-  background-color: transparent;
+  background-color: var(--bg-color);
   border-radius: var(--default-border-radius);
+  border: none;
   padding: calc(var(--default-spacing) / 2) var(--default-spacing);
   cursor: pointer;
-  transition: color var(--default-transition),
-    border-color var(--default-transition);
+  color: var(--text-color);
+  transition: color var(--default-transition);
+  outline: 0;
+  text-transform: capitalize;
 }
 
 select:hover,
 select:active {
   color: var(--accent-color);
-  border-color: var(--accent-color);
 }
 
 option {
   cursor: pointer;
-  color: var(--bg-color);
-  background: var(--text-color);
+  color: var(--text-color);
+  background: var(--bg-color);
+  outline: 0;
 }
 
 .block-link {

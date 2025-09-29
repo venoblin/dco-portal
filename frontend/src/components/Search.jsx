@@ -1,10 +1,15 @@
 import './Search.css'
 import useFormState from '../hooks/useFormState'
-import { useEffect } from 'react'
 
 const Search = (props) => {
   const [search, onSearchChange] = useFormState('')
-  const [activeFilter, setActiveFilter] = useFormState('')
+  const [activeFilter, setActiveFilter] = useFormState(props.filters[0] || null)
+
+  const cleanFilter = (filter) => {
+    const cleanedFilter = filter.replace('_', ' ')
+
+    return cleanedFilter
+  }
 
   const onSearch = (event) => {
     event.preventDefault()
@@ -12,12 +17,9 @@ const Search = (props) => {
     props.onSearch(search)
   }
 
-  const handleFilterChange = (event) => {}
-
-  useEffect(() => {
-    if (props.filters && props.filters.length > 0)
-      setActiveFilter(props.filters[0])
-  }, [])
+  const handleFilterChange = (event) => {
+    setActiveFilter(event)
+  }
 
   return (
     <div className="Search">
@@ -26,11 +28,11 @@ const Search = (props) => {
           <select
             className="filters-wrap"
             value={activeFilter}
-            onChange={handleFilterChange}
+            onChange={(event) => handleFilterChange(event)}
           >
             {props.filters.map((f, i) => (
               <option value={f} key={i}>
-                {f}
+                {cleanFilter(f)}
               </option>
             ))}
           </select>

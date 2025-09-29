@@ -1,3 +1,8 @@
+.Search {
+  border: var(--default-border);
+  border-radius: var(--default-border-radius);
+}
+
 .Search input {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
