@@ -1,8 +1,15 @@
 .IncidentCard {
-  padding: 3rem 0;
+  min-height: 200px;
+  padding: var(--default-spacing);
   border-bottom: var(--border-width) solid var(--bg-color);
-  display: flex;
-  justify-content: space-between;
+  transition: background var(--default-transition),
+    border-radius var(--default-transition);
+}
+
+.IncidentCard.selected {
+  background: var(--accent-color);
+  border-radius: var(--default-border-radius);
+  border: none;
 }
 
 .IncidentCard:first-of-type {
@@ -15,7 +22,23 @@
 .IncidentCard .incident-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: var(--default-spacing);
+}
+
+.IncidentCard .incident {
+  display: flex;
+  align-items: center;
+}
+
+.IncidentCard .inputs {
+  display: flex;
+  align-items: center;
+}
+
+.IncidentCard input[type='checkbox'] {
+  margin-right: 2rem;
+  margin-left: var(--default-spacing);
 }
 
 .IncidentCard .incident-header h2 {

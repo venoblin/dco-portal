@@ -226,3 +226,12 @@ a:hover {
 .svg-btn:hover .accent {
   fill: var(--accent-color);
 }
+
+.big-checkbox {
+  width: 20px;
+  height: 20px;
+}
+
+input[type='checkbox'] {
+  cursor: pointer;
+}
