@@ -11,6 +11,7 @@ const IncidentManager = () => {
   const appContext = useContext(AppContext)
   const [selectedFile, setSelectedFile] = useState(null)
   const [incidents, setIncidents] = useState(null)
+  const [searchedIncidents, setSearchedIncidents] = useState(null)
 
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0])
@@ -36,15 +37,13 @@ const IncidentManager = () => {
   }
 
   const onSearch = (search, filter) => {
-    let searchedIncidents
-
     if (search !== '') {
-      searchedIncidents = incidents.filter((i) =>
+      const searchedIncidents = incidents.filter((i) =>
         i[filter].toLowerCase().includes(search.toLowerCase())
       )
-      setIncidents(searchedIncidents)
+      setSearchedIncidents(searchedIncidents)
     } else {
-      populateIncidents()
+      setSearchedIncidents(null)
     }
   }
 
@@ -104,8 +103,12 @@ const IncidentManager = () => {
       </header>
 
       <Panel>
-        {incidents && incidents.length > 0 ? (
+        {incidents && incidents.length > 0 && !searchedIncidents ? (
           incidents.map((i, idx) => <IncidentCard key={idx} incident={i} />)
+        ) : searchedIncidents && searchedIncidents.length > 0 ? (
+          searchedIncidents.map((i, idx) => (
+            <IncidentCard key={idx} incident={i} />
+          ))
         ) : (
           <p>There are no incidents!</p>
         )}
