@@ -124,8 +124,6 @@ const IncidentManager = () => {
           <h1>Incident Manager</h1>
         </div>
 
-        <button onClick={printSingle}>Print</button>
-
         <div className="filter-wrap">
           {checkedIncidents.length > 0 ? (
             <div className="selection">
