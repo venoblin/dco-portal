@@ -27,6 +27,10 @@
 }
 
 @media print {
+  @page {
+    size: landscape;
+  }
+
   nav,
   header,
   .Panel,
@@ -35,6 +39,8 @@
   }
 
   .print {
+    color: black;
+    background: white;
     display: block !important;
   }
 }

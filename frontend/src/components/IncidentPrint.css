@@ -1,0 +1,27 @@
+.IncidentPrint {
+  padding: 1rem;
+}
+
+.IncidentPrint h2 {
+  margin-bottom: 1rem;
+}
+
+.IncidentPrint .info p {
+  margin-bottom: 0.5rem;
+}
+
+.IncidentPrint .info-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.IncidentPrint .info {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.IncidentPrint .barcodes {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
