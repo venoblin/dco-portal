@@ -1,19 +1,11 @@
 import './IncidentManager.css'
-import { useContext, useEffect, useState, useRef, forwardRef } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../contexts/AppContext'
-import { useReactToPrint } from 'react-to-print'
 import { uploadCsv } from '../../services/tools'
 import { storageSet, storageGet } from '../../utils/localStorage'
 import Panel from '../ui/Panel'
 import IncidentCard from '../IncidentCard'
 import Search from '../Search'
-
-const PrintableContent = forwardRef((props, ref) => (
-  <div ref={ref}>
-    <h1>Printable Content</h1>
-    <p>This should work!</p>
-  </div>
-))
 
 const IncidentManager = () => {
   const appContext = useContext(AppContext)
@@ -21,18 +13,6 @@ const IncidentManager = () => {
   const [allIncidents, setAllIncidents] = useState(null)
   const [searchedIncidents, setSearchedIncidents] = useState(null)
   const [checkedIncidents, setCheckedIncidents] = useState([])
-  const componentRef = useRef()
-
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-    documentTitle: 'Incident Report',
-    onBeforeGetContent: () => {
-      console.log('Preparing content for printing...')
-      return Promise.resolve()
-    },
-    onAfterPrint: () => console.log('Printed successfully!'),
-    removeAfterPrint: true
-  })
 
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0])
@@ -126,21 +106,13 @@ const IncidentManager = () => {
     }
   }
 
-  const printSingle = (incident) => {
-    try {
-      handlePrint()
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const printSingle = (incident) => {}
 
   const printAll = () => {
     console.log(checkedIncidents)
   }
 
   useEffect(() => {
-    console.log(componentRef.current)
-
     populateIncidents()
     populateSelectedFile()
   }, [])
@@ -153,8 +125,6 @@ const IncidentManager = () => {
         </div>
 
         <button onClick={printSingle}>Print</button>
-
-        <PrintableContent ref={componentRef} />
 
         <div className="filter-wrap">
           {checkedIncidents.length > 0 ? (
