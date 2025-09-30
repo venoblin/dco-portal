@@ -11,7 +11,6 @@ const IncidentManager = () => {
   const appContext = useContext(AppContext)
   const [selectedFile, setSelectedFile] = useState(null)
   const [allIncidents, setAllIncidents] = useState(null)
-  const [searchedIncidents, setSearchedIncidents] = useState(null)
   const [checkedIncidents, setCheckedIncidents] = useState([])
 
   const onFileChange = (event) => {
@@ -130,26 +129,31 @@ const IncidentManager = () => {
           <h1>Incident Manager</h1>
         </div>
 
-        <div className="filter-wrap">
-          {checkedIncidents.length > 0 ? (
-            <div className="selection">
-              <div className="inputs">
-                <button onClick={deselectAllIncidents}>{`De-Select${
-                  checkedIncidents.length > 1 ? ' All' : ''
-                }`}</button>
-                <button onClick={printAll}>{`Print${
-                  checkedIncidents.length > 1 ? ' All' : ''
-                }`}</button>
+        {allIncidents && allIncidents.length > 0 && (
+          <div className="filter-wrap">
+            {checkedIncidents && checkedIncidents.length > 0 ? (
+              <div className="selection">
+                <div className="inputs">
+                  <button onClick={deselectAllIncidents}>{`De-Select${
+                    checkedIncidents.length > 1 ? ' All' : ''
+                  }`}</button>
+                  <button onClick={printAll}>{`Print${
+                    checkedIncidents.length > 1 ? ' All' : ''
+                  }`}</button>
+                </div>
+                <p>
+                  <span className="muted-text">Selected Incidents:</span>{' '}
+                  {checkedIncidents.length}
+                </p>
               </div>
-              <p>
-                <span className="muted-text">Selected Incidents:</span>{' '}
-                {checkedIncidents.length}
-              </p>
-            </div>
-          ) : (
-            <Search onSearch={onSearch} filters={['assigned_to', 'incident']} />
-          )}
-        </div>
+            ) : (
+              <Search
+                onSearch={onSearch}
+                filters={['assigned_to', 'incident']}
+              />
+            )}
+          </div>
+        )}
 
         <div>
           <div className="file-wrap">
@@ -175,17 +179,8 @@ const IncidentManager = () => {
       </header>
 
       <Panel>
-        {allIncidents && allIncidents.length > 0 && !searchedIncidents ? (
+        {allIncidents && allIncidents.length > 0 ? (
           allIncidents.map((i) => (
-            <IncidentCard
-              key={i.number}
-              incident={i}
-              onPrint={printSingle}
-              onCheckChange={onCheckChange}
-            />
-          ))
-        ) : searchedIncidents && searchedIncidents.length > 0 ? (
-          searchedIncidents.map((i) => (
             <IncidentCard
               key={i.number}
               incident={i}
