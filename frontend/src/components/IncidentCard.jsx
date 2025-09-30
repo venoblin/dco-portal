@@ -25,7 +25,7 @@ const IncidentCard = (props) => {
             <input
               className="big-checkbox"
               type="checkbox"
-              value={props.incident.isChecked}
+              checked={props.incident.isChecked}
               onChange={(event) => props.onCheckChange(event, props.incident)}
             />
 

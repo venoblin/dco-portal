@@ -43,8 +43,10 @@ const IncidentManager = () => {
   }
 
   const onSearch = (search, filter) => {
+    deselectAllIncidents()
+
     if (search !== '') {
-      const searchedIncidents = incidents.filter((i) =>
+      const searchedIncidents = allIncidents.filter((i) =>
         i[filter].toLowerCase().includes(search.toLowerCase())
       )
       setSearchedIncidents(searchedIncidents)
@@ -55,14 +57,36 @@ const IncidentManager = () => {
 
   const onCheckChange = (event, incident) => {
     let updatedIncidents = [...allIncidents]
-
     updatedIncidents.forEach((i) => {
       if (i.number === incident.number) {
         i.isChecked = event.target.checked
+
+        let updatedCheckedIncidents = [...checkedIncidents]
+        if (event.target.checked) {
+          updatedCheckedIncidents.push(incident)
+        } else {
+          updatedCheckedIncidents = updatedCheckedIncidents.filter(
+            (i) => i.number !== incident.number
+          )
+        }
+
+        setCheckedIncidents(updatedCheckedIncidents)
+
         return
       }
     })
 
+    setAllIncidents(updatedIncidents)
+  }
+
+  const deselectAllIncidents = () => {
+    let updatedIncidents = [...allIncidents]
+
+    updatedIncidents.forEach((i) => {
+      i.isChecked = false
+    })
+
+    setCheckedIncidents([])
     setAllIncidents(updatedIncidents)
   }
 
@@ -98,7 +122,7 @@ const IncidentManager = () => {
           {checkedIncidents.length > 0 ? (
             <div className="selection">
               <div className="inputs">
-                <button>De-Select All</button>
+                <button onClick={deselectAllIncidents}>De-Select All</button>
                 <button>Print All</button>
               </div>
               <p>Selected Incidents: {checkedIncidents.length}</p>
@@ -133,17 +157,17 @@ const IncidentManager = () => {
 
       <Panel>
         {allIncidents && allIncidents.length > 0 && !searchedIncidents ? (
-          allIncidents.map((i, idx) => (
+          allIncidents.map((i) => (
             <IncidentCard
-              key={idx}
+              key={i.number}
               incident={i}
               onCheckChange={onCheckChange}
             />
           ))
         ) : searchedIncidents && searchedIncidents.length > 0 ? (
-          searchedIncidents.map((i, idx) => (
+          searchedIncidents.map((i) => (
             <IncidentCard
-              key={idx}
+              key={i.number}
               incident={i}
               onCheckChange={onCheckChange}
             />
