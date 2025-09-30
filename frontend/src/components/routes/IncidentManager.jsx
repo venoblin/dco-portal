@@ -128,10 +128,17 @@ const IncidentManager = () => {
           {checkedIncidents.length > 0 ? (
             <div className="selection">
               <div className="inputs">
-                <button onClick={deselectAllIncidents}>De-Select All</button>
-                <button onClick={printAll}>Print All</button>
+                <button onClick={deselectAllIncidents}>{`De-Select${
+                  checkedIncidents.length > 1 ? ' All' : ''
+                }`}</button>
+                <button onClick={printAll}>{`Print${
+                  checkedIncidents.length > 1 ? ' All' : ''
+                }`}</button>
               </div>
-              <p>Selected Incidents: {checkedIncidents.length}</p>
+              <p>
+                <span className="muted-text">Selected Incidents:</span>{' '}
+                {checkedIncidents.length}
+              </p>
             </div>
           ) : (
             <Search onSearch={onSearch} filters={['assigned_to', 'incident']} />
