@@ -21,3 +21,20 @@
 .IncidentManager .selection .inputs button:last-of-type {
   margin-right: 0;
 }
+
+.IncidentManager .print {
+  display: none;
+}
+
+@media print {
+  nav,
+  header,
+  .Panel,
+  footer {
+    display: none !important;
+  }
+
+  .print {
+    display: block !important;
+  }
+}

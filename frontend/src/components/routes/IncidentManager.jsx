@@ -1,18 +1,20 @@
 import './IncidentManager.css'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { AppContext } from '../../contexts/AppContext'
 import { uploadCsv } from '../../services/tools'
 import { storageSet, storageGet } from '../../utils/localStorage'
 import Panel from '../ui/Panel'
 import IncidentCard from '../IncidentCard'
 import Search from '../Search'
+import IncidentPrint from '../IncidentPrint'
 
 const IncidentManager = () => {
   const appContext = useContext(AppContext)
-  const [selectedFile, setSelectedFile] = useState(null)
-  const [allIncidents, setAllIncidents] = useState(null)
-  const [searchedIncidents, setSearchedIncidents] = useState(null)
+  const [selectedFile, setSelectedFile] = useState([])
+  const [allIncidents, setAllIncidents] = useState([])
   const [checkedIncidents, setCheckedIncidents] = useState([])
+  const [toPrint, setToPrint] = useState([])
+  const [search, setSearch] = useState('')
 
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0])
@@ -43,15 +45,23 @@ const IncidentManager = () => {
   }
 
   const onSearch = (search, filter) => {
-    deselectAllIncidents()
+    setSearch(search)
+
+    if (allIncidents && checkedIncidents) {
+      deselectAllIncidents()
+    }
 
     if (search !== '') {
-      const searchedIncidents = allIncidents.filter((i) =>
-        i[filter].toLowerCase().includes(search.toLowerCase())
-      )
-      setSearchedIncidents(searchedIncidents)
+      const items = storageGet('incidents')
+
+      if (items) {
+        const searchedIncidents = items.filter((i) =>
+          i[filter].toLowerCase().includes(search.toLowerCase())
+        )
+        setAllIncidents(searchedIncidents)
+      }
     } else {
-      setSearchedIncidents(null)
+      populateIncidents()
     }
   }
 
@@ -76,6 +86,17 @@ const IncidentManager = () => {
       }
     })
 
+    setAllIncidents(updatedIncidents)
+  }
+
+  const selectAllIncidents = () => {
+    let updatedIncidents = [...allIncidents]
+
+    updatedIncidents.forEach((i) => {
+      i.isChecked = true
+    })
+
+    setCheckedIncidents(updatedIncidents)
     setAllIncidents(updatedIncidents)
   }
 
@@ -106,14 +127,26 @@ const IncidentManager = () => {
     }
   }
 
+  const printSingle = (incident) => {
+    setToPrint([incident])
+  }
+
   const printAll = () => {
-    console.log(checkedIncidents)
+    setToPrint([...checkedIncidents])
   }
 
   useEffect(() => {
-    populateIncidents()
+    if (search === '') {
+      populateIncidents()
+    }
     populateSelectedFile()
-  }, [])
+
+    if (toPrint.length > 0) {
+      window.print()
+
+      if (checkedIncidents.length > 0) deselectAllIncidents()
+    }
+  }, [toPrint])
 
   return (
     <div className="IncidentManager">
@@ -122,19 +155,32 @@ const IncidentManager = () => {
           <h1>Incident Manager</h1>
         </div>
 
-        <div className="filter-wrap">
-          {checkedIncidents.length > 0 ? (
-            <div className="selection">
-              <div className="inputs">
-                <button onClick={deselectAllIncidents}>De-Select All</button>
-                <button onClick={printAll}>Print All</button>
+        {storageGet('incidents') && (
+          <div className="filter-wrap">
+            {checkedIncidents && checkedIncidents.length > 0 ? (
+              <div className="selection">
+                <div className="inputs">
+                  <button onClick={selectAllIncidents}>Select All</button>
+                  <button onClick={deselectAllIncidents}>{`De-Select${
+                    checkedIncidents.length > 1 ? ' All' : ''
+                  }`}</button>
+                  <button onClick={printAll}>{`Print${
+                    checkedIncidents.length > 1 ? ' All' : ''
+                  }`}</button>
+                </div>
+                <p>
+                  <span className="muted-text">Selected Incidents:</span>{' '}
+                  {checkedIncidents.length}
+                </p>
               </div>
-              <p>Selected Incidents: {checkedIncidents.length}</p>
-            </div>
-          ) : (
-            <Search onSearch={onSearch} filters={['assigned_to', 'incident']} />
-          )}
-        </div>
+            ) : (
+              <Search
+                onSearch={onSearch}
+                filters={['assigned_to', 'incident']}
+              />
+            )}
+          </div>
+        )}
 
         <div>
           <div className="file-wrap">
@@ -160,19 +206,12 @@ const IncidentManager = () => {
       </header>
 
       <Panel>
-        {allIncidents && allIncidents.length > 0 && !searchedIncidents ? (
+        {allIncidents && allIncidents.length > 0 ? (
           allIncidents.map((i) => (
             <IncidentCard
               key={i.number}
               incident={i}
-              onCheckChange={onCheckChange}
-            />
-          ))
-        ) : searchedIncidents && searchedIncidents.length > 0 ? (
-          searchedIncidents.map((i) => (
-            <IncidentCard
-              key={i.number}
-              incident={i}
+              onPrint={printSingle}
               onCheckChange={onCheckChange}
             />
           ))
@@ -180,6 +219,13 @@ const IncidentManager = () => {
           <p>There are no incidents!</p>
         )}
       </Panel>
+
+      {/* Only renders when printing */}
+      <div className="print">
+        {toPrint &&
+          toPrint.length > 0 &&
+          toPrint.map((i) => <IncidentPrint key={i.number} incident={i} />)}
+      </div>
     </div>
   )
 }
