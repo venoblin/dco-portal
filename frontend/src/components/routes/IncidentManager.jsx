@@ -43,15 +43,21 @@ const IncidentManager = () => {
   }
 
   const onSearch = (search, filter) => {
-    deselectAllIncidents()
+    if (allIncidents && checkedIncidents) {
+      deselectAllIncidents()
+    }
 
     if (search !== '') {
-      const searchedIncidents = allIncidents.filter((i) =>
-        i[filter].toLowerCase().includes(search.toLowerCase())
-      )
-      setSearchedIncidents(searchedIncidents)
+      const items = storageGet('incidents')
+
+      if (items) {
+        const searchedIncidents = items.filter((i) =>
+          i[filter].toLowerCase().includes(search.toLowerCase())
+        )
+        setAllIncidents(searchedIncidents)
+      }
     } else {
-      setSearchedIncidents(null)
+      populateIncidents()
     }
   }
 
