@@ -129,7 +129,7 @@ const IncidentManager = () => {
           <h1>Incident Manager</h1>
         </div>
 
-        {allIncidents && allIncidents.length > 0 && (
+        {storageGet('incidents') && (
           <div className="filter-wrap">
             {checkedIncidents && checkedIncidents.length > 0 ? (
               <div className="selection">
