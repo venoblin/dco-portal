@@ -106,6 +106,8 @@ const IncidentManager = () => {
     }
   }
 
+  const printSingle = (incident) => {}
+
   const printAll = () => {
     console.log(checkedIncidents)
   }
@@ -165,6 +167,7 @@ const IncidentManager = () => {
             <IncidentCard
               key={i.number}
               incident={i}
+              onPrint={printSingle}
               onCheckChange={onCheckChange}
             />
           ))
@@ -173,6 +176,7 @@ const IncidentManager = () => {
             <IncidentCard
               key={i.number}
               incident={i}
+              onPrint={printSingle}
               onCheckChange={onCheckChange}
             />
           ))

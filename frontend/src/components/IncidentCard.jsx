@@ -21,7 +21,11 @@ const IncidentCard = (props) => {
           </div>
 
           <div className="inputs">
-            {!props.incident.isChecked && <button>Print</button>}
+            {!props.incident.isChecked && (
+              <button onClick={() => props.onPrint(props.incident)}>
+                Print
+              </button>
+            )}
             <input
               className="big-checkbox"
               type="checkbox"
