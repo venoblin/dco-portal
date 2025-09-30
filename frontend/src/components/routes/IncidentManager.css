@@ -9,3 +9,15 @@
 .IncidentManager .IncidentCard:first-of-type {
   margin-top: 0;
 }
+
+.IncidentManager .selection .inputs {
+  margin-right: var(--default-spacing);
+}
+
+.IncidentManager .selection .inputs button {
+  margin-right: calc(var(--default-spacing) / 2);
+}
+
+.IncidentManager .selection .inputs button:last-of-type {
+  margin-right: 0;
+}

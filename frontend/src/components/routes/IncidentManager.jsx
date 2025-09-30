@@ -10,8 +10,9 @@ import Search from '../Search'
 const IncidentManager = () => {
   const appContext = useContext(AppContext)
   const [selectedFile, setSelectedFile] = useState(null)
-  const [incidents, setIncidents] = useState(null)
+  const [allIncidents, setAllIncidents] = useState(null)
   const [searchedIncidents, setSearchedIncidents] = useState(null)
+  const [checkedIncidents, setCheckedIncidents] = useState([])
 
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0])
@@ -28,8 +29,13 @@ const IncidentManager = () => {
 
       const res = await uploadCsv(formData)
 
-      setIncidents(res.data)
-      storageSet('incidents', res.data)
+      let incidents = []
+      res.data.forEach((incident) => {
+        incidents.push({ ...incident, isChecked: false })
+      })
+
+      setAllIncidents(incidents)
+      storageSet('incidents', incidents)
       storageSet('incidents-file-name', selectedFile.name)
     } catch (error) {
       appContext.showPopup(error.message)
@@ -37,8 +43,10 @@ const IncidentManager = () => {
   }
 
   const onSearch = (search, filter) => {
+    deselectAllIncidents()
+
     if (search !== '') {
-      const searchedIncidents = incidents.filter((i) =>
+      const searchedIncidents = allIncidents.filter((i) =>
         i[filter].toLowerCase().includes(search.toLowerCase())
       )
       setSearchedIncidents(searchedIncidents)
@@ -47,11 +55,46 @@ const IncidentManager = () => {
     }
   }
 
+  const onCheckChange = (event, incident) => {
+    let updatedIncidents = [...allIncidents]
+    updatedIncidents.forEach((i) => {
+      if (i.number === incident.number) {
+        i.isChecked = event.target.checked
+
+        let updatedCheckedIncidents = [...checkedIncidents]
+        if (event.target.checked) {
+          updatedCheckedIncidents.push(incident)
+        } else {
+          updatedCheckedIncidents = updatedCheckedIncidents.filter(
+            (i) => i.number !== incident.number
+          )
+        }
+
+        setCheckedIncidents(updatedCheckedIncidents)
+
+        return
+      }
+    })
+
+    setAllIncidents(updatedIncidents)
+  }
+
+  const deselectAllIncidents = () => {
+    let updatedIncidents = [...allIncidents]
+
+    updatedIncidents.forEach((i) => {
+      i.isChecked = false
+    })
+
+    setCheckedIncidents([])
+    setAllIncidents(updatedIncidents)
+  }
+
   const populateIncidents = () => {
     const items = storageGet('incidents')
 
     if (items) {
-      setIncidents(items)
+      setAllIncidents(items)
     }
   }
 
@@ -61,6 +104,10 @@ const IncidentManager = () => {
     if (name) {
       setSelectedFile({ name: name })
     }
+  }
+
+  const printAll = () => {
+    console.log(checkedIncidents)
   }
 
   useEffect(() => {
@@ -76,7 +123,17 @@ const IncidentManager = () => {
         </div>
 
         <div className="filter-wrap">
-          <Search onSearch={onSearch} filters={['assigned_to', 'incident']} />
+          {checkedIncidents.length > 0 ? (
+            <div className="selection">
+              <div className="inputs">
+                <button onClick={deselectAllIncidents}>De-Select All</button>
+                <button onClick={printAll}>Print All</button>
+              </div>
+              <p>Selected Incidents: {checkedIncidents.length}</p>
+            </div>
+          ) : (
+            <Search onSearch={onSearch} filters={['assigned_to', 'incident']} />
+          )}
         </div>
 
         <div>
@@ -103,11 +160,21 @@ const IncidentManager = () => {
       </header>
 
       <Panel>
-        {incidents && incidents.length > 0 && !searchedIncidents ? (
-          incidents.map((i, idx) => <IncidentCard key={idx} incident={i} />)
+        {allIncidents && allIncidents.length > 0 && !searchedIncidents ? (
+          allIncidents.map((i) => (
+            <IncidentCard
+              key={i.number}
+              incident={i}
+              onCheckChange={onCheckChange}
+            />
+          ))
         ) : searchedIncidents && searchedIncidents.length > 0 ? (
-          searchedIncidents.map((i, idx) => (
-            <IncidentCard key={idx} incident={i} />
+          searchedIncidents.map((i) => (
+            <IncidentCard
+              key={i.number}
+              incident={i}
+              onCheckChange={onCheckChange}
+            />
           ))
         ) : (
           <p>There are no incidents!</p>
