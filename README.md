@@ -86,18 +86,18 @@ Describe prerequisites and how to complete them, this example we're installing n
    npm install express sequelize sqlite3 cors dotenv bcrypt multer csv-parse
    npm install --save-dev nodemon
 
-   npm install react react-dom react-router-dom@6 quill
+   npm install react react-dom react-router-dom@6 quill react-to-print
    npm install --save-dev parcel
    ```
 
-2. **Create settings file (for [ezdownloadsorter](https://github.com/venoblin/download-file-sorter))**
+1. **Create settings file (for [ezdownloadsorter](https://github.com/venoblin/download-file-sorter))**
 
    ```sh
    cd scripts
    touch settings.json
    ```
 
-3. **Modify `settings.json`**
+1. **Modify `settings.json`**
 
    ```json
    {
@@ -110,7 +110,7 @@ Describe prerequisites and how to complete them, this example we're installing n
    }
    ```
 
-4. **Install scripts**
+1. **Install scripts**
    ```sh
    ./install.sh
    ```

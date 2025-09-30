@@ -106,6 +106,10 @@ const IncidentManager = () => {
     }
   }
 
+  const printAll = () => {
+    console.log(checkedIncidents)
+  }
+
   useEffect(() => {
     populateIncidents()
     populateSelectedFile()
@@ -123,7 +127,7 @@ const IncidentManager = () => {
             <div className="selection">
               <div className="inputs">
                 <button onClick={deselectAllIncidents}>De-Select All</button>
-                <button>Print All</button>
+                <button onClick={printAll}>Print All</button>
               </div>
               <p>Selected Incidents: {checkedIncidents.length}</p>
             </div>
