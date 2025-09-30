@@ -1,12 +1,17 @@
 .IncidentPrint {
   padding: 1rem;
+  width: 100%;
+  height: 100vh;
 }
 
 .IncidentPrint h2 {
   margin-bottom: 1rem;
+  border-bottom: var(--default-border);
+  border-color: black;
+  padding-bottom: 1rem;
 }
 
-.IncidentPrint .info p {
+.IncidentPrint p {
   margin-bottom: 0.5rem;
 }
 
@@ -17,7 +22,16 @@
 
 .IncidentPrint .info {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 2fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-color: black;
+}
+
+.IncidentPrint .description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .IncidentPrint .barcodes {

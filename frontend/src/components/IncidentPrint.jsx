@@ -23,6 +23,10 @@ const IncidentPrint = (props) => {
               {props.incident.arm_number ? props.incident.arm_number : 'N/A'}
             </p>
           </div>
+          <div className="info-wrap">
+            <p className="muted-text">Assigned To:</p>
+            <p>{props.incident.assigned_to}</p>
+          </div>
 
           <div className="info-wrap">
             <p className="muted-text">Due:</p>
@@ -59,6 +63,12 @@ const IncidentPrint = (props) => {
           <div>Asset tag Barcode</div>
           <div>ARM Barcode</div>
         </div>
+      </div>
+
+      <div className="description">
+        <p className="type">{props.incident.u_sub_type}</p>
+        <p className="short-description">{props.incident.short_description}</p>
+        <p className="full-description">{props.incident.description}</p>
       </div>
     </div>
   )
