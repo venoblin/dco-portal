@@ -4,17 +4,14 @@ import useToggle from '../hooks/useToggle'
 const IncidentCard = (props) => {
   const [isShowingDesc, toggleIsShowingDesc] = useToggle(false)
 
-  const onCheckChange = (event) => {
-    setIsChecked(event.target.checked)
-    props.onCheck(props.incident, event.target.checked)
-  }
-
   const showDescHandler = () => {
     toggleIsShowingDesc()
   }
 
   return (
-    <div className={`IncidentCard${isChecked ? ' selected' : ''}`}>
+    <div
+      className={`IncidentCard${props.incident.isChecked ? ' selected' : ''}`}
+    >
       <div>
         <div className="incident-header">
           <div className="incident">
@@ -24,12 +21,12 @@ const IncidentCard = (props) => {
           </div>
 
           <div className="inputs">
-            {!isChecked && <button>Print</button>}
+            {!props.incident.isChecked && <button>Print</button>}
             <input
               className="big-checkbox"
               type="checkbox"
-              value={isChecked}
-              onChange={(event) => onCheckChange(event)}
+              value={props.incident.isChecked}
+              onChange={(event) => props.onCheckChange(event, props.incident)}
             />
 
             <button
