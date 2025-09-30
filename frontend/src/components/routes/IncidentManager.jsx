@@ -208,7 +208,7 @@ const IncidentManager = () => {
       <Panel>
         {allIncidents && allIncidents.length > 0 ? (
           allIncidents.map((i) => (
-            <IncidentPrint
+            <IncidentCard
               key={i.number}
               incident={i}
               onPrint={printSingle}
