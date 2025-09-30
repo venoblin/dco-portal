@@ -14,6 +14,7 @@ const IncidentManager = () => {
   const [allIncidents, setAllIncidents] = useState([])
   const [checkedIncidents, setCheckedIncidents] = useState([])
   const [toPrint, setToPrint] = useState([])
+  const [search, setSearch] = useState('')
 
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0])
@@ -44,6 +45,8 @@ const IncidentManager = () => {
   }
 
   const onSearch = (search, filter) => {
+    setSearch(search)
+
     if (allIncidents && checkedIncidents) {
       deselectAllIncidents()
     }
@@ -86,6 +89,17 @@ const IncidentManager = () => {
     setAllIncidents(updatedIncidents)
   }
 
+  const selectAllIncidents = () => {
+    let updatedIncidents = [...allIncidents]
+
+    updatedIncidents.forEach((i) => {
+      i.isChecked = true
+    })
+
+    setCheckedIncidents(updatedIncidents)
+    setAllIncidents(updatedIncidents)
+  }
+
   const deselectAllIncidents = () => {
     let updatedIncidents = [...allIncidents]
 
@@ -115,18 +129,24 @@ const IncidentManager = () => {
 
   const printSingle = (incident) => {
     setToPrint([incident])
-
-    window.print()
   }
 
   const printAll = () => {
-    console.log(checkedIncidents)
+    setToPrint([...checkedIncidents])
   }
 
   useEffect(() => {
-    populateIncidents()
+    if (search === '') {
+      populateIncidents()
+    }
     populateSelectedFile()
-  }, [])
+
+    if (toPrint.length > 0) {
+      window.print()
+
+      if (checkedIncidents.length > 0) deselectAllIncidents()
+    }
+  }, [toPrint])
 
   return (
     <div className="IncidentManager">
@@ -140,6 +160,7 @@ const IncidentManager = () => {
             {checkedIncidents && checkedIncidents.length > 0 ? (
               <div className="selection">
                 <div className="inputs">
+                  <button onClick={selectAllIncidents}>Select All</button>
                   <button onClick={deselectAllIncidents}>{`De-Select${
                     checkedIncidents.length > 1 ? ' All' : ''
                   }`}</button>
@@ -201,10 +222,9 @@ const IncidentManager = () => {
 
       {/* Only renders when printing */}
       <div className="print">
-        {toPrint.length > 0 &&
-          toPrint.map((i) => (
-            <IncidentPrint key={i.incident.number} incident={i} />
-          ))}
+        {toPrint &&
+          toPrint.length > 0 &&
+          toPrint.map((i) => <IncidentPrint key={i.number} incident={i} />)}
       </div>
     </div>
   )
