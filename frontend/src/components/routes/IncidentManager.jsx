@@ -1,5 +1,5 @@
 import './IncidentManager.css'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { AppContext } from '../../contexts/AppContext'
 import { uploadCsv } from '../../services/tools'
 import { storageSet, storageGet } from '../../utils/localStorage'

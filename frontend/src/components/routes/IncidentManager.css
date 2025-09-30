@@ -21,3 +21,7 @@
 .IncidentManager .selection .inputs button:last-of-type {
   margin-right: 0;
 }
+
+.IncidentManager .print-wrap {
+  background: red;
+}
