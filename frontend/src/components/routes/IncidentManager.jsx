@@ -6,12 +6,14 @@ import { storageSet, storageGet } from '../../utils/localStorage'
 import Panel from '../ui/Panel'
 import IncidentCard from '../IncidentCard'
 import Search from '../Search'
+import IncidentPrint from '../IncidentPrint'
 
 const IncidentManager = () => {
   const appContext = useContext(AppContext)
-  const [selectedFile, setSelectedFile] = useState(null)
-  const [allIncidents, setAllIncidents] = useState(null)
+  const [selectedFile, setSelectedFile] = useState([])
+  const [allIncidents, setAllIncidents] = useState([])
   const [checkedIncidents, setCheckedIncidents] = useState([])
+  const [toPrint, setToPrint] = useState([])
 
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0])
@@ -111,7 +113,11 @@ const IncidentManager = () => {
     }
   }
 
-  const printSingle = (incident) => {}
+  const printSingle = (incident) => {
+    setToPrint([incident])
+
+    window.print()
+  }
 
   const printAll = () => {
     console.log(checkedIncidents)
@@ -192,6 +198,14 @@ const IncidentManager = () => {
           <p>There are no incidents!</p>
         )}
       </Panel>
+
+      {/* Only renders when printing */}
+      <div className="print">
+        {toPrint.length > 0 &&
+          toPrint.map((i) => (
+            <IncidentPrint key={i.incident.number} incident={i} />
+          ))}
+      </div>
     </div>
   )
 }

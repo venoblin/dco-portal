@@ -22,6 +22,19 @@
   margin-right: 0;
 }
 
-.IncidentManager .print-wrap {
-  background: red;
+.IncidentManager .print {
+  display: none;
+}
+
+@media print {
+  nav,
+  header,
+  .Panel,
+  footer {
+    display: none !important;
+  }
+
+  .print {
+    display: block !important;
+  }
 }
