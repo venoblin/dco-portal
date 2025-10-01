@@ -1,4 +1,5 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
+import { storageGet } from '../utils/localStorage'
 import useToggle from '../hooks/useToggle'
 import Popup from '../components/Popup'
 
@@ -8,6 +9,10 @@ export const AppProvider = (props) => {
   const [isLoading, toggleIsLoading] = useToggle(false)
   const [popupMsg, setPopupMsg] = useState('')
   const [isPopup, setIsPopup] = useState(false)
+  const [auth, setAuth] = useState({
+    isAuthenticated: null,
+    token: null
+  })
 
   const load = (promise) => {
     toggleIsLoading()
@@ -36,8 +41,20 @@ export const AppProvider = (props) => {
     }
   }
 
+  const checkToken = () => {
+    const token = storageGet('token')
+
+    if (token) {
+      setAuth({ isAuthenticated: true, token: token })
+    }
+  }
+
+  useEffect(() => {
+    checkToken()
+  }, [])
+
   return (
-    <AppContext.Provider value={{ showPopup, isLoading, load }}>
+    <AppContext.Provider value={{ showPopup, isLoading, load, auth }}>
       {isPopup === true && !isLoading && (
         <Popup msg={popupMsg} showPopup={showPopup} />
       )}
