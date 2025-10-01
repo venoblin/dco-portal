@@ -23,12 +23,36 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--default-spacing);
+  margin-bottom: 0;
 }
 
 .IncidentCard .incident {
   display: flex;
   align-items: center;
+}
+
+.IncidentCard .incident *:last-child {
+  border: none;
+}
+
+.IncidentCard .incident h2,
+.IncidentCard .incident-arms {
+  border-right: var(--default-border);
+  border-color: var(--bg-color);
+}
+
+.IncidentCard .incident-arms {
+  padding-right: var(--default-spacing);
+  margin-right: var(--default-spacing);
+  display: flex;
+}
+
+.IncidentCard .incident-arms p {
+  margin-right: 0.5rem;
+}
+
+.IncidentCard .incident-arms p:last-of-type {
+  margin-right: 0.5rem;
 }
 
 .IncidentCard .inputs {
@@ -42,8 +66,6 @@
 }
 
 .IncidentCard .incident-header h2 {
-  border-right: var(--default-border);
-  border-color: var(--bg-color);
   padding-right: var(--default-spacing);
   margin-right: var(--default-spacing);
 }
@@ -54,4 +76,12 @@
 
 .IncidentCard .svg-btn.showing {
   transform: rotate(180deg);
+}
+
+.IncidentCard .incident-info p {
+  margin-bottom: 0.5rem;
+}
+
+.IncidentCard .incident-info p:last-of-type {
+  margin-bottom: 0;
 }

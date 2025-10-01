@@ -17,7 +17,13 @@ const IncidentCard = (props) => {
           <div className="incident">
             <h2>{props.incident.incident}</h2>
             <h2>{props.incident.number}</h2>
-            <p>Assigned to {props.incident.assigned_to}</p>
+
+            {props.incident.arms && (
+              <div className="incident-arms">
+                {props.incident.arms.length > 0 &&
+                  props.incident.arms.map((a) => <p key={a}>{a}</p>)}
+              </div>
+            )}
           </div>
 
           <div className="inputs">
@@ -57,6 +63,8 @@ const IncidentCard = (props) => {
         </div>
 
         <div className="incident-info">
+          <p>Assigned to {props.incident.assigned_to}</p>
+          <p>Due {props.incident.due_date}</p>
           <p>{props.incident.short_description}</p>
 
           {isShowingDesc === true && (
