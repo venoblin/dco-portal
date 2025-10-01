@@ -73,8 +73,18 @@ const IncidentPrint = (props) => {
 
           {props.incident.arms && (
             <div className="info-wrap">
-              <p className="muted-text">ARM:</p>
-              <p>{props.incident.arms}</p>
+              <p className="muted-text">ARM/s:</p>
+
+              <div className="arms">
+                {props.incident.arms.length > 0 &&
+                  props.incident.arms.map((a, idx) =>
+                    idx === props.incident.arms.length - 1 ? (
+                      <p key={a}>{a}</p>
+                    ) : (
+                      <p key={a}>{a},</p>
+                    )
+                  )}
+              </div>
             </div>
           )}
         </div>

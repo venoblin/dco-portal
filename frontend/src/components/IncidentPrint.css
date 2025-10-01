@@ -10,15 +10,24 @@
   padding: 0.5rem;
 }
 
-.IncidentPrint p {
+.IncidentPrint .info-wrap {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   padding: 0.5rem;
   border-bottom: var(--default-border);
   border-color: var(--muted-color);
 }
 
-.IncidentPrint .info-wrap {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
+.info-wrap .arms {
+  display: flex;
+}
+
+.info-wrap .arms p {
+  margin-right: 0.25rem;
+}
+
+.info-wrap .arms p:last-of-type {
+  margin-right: 0rem;
 }
 
 .IncidentPrint .info {
@@ -26,6 +35,13 @@
   grid-template-columns: 2fr 2fr 1fr;
   gap: 0.5rem;
   margin-bottom: 1rem;
+}
+
+.IncidentPrint .short-description {
+  border-bottom: var(--default-border);
+  border-color: var(--muted-color);
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .IncidentPrint .full-description {
