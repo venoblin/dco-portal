@@ -35,7 +35,7 @@
   body,
   html,
   #root {
-    width: 100% !important; /* Force full width on all levels */
+    width: 100% !important;
     padding: 0 !important;
     margin: 0 !important;
   }
@@ -48,7 +48,7 @@
   }
 
   main {
-    padding: 1rem;
+    padding: 0rem;
     margin: 0;
   }
 
@@ -56,5 +56,15 @@
     color: black;
     background: white;
     display: block !important;
+  }
+
+  .IncidentPrint {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .IncidentPrint:last-of-type {
+    page-break-after: auto;
+    break-after: auto;
   }
 }

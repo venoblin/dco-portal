@@ -1,8 +1,6 @@
 .IncidentPrint {
   padding: 0.5rem;
   width: 100%;
-  border: var(--default-border);
-  border-color: var(--muted-color);
 }
 
 .IncidentPrint h2 {
