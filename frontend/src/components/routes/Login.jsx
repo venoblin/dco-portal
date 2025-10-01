@@ -27,7 +27,9 @@ const Login = () => {
             required
           />
 
-          <button>Login</button>
+          <div className="btn-wrap">
+            <button>Login</button>
+          </div>
         </form>
       </Panel>
     </div>

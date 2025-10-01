@@ -9,6 +9,11 @@
   bottom: 50%;
 }
 
+.Login .btn-wrap {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .Login .Logo {
   height: fit-content;
   padding-bottom: 0;
