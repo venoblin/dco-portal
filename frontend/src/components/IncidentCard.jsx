@@ -17,7 +17,13 @@ const IncidentCard = (props) => {
           <div className="incident">
             <h2>{props.incident.incident}</h2>
             <h2>{props.incident.number}</h2>
-            <p>Assigned to {props.incident.assigned_to}</p>
+
+            {props.incident.arms && (
+              <div className="incident-arms">
+                {props.incident.arms.length > 0 &&
+                  props.incident.arms.map((a) => <p key={a}>{a}</p>)}
+              </div>
+            )}
           </div>
 
           <div className="inputs">
@@ -57,10 +63,39 @@ const IncidentCard = (props) => {
         </div>
 
         <div className="incident-info">
-          <p>{props.incident.short_description}</p>
+          <div className="info">
+            <div className="machine-info-wrap">
+              <div className="machine-info">
+                <p className="muted-text">Hostname:</p>
+                <p>{props.incident.cmdb_ci}</p>
+              </div>
 
+              <div className="machine-info">
+                <p className="muted-text">Asset:</p>
+                <p>{props.incident.ci ? props.incident.ci.asset_tag : 'N/A'}</p>
+              </div>
+
+              <div className="machine-info">
+                <p className="muted-text">Rack:</p>
+                <p>{props.incident.ci ? props.incident.ci.rack : 'N/A'}</p>
+              </div>
+
+              <div className="machine-info">
+                <p className="muted-text">Height:</p>
+                <p>{props.incident.ci ? props.incident.ci.height : 'N/A'}</p>
+              </div>
+            </div>
+
+            <div>
+              <p>Assigned to {props.incident.assigned_to}</p>
+              <p>{props.incident.u_sub_type}</p>
+              <p>Due {props.incident.due_date}</p>
+            </div>
+          </div>
+
+          <p>{props.incident.short_description}</p>
           {isShowingDesc === true && (
-            <p className="muted-text">{props.incident.description}</p>
+            <p className="full-description">{props.incident.description}</p>
           )}
         </div>
       </div>

@@ -1,4 +1,5 @@
 import './IncidentPrint.css'
+import Barcode from 'react-barcode'
 
 const IncidentPrint = (props) => {
   return (
@@ -28,6 +29,11 @@ const IncidentPrint = (props) => {
           </div>
 
           <div className="info-wrap">
+            <p className="muted-text">Model:</p>
+            <p>{props.incident.ci ? props.incident.ci.model : 'N/A'}</p>
+          </div>
+
+          <div className="info-wrap">
             <p className="muted-text">Rack:</p>
             <p>{props.incident.ci ? props.incident.ci.rack : 'N/A'}</p>
           </div>
@@ -51,13 +57,6 @@ const IncidentPrint = (props) => {
             <p>{props.incident.number}</p>
           </div>
 
-          {props.incident.arm_number && (
-            <div className="info-wrap">
-              <p className="muted-text">ARM:</p>
-              <p>{props.incident.arm_number}</p>
-            </div>
-          )}
-
           <div className="info-wrap">
             <p className="muted-text">Assigned To:</p>
             <p>{props.incident.assigned_to}</p>
@@ -67,18 +66,57 @@ const IncidentPrint = (props) => {
             <p className="muted-text">Due:</p>
             <p>{props.incident.due_date}</p>
           </div>
+
+          <div className="info-wrap">
+            <p className="muted-text">Type:</p>
+            <p>{props.incident.u_sub_type}</p>
+          </div>
+
+          {props.incident.arms && (
+            <div className="info-wrap">
+              <p className="muted-text">ARM/s:</p>
+
+              <div className="arms">
+                {props.incident.arms.length > 0 &&
+                  props.incident.arms.map((a, idx) =>
+                    idx === props.incident.arms.length - 1 ? (
+                      <p key={a}>{a}</p>
+                    ) : (
+                      <p key={a}>{a},</p>
+                    )
+                  )}
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="barcodes">
-          <div>Incident Barcode</div>
+          <Barcode
+            value={props.incident.incident}
+            format="CODE128"
+            width={1.5}
+            height={30}
+            displayValue={true}
+          />
+
           <div>Asset tag Barcode</div>
 
-          {props.incident.arm_number && <div>ARM Barcode</div>}
+          {props.incident.arms &&
+            props.incident.arms.length > 0 &&
+            props.incident.arms.map((a) => (
+              <Barcode
+                key={a}
+                value={a}
+                format="CODE128"
+                width={1.5}
+                height={35}
+                displayValue={true}
+              />
+            ))}
         </div>
       </div>
 
       <div className="description">
-        <p className="type">{props.incident.u_sub_type}</p>
         <p className="short-description">{props.incident.short_description}</p>
         <p className="full-description">{props.incident.description}</p>
       </div>
