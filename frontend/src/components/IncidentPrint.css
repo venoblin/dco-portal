@@ -43,3 +43,7 @@
   align-items: center;
   padding: 0.5rem;
 }
+
+.IncidentPrint .barcodes p {
+  border: none;
+}

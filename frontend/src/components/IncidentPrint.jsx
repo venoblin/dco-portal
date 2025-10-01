@@ -80,7 +80,11 @@ const IncidentPrint = (props) => {
         </div>
 
         <div className="barcodes">
-          <div>Incident Barcode</div>
+          <div>
+            <div id="incident-barcode"></div>
+            <p>{props.incident.incident}</p>
+          </div>
+
           <div>Asset tag Barcode</div>
           {props.incident.arm_number && <div>ARM Barcode</div>}
         </div>
