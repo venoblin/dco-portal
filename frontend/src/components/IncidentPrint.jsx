@@ -71,10 +71,10 @@ const IncidentPrint = (props) => {
             <p>{props.incident.u_sub_type}</p>
           </div>
 
-          {props.incident.arm_number && (
+          {props.incident.arms && (
             <div className="info-wrap">
               <p className="muted-text">ARM:</p>
-              <p>{props.incident.arm_number}</p>
+              <p>{props.incident.arms}</p>
             </div>
           )}
         </div>
@@ -86,7 +86,7 @@ const IncidentPrint = (props) => {
           </div>
 
           <div>Asset tag Barcode</div>
-          {props.incident.arm_number && <div>ARM Barcode</div>}
+          {props.incident.arms && <div>ARM Barcode</div>}
         </div>
       </div>
 
