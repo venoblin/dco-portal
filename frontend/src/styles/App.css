@@ -45,6 +45,10 @@ main header div a {
   margin-right: var(--default-spacing);
 }
 
+main header .block-link:last-of-type {
+  margin-right: 0;
+}
+
 main header div p {
   margin-right: calc(var(--default-spacing) / 2);
 }

@@ -50,9 +50,14 @@ const Dashboard = () => {
         <Panel>
           <header>
             <h2>Recent Guides</h2>
-            <Link className="block-link" to="/guides">
-              View More →
-            </Link>
+            <div className="links">
+              <Link className="block-link" to="/guides/new">
+                Create Guide →
+              </Link>
+              <Link className="block-link" to="/guides">
+                View More →
+              </Link>
+            </div>
           </header>
 
           {!appContext.isLoading ? (
