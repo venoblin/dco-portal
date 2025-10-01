@@ -10,6 +10,7 @@ import Tools from './components/routes/Tools'
 import Profile from './components/routes/Profile'
 import TriageManager from './components/routes/TriageManager'
 import IncidentManager from './components/routes/IncidentManager'
+import NotFound from './components/routes/NotFound'
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/tools/triage-manager" element={<TriageManager />} />
           <Route path="/tools/incident-manager" element={<IncidentManager />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
       </main>
 
