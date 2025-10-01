@@ -103,7 +103,12 @@ const IncidentPrint = (props) => {
 
       <div className="description">
         <p className="short-description">{props.incident.short_description}</p>
-        <p className="full-description">{props.incident.description}</p>
+        <p
+          className="full-description"
+          dangerouslySetInnerHTML={{
+            __html: props.incident.description
+          }}
+        />
       </div>
     </div>
   )
