@@ -56,13 +56,6 @@ const IncidentPrint = (props) => {
             <p>{props.incident.number}</p>
           </div>
 
-          {props.incident.arm_number && (
-            <div className="info-wrap">
-              <p className="muted-text">ARM:</p>
-              <p>{props.incident.arm_number}</p>
-            </div>
-          )}
-
           <div className="info-wrap">
             <p className="muted-text">Assigned To:</p>
             <p>{props.incident.assigned_to}</p>
@@ -77,12 +70,18 @@ const IncidentPrint = (props) => {
             <p className="muted-text">Type:</p>
             <p>{props.incident.u_sub_type}</p>
           </div>
+
+          {props.incident.arm_number && (
+            <div className="info-wrap">
+              <p className="muted-text">ARM:</p>
+              <p>{props.incident.arm_number}</p>
+            </div>
+          )}
         </div>
 
         <div className="barcodes">
           <div>Incident Barcode</div>
           <div>Asset tag Barcode</div>
-
           {props.incident.arm_number && <div>ARM Barcode</div>}
         </div>
       </div>
