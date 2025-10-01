@@ -52,10 +52,6 @@
   width: fit-content;
 }
 
-.IncidentPrint .arm-barcode {
-  margin-bottom: 0.5rem;
-}
-
 .IncidentPrint .arm-barcode:last-of-type {
   margin-bottom: 0;
 }
