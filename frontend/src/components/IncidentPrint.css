@@ -9,7 +9,6 @@
   margin-bottom: 1rem;
   border-color: black;
   border-bottom: var(--default-border);
-  border-width: 2px;
   border-color: var(--muted-color);
   padding: 0.5rem;
 }
