@@ -39,6 +39,10 @@
   border-bottom: none;
 }
 
+.IncidentPrint .description p {
+  width: fit-content;
+}
+
 .IncidentPrint .barcodes {
   display: flex;
   flex-direction: column;
