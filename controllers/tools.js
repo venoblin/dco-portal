@@ -12,6 +12,7 @@ const parseCsvFile = async (req, res) => {
     const parsedData = await parseCsv(filePath)
 
     parsedData.forEach((d) => {
+      d.description = d.description.replaceAll('\\n', '<br>')
       const arms = d.description.match(/ARM\d{10}/g)
 
       if (arms) {

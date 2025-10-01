@@ -108,10 +108,10 @@ const IncidentCard = (props) => {
 
           <p>{props.incident.short_description}</p>
           {isShowingDesc === true && (
-            <div
+            <p
               className="full-description"
               dangerouslySetInnerHTML={{
-                __html: props.incident.description.replaceAll('\n', '<br>')
+                __html: props.incident.description
               }}
             />
           )}
