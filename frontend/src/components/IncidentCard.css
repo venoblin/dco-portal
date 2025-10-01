@@ -35,22 +35,9 @@
   border: none;
 }
 
-.IncidentCard .machine-info-wrap {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-}
-
 .IncidentCard .machine-info {
-  display: flex;
-  margin-bottom: 0.5rem;
-}
-
-.IncidentCard .machine-info p {
-  margin-right: 0.5rem;
-}
-
-.IncidentCard .machine-info p:last-of-type {
-  margin-right: 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
 }
 
 .incident-info .info {
@@ -105,6 +92,6 @@
   margin-bottom: 0.5rem;
 }
 
-.IncidentCard .incident-info p:last-of-type {
+.IncidentCard p.full-description {
   margin-bottom: 0;
 }

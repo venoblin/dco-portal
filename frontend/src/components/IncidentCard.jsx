@@ -94,7 +94,9 @@ const IncidentCard = (props) => {
           </div>
 
           <p>{props.incident.short_description}</p>
-          {isShowingDesc === true && <p>{props.incident.description}</p>}
+          {isShowingDesc === true && (
+            <p className="full-description">{props.incident.description}</p>
+          )}
         </div>
       </div>
     </div>
