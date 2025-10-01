@@ -7,10 +7,11 @@ import Panel from '../ui/Panel'
 import IncidentCard from '../IncidentCard'
 import Search from '../Search'
 import IncidentPrint from '../IncidentPrint'
+import Loading from '../Loading'
 
 const IncidentManager = () => {
   const appContext = useContext(AppContext)
-  const [selectedFile, setSelectedFile] = useState([])
+  const [selectedFile, setSelectedFile] = useState(null)
   const [allIncidents, setAllIncidents] = useState([])
   const [checkedIncidents, setCheckedIncidents] = useState([])
   const [toPrint, setToPrint] = useState([])
@@ -29,7 +30,7 @@ const IncidentManager = () => {
       const formData = new FormData()
       formData.append('csvFile', selectedFile)
 
-      const res = await uploadCsv(formData)
+      const res = await appContext.load(() => uploadCsv(formData))
 
       let incidents = []
       res.data.forEach((incident) => {
@@ -205,20 +206,24 @@ const IncidentManager = () => {
         </div>
       </header>
 
-      <Panel>
-        {allIncidents && allIncidents.length > 0 ? (
-          allIncidents.map((i) => (
-            <IncidentCard
-              key={i.number}
-              incident={i}
-              onPrint={printSingle}
-              onCheckChange={onCheckChange}
-            />
-          ))
-        ) : (
-          <p>There are no incidents!</p>
-        )}
-      </Panel>
+      {!appContext.isLoading ? (
+        <Panel>
+          {allIncidents && allIncidents.length > 0 ? (
+            allIncidents.map((i) => (
+              <IncidentCard
+                key={i.number}
+                incident={i}
+                onPrint={printSingle}
+                onCheckChange={onCheckChange}
+              />
+            ))
+          ) : (
+            <p>There are no incidents!</p>
+          )}
+        </Panel>
+      ) : (
+        <Loading />
+      )}
 
       {/* Only renders when printing */}
       <div className="print">
