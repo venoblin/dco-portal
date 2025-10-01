@@ -52,10 +52,6 @@
   width: fit-content;
 }
 
-.IncidentPrint .arm-barcode:last-of-type {
-  margin-bottom: 0;
-}
-
 .IncidentPrint .barcodes {
   display: flex;
   flex-direction: column;
@@ -64,6 +60,10 @@
   padding: 0.5rem;
 }
 
-.IncidentPrint .barcodes p {
-  border: none;
+.IncidentPrint .barcodes * {
+  margin-bottom: 0.5rem;
+}
+
+.IncidentPrint .barcodes *:last-of-type {
+  margin-bottom: 0;
 }

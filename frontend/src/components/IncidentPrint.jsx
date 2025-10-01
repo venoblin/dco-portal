@@ -91,33 +91,28 @@ const IncidentPrint = (props) => {
         </div>
 
         <div className="barcodes">
-          <div>
-            <Barcode
-              value={props.incident.incident}
-              format="CODE128"
-              width={1.5}
-              height={30}
-              displayValue={true}
-            />
-          </div>
+          <Barcode
+            value={props.incident.incident}
+            format="CODE128"
+            width={1.5}
+            height={30}
+            displayValue={true}
+          />
 
           <div>Asset tag Barcode</div>
-          {props.incident.arms && (
-            <div>
-              {props.incident.arms.length > 0 &&
-                props.incident.arms.map((a) => (
-                  <div className="arm-barcode" key={a}>
-                    <Barcode
-                      value={a}
-                      format="CODE128"
-                      width={1.5}
-                      height={35}
-                      displayValue={true}
-                    />
-                  </div>
-                ))}
-            </div>
-          )}
+
+          {props.incident.arms &&
+            props.incident.arms.length > 0 &&
+            props.incident.arms.map((a) => (
+              <Barcode
+                key={a}
+                value={a}
+                format="CODE128"
+                width={1.5}
+                height={35}
+                displayValue={true}
+              />
+            ))}
         </div>
       </div>
 
