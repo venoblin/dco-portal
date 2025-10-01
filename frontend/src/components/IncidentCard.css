@@ -35,6 +35,29 @@
   border: none;
 }
 
+.IncidentCard .machine-info-wrap {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.IncidentCard .machine-info {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+
+.IncidentCard .machine-info p {
+  margin-right: 0.5rem;
+}
+
+.IncidentCard .machine-info p:last-of-type {
+  margin-right: 0;
+}
+
+.incident-info .info {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
 .IncidentCard .incident h2,
 .IncidentCard .incident-arms {
   border-right: var(--default-border);
@@ -48,11 +71,11 @@
 }
 
 .IncidentCard .incident-arms p {
-  margin-right: 0.5rem;
+  margin-right: var(--default-spacing);
 }
 
 .IncidentCard .incident-arms p:last-of-type {
-  margin-right: 0.5rem;
+  margin-right: 0;
 }
 
 .IncidentCard .inputs {

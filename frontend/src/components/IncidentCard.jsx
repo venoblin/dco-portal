@@ -63,13 +63,38 @@ const IncidentCard = (props) => {
         </div>
 
         <div className="incident-info">
-          <p>Assigned to {props.incident.assigned_to}</p>
-          <p>Due {props.incident.due_date}</p>
-          <p>{props.incident.short_description}</p>
+          <div className="info">
+            <div className="machine-info-wrap">
+              <div className="machine-info">
+                <p className="muted-text">Hostname:</p>
+                <p>{props.incident.cmdb_ci}</p>
+              </div>
 
-          {isShowingDesc === true && (
-            <p className="muted-text">{props.incident.description}</p>
-          )}
+              <div className="machine-info">
+                <p className="muted-text">Asset:</p>
+                <p>{props.incident.ci ? props.incident.ci.asset_tag : 'N/A'}</p>
+              </div>
+
+              <div className="machine-info">
+                <p className="muted-text">Rack:</p>
+                <p>{props.incident.ci ? props.incident.ci.rack : 'N/A'}</p>
+              </div>
+
+              <div className="machine-info">
+                <p className="muted-text">Height:</p>
+                <p>{props.incident.ci ? props.incident.ci.height : 'N/A'}</p>
+              </div>
+            </div>
+
+            <div>
+              <p>Assigned to {props.incident.assigned_to}</p>
+              <p>{props.incident.u_sub_type}</p>
+              <p>Due {props.incident.due_date}</p>
+            </div>
+          </div>
+
+          <p>{props.incident.short_description}</p>
+          {isShowingDesc === true && <p>{props.incident.description}</p>}
         </div>
       </div>
     </div>
