@@ -28,8 +28,16 @@
 
 @media print {
   @page {
-    size: A4 landscape;
-    margin: 0.5in;
+    size: landscape;
+    margin: 0;
+  }
+
+  body,
+  html,
+  #root {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   nav,
@@ -39,9 +47,24 @@
     display: none !important;
   }
 
+  main {
+    padding: 0rem;
+    margin: 0;
+  }
+
   .print {
     color: black;
     background: white;
     display: block !important;
+  }
+
+  .IncidentPrint {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .IncidentPrint:last-of-type {
+    page-break-after: auto;
+    break-after: auto;
   }
 }
