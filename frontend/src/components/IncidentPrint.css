@@ -2,17 +2,23 @@
   padding: 0.5rem;
   width: 100vw;
   height: 100vh;
+  border: var(--default-border);
+  border-color: var(--muted-color);
 }
 
 .IncidentPrint h2 {
   margin-bottom: 1rem;
   border-color: black;
+  border-bottom: var(--default-border);
+  border-width: 2px;
+  border-color: var(--muted-color);
+  padding: 0.5rem;
 }
 
 .IncidentPrint p {
   padding: 0.5rem;
-  border: var(--default-border);
-  border-color: black;
+  border-bottom: var(--default-border);
+  border-color: var(--muted-color);
 }
 
 .IncidentPrint p.muted-color {
@@ -28,15 +34,16 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 0.5rem;
-  margin-bottom: 0.5rem;
-  border-color: black;
+}
+
+.IncidentPrint .full-description {
+  border-bottom: none;
 }
 
 .IncidentPrint .barcodes {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  border: var(--default-border);
   padding: 0.5rem;
 }
