@@ -89,13 +89,31 @@ const IncidentCard = (props) => {
             <div>
               <p>Assigned to {props.incident.assigned_to}</p>
               <p>{props.incident.u_sub_type}</p>
-              <p>Due {props.incident.due_date}</p>
+              <p
+                className={`${
+                  (Date.parse(props.incident.due_date) < new Date() === true
+                    ? 'danger'
+                    : '') ||
+                  (Date.parse(props.incident.due_date) - 4 * 60 * 60 * 1000 <
+                    new Date() ===
+                  true
+                    ? 'warning'
+                    : '')
+                }`}
+              >
+                Due {props.incident.due_date}
+              </p>
             </div>
           </div>
 
           <p>{props.incident.short_description}</p>
           {isShowingDesc === true && (
-            <p className="full-description">{props.incident.description}</p>
+            <div
+              className="full-description"
+              dangerouslySetInnerHTML={{
+                __html: props.incident.description.replaceAll('\n', '<br>')
+              }}
+            />
           )}
         </div>
       </div>

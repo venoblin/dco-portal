@@ -94,4 +94,5 @@
 
 .IncidentCard p.full-description {
   margin-bottom: 0;
+  white-space: pre-wrap;
 }
