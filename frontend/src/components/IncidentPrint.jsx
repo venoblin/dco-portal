@@ -72,6 +72,11 @@ const IncidentPrint = (props) => {
             <p className="muted-text">Due:</p>
             <p>{props.incident.due_date}</p>
           </div>
+
+          <div className="info-wrap">
+            <p className="muted-text">Type:</p>
+            <p>{props.incident.u_sub_type}</p>
+          </div>
         </div>
 
         <div className="barcodes">
@@ -83,7 +88,6 @@ const IncidentPrint = (props) => {
       </div>
 
       <div className="description">
-        <p className="type">{props.incident.u_sub_type}</p>
         <p className="short-description">{props.incident.short_description}</p>
         <p className="full-description">{props.incident.description}</p>
       </div>
