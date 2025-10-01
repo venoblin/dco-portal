@@ -28,8 +28,16 @@
 
 @media print {
   @page {
-    size: A4 landscape;
-    margin: 0.5in;
+    size: landscape;
+    margin: 0;
+  }
+
+  body,
+  html,
+  #root {
+    width: 100% !important; /* Force full width on all levels */
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   nav,
@@ -37,6 +45,11 @@
   .Panel,
   footer {
     display: none !important;
+  }
+
+  main {
+    padding: 1rem;
+    margin: 0;
   }
 
   .print {
