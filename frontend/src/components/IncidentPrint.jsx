@@ -1,5 +1,5 @@
 import './IncidentPrint.css'
-import Barcode from 'react-barcode'
+import Barcode from './Barcode'
 
 const IncidentPrint = (props) => {
   return (
@@ -91,28 +91,13 @@ const IncidentPrint = (props) => {
         </div>
 
         <div className="barcodes">
-          <Barcode
-            value={props.incident.incident}
-            format="CODE128"
-            width={1.5}
-            height={30}
-            displayValue={true}
-          />
+          <Barcode value={props.incident.incident} />
 
           <div>Asset tag Barcode</div>
 
           {props.incident.arms &&
             props.incident.arms.length > 0 &&
-            props.incident.arms.map((a) => (
-              <Barcode
-                key={a}
-                value={a}
-                format="CODE128"
-                width={1.5}
-                height={35}
-                displayValue={true}
-              />
-            ))}
+            props.incident.arms.map((a) => <Barcode key={a} value={a} />)}
         </div>
       </div>
 
