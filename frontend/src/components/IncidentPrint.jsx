@@ -28,6 +28,11 @@ const IncidentPrint = (props) => {
           </div>
 
           <div className="info-wrap">
+            <p className="muted-text">Model:</p>
+            <p>{props.incident.ci ? props.incident.ci.model : 'N/A'}</p>
+          </div>
+
+          <div className="info-wrap">
             <p className="muted-text">Rack:</p>
             <p>{props.incident.ci ? props.incident.ci.rack : 'N/A'}</p>
           </div>
