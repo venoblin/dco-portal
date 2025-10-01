@@ -96,7 +96,16 @@ const IncidentPrint = (props) => {
           </div>
 
           <div>Asset tag Barcode</div>
-          {props.incident.arms && <div>ARM Barcode</div>}
+          {props.incident.arms && (
+            <div>
+              {props.incident.arms.length > 0 &&
+                props.incident.arms.map((a) => (
+                  <div className="arm-barcode" key={a}>
+                    <p>{a}</p>
+                  </div>
+                ))}
+            </div>
+          )}
         </div>
       </div>
 
