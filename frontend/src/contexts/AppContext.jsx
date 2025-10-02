@@ -10,7 +10,7 @@ export const AppProvider = (props) => {
   const [popupMsg, setPopupMsg] = useState('')
   const [isPopup, setIsPopup] = useState(false)
   const [auth, setAuth] = useState({
-    isAuthenticated: null,
+    isAuthenticated: true,
     token: null
   })
 
