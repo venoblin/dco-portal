@@ -1,4 +1,5 @@
 import './IncidentPrint.css'
+import Barcode from './Barcode'
 
 const IncidentPrint = (props) => {
   return (
