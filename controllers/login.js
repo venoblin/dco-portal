@@ -4,6 +4,8 @@ const login = async (req, res) => {
   try {
     const res = await service.loginUser(req)
 
+    console.log(res)
+
     res.status(200).json({
       data: {
         token: res.access_token,
