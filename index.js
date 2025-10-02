@@ -12,7 +12,14 @@ const frontendPath = path.join(__dirname, 'frontend/dist')
 
 app.use(cors())
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(
+  express.urlencoded({
+    extended: true,
+    verify: (req, res, buf) => {
+      req.rawBody = buf.toString()
+    }
+  })
+)
 app.use(express.static(frontendPath))
 
 app.use('/api', apiRoutes)
