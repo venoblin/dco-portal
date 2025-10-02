@@ -2,7 +2,7 @@ const service = require('../services/login')
 
 const login = async (req, res) => {
   try {
-    if (process.env.HOSTNAME) {
+    if (process.env.DCO_PORTAL_HOSTNAME) {
       const res = await service.loginUser(req)
 
       return res.status(200).json({
