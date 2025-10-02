@@ -2,15 +2,15 @@ const service = require('../services/login')
 
 const login = async (req, res) => {
   try {
-    const res = await service.loginUser(req)
+    const authRes = await service.loginUser(req)
 
-    console.log(res)
+    console.log(authRes)
 
     res.status(200).json({
       data: {
-        token: res.access_token,
-        refreshToken: res.refresh_token,
-        expiresAt: Date.now() / 1000 + res.expires_in
+        token: authRes.access_token,
+        refreshToken: authRes.refresh_token,
+        expiresAt: Date.now() / 1000 + authRes.expires_in
       }
     })
   } catch (error) {

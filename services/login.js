@@ -26,7 +26,8 @@ const loginUser = async (req) => {
 
   const { body } = await requestPromise(options, postBody)
 
-  return { data: body }
+  const parsedBody = JSON.parse(body)
+  return parsedBody
 }
 
 module.exports = {
