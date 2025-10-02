@@ -1,6 +1,6 @@
 const { spawn } = require('child_process')
 
-export const execCommand = (command, commandArgs = null) => {
+const execCommand = (command, commandArgs = null) => {
   return new Promise((resolve, reject) => {
     let exec = null
     let output = ''
@@ -31,4 +31,8 @@ export const execCommand = (command, commandArgs = null) => {
       reject(err)
     })
   })
+}
+
+module.exports = {
+  execCommand
 }

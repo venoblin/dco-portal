@@ -2,7 +2,7 @@ const fs = require('fs')
 const { parse } = require('csv-parse')
 const http = require('https')
 
-export const parseCsv = (csvFilePath) => {
+const parseCsv = (csvFilePath) => {
   return new Promise((resolve, reject) => {
     const records = []
 
@@ -38,7 +38,7 @@ export const parseCsv = (csvFilePath) => {
   })
 }
 
-export const filterHeaders = (rawHeaders, excludedHeaders) => {
+const filterHeaders = (rawHeaders, excludedHeaders) => {
   const exclusionSet = new Set(excludedHeaders.map((h) => h.toLowerCase()))
 
   return Object.entries(rawHeaders).reduce((acc, [key, value]) => {
@@ -50,7 +50,7 @@ export const filterHeaders = (rawHeaders, excludedHeaders) => {
   }, {})
 }
 
-export const requestPromise = (options, postBody) => {
+const requestPromise = (options, postBody) => {
   return new Promise((resolve, reject) => {
     const request = http.request(options, (res) => {
       const chunks = []
@@ -72,4 +72,10 @@ export const requestPromise = (options, postBody) => {
     request.write(postBody)
     request.end()
   })
+}
+
+module.exports = {
+  parseCsv,
+  filterHeaders,
+  requestPromise
 }
