@@ -17,11 +17,21 @@ const IncidentCard = (props) => {
           <div className="incident">
             <h2>{props.incident.incident}</h2>
             <h2>{props.incident.number}</h2>
-            <p>Assigned to {props.incident.assigned_to}</p>
+
+            {props.incident.arms && (
+              <div className="incident-arms">
+                {props.incident.arms.length > 0 &&
+                  props.incident.arms.map((a) => <p key={a}>{a}</p>)}
+              </div>
+            )}
           </div>
 
           <div className="inputs">
-            {!props.incident.isChecked && <button>Print</button>}
+            {!props.incident.isChecked && (
+              <button onClick={() => props.onPrint(props.incident)}>
+                Print
+              </button>
+            )}
             <input
               className="big-checkbox"
               type="checkbox"
@@ -53,10 +63,57 @@ const IncidentCard = (props) => {
         </div>
 
         <div className="incident-info">
-          <p>{props.incident.short_description}</p>
+          <div className="info">
+            <div className="machine-info-wrap">
+              <div className="machine-info">
+                <p className="muted-text">Hostname:</p>
+                <p>{props.incident.cmdb_ci}</p>
+              </div>
 
+              <div className="machine-info">
+                <p className="muted-text">Asset:</p>
+                <p>{props.incident.ci ? props.incident.ci.asset_tag : 'N/A'}</p>
+              </div>
+
+              <div className="machine-info">
+                <p className="muted-text">Rack:</p>
+                <p>{props.incident.ci ? props.incident.ci.rack : 'N/A'}</p>
+              </div>
+
+              <div className="machine-info">
+                <p className="muted-text">Height:</p>
+                <p>{props.incident.ci ? props.incident.ci.height : 'N/A'}</p>
+              </div>
+            </div>
+
+            <div>
+              <p>Assigned to {props.incident.assigned_to}</p>
+              <p>{props.incident.u_sub_type}</p>
+              <p
+                className={`${
+                  (Date.parse(props.incident.due_date) < new Date() === true
+                    ? 'danger'
+                    : '') ||
+                  (Date.parse(props.incident.due_date) - 4 * 60 * 60 * 1000 <
+                    new Date() ===
+                  true
+                    ? 'warning'
+                    : '')
+                }`}
+              >
+                Due {props.incident.due_date}
+              </p>
+            </div>
+          </div>
+
+          <p>{props.incident.short_description}</p>
           {isShowingDesc === true && (
-            <p className="muted-text">{props.incident.description}</p>
+            <p
+              className="full-description"
+              dangerouslySetInnerHTML={{
+                __html: props.incident.description
+              }}
+            />
           )}
         </div>
       </div>

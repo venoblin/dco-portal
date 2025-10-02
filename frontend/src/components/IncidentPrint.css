@@ -1,0 +1,69 @@
+.IncidentPrint {
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.IncidentPrint h2 {
+  margin-bottom: 1rem;
+  border-bottom: var(--default-border);
+  border-color: var(--muted-color);
+  padding: 0.5rem;
+}
+
+.IncidentPrint .info-wrap {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding: 0.5rem;
+  border-bottom: var(--default-border);
+  border-color: var(--muted-color);
+}
+
+.info-wrap .arms {
+  display: flex;
+}
+
+.info-wrap .arms p {
+  margin-right: 0.25rem;
+}
+
+.info-wrap .arms p:last-of-type {
+  margin-right: 0rem;
+}
+
+.IncidentPrint .info {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.IncidentPrint .short-description {
+  border-bottom: var(--default-border);
+  border-color: var(--muted-color);
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.IncidentPrint .full-description {
+  border-bottom: none;
+}
+
+.IncidentPrint .description p {
+  width: fit-content;
+}
+
+.IncidentPrint .barcodes {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.IncidentPrint .barcodes * {
+  margin-bottom: 0.5rem;
+}
+
+.IncidentPrint .barcodes *:last-of-type {
+  margin-bottom: 0;
+}

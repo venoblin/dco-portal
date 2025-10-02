@@ -11,6 +11,17 @@ const parseCsvFile = async (req, res) => {
   try {
     const parsedData = await parseCsv(filePath)
 
+    parsedData.forEach((d) => {
+      d.description = d.description.replaceAll('\\n', '<br>')
+      const arms = d.description.match(/ARM\d{10}/g)
+
+      if (arms) {
+        d.arms = arms
+      } else {
+        d.arms = null
+      }
+    })
+
     fs.unlinkSync(filePath)
 
     return res.status(200).json({
