@@ -48,22 +48,3 @@ export const filterHeaders = (rawHeaders, excludedHeaders) => {
     return acc
   }, {})
 }
-
-export const forwardRequest = async (req, apiUrl) => {
-  const { username, password } = req.body
-
-  const bodyString = `${
-    process.env.GRANT_BEGINNING
-  }${username}&password=${encodeURIComponent(password)}${process.env.GRANT_END}`
-
-  const res = await fetch(apiUrl, {
-    method: req.method,
-    body: bodyString,
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    redirect: 'manual'
-  })
-
-  return res
-}
