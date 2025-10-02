@@ -54,7 +54,7 @@ const Login = () => {
               id="password"
               name="password"
               type="password"
-              placeholder="password"
+              placeholder="Password"
               required
               onChange={(event) => onPasswordChange(event)}
               value={password}
