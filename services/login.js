@@ -24,6 +24,7 @@ const loginUser = async (req) => {
     'postman-token': process.env.POSTMAN_TOKEN
   }
 
+  let response
   const request = http.request(options, function (res) {
     const chunks = []
 
@@ -32,7 +33,7 @@ const loginUser = async (req) => {
     })
     res.on('end', function () {
       const body = Buffer.concat(chunks)
-      console.log(body.toString())
+      response = body
     })
   })
 
@@ -41,14 +42,15 @@ const loginUser = async (req) => {
       grant_type: 'password',
       client_id: process.env.CLIENT_ID,
       resource: process.env.RESOURCE,
-      username: username,
+      username: `NAEAST\\${username}`,
       password: password
     })
   )
-
   request.end()
 
   // const headers = filterHeaders(res.raw.headers, excludedHeaders)
+
+  console.log(response)
 
   return { success: 'success' }
 }
