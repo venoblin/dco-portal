@@ -4,16 +4,6 @@ const http = require('https')
 const loginUser = async (req) => {
   const { username, password } = req.body
 
-  console.log(
-    process.env.DCO_PORTAL_HOSTNAME,
-    process.env.DCO_PORTAL_PATH,
-    process.env.DCO_PORTAL_POSTMAN_TOKEN,
-    process.env.DCO_PORTAL_CLIENT_ID,
-    process.env.DCO_PORTAL_RESOURCE
-  )
-
-  console.log('username', username, 'password', password)
-
   const options = {
     method: 'POST',
     hostname: process.env.DCO_PORTAL_HOSTNAME,
@@ -35,8 +25,7 @@ const loginUser = async (req) => {
     })
     res.on('end', function () {
       const body = Buffer.concat(chunks)
-      console.log('Body', body.toString())
-      response = body.toString()
+      response = body
     })
   })
 
@@ -50,6 +39,8 @@ const loginUser = async (req) => {
     })
   )
   request.end()
+
+  console.log(response)
 
   return response
 }

@@ -2,20 +2,14 @@ const service = require('../services/login')
 
 const login = async (req, res) => {
   try {
-    if (process.env.DCO_PORTAL_HOSTNAME) {
-      const res = await service.loginUser(req)
+    const res = await service.loginUser(req)
 
-      return res.status(200).json({
-        data: {
-          token: res.adfs_token,
-          refreshToken: res.refresh_token,
-          expiresAt: Date.now() / 1000 + res.expires_in
-        }
-      })
-    }
-
-    res.status(400).json({
-      error: 'Password or username incorrect'
+    res.status(200).json({
+      data: {
+        token: res.access_token,
+        refreshToken: res.refresh_token,
+        expiresAt: Date.now() / 1000 + res.expires_in
+      }
     })
   } catch (error) {
     res.status(500).json({
