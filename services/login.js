@@ -5,25 +5,25 @@ const loginUser = async (req) => {
   const { username, password } = req.body
 
   console.log(
-    process.env.HOSTNAME,
-    process.env.PATH,
-    process.env.POSTMAN_TOKEN,
-    process.env.CLIENT_ID,
-    process.env.RESOURCE
+    process.env.DCO_PORTAL_HOSTNAME,
+    process.env.DCO_PORTAL_PATH,
+    process.env.DCO_PORTAL_POSTMAN_TOKEN,
+    process.env.DCO_PORTAL_CLIENT_ID,
+    process.env.DCO_PORTAL_RESOURCE
   )
 
   console.log('username', username, 'password', password)
 
   const options = {
     method: 'POST',
-    hostname: process.env.HOSTNAME,
+    hostname: process.env.DCO_PORTAL_HOSTNAME,
     port: null,
-    path: process.env.PATH,
+    path: process.env.DCO_PORTAL_PATH,
     headers: {
       'content-type': 'application/x-www-form-urlencoded'
     },
     'cache-control': 'no-cache',
-    'postman-token': process.env.POSTMAN_TOKEN
+    'postman-token': process.env.DCO_PORTAL_POSTMAN_TOKEN
   }
 
   let response
@@ -43,8 +43,8 @@ const loginUser = async (req) => {
   request.write(
     qs.stringify({
       grant_type: 'password',
-      client_id: process.env.CLIENT_ID,
-      resource: process.env.RESOURCE,
+      client_id: process.env.DCO_PORTAL_CLIENT_ID,
+      resource: process.env.DCO_PORTAL_RESOURCE,
       username: `NAEAST\\${username}`,
       password: password
     })
