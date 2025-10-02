@@ -35,8 +35,8 @@ const loginUser = async (req) => {
     })
     res.on('end', function () {
       const body = Buffer.concat(chunks)
-      console.log('Body', body)
-      response = body
+      console.log('Body', body.toString())
+      response = body.toString()
     })
   })
 
