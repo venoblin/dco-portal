@@ -1,3 +1,5 @@
+const { filterHeaders } = require('../utils')
+
 const loginUser = async (username, password) => {
   const authApi = process.env.AUTH_API
   const res = await fetch(authApi, {
@@ -9,14 +11,16 @@ const loginUser = async (username, password) => {
     }`
   })
 
-  const excludedHeader = [
+  const excludedHeaders = [
     'content-encoding',
     'content-length',
     'transfer-encoding',
     'connection'
   ]
 
-  return res
+  const headers = filterHeaders(res.raw.headers, excludedHeaders)
+
+  return { content: res.content, statusCode: res.status_code, headers: headers }
 }
 
 module.exports = {

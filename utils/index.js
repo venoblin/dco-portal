@@ -36,3 +36,15 @@ export const parseCsv = (csvFilePath) => {
     })
   })
 }
+
+export const filterHeaders = (rawHeaders, excludedHeaders) => {
+  const exclusionSet = new Set(excludedHeaders.map((h) => h.toLowerCase()))
+
+  return Object.entries(rawHeaders).reduce((acc, [key, value]) => {
+    if (!exclusionSet.has(key.toLowerCase())) {
+      acc[key] = value
+    }
+
+    return acc
+  }, {})
+}
