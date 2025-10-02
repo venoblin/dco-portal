@@ -1,12 +1,9 @@
 const service = require('../services/login')
 
 const login = async (req, res) => {
-  const { username, password } = req.body
-
   try {
     if (process.env.AUTH_API) {
-      const res = await service.loginUser(username, password)
-
+      const res = await service.loginUser(req)
       res.status(200).json({
         data: {
           token: res.adfs_token,
@@ -19,7 +16,6 @@ const login = async (req, res) => {
         error: 'Invalid API url'
       })
     }
-
     res.status(400).json({
       error: 'Password or username incorrect'
     })
