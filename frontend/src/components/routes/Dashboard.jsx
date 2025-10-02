@@ -15,7 +15,9 @@ const Dashboard = () => {
     try {
       const res = await appContext.load(() => getAllGuides('limit=5'))
 
-      setGuides(res.guides)
+      if (res) {
+        setGuides(res.guides)
+      }
     } catch (error) {
       appContext.showPopup(error.message)
     }

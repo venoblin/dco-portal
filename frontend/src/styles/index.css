@@ -5,6 +5,7 @@
   --overlay-bg-color: #262424;
   --accent-color: #2175d9;
   --danger-color: #c13642;
+  --warning-color: #de6b48;
   --border-width: 1px;
   --nav-width: 200px;
   --nav-height: 100px;
@@ -213,6 +214,14 @@ a:hover {
 
 .muted-text {
   color: var(--muted-text-color);
+}
+
+.danger {
+  color: #c13642;
+}
+
+.warning {
+  color: #de6b48;
 }
 
 .svg-btn {

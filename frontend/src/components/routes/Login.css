@@ -1,0 +1,29 @@
+.Login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  left: 50%;
+  bottom: 50%;
+}
+
+.Login .Logo {
+  height: fit-content;
+  padding-bottom: 0;
+  margin-bottom: var(--default-spacing);
+}
+
+.Login form {
+  display: flex;
+  flex-direction: column;
+}
+
+.Login input {
+  margin-bottom: calc(var(--default-spacing) / 2);
+}
+
+.Login input:last-of-type {
+  margin-bottom: var(--default-spacing);
+}
