@@ -50,9 +50,7 @@ const loginUser = async (req) => {
 
   // const headers = filterHeaders(res.raw.headers, excludedHeaders)
 
-  console.log(response)
-
-  return { success: 'success' }
+  return response
 }
 
 module.exports = {
