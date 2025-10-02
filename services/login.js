@@ -1,5 +1,5 @@
 const qs = require('querystring')
-const http = require('https')
+const { requestPromise } = require('../utils')
 
 const loginUser = async (req) => {
   const { username, password } = req.body
@@ -16,33 +16,17 @@ const loginUser = async (req) => {
     'postman-token': process.env.DCO_PORTAL_POSTMAN_TOKEN
   }
 
-  let response
-  const request = http.request(options, function (res) {
-    const chunks = []
-
-    res.on('data', function (chunk) {
-      chunks.push(chunk)
-    })
-    res.on('end', function () {
-      const body = Buffer.concat(chunks)
-      response = body
-    })
+  const postBody = qs.stringify({
+    grant_type: 'password',
+    client_id: process.env.DCO_PORTAL_CLIENT_ID,
+    resource: process.env.DCO_PORTAL_RESOURCE,
+    username: `NAEAST\\${username}`,
+    password: password
   })
 
-  request.write(
-    qs.stringify({
-      grant_type: 'password',
-      client_id: process.env.DCO_PORTAL_CLIENT_ID,
-      resource: process.env.DCO_PORTAL_RESOURCE,
-      username: `NAEAST\\${username}`,
-      password: password
-    })
-  )
-  request.end()
+  const { body } = await requestPromise(options, postBody)
 
-  console.log(response)
-
-  return response
+  return { data: body }
 }
 
 module.exports = {

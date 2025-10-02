@@ -1,5 +1,6 @@
 import * as fs from 'fs'
 import { parse } from 'csv-parse'
+const http = require('https')
 
 export const parseCsv = (csvFilePath) => {
   return new Promise((resolve, reject) => {
@@ -47,4 +48,28 @@ export const filterHeaders = (rawHeaders, excludedHeaders) => {
 
     return acc
   }, {})
+}
+
+export const requestPromise = (options, postBody) => {
+  return new Promise((resolve, reject) => {
+    const request = http.request(options, (res) => {
+      const chunks = []
+
+      res.on('data', (chunk) => {
+        chunks.push(chunk)
+      })
+
+      res.on('end', () => {
+        const body = Buffer.concat(chunks).toString()
+        resolve({ body: body })
+      })
+    })
+
+    request.on('error', (err) => {
+      reject(err)
+    })
+
+    request.write(postBody)
+    request.end()
+  })
 }
