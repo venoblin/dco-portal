@@ -1,56 +1,46 @@
 const qs = require('querystring')
-const { filterHeaders } = require('../utils')
+const http = require('https')
 
 const loginUser = async (req) => {
   const { username, password } = req.body
-  const authApiUrl = `https://${process.env.HOSTNAME}${process.env.PATH}`
 
-  const excludedHeaders = [
-    'content-encoding',
-    'content-length',
-    'transfer-encoding',
-    'connection'
-  ]
-
-  const bodyString = qs.stringify({
-    grant_type: 'password',
-    client_id: process.env.CLIENT_ID,
-    resource: process.env.RESOURCE,
-    username: `NAEAST\\${username}`,
-    password: password
-  })
-
-  const externalResponse = await fetch(authApiUrl, {
+  const options = {
     method: 'POST',
-    body: bodyString,
+    hostname: process.env.HOSTNAME,
+    port: null,
+    path: process.env.PATH,
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'content-type': 'application/x-www-form-urlencoded'
     },
-    redirect: 'manual'
+    'cache-control': 'no-cache',
+    'postman-token': process.env.POSTMAN_TOKEN
+  }
+
+  let response
+  const request = http.request(options, function (res) {
+    const chunks = []
+
+    res.on('data', function (chunk) {
+      chunks.push(chunk)
+    })
+    res.on('end', function () {
+      const body = Buffer.concat(chunks)
+      response = body
+    })
   })
 
-  const externalHeaders = filterHeaders(
-    externalResponse.headers.raw(),
-    excludedHeaders
+  request.write(
+    qs.stringify({
+      grant_type: 'password',
+      client_id: process.env.CLIENT_ID,
+      resource: process.env.RESOURCE,
+      username: `NAEAST\\${username}`,
+      password: password
+    })
   )
-  const externalStatus = externalResponse.status
+  request.end()
 
-  if (externalStatus >= 300 && externalStatus < 400) {
-    return {
-      success: false,
-      message: `External service redirect (${externalStatus})`,
-      headers: externalHeaders
-    }
-  }
-
-  const content = await externalResponse.json().catch(() => null)
-
-  return {
-    content: content,
-    statusCode: externalStatus,
-    headers: externalHeaders,
-    success: true
-  }
+  return response
 }
 
 module.exports = {
