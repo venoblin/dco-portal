@@ -1,4 +1,3 @@
-const { filterHeaders } = require('../utils')
 const qs = require('querystring')
 const http = require('https')
 
@@ -47,8 +46,6 @@ const loginUser = async (req) => {
     })
   )
   request.end()
-
-  // const headers = filterHeaders(res.raw.headers, excludedHeaders)
 
   return response
 }
