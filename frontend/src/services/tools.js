@@ -1,8 +1,8 @@
-import { API } from '../api'
+import { api } from '../api'
 
 export const uploadCsv = async (formData) => {
   try {
-    const res = await API.upload('/tools/parse-csv', formData)
+    const res = await api.upload('/tools/parse-csv', formData)
 
     return res
   } catch (error) {

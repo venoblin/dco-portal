@@ -5,7 +5,15 @@ const login = async (req, res) => {
 
   try {
     if (process.env.AUTH_API) {
-      await service.loginUser(username, password)
+      const res = await service.loginUser(username, password)
+
+      res.status(200).json({
+        data: {
+          token: res.adfs_token,
+          refreshToken: res.refresh_token,
+          expiresAt: Date.now() / 1000 + res.expires_in
+        }
+      })
     } else {
       res.status(400).json({
         error: 'Invalid API url'
