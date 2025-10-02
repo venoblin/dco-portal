@@ -24,7 +24,7 @@ const loginUser = async (req) => {
     'postman-token': process.env.POSTMAN_TOKEN
   }
 
-  const req = http.request(options, function (res) {
+  const request = http.request(options, function (res) {
     const chunks = []
 
     res.on('data', function (chunk) {
@@ -36,7 +36,7 @@ const loginUser = async (req) => {
     })
   })
 
-  req.write(
+  request.write(
     qs.stringify({
       grant_type: 'password',
       client_id: process.env.CLIENT_ID,
@@ -46,7 +46,7 @@ const loginUser = async (req) => {
     })
   )
 
-  req.end()
+  request.end()
 
   // const headers = filterHeaders(res.raw.headers, excludedHeaders)
 
