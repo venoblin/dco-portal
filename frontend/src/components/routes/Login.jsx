@@ -20,7 +20,9 @@ const Login = () => {
         login({ username: username, password: password })
       )
 
-      console.log(res)
+      if (!res) {
+        appContext.showPopup('Password or username is incorrect')
+      }
     } catch (error) {
       appContext.showPopup(error.message)
     }
