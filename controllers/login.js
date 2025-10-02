@@ -2,17 +2,16 @@ const service = require('../services/login')
 
 const login = async (req, res) => {
   try {
-    if (process.env.HOSTANME) {
+    if (process.env.HOSTNAME) {
       const res = await service.loginUser(req)
 
-      console.log(res)
-      // res.status(200).json({
-      //   data: {
-      //     token: res.adfs_token,
-      //     refreshToken: res.refresh_token,
-      //     expiresAt: Date.now() / 1000 + res.expires_in
-      //   }
-      // })
+      return res.status(200).json({
+        data: {
+          token: res.adfs_token,
+          refreshToken: res.refresh_token,
+          expiresAt: Date.now() / 1000 + res.expires_in
+        }
+      })
     } else {
       res.status(400).json({
         error: 'Invalid API url'

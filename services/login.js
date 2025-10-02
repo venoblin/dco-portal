@@ -3,7 +3,7 @@ const { filterHeaders } = require('../utils')
 
 const loginUser = async (req) => {
   const { username, password } = req.body
-  const authApiUrl = `https://${process.env.HOSTANME}${process.env.PATH}`
+  const authApiUrl = `https://${process.env.HOSTNAME}${process.env.PATH}`
 
   const excludedHeaders = [
     'content-encoding',
