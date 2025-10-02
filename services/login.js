@@ -1,5 +1,5 @@
 const qs = require('querystring')
-import { filterHeaders } from '../utils'
+const { filterHeaders } = require('../utils')
 
 const loginUser = async (req) => {
   const { username, password } = req.body
