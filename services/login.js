@@ -1,28 +1,15 @@
-const { filterHeaders } = require('../utils')
+const { filterHeaders, forwardAuthRequest } = require('../utils')
+const authApi = process.env.AUTH_API
 
 const loginUser = async (req) => {
-  const { username, password } = req.body
-
-  const bodyString = `${
-    process.env.GRANT_BEGINNING
-  }${username}&password=${encodeURIComponent(password)}${process.env.GRANT_END}`
-
-  const authApi = process.env.AUTH_API
-  const res = await fetch(authApi, {
-    method: 'POST',
-    body: bodyString,
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    redirect: 'manual'
-  })
-
   const excludedHeaders = [
     'content-encoding',
     'content-length',
     'transfer-encoding',
     'connection'
   ]
+
+  const res = await forwardAuthRequest(req, authApi)
 
   const headers = filterHeaders(res.raw.headers, excludedHeaders)
 
