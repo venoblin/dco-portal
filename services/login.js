@@ -4,6 +4,16 @@ const http = require('https')
 const loginUser = async (req) => {
   const { username, password } = req.body
 
+  console.log(
+    process.env.HOSTNAME,
+    process.env.PATH,
+    process.env.POSTMAN_TOKEN,
+    process.env.CLIENT_ID,
+    process.env.RESOURCE
+  )
+
+  console.log('username', username, 'password', password)
+
   const options = {
     method: 'POST',
     hostname: process.env.HOSTNAME,
@@ -25,6 +35,7 @@ const loginUser = async (req) => {
     })
     res.on('end', function () {
       const body = Buffer.concat(chunks)
+      console.log('Body', body)
       response = body
     })
   })
