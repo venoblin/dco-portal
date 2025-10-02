@@ -1,5 +1,5 @@
-import * as fs from 'fs'
-import { parse } from 'csv-parse'
+const fs = require('fs')
+const { parse } = require('csv-parse')
 const http = require('https')
 
 export const parseCsv = (csvFilePath) => {
