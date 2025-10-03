@@ -23,7 +23,7 @@ const Login = () => {
 
       if (res.data.accessToken) {
         const credentials = {
-          accessToken: res.data.token,
+          accessToken: res.data.accessToken,
           refreshToken: res.data.refreshToken,
           expiresAt: res.data.expiresAt
         }
