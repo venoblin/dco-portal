@@ -52,7 +52,7 @@ export const AppProvider = (props) => {
   }
 
   useEffect(() => {
-    // checkToken()
+    checkToken()
   }, [])
 
   return (
