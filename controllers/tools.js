@@ -22,12 +22,14 @@ const parseCsvFile = async (req, res) => {
       const verumResponse = await fetch(verumUrl, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${clientToken}`,
+          Authorization: `Bearer ${clientToken.toString('base64')}`,
           Accept: 'application/json'
         }
       })
 
       if (!verumResponse.ok) {
+        console.log(verumResponse)
+
         throw new Error(
           `External API failed with status ${verumResponse.status}`
         )

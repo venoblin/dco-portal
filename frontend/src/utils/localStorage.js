@@ -6,3 +6,7 @@ export const storageGet = (key) => {
 export const storageSet = (key, item) => {
   localStorage.setItem(key, JSON.stringify(item))
 }
+
+export const storageRemove = (key) => {
+  localStorage.removeItem(key)
+}

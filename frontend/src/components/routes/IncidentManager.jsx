@@ -2,7 +2,7 @@ import './IncidentManager.css'
 import { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../contexts/AppContext'
 import { uploadCsv } from '../../services/tools'
-import { storageSet, storageGet } from '../../utils/localStorage'
+import { storageSet, storageGet, storageRemove } from '../../utils/localStorage'
 import Panel from '../ui/Panel'
 import IncidentCard from '../IncidentCard'
 import Search from '../Search'
@@ -22,6 +22,10 @@ const IncidentManager = () => {
   }
 
   const handleUpload = async () => {
+    if (storageGet.incidents) {
+      storageRemove('incidents')
+    }
+
     try {
       if (selectedFile.type !== 'text/csv') {
         throw new Error('File is not a CSV file')

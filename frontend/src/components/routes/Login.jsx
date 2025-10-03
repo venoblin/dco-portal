@@ -21,8 +21,7 @@ const Login = () => {
         login({ username: username, password: password })
       )
 
-      if (res) {
-        console.log(res)
+      if (res.data.accessToken) {
         const credentials = {
           accessToken: res.data.token,
           refreshToken: res.data.refreshToken,
