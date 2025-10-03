@@ -19,6 +19,16 @@ const parseCsvFile = async (req, res) => {
     const enrichedDataPromises = parsedData.map(async (incident) => {
       incident.description = incident.description.replace(/\\n/g, '<br>')
 
+      const startDateRegex = /(\d{1,2})\/(\d{1,2}) @ (\d{4})/
+      const shortDescriptionMatch =
+        incident.short_description.match(startDateRegex)
+
+      if (shortDescriptionMatch) {
+        incident.startDate = shortDescriptionMatch[0]
+      } else {
+        incident.startDate = incident.description.match(startDateRegex)
+      }
+
       const device = await deviceLookup(clientToken, incident.cmdb_ci)
 
       incident.device = device
