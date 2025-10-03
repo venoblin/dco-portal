@@ -15,32 +15,32 @@ const IncidentPrint = (props) => {
 
           <div className="info-wrap">
             <p className="muted-text">Asset:</p>
-            <p>{props.incident.ci ? props.incident.ci.asset_tag : 'N/A'}</p>
+            <p>{props.incident.device.asset_tag}</p>
           </div>
 
           <div className="info-wrap">
             <p className="muted-text">Serial:</p>
-            <p>{props.incident.ci ? props.incident.ci.serial : 'N/A'}</p>
+            <p>{props.incident.device.serial}</p>
           </div>
 
           <div className="info-wrap">
             <p className="muted-text">Manufacturer:</p>
-            <p>{props.incident.ci ? props.incident.ci.manufacturer : 'N/A'}</p>
+            <p>{props.incident.device.manufacturer}</p>
           </div>
 
           <div className="info-wrap">
             <p className="muted-text">Model:</p>
-            <p>{props.incident.ci ? props.incident.ci.model : 'N/A'}</p>
+            <p>{props.incident.device.model}</p>
           </div>
 
           <div className="info-wrap">
             <p className="muted-text">Rack:</p>
-            <p>{props.incident.ci ? props.incident.ci.rack : 'N/A'}</p>
+            <p>{props.incident.device.rack}</p>
           </div>
 
           <div className="info-wrap">
             <p className="muted-text">Height:</p>
-            <p>{props.incident.ci ? props.incident.ci.height : 'N/A'}</p>
+            <p>{props.incident.device.height}</p>
           </div>
         </div>
 
