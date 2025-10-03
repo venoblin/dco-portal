@@ -3,7 +3,7 @@ const { parseCsv } = require('../utils')
 const { deviceLookup } = require('../services/devices')
 
 const parseCsvFile = async (req, res) => {
-  const armBaseUrl = process.env.ARM_BASE_URL
+  const snowBaseUrl = process.env.SNOW_BASE_URL
   const authHeader = req.headers.authorization
   const filePath = req.file ? req.file.path : null
 
@@ -26,11 +26,13 @@ const parseCsvFile = async (req, res) => {
       const rawArms = incident.description.match(/ARM\d{10}/g)
       incident.arms = null
 
-      if (rawArms && rawArms.length > 0 && armBaseUrl) {
+      if (rawArms && rawArms.length > 0 && snowBaseUrl) {
         incident.arms = {}
 
         rawArms.forEach((a) => {
-          incident.arms = { ...arms, number: a, link: `${armBaseUrl}${a}` }
+          incident.arms = { ...arms, number: a, link: `${snowBaseUrl}${a}` }
+          incident.incLink = `${snowBaseUrl}${incident.incident}`
+          incident.taskLink = `${snowBaseUrl}${incident.number}`
         })
       }
 

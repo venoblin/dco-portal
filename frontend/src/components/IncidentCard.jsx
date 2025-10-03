@@ -15,8 +15,21 @@ const IncidentCard = (props) => {
       <div>
         <div className="incident-header">
           <div className="incident">
-            <h2>{props.incident.incident}</h2>
-            <h2>{props.incident.number}</h2>
+            <h2>
+              {props.incident.incLink ? (
+                <a>{props.incident.incident}</a>
+              ) : (
+                props.incident.incident
+              )}
+            </h2>
+
+            <h2>
+              {props.incident.taskLink ? (
+                <a>{props.incident.number}</a>
+              ) : (
+                props.incident.number
+              )}
+            </h2>
 
             {props.incident.arms && (
               <div className="incident-arms">
