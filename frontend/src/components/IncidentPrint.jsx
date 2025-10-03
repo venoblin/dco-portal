@@ -82,12 +82,13 @@ const IncidentPrint = (props) => {
               <p className="muted-text">ARM/s:</p>
 
               <div className="arms">
-                {props.incident.arms.length > 0 &&
+                {props.incident.arms &&
+                  props.incident.arms.length > 0 &&
                   props.incident.arms.map((a, idx) =>
                     idx === props.incident.arms.length - 1 ? (
-                      <p key={a}>{a}</p>
+                      <p key={a.number}>{a.number}</p>
                     ) : (
-                      <p key={a}>{a},</p>
+                      <p key={a.number}>{a.number},</p>
                     )
                   )}
               </div>
@@ -104,7 +105,9 @@ const IncidentPrint = (props) => {
 
           {props.incident.arms &&
             props.incident.arms.length > 0 &&
-            props.incident.arms.map((a) => <Barcode key={a} value={a} />)}
+            props.incident.arms.map((a) => (
+              <Barcode key={a.number} value={a.number} />
+            ))}
         </div>
       </div>
 

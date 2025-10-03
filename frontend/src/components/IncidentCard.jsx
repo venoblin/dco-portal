@@ -20,8 +20,13 @@ const IncidentCard = (props) => {
 
             {props.incident.arms && (
               <div className="incident-arms">
-                {props.incident.arms.length > 0 &&
-                  props.incident.arms.map((a) => <p key={a}>{a}</p>)}
+                {props.incident.arms &&
+                  props.incident.arms.length > 0 &&
+                  props.incident.arms.map((a) => (
+                    <a key={a.number} href={a.link} target="_blank">
+                      {a.number}
+                    </a>
+                  ))}
               </div>
             )}
           </div>
@@ -112,15 +117,17 @@ const IncidentCard = (props) => {
             </div>
           </div>
 
-          <p>{props.incident.short_description}</p>
-          {isShowingDesc === true && (
-            <p
-              className="full-description"
-              dangerouslySetInnerHTML={{
-                __html: props.incident.description
-              }}
-            />
-          )}
+          <div className="description">
+            <p>{props.incident.short_description}</p>
+            {isShowingDesc === true && (
+              <p
+                className="full-description"
+                dangerouslySetInnerHTML={{
+                  __html: props.incident.description
+                }}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>
