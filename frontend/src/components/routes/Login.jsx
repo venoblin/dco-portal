@@ -6,7 +6,7 @@ import { login } from '../../services/login'
 import Logo from '../Logo'
 import Panel from '../ui/Panel'
 import Loading from '../Loading'
-import { storageSet } from '../../utils/localStorage'
+import { storageGet, storageRemove, storageSet } from '../../utils/localStorage'
 
 const Login = () => {
   const appContext = useContext(AppContext)
@@ -15,6 +15,9 @@ const Login = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault()
+    if (storageGet('credentials')) {
+      storageRemove('credentials')
+    }
 
     try {
       const res = await appContext.load(() =>
@@ -29,7 +32,10 @@ const Login = () => {
         }
         storageSet('credentials', credentials)
 
-        appContext.setAuth({ isAuthenticated: true, credentials: credentials })
+        appContext.setAuth({
+          isAuthenticated: true,
+          credentials: credentials
+        })
       } else {
         appContext.showPopup('Password or username is incorrect')
       }
