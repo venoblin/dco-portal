@@ -27,24 +27,25 @@ const parseCsvFile = async (req, res) => {
       incident.arms = null
 
       if (rawArms && rawArms.length > 0) {
-        incident.arms = {}
+        incident.arms = []
 
         rawArms.forEach((a) => {
-          incident.arms = {
-            ...incident.arms,
+          const newArm = {
             number: a,
             link: snowBaseUrl ? `${snowBaseUrl}${a}` : null
           }
 
-          incident.incLink = snowBaseUrl
-            ? `${snowBaseUrl}${incident.incident}`
-            : null
-
-          incident.taskLink = snowBaseUrl
-            ? `${snowBaseUrl}${incident.number}`
-            : null
+          incident.arms.push(newArm)
         })
       }
+
+      incident.incLink = snowBaseUrl
+        ? `${snowBaseUrl}${incident.incident}`
+        : null
+
+      incident.taskLink = snowBaseUrl
+        ? `${snowBaseUrl}${incident.number}`
+        : null
 
       return incident
     })
