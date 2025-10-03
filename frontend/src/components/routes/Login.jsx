@@ -27,6 +27,7 @@ const Login = () => {
           refreshToken: res.refreshToken,
           expiresAt: res.expiresAt
         }
+        console.log(credentials)
         storageSet('credentials', credentials)
 
         appContext.setAuth({ isAuthenticated: true, credentials: credentials })
