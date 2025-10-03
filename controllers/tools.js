@@ -19,38 +19,38 @@ const parseCsvFile = async (req, res) => {
   try {
     const parsedData = await parseCsv(filePath)
 
-    parsedData.forEach((d) => {
-      d.description = d.description.replaceAll('\\n', '<br>')
-      const arms = d.description.match(/ARM\d{10}/g)
+    parsedData.forEach(async (incident) => {
+      incident.description = incident.description.replaceAll('\\n', '<br>')
+      const arms = incident.description.match(/ARM\d{10}/g)
+      const verumUrl = `${process.env.DCO_PORTAL_VERUM_URL_START}${incident.cmdb_ci}${process.env.DCO_PORTAL_VERUM_URL_}`
+      const verumRes = await fetch(verumUrl, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${clientToken}`,
+          Accept: 'application/json'
+        }
+      })
+      const verumData = JSON.parse(verumRes)
+
+      let device = null
+      if (verumData.totalCount === 0) {
+        device = null
+      } else if (verumData.totalCount > 1) {
+        device = getBestDevice(verumData.verumObjectList)
+      } else {
+        device = verumData.verumObjectList[0]
+      }
+
+      if (device) {
+        incident.device = device
+      }
 
       if (arms) {
-        d.arms = arms
+        incident.arms = arms
       } else {
-        d.arms = null
+        incident.arms = null
       }
     })
-
-    const verumUrl = `${process.env.DCO_PORTAL_VERUM_URL_START}${parsedData.cmdb_ci}${process.env.DCO_PORTAL_VERUM_URL_}`
-    const verumRes = await fetch(verumUrl, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${clientToken.toString('base64')}`,
-        Accept: 'application/json'
-      }
-    })
-
-    let device = null
-    if (verumRes.totalCount === 0) {
-      device = null
-    } else if (verumRes.totalCount > 1) {
-      device = getBestDevice(verumRes.verumObjectList)
-    } else {
-      device = verumRes.verumObjectList[0]
-    }
-
-    if (device) {
-      parsedData.device = device
-    }
 
     fs.unlinkSync(filePath)
 
