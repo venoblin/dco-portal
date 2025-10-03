@@ -93,7 +93,7 @@ const IncidentPrint = (props) => {
         <div className="barcodes">
           <Barcode value={props.incident.incident} />
 
-          <div>Asset tag Barcode</div>
+          <Barcode value={props.incident.device.assetTag} />
 
           {props.incident.arms &&
             props.incident.arms.length > 0 &&
