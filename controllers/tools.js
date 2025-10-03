@@ -11,8 +11,6 @@ const parseCsvFile = async (req, res) => {
 
   const clientToken = authHeader.split(' ')[1]
 
-  console.log(clientToken)
-
   try {
     const parsedData = await parseCsv(filePath)
 
