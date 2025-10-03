@@ -18,7 +18,7 @@ const getAllGuides = async (req, res) => {
     })
   } catch {
     res.status(500).json({
-      error: 'Failed to get all guides'
+      message: 'Failed to get all guides'
     })
   }
 }
@@ -33,7 +33,7 @@ const getSingleGuide = async (req, res) => {
     })
   } catch {
     res.status(500).json({
-      error: 'Failed to get guide'
+      message: 'Failed to get guide'
     })
   }
 }
@@ -51,12 +51,12 @@ const patchGuide = async (req, res) => {
       })
     } else {
       res.status(404).json({
-        error: 'Guide not found'
+        message: 'Guide not found'
       })
     }
   } catch {
     res.status(500).json({
-      error: 'Failed to create guide'
+      message: 'Failed to create guide'
     })
   }
 }
@@ -70,7 +70,7 @@ const postGuide = async (req, res) => {
     })
   } catch {
     res.status(500).json({
-      error: 'Failed to create guide'
+      message: 'Failed to create guide'
     })
   }
 }
@@ -86,12 +86,12 @@ const deleteGuide = async (req, res) => {
       })
     } else {
       res.status(404).json({
-        error: 'Guide not found'
+        message: 'Guide not found'
       })
     }
   } catch {
     res.status(500).json({
-      error: 'Failed to delete user'
+      message: 'Failed to delete user'
     })
   }
 }
@@ -117,7 +117,7 @@ const getBySearch = async (req, res) => {
     })
   } catch {
     res.status(500).json({
-      error: 'Failed searching for guides'
+      message: 'Failed searching for guides'
     })
   }
 }

@@ -63,7 +63,7 @@ const parseCsvFile = async (req, res) => {
         .catch((err) => console.error('Failed to cleanup file:', err))
     }
     console.error('File processing failed:', error)
-    return res.status(500).json({ error: error.message })
+    return res.status(500).json({ message: error.message })
   }
 }
 
