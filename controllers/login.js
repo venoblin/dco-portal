@@ -3,6 +3,7 @@ const service = require('../services/login')
 const login = async (req, res) => {
   try {
     const authRes = await service.loginUser(req)
+    console.log(authRes)
 
     res.status(200).json({
       data: {
