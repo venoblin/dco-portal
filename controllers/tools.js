@@ -1,5 +1,6 @@
 const fs = require('fs/promises')
-const { parseCsv, getBestDevice } = require('../utils')
+const { parseCsv } = require('../utils')
+const { deviceLookup } = require('../services/devices')
 
 const parseCsvFile = async (req, res) => {
   const authHeader = req.headers.authorization
@@ -17,31 +18,7 @@ const parseCsvFile = async (req, res) => {
     const enrichedDataPromises = parsedData.map(async (incident) => {
       incident.description = incident.description.replace(/\\n/g, '<br>')
 
-      const verumUrl = `${process.env.DCO_PORTAL_VERUM_URL_START}${incident.cmdb_ci}${process.env.DCO_PORTAL_VERUM_URL_END}`
-
-      const verumResponse = await fetch(verumUrl, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${clientToken.toString('base64')}`,
-          Accept: 'application/json'
-        }
-      })
-
-      if (!verumResponse.ok) {
-        console.log(verumResponse)
-
-        throw new Error(
-          `External API failed with status ${verumResponse.status}`
-        )
-      }
-      const verumData = await verumResponse.json()
-
-      let device = null
-      if (verumData.totalCount > 1) {
-        device = getBestDevice(verumData.verumObjectList)
-      } else if (verumData.totalCount === 1) {
-        device = verumData.verumObjectList[0]
-      }
+      const device = await deviceLookup(clientToken, incident.cmdb_ci)
 
       incident.device = device
       incident.arms = incident.description.match(/ARM\d{10}/g)

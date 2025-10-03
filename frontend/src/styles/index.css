@@ -244,3 +244,11 @@ a:hover {
 input[type='checkbox'] {
   cursor: pointer;
 }
+
+.Panel .block-link {
+  margin-bottom: 0.5rem;
+}
+
+.Panel .block-link:last-of-type {
+  margin-bottom: 0;
+}
