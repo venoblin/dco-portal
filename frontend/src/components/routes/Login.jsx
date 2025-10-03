@@ -24,7 +24,9 @@ const Login = () => {
         login({ username: username, password: password })
       )
 
-      if (res.data.accessToken) {
+      console.log(res)
+
+      if (res && res.data.accessToken) {
         const credentials = {
           accessToken: res.data.accessToken,
           refreshToken: res.data.refreshToken,
@@ -37,7 +39,9 @@ const Login = () => {
           credentials: credentials
         })
       } else {
-        appContext.showPopup('Password or username is incorrect')
+        appContext.showPopup(
+          res.message ? res.message : 'Username or password are incorrect'
+        )
       }
     } catch (error) {
       appContext.showPopup(error.message)

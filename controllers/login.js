@@ -12,22 +12,32 @@ const login = async (req, res) => {
           expiresAt: Date.now() / 1000 + authRes.expires_in
         }
       })
-    } else if (process.env.DEV_ACCESS_TOKEN) {
-      res.status(200).json({
-        data: {
-          accessToken: process.env.DEV_ACCESS_TOKEN,
-          refreshToken: `REFRESH_${process.env.DEV_ACCESS_TOKEN}`,
-          expiresAt: Date.now() * 1000
-        }
-      })
+    } else if (
+      process.env.DEV_USERNAME &&
+      process.env.DEV_PASSWORD &&
+      process.env.DEV_ACCESS_TOKEN
+    ) {
+      if (
+        process.env.DEV_USERNAME.toLowerCase() ===
+          req.body.username.toLowerCase() &&
+        process.env.DEV_PASSWORD === req.body.password
+      ) {
+        res.status(200).json({
+          data: {
+            accessToken: process.env.DEV_ACCESS_TOKEN,
+            refreshToken: `REFRESH_${process.env.DEV_ACCESS_TOKEN}`,
+            expiresAt: Date.now() * 1000
+          }
+        })
+      }
     }
 
     res.status(400).json({
-      error: 'Credentials'
+      message: 'Credentials are incorrect or not present'
     })
   } catch (error) {
     res.status(500).json({
-      error: 'Failed to login user'
+      message: 'Failed to login user'
     })
   }
 }
