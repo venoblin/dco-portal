@@ -119,6 +119,7 @@ const IncidentCard = (props) => {
             </div>
 
             <div>
+              {props.incident.startDate && <p>{props.incident.startDate}</p>}
               <p>Assigned to {props.incident.assigned_to}</p>
               <p>{props.incident.u_sub_type}</p>
               <p
