@@ -15,32 +15,37 @@ const IncidentPrint = (props) => {
 
           <div className="info-wrap">
             <p className="muted-text">Asset:</p>
-            <p>{props.incident.device.assetTag}</p>
+            <p>{props.incident.device && props.incident.device.assetTag}</p>
           </div>
 
           <div className="info-wrap">
             <p className="muted-text">Serial:</p>
-            <p>{props.incident.device.serialNo}</p>
+            <p>{props.incident.device && props.incident.device.serialNo}</p>
           </div>
 
           <div className="info-wrap">
             <p className="muted-text">Manufacturer:</p>
-            <p>{props.incident.device.manufacturer}</p>
+            <p>{props.incident.device && props.incident.device.manufacturer}</p>
           </div>
 
           <div className="info-wrap">
             <p className="muted-text">Model:</p>
-            <p>{props.incident.device.model}</p>
+            <p>{props.incident.device && props.incident.device.model}</p>
           </div>
 
           <div className="info-wrap">
             <p className="muted-text">Rack:</p>
-            <p>{props.incident.device.deployment.rack}</p>
+            <p>
+              {props.incident.device && props.incident.device.deployment.rack}
+            </p>
           </div>
 
           <div className="info-wrap">
             <p className="muted-text">Height:</p>
-            <p>{props.incident.device.deployment.zPosition}</p>
+            <p>
+              {props.incident.device &&
+                props.incident.device.deployment.zPosition}
+            </p>
           </div>
         </div>
 
@@ -93,7 +98,9 @@ const IncidentPrint = (props) => {
         <div className="barcodes">
           <Barcode value={props.incident.incident} />
 
-          <Barcode value={props.incident.device.assetTag} />
+          {props.incident.device && (
+            <Barcode value={props.incident.device.assetTag} />
+          )}
 
           {props.incident.arms &&
             props.incident.arms.length > 0 &&
