@@ -10,7 +10,7 @@ export const AppProvider = (props) => {
   const [popupMsg, setPopupMsg] = useState('')
   const [isPopup, setIsPopup] = useState(false)
   const [auth, setAuth] = useState({
-    isAuthenticated: false,
+    isAuthenticated: true,
     credentials: null
   })
 
@@ -52,7 +52,7 @@ export const AppProvider = (props) => {
   }
 
   useEffect(() => {
-    checkToken()
+    // checkToken()
   }, [])
 
   return (
