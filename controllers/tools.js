@@ -36,8 +36,13 @@ const parseCsvFile = async (req, res) => {
             link: snowBaseUrl ? `${snowBaseUrl}${a}` : null
           }
 
-          incident.incLink = `${snowBaseUrl}${incident.incident}`
-          incident.taskLink = `${snowBaseUrl}${incident.number}`
+          incident.incLink = snowBaseUrl
+            ? `${snowBaseUrl}${incident.incident}`
+            : null
+
+          incident.taskLink = snowBaseUrl
+            ? `${snowBaseUrl}${incident.number}`
+            : null
         })
       }
 
