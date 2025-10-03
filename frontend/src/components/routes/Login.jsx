@@ -22,12 +22,12 @@ const Login = () => {
       )
 
       if (res) {
+        console.log(res)
         const credentials = {
           accessToken: res.data.token,
           refreshToken: res.data.refreshToken,
           expiresAt: res.data.expiresAt
         }
-        console.log(credentials)
         storageSet('credentials', credentials)
 
         appContext.setAuth({ isAuthenticated: true, credentials: credentials })

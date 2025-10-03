@@ -30,7 +30,9 @@ const IncidentManager = () => {
       const formData = new FormData()
       formData.append('csvFile', selectedFile)
 
-      const res = await appContext.load(() => uploadCsv(formData))
+      const res = await appContext.load(() =>
+        uploadCsv(formData, appContext.auth.credentials)
+      )
 
       let incidents = []
       res.data.forEach((incident) => {

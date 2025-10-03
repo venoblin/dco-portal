@@ -45,11 +45,14 @@ class Client {
     }
   }
 
-  async upload(endpoint, formData) {
+  async upload(endpoint, formData, accessToken) {
     try {
       const res = await fetch(this.#constructUrl(endpoint), {
         method: 'POST',
-        body: formData
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
       })
 
       if (res.ok) {
