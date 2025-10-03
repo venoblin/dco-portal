@@ -9,12 +9,12 @@ const Tools = () => {
       </header>
 
       <Panel>
-        <Link className="block-link" to="/tools/triage-manager">
-          Triage Manager →
+        <Link className="block-link" to="/tools/incident-manager">
+          Tools/Incident Manager →
         </Link>
 
-        <Link className="block-link" to="/tools/incident-manager">
-          Incident Manager →
+        <Link className="block-link" to="/tools/triage-manager">
+          Tools/Triage Manager →
         </Link>
       </Panel>
     </div>

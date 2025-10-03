@@ -40,11 +40,12 @@ const Dashboard = () => {
           </header>
 
           <div>
-            <Link className="block-link" to="/tools/triage-manager">
-              Tools/Triage Manager →
-            </Link>
             <Link className="block-link" to="/tools/incident-manager">
               Tools/Incident Manager →
+            </Link>
+
+            <Link className="block-link" to="/tools/triage-manager">
+              Tools/Triage Manager →
             </Link>
           </div>
         </Panel>
