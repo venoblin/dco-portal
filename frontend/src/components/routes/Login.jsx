@@ -6,6 +6,7 @@ import { login } from '../../services/login'
 import Logo from '../Logo'
 import Panel from '../ui/Panel'
 import Loading from '../Loading'
+import { storageSet } from '../../utils/localStorage'
 
 const Login = () => {
   const appContext = useContext(AppContext)
@@ -20,11 +21,17 @@ const Login = () => {
         login({ username: username, password: password })
       )
 
-      console.log(res)
+      if (res) {
+        const credentials = {
+          accessToken: res.data.token,
+          refreshToken: res.refreshToken,
+          expiresAt: res.expiresAt
+        }
+        storageSet('credentials', credentials)
 
-      if (!res) {
-        appContext.showPopup('Password or username is incorrect')
+        appContext.setAuth({ isAuthenticated: true, credentials: credentials })
       } else {
+        appContext.showPopup('Password or username is incorrect')
       }
     } catch (error) {
       appContext.showPopup(error.message)

@@ -11,7 +11,7 @@ export const AppProvider = (props) => {
   const [isPopup, setIsPopup] = useState(false)
   const [auth, setAuth] = useState({
     isAuthenticated: false,
-    token: null
+    credentials: null
   })
 
   const load = (promise) => {
@@ -42,10 +42,10 @@ export const AppProvider = (props) => {
   }
 
   const checkToken = () => {
-    const token = storageGet('token')
+    const credentials = storageGet('credentials')
 
-    if (token) {
-      setAuth({ isAuthenticated: true, token: token })
+    if (credentials) {
+      setAuth({ isAuthenticated: true, credentials: credentials })
     }
   }
 
@@ -54,7 +54,7 @@ export const AppProvider = (props) => {
   }, [])
 
   return (
-    <AppContext.Provider value={{ showPopup, isLoading, load, auth }}>
+    <AppContext.Provider value={{ showPopup, isLoading, load, auth, setAuth }}>
       {isPopup === true && !isLoading && (
         <Popup msg={popupMsg} showPopup={showPopup} />
       )}

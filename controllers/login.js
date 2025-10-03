@@ -4,11 +4,9 @@ const login = async (req, res) => {
   try {
     const authRes = await service.loginUser(req)
 
-    console.log(authRes)
-
     res.status(200).json({
       data: {
-        token: authRes.access_token,
+        accessToken: authRes.access_token,
         refreshToken: authRes.refresh_token,
         expiresAt: Date.now() / 1000 + authRes.expires_in
       }
