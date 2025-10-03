@@ -3,6 +3,7 @@ const { parseCsv } = require('../utils')
 const { deviceLookup } = require('../services/devices')
 
 const parseCsvFile = async (req, res) => {
+  const snowBaseUrl = process.env.SNOW_BASE_URL
   const authHeader = req.headers.authorization
   const filePath = req.file ? req.file.path : null
 
@@ -21,7 +22,19 @@ const parseCsvFile = async (req, res) => {
       const device = await deviceLookup(clientToken, incident.cmdb_ci)
 
       incident.device = device
-      incident.arms = incident.description.match(/ARM\d{10}/g)
+
+      const rawArms = incident.description.match(/ARM\d{10}/g)
+      incident.arms = null
+
+      if (rawArms && rawArms.length > 0 && snowBaseUrl) {
+        incident.arms = {}
+
+        rawArms.forEach((a) => {
+          incident.arms = { ...arms, number: a, link: `${snowBaseUrl}${a}` }
+          incident.incLink = `${snowBaseUrl}${incident.incident}`
+          incident.taskLink = `${snowBaseUrl}${incident.number}`
+        })
+      }
 
       return incident
     })

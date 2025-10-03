@@ -15,13 +15,31 @@ const IncidentCard = (props) => {
       <div>
         <div className="incident-header">
           <div className="incident">
-            <h2>{props.incident.incident}</h2>
-            <h2>{props.incident.number}</h2>
+            <h2>
+              {props.incident.incLink ? (
+                <a>{props.incident.incident}</a>
+              ) : (
+                props.incident.incident
+              )}
+            </h2>
+
+            <h2>
+              {props.incident.taskLink ? (
+                <a>{props.incident.number}</a>
+              ) : (
+                props.incident.number
+              )}
+            </h2>
 
             {props.incident.arms && (
               <div className="incident-arms">
-                {props.incident.arms.length > 0 &&
-                  props.incident.arms.map((a) => <p key={a}>{a}</p>)}
+                {props.incident.arms &&
+                  props.incident.arms.length > 0 &&
+                  props.incident.arms.map((a) => (
+                    <a key={a.number} href={a.link} target="_blank">
+                      {a.number}
+                    </a>
+                  ))}
               </div>
             )}
           </div>
@@ -112,15 +130,17 @@ const IncidentCard = (props) => {
             </div>
           </div>
 
-          <p>{props.incident.short_description}</p>
-          {isShowingDesc === true && (
-            <p
-              className="full-description"
-              dangerouslySetInnerHTML={{
-                __html: props.incident.description
-              }}
-            />
-          )}
+          <div className="description">
+            <p>{props.incident.short_description}</p>
+            {isShowingDesc === true && (
+              <p
+                className="full-description"
+                dangerouslySetInnerHTML={{
+                  __html: props.incident.description
+                }}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

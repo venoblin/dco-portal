@@ -9,9 +9,9 @@ function BarcodeDisplay(props) {
       JsBarcode(barcodeRef.current, props.value, {
         displayValue: true,
         text: props.value,
-        height: 30,
-        width: 1.5,
-        fontSize: 16
+        height: 20,
+        width: 1,
+        fontSize: 14
       })
     }
   }, [props.value])
