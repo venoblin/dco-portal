@@ -31,7 +31,7 @@ const parseCsvFile = async (req, res) => {
 
         rawArms.forEach((a) => {
           incident.arms = {
-            ...arms,
+            ...incident.arms,
             number: a,
             link: snowBaseUrl ? `${snowBaseUrl}${a}` : null
           }
