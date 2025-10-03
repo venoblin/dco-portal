@@ -44,8 +44,10 @@ export const AppProvider = (props) => {
   const checkToken = () => {
     const credentials = storageGet('credentials')
 
-    if (credentials) {
+    if (credentials && Date.now() / 1000 < credentials.expiresAt) {
       setAuth({ isAuthenticated: true, credentials: credentials })
+    } else {
+      setAuth({ isAuthenticated: false, credentials: null })
     }
   }
 
