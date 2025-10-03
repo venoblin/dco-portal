@@ -24,8 +24,8 @@ const Login = () => {
       if (res) {
         const credentials = {
           accessToken: res.data.token,
-          refreshToken: res.refreshToken,
-          expiresAt: res.expiresAt
+          refreshToken: res.data.refreshToken,
+          expiresAt: res.data.expiresAt
         }
         console.log(credentials)
         storageSet('credentials', credentials)

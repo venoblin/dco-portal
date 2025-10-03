@@ -73,9 +73,42 @@ const requestPromise = (options, postBody) => {
     request.end()
   })
 }
+const getBestDevice = (deviceList) => {
+  let highScore = -5
+  let highIdx = -1
+
+  for (let x = 0; x < deviceList.length; x++) {
+    score = 0
+
+    switch (deviceList[x].statusT) {
+      case 'Installed':
+        score += 1
+        break
+      case 'Disposed':
+        score -= 1
+        break
+    }
+    switch (deviceList[x].subStatus) {
+      case 'Production':
+        score += 1
+        break
+      case 'Scrapped':
+        score -= 1
+        break
+    }
+
+    if (score > highScore) {
+      highScore = score
+      highIdx = x
+    }
+  }
+
+  return deviceList[highIdx]
+}
 
 module.exports = {
   parseCsv,
   filterHeaders,
-  requestPromise
+  requestPromise,
+  getBestDevice
 }
