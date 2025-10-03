@@ -3,7 +3,7 @@ const { parseCsv } = require('../utils')
 const { deviceLookup } = require('../services/devices')
 
 const parseCsvFile = async (req, res) => {
-  const snowBaseUrl = process.env.SNOW_BASE_URL
+  const snowBaseUrl = process.env.DCO_PORTAL_SNOW_BASE_URL
   const authHeader = req.headers.authorization
   const filePath = req.file ? req.file.path : null
 
@@ -26,11 +26,16 @@ const parseCsvFile = async (req, res) => {
       const rawArms = incident.description.match(/ARM\d{10}/g)
       incident.arms = null
 
-      if (rawArms && rawArms.length > 0 && snowBaseUrl) {
+      if (rawArms && rawArms.length > 0) {
         incident.arms = {}
 
         rawArms.forEach((a) => {
-          incident.arms = { ...arms, number: a, link: `${snowBaseUrl}${a}` }
+          incident.arms = {
+            ...arms,
+            number: a,
+            link: snowBaseUrl ? `${snowBaseUrl}${a}` : null
+          }
+
           incident.incLink = `${snowBaseUrl}${incident.incident}`
           incident.taskLink = `${snowBaseUrl}${incident.number}`
         })
