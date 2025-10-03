@@ -72,17 +72,17 @@ const IncidentCard = (props) => {
 
               <div className="machine-info">
                 <p className="muted-text">Asset:</p>
-                <p>{props.incident.device.asset_tag}</p>
+                <p>{props.incident.device.assetTag}</p>
               </div>
 
               <div className="machine-info">
                 <p className="muted-text">Rack:</p>
-                <p>{props.incident.device.rack}</p>
+                <p>{props.incident.device.deployment.rack}</p>
               </div>
 
               <div className="machine-info">
                 <p className="muted-text">Height:</p>
-                <p>{props.incident.device.height}</p>
+                <p>{props.incident.device.deployment.zPosition}</p>
               </div>
             </div>
 

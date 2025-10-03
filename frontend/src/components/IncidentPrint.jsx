@@ -15,12 +15,12 @@ const IncidentPrint = (props) => {
 
           <div className="info-wrap">
             <p className="muted-text">Asset:</p>
-            <p>{props.incident.device.asset_tag}</p>
+            <p>{props.incident.device.assetTag}</p>
           </div>
 
           <div className="info-wrap">
             <p className="muted-text">Serial:</p>
-            <p>{props.incident.device.serial}</p>
+            <p>{props.incident.device.serialNo}</p>
           </div>
 
           <div className="info-wrap">
@@ -35,12 +35,12 @@ const IncidentPrint = (props) => {
 
           <div className="info-wrap">
             <p className="muted-text">Rack:</p>
-            <p>{props.incident.device.rack}</p>
+            <p>{props.incident.device.deployment.rack}</p>
           </div>
 
           <div className="info-wrap">
             <p className="muted-text">Height:</p>
-            <p>{props.incident.device.height}</p>
+            <p>{props.incident.device.deployment.zPosition}</p>
           </div>
         </div>
 
@@ -93,7 +93,7 @@ const IncidentPrint = (props) => {
         <div className="barcodes">
           <Barcode value={props.incident.incident} />
 
-          <div>Asset tag Barcode</div>
+          <Barcode value={props.incident.device.assetTag} />
 
           {props.incident.arms &&
             props.incident.arms.length > 0 &&
