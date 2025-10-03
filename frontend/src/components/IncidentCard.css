@@ -93,6 +93,7 @@
 }
 
 .IncidentCard p.full-description {
+  margin-top: 1rem;
   margin-bottom: 0;
   white-space: pre-wrap;
 }

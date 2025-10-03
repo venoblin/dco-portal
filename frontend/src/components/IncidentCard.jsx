@@ -17,7 +17,9 @@ const IncidentCard = (props) => {
           <div className="incident">
             <h2>
               {props.incident.incLink ? (
-                <a>{props.incident.incident}</a>
+                <a href={props.incident.incLink} target="_blank">
+                  {props.incident.incident}
+                </a>
               ) : (
                 props.incident.incident
               )}
@@ -25,7 +27,9 @@ const IncidentCard = (props) => {
 
             <h2>
               {props.incident.taskLink ? (
-                <a>{props.incident.number}</a>
+                <a href={props.incident.taskLink} target="_blank">
+                  {props.incident.number}
+                </a>
               ) : (
                 props.incident.number
               )}
@@ -35,11 +39,15 @@ const IncidentCard = (props) => {
               <div className="incident-arms">
                 {props.incident.arms &&
                   props.incident.arms.length > 0 &&
-                  props.incident.arms.map((a) => (
-                    <a key={a.number} href={a.link} target="_blank">
-                      {a.number}
-                    </a>
-                  ))}
+                  props.incident.arms.map((a) =>
+                    a.link ? (
+                      <a key={a.number} href={a.link} target="_blank">
+                        {a.number}
+                      </a>
+                    ) : (
+                      <p key={a.number}>{a.number}</p>
+                    )
+                  )}
               </div>
             )}
           </div>
