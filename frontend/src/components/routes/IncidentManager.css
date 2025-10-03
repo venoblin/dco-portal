@@ -53,7 +53,7 @@
   }
 
   .print {
-    color: black;
+    color: var(--bg-color);
     background: white;
     display: block !important;
   }
