@@ -8,7 +8,13 @@ const DeviceLookup = () => {
 
   const [rowData, setRowData] = useState([])
 
-  const [headers, setHeaders] = useState([{ field: 'hostname' }])
+  const [headers, setHeaders] = useState([
+    {
+      header: 'Hostname',
+      accessorKey: 'hostname'
+    },
+    { header: 'Asset Tag', accessorKey: 'assetTag' }
+  ])
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -41,6 +47,8 @@ const DeviceLookup = () => {
             placeholder="Paste hostnames here..."
           ></textarea>
         </form>
+
+        <Spreadsheet rowData={rowData} columns={headers} />
       </div>
     </div>
   )
