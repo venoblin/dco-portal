@@ -59,7 +59,7 @@ const DeviceLookup = () => {
               <option>Regular</option>
               <option>Barcodes</option>
             </select>
-            <button type="button">Copy</button>
+            {rowData.length > 0 && <button type="button">Copy</button>}
           </div>
           <Spreadsheet rowData={rowData} columns={headers} />
         </div>
