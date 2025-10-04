@@ -2,3 +2,9 @@
   height: 500px;
   width: 100%;
 }
+
+.Spreadsheet th {
+  border: var(--default-border);
+  border-color: var(--overlay-bg-color);
+  padding: var(--default-spacing);
+}
