@@ -51,7 +51,7 @@ const Spreadsheet = (props) => {
         </tbody>
       </table>
 
-      {props.rowData.length === 0 && <p>No hostnames entered!</p>}
+      {props.rowData.length === 0 && <p>No hostnames entered.</p>}
     </div>
   )
 }
