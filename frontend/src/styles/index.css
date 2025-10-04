@@ -140,6 +140,10 @@ textarea {
   transition: border var(--default-transition), color var(--default-transition);
 }
 
+textarea {
+  resize: none;
+}
+
 input[type='file'] {
   display: none;
 }

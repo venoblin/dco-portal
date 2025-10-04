@@ -11,3 +11,8 @@
 .DeviceLookup textarea {
   height: 500px;
 }
+
+.DeviceLookup .wrapper {
+  display: flex;
+  align-items: flex-end;
+}

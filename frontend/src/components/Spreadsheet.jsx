@@ -7,7 +7,7 @@ ModuleRegistry.registerModules([AllCommunityModule])
 const Spreadsheet = (props) => {
   return (
     <div className="Spreadsheet">
-      <AgGridReact rowData={props.rows} columnDefs={props.headers} />
+      <AgGridReact rowData={props.rowData} columnDefs={props.headers} />
     </div>
   )
 }
