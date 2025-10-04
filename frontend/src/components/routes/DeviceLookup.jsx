@@ -41,8 +41,6 @@ const DeviceLookup = () => {
             placeholder="Paste hostnames here..."
           ></textarea>
         </form>
-
-        <Spreadsheet headers={headers} rowData={rowData} />
       </div>
     </div>
   )

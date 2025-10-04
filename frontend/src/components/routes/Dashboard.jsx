@@ -58,12 +58,8 @@ const Dashboard = () => {
           <header>
             <h2>Recent Guides</h2>
             <div className="links">
-              <Link className="block-link" to="/guides/new">
-                Create Guide →
-              </Link>
-              <Link className="block-link" to="/guides">
-                View More →
-              </Link>
+              <Link to="/guides/new">Create Guide →</Link>
+              <Link to="/guides">View More →</Link>
             </div>
           </header>
 
