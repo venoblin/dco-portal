@@ -4,6 +4,13 @@
   max-width: 200px;
 }
 
+.DeviceLookup .inputs {
+  margin-bottom: var(--default-spacing);
+  width: max-content;
+  border: var(--default-border);
+  border-radius: var(--default-border-radius);
+}
+
 .DeviceLookup form button {
   margin-bottom: var(--default-spacing);
 }

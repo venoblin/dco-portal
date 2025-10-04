@@ -1,10 +1,12 @@
 import './Spreadsheet.css'
+import { useEffect, useRef, useState } from 'react'
 import {
   useReactTable,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel
 } from '@tanstack/react-table'
+import useToggle from '../hooks/useToggle'
 
 const Spreadsheet = (props) => {
   if (!props.rowData) {
@@ -51,7 +53,9 @@ const Spreadsheet = (props) => {
         </tbody>
       </table>
 
-      {props.rowData.length === 0 && <p>No hostnames entered.</p>}
+      {props.rowData.length === 0 && (
+        <p className="msg">No hostnames entered!</p>
+      )}
     </div>
   )
 }

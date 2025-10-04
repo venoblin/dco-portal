@@ -5,15 +5,20 @@ import useFormState from '../../hooks/useFormState'
 
 const DeviceLookup = () => {
   const [hosts, onHostsChange] = useFormState('')
-
   const [rowData, setRowData] = useState([])
-
   const [headers, setHeaders] = useState([
     {
       header: 'Hostname',
       accessorKey: 'hostname'
     },
-    { header: 'Asset Tag', accessorKey: 'assetTag' }
+    { header: 'Asset Tag', accessorKey: 'assetTag' },
+    { header: 'Serial #', accessorKey: 'serialNum' },
+    { header: 'Inventory #', accessorKey: 'inventoryNum' },
+    { header: 'Rack', accessorKey: 'rack' },
+    { header: 'Height', accessorKey: 'height' },
+    { header: 'Status', accessorKey: 'status' },
+    { header: 'Model', accessorKey: 'model' },
+    { header: 'GPC', accessorKey: 'gpc' }
   ])
 
   const handleSubmit = (event) => {
@@ -48,7 +53,16 @@ const DeviceLookup = () => {
           ></textarea>
         </form>
 
-        <Spreadsheet rowData={rowData} columns={headers} />
+        <div>
+          <div className="inputs">
+            <select>
+              <option>Regular</option>
+              <option>Barcodes</option>
+            </select>
+            <button type="button">Copy</button>
+          </div>
+          <Spreadsheet rowData={rowData} columns={headers} />
+        </div>
       </div>
     </div>
   )

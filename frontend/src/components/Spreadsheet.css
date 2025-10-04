@@ -9,6 +9,10 @@
   font-family: var(--body-font-family);
 }
 
+.Spreadsheet .msg {
+  padding: var(--default-spacing);
+}
+
 .Spreadsheet table {
   border: var(--default-border);
   border-radius: var(--default-border-radius);
@@ -21,6 +25,12 @@
   border-top: var(--default-border);
   border-right: var(--default-border);
   border-color: lightgrey;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .Spreadsheet th:last-of-type,
