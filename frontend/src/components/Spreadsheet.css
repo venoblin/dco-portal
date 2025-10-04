@@ -1,10 +1,33 @@
 .Spreadsheet {
   height: 500px;
   width: 100%;
+  background: var(--text-color);
+  color: var(--bg-color);
+  padding: var(--default-spacing);
+  border-radius: var(--default-border-radius);
+  overflow: scroll;
+  font-family: var(--body-font-family);
 }
 
-.Spreadsheet th {
+.Spreadsheet table {
   border: var(--default-border);
-  border-color: var(--overlay-bg-color);
-  padding: var(--default-spacing);
+  border-radius: var(--default-border-radius);
+  border-color: lightgrey;
+}
+
+.Spreadsheet th,
+.Spreadsheet td {
+  padding: calc(var(--default-spacing) / 2) var(--default-spacing);
+  border-top: var(--default-border);
+  border-right: var(--default-border);
+  border-color: lightgrey;
+}
+
+.Spreadsheet th:last-of-type,
+.Spreadsheet td:last-of-type {
+  border-right: none;
+}
+
+.Spreadsheet thead th {
+  border-top: none;
 }

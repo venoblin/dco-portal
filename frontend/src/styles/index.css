@@ -129,9 +129,12 @@ button:hover,
   margin-left: 0;
 }
 
+input {
+  padding: 0.75rem 1rem;
+}
+
 input,
 textarea {
-  padding: 0.75rem 1rem;
   border-radius: var(--default-border-radius);
   outline: none;
   border: var(--border-width) solid var(--overlay-bg-color);
@@ -141,6 +144,7 @@ textarea {
 }
 
 textarea {
+  padding: var(--default-spacing);
   resize: none;
 }
 
