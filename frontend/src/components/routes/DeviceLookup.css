@@ -1,0 +1,13 @@
+.DeviceLookup form {
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+}
+
+.DeviceLookup form button {
+  margin-bottom: var(--default-spacing);
+}
+
+.DeviceLookup textarea {
+  height: 500px;
+}
