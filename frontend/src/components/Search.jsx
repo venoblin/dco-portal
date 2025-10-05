@@ -2,7 +2,7 @@ import './Search.css'
 import useFormState from '../hooks/useFormState'
 
 const Search = (props) => {
-  const [search, onSearchChange] = useFormState('')
+  const [search, handleSearchChange] = useFormState('')
   const [activeFilter, setActiveFilter] = useFormState(
     props.filters ? props.filters[0] : null
   )
@@ -13,7 +13,7 @@ const Search = (props) => {
     return cleaned
   }
 
-  const onSearch = (event) => {
+  const onSearchSubmit = (event) => {
     event.preventDefault()
 
     props.onSearch(search, activeFilter)
@@ -25,7 +25,7 @@ const Search = (props) => {
 
   return (
     <div className="Search">
-      <form className="search" onSubmit={(event) => onSearch(event)}>
+      <form className="search" onSubmit={(event) => onSearchSubmit(event)}>
         {props.filters && props.filters.length > 0 && (
           <select
             className="filters-wrap"
@@ -47,7 +47,7 @@ const Search = (props) => {
           name="search"
           placeholder={`${props.placeholder ? props.placeholder : 'Search...'}`}
           value={search}
-          onChange={(event) => onSearchChange(event)}
+          onChange={(event) => handleSearchChange(event)}
         />
 
         <button className="search">Search</button>

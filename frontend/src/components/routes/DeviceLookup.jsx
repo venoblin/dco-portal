@@ -4,22 +4,35 @@ import Spreadsheet from '../Spreadsheet'
 import useFormState from '../../hooks/useFormState'
 
 const DeviceLookup = () => {
-  const [hosts, onHostsChange] = useFormState('')
+  const headerTypes = {
+    regular: [
+      {
+        header: 'Hostname',
+        accessorKey: 'hostname'
+      },
+      { header: 'Asset Tag', accessorKey: 'assetTag' },
+      { header: 'Serial #', accessorKey: 'serialNum' },
+      { header: 'Inventory #', accessorKey: 'inventoryNum' },
+      { header: 'Rack', accessorKey: 'rack' },
+      { header: 'Height', accessorKey: 'height' },
+      { header: 'Status', accessorKey: 'status' },
+      { header: 'Model', accessorKey: 'model' },
+      { header: 'GPC', accessorKey: 'gpc' }
+    ],
+    barcodes: [
+      {
+        header: 'Hostname',
+        accessorKey: 'hostname'
+      },
+      { header: 'Asset Tag', accessorKey: 'assetTag' },
+      { header: 'GPC', accessorKey: 'gpc' }
+    ]
+  }
+
+  const [hosts, handleHostsChange] = useFormState('')
+  const [type, handleTypeChange] = useFormState('regular')
   const [rowData, setRowData] = useState([])
-  const [headers, setHeaders] = useState([
-    {
-      header: 'Hostname',
-      accessorKey: 'hostname'
-    },
-    { header: 'Asset Tag', accessorKey: 'assetTag' },
-    { header: 'Serial #', accessorKey: 'serialNum' },
-    { header: 'Inventory #', accessorKey: 'inventoryNum' },
-    { header: 'Rack', accessorKey: 'rack' },
-    { header: 'Height', accessorKey: 'height' },
-    { header: 'Status', accessorKey: 'status' },
-    { header: 'Model', accessorKey: 'model' },
-    { header: 'GPC', accessorKey: 'gpc' }
-  ])
+  const [headers, setHeaders] = useState(headerTypes[type])
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -33,6 +46,10 @@ const DeviceLookup = () => {
     setRowData(rowHostnames)
   }
 
+  const switchHeaders = (state) => {
+    setHeaders(headerTypes[state])
+  }
+
   return (
     <div className="DeviceLookup">
       <header>
@@ -44,7 +61,7 @@ const DeviceLookup = () => {
           <button type="submit">Search</button>
 
           <textarea
-            onChange={onHostsChange}
+            onChange={handleHostsChange}
             name="hostnames"
             id="hostnames"
             value={hosts}
@@ -55,9 +72,12 @@ const DeviceLookup = () => {
 
         <div>
           <div className="inputs">
-            <select>
-              <option>Regular</option>
-              <option>Barcodes</option>
+            <select
+              value={type}
+              onChange={(event) => handleTypeChange(event, switchHeaders)}
+            >
+              <option value="regular">Regular</option>
+              <option value="barcodes">Barcodes</option>
             </select>
             {rowData.length > 0 && <button type="button">Copy</button>}
           </div>

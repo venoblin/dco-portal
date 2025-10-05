@@ -1,7 +1,6 @@
 .DeviceLookup form {
   display: flex;
   flex-direction: column;
-  max-width: 200px;
 }
 
 .DeviceLookup .inputs {
@@ -16,6 +15,7 @@
 }
 
 .DeviceLookup textarea {
+  width: 175px;
   height: 500px;
 }
 
