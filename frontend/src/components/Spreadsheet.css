@@ -5,12 +5,12 @@
   color: var(--bg-color);
   padding: var(--default-spacing);
   border-radius: var(--default-border-radius);
-  overflow-y: scroll;
+  overflow: scroll;
   font-family: var(--body-font-family);
 }
 
 .Spreadsheet.copied {
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 .Spreadsheet .msg {
