@@ -13,6 +13,10 @@ const Tools = () => {
           Tools/Incident Manager →
         </Link>
 
+        <Link className="block-link" to="/tools/device-lookup">
+          Tools/Device Lookup →
+        </Link>
+
         <Link className="block-link" to="/tools/triage-manager">
           Tools/Triage Manager →
         </Link>

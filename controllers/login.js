@@ -35,7 +35,7 @@ const login = async (req, res) => {
     res.status(400).json({
       message: 'Credentials are incorrect or not present'
     })
-  } catch (error) {
+  } catch {
     res.status(500).json({
       message: 'Failed to login user'
     })

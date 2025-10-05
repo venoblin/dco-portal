@@ -1,0 +1,66 @@
+.Spreadsheet {
+  height: 500px;
+  width: 100%;
+  background: var(--text-color);
+  color: var(--bg-color);
+  padding: var(--default-spacing);
+  border-radius: var(--default-border-radius);
+  overflow-y: scroll;
+  font-family: var(--body-font-family);
+}
+
+.Spreadsheet.copied {
+  overflow-y: hidden;
+}
+
+.Spreadsheet .msg {
+  padding: var(--default-spacing);
+}
+
+.Spreadsheet table {
+  border: var(--default-border);
+  border-radius: var(--default-border-radius);
+  border-color: lightgrey;
+  position: relative;
+}
+
+.Spreadsheet th,
+.Spreadsheet td {
+  padding: calc(var(--default-spacing) / 2) var(--default-spacing);
+  border-top: var(--default-border);
+  border-right: var(--default-border);
+  border-color: lightgrey;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.Spreadsheet th:last-of-type,
+.Spreadsheet td:last-of-type {
+  border-right: none;
+}
+
+.Spreadsheet thead th {
+  border-top: none;
+}
+
+.Spreadsheet .copy-msg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: var(--default-spacing);
+  background: var(--popup-bg-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--default-border-radius);
+  z-index: 5;
+}

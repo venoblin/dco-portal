@@ -11,6 +11,7 @@ import GuideSingle from './components/routes/GuideSingle'
 import Tools from './components/routes/Tools'
 import Profile from './components/routes/Profile'
 import TriageManager from './components/routes/TriageManager'
+import DeviceLookup from './components/routes/DeviceLookup'
 import IncidentManager from './components/routes/IncidentManager'
 import NotFound from './components/routes/NotFound'
 import Login from './components/routes/Login'
@@ -35,6 +36,7 @@ const App = () => {
             <Route path="/guides/:id" element={<GuideSingle />} />
             <Route path="/tools" element={<Tools />} />
             <Route path="/tools/triage-manager" element={<TriageManager />} />
+            <Route path="/tools/device-lookup" element={<DeviceLookup />} />
             <Route
               path="/tools/incident-manager"
               element={<IncidentManager />}

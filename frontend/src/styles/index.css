@@ -14,6 +14,7 @@
   --default-border-radius: 1rem;
   --default-border: var(--border-width) solid var(--overlay-bg-color);
   --body-font-family: 'Poppins', Helvetica, Arial, sans-serif;
+  --popup-bg-color: rgba(0, 0, 0, 0.85);
 }
 
 * {
@@ -129,15 +130,23 @@ button:hover,
   margin-left: 0;
 }
 
+input {
+  padding: 0.75rem 1rem;
+}
+
 input,
 textarea {
-  padding: 0.75rem 1rem;
   border-radius: var(--default-border-radius);
   outline: none;
   border: var(--border-width) solid var(--overlay-bg-color);
   background: var(--text-color);
   color: var(--bg-color);
   transition: border var(--default-transition), color var(--default-transition);
+}
+
+textarea {
+  padding: var(--default-spacing);
+  resize: none;
 }
 
 input[type='file'] {
@@ -165,9 +174,14 @@ textarea:focus {
 }
 
 input:disabled,
-button:disabled {
+button:disabled,
+select:disabled {
   opacity: 0.5;
   cursor: default;
+}
+
+select:disabled:hover {
+  color: var(--text-color);
 }
 
 select {

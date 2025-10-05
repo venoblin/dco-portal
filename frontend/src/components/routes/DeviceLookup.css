@@ -1,0 +1,28 @@
+.DeviceLookup form {
+  display: flex;
+  flex-direction: column;
+}
+
+.DeviceLookup .inputs {
+  margin-bottom: var(--default-spacing);
+  width: max-content;
+  border: var(--default-border);
+  border-radius: var(--default-border-radius);
+}
+
+.DeviceLookup form button {
+  margin-bottom: var(--default-spacing);
+}
+
+.DeviceLookup textarea {
+  width: 175px;
+  height: 500px;
+}
+
+.DeviceLookup .wrapper {
+  display: flex;
+}
+
+.DeviceLookup .spreadsheet-wrapper {
+  width: 100%;
+}
