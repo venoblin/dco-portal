@@ -1,7 +1,9 @@
 import './DeviceLookup.css'
-import { useState, useRef } from 'react'
-import { sleep } from '../../utils'
+import { useState, useRef, useContext } from 'react'
+import { AppContext } from '../../contexts/AppContext'
 import useToggle from '../../hooks/useToggle'
+import { sleep } from '../../utils'
+import { findAllDevices } from '../../services/tools'
 import useFormState from '../../hooks/useFormState'
 import Spreadsheet from '../Spreadsheet'
 
@@ -31,6 +33,7 @@ const DeviceLookup = () => {
     ]
   }
 
+  const appContext = useContext(AppContext)
   const [hosts, handleHostsChange] = useFormState('')
   const [type, handleTypeChange] = useFormState('regular')
   const [rowData, setRowData] = useState([])
@@ -38,9 +41,13 @@ const DeviceLookup = () => {
   const [isCopyClick, toggleIsCopyClick] = useToggle(false)
   const tableRef = useRef()
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
     const hostsArr = hosts.split('\n')
+
+    const res = await appContext.load(() => findAllDevices(hostsArr))
+
+    console.log(res)
 
     const rowHostnames = []
     hostsArr.forEach((h) => {

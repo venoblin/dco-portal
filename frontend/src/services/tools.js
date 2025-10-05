@@ -9,3 +9,9 @@ export const uploadCsv = async (formData, credentials) => {
 
   return res
 }
+
+export const findAllDevices = async (hostnames) => {
+  const res = await api.post('/tools/find-devices', { hostnames: hostnames })
+
+  return res
+}
