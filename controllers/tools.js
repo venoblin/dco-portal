@@ -77,11 +77,32 @@ const parseCsvFile = async (req, res) => {
   }
 }
 
-const findAllDevices = (req, res) => {
+const findAllDevices = async (req, res) => {
   try {
     const { hostnames } = req.body
+    const authHeader = req.headers.authorization
 
-    res.status(200).json({ hostnames: hostnames })
+    if (!authHeader || !authHeader.startsWith('Bearer ') || !filePath) {
+      return res.status(401).json({ error: 'Missing token or file.' })
+    }
+
+    const clientToken = authHeader.split(' ')[1]
+
+    const devicePromises = hostnames.map(async (hostname) => {
+      const device = await deviceLookup(clientToken, hostname)
+
+      const newDevice = { hostname: hostname }
+
+      if (device) {
+        newDevice.info = { ...device }
+      }
+
+      return newDevice
+    })
+
+    const finalData = await Promise.all(devicePromises)
+
+    res.status(200).json({ data: finalData })
   } catch {
     return res.status(500).json({ message: 'Failed to find devices' })
   }
