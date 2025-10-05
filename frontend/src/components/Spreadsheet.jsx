@@ -20,11 +20,11 @@ const Spreadsheet = (props) => {
 
   return (
     <div className={`Spreadsheet${props.isCopyClick ? ' copied' : ''}`}>
-      {props.isCopyClick === true && (
-        <div className="copy-msg">Successfully copied!</div>
-      )}
-
       <table ref={props.tableRef}>
+        {props.isCopyClick === true && (
+          <div className="copy-msg">Successfully copied!</div>
+        )}
+
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
