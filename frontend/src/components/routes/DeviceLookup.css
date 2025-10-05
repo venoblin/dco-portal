@@ -21,5 +21,8 @@
 
 .DeviceLookup .wrapper {
   display: flex;
-  align-items: flex-end;
+}
+
+.DeviceLookup .spreadsheet-wrapper {
+  width: 100%;
 }

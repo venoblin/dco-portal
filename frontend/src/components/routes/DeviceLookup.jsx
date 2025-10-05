@@ -6,6 +6,7 @@ import { sleep } from '../../utils'
 import { findAllDevices } from '../../services/tools'
 import useFormState from '../../hooks/useFormState'
 import Spreadsheet from '../Spreadsheet'
+import Loading from '../Loading'
 
 const DeviceLookup = () => {
   const headerTypes = {
@@ -78,7 +79,13 @@ const DeviceLookup = () => {
 
       <div className="wrapper">
         <form onSubmit={handleSubmit}>
-          <button type="submit">Search</button>
+          {!appContext.isLoading ? (
+            <button type="submit">Search</button>
+          ) : (
+            <button type="submit" disabled>
+              Search
+            </button>
+          )}
 
           <textarea
             onChange={handleHostsChange}
@@ -90,27 +97,50 @@ const DeviceLookup = () => {
           ></textarea>
         </form>
 
-        <div>
-          <div className="inputs">
-            <select
-              value={type}
-              onChange={(event) => handleTypeChange(event, switchHeaders)}
-            >
-              <option value="regular">Regular</option>
-              <option value="barcodes">Barcodes</option>
-            </select>
-            {rowData.length > 0 && (
-              <button type="button" onClick={handleCopy}>
-                Copy
-              </button>
-            )}
-          </div>
-          <Spreadsheet
-            rowData={rowData}
-            columns={headers}
-            tableRef={tableRef}
-            isCopyClick={isCopyClick}
-          />
+        <div className="spreadsheet-wrapper">
+          {!appContext.isLoading ? (
+            <div className="inputs">
+              <select
+                value={type}
+                onChange={(event) => handleTypeChange(event, switchHeaders)}
+              >
+                <option value="regular">Regular</option>
+                <option value="barcodes">Barcodes</option>
+              </select>
+              {rowData.length > 0 && (
+                <button type="button" onClick={handleCopy}>
+                  Copy
+                </button>
+              )}
+            </div>
+          ) : (
+            <div className="inputs">
+              <select
+                disabled
+                value={type}
+                onChange={(event) => handleTypeChange(event, switchHeaders)}
+              >
+                <option value="regular">Regular</option>
+                <option value="barcodes">Barcodes</option>
+              </select>
+              {rowData.length > 0 && (
+                <button disabled type="button" onClick={handleCopy}>
+                  Copy
+                </button>
+              )}
+            </div>
+          )}
+
+          {!appContext.isLoading ? (
+            <Spreadsheet
+              rowData={rowData}
+              columns={headers}
+              tableRef={tableRef}
+              isCopyClick={isCopyClick}
+            />
+          ) : (
+            <Loading />
+          )}
         </div>
       </div>
     </div>

@@ -174,9 +174,14 @@ textarea:focus {
 }
 
 input:disabled,
-button:disabled {
+button:disabled,
+select:disabled {
   opacity: 0.5;
   cursor: default;
+}
+
+select:disabled:hover {
+  color: var(--text-color);
 }
 
 select {
