@@ -1,7 +1,9 @@
 import './DeviceLookup.css'
-import { useState } from 'react'
-import Spreadsheet from '../Spreadsheet'
+import { useState, useRef } from 'react'
+import { sleep } from '../../utils'
+import useToggle from '../../hooks/useToggle'
 import useFormState from '../../hooks/useFormState'
+import Spreadsheet from '../Spreadsheet'
 
 const DeviceLookup = () => {
   const headerTypes = {
@@ -33,6 +35,8 @@ const DeviceLookup = () => {
   const [type, handleTypeChange] = useFormState('regular')
   const [rowData, setRowData] = useState([])
   const [headers, setHeaders] = useState(headerTypes[type])
+  const [isCopyClick, toggleIsCopyClick] = useToggle(false)
+  const tableRef = useRef()
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -48,6 +52,15 @@ const DeviceLookup = () => {
 
   const switchHeaders = (state) => {
     setHeaders(headerTypes[state])
+  }
+
+  const handleCopy = async () => {
+    const tableHtml = tableRef.current.innerText
+
+    navigator.clipboard.writeText(tableHtml)
+    toggleIsCopyClick()
+    await sleep(1000)
+    toggleIsCopyClick()
   }
 
   return (
@@ -79,9 +92,18 @@ const DeviceLookup = () => {
               <option value="regular">Regular</option>
               <option value="barcodes">Barcodes</option>
             </select>
-            {rowData.length > 0 && <button type="button">Copy</button>}
+            {rowData.length > 0 && (
+              <button type="button" onClick={handleCopy}>
+                Copy
+              </button>
+            )}
           </div>
-          <Spreadsheet rowData={rowData} columns={headers} />
+          <Spreadsheet
+            rowData={rowData}
+            columns={headers}
+            tableRef={tableRef}
+            isCopyClick={isCopyClick}
+          />
         </div>
       </div>
     </div>

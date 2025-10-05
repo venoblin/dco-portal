@@ -20,3 +20,7 @@ export const getBasePathname = (pathname) => {
 
   return cleanedPath
 }
+
+export const sleep = async (time) => {
+  return new Promise((res) => setTimeout(res, time))
+}

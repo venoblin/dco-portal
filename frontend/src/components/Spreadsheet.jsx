@@ -1,12 +1,10 @@
 import './Spreadsheet.css'
-import { useEffect, useRef, useState } from 'react'
 import {
   useReactTable,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel
 } from '@tanstack/react-table'
-import useToggle from '../hooks/useToggle'
 
 const Spreadsheet = (props) => {
   if (!props.rowData) {
@@ -22,7 +20,11 @@ const Spreadsheet = (props) => {
 
   return (
     <div className="Spreadsheet">
-      <table>
+      {props.isCopyClick === true && (
+        <div className="copy-msg">Successfully copied!</div>
+      )}
+
+      <table ref={props.tableRef}>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>

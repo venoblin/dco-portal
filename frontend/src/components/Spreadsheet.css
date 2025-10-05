@@ -7,6 +7,7 @@
   border-radius: var(--default-border-radius);
   overflow: scroll;
   font-family: var(--body-font-family);
+  position: relative;
 }
 
 .Spreadsheet .msg {
@@ -40,4 +41,20 @@
 
 .Spreadsheet thead th {
   border-top: none;
+}
+
+.Spreadsheet .copy-msg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--popup-bg-color);
+  color: var(--text-color);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--default-border-radius);
 }
