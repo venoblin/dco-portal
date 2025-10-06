@@ -78,6 +78,7 @@ const parseCsvFile = async (req, res) => {
 }
 
 const findAllDevices = async (req, res) => {
+  console.log('hi')
   try {
     const { hostnames } = req.body
     const authHeader = req.headers.authorization
@@ -92,7 +93,6 @@ const findAllDevices = async (req, res) => {
 
     const devicePromises = hostnames.map(async (hostname) => {
       const device = await deviceLookup(clientToken, hostname)
-      console.log(device, clientToken, hostname)
 
       const newDevice = { hostname: hostname }
 
