@@ -13,8 +13,8 @@ function BarcodeDisplay(props) {
         height: 14,
         width: 1,
         fontSize: 14,
-        lineColor: '#262424',
-        background: '#f6f7eb'
+        lineColor: 'black',
+        background: 'transparent'
       })
     }
   }, [props.value])
