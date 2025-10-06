@@ -45,8 +45,6 @@ const parseCsvFile = async (req, res) => {
             link: snowBaseUrl ? `${snowBaseUrl}${a}` : null
           }
 
-          console.log(newArm)
-
           incident.arms.push(newArm)
         })
       }
