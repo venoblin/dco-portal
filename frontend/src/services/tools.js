@@ -10,7 +10,7 @@ export const uploadCsv = async (formData, credentials) => {
   return res
 }
 
-export const findAllDevices = async (hostnames) => {
+export const findAllDevices = async (hostnames, credentials) => {
   const res = await api.upload(
     '/tools/find-devices',
     { hostnames: hostnames },
