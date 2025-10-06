@@ -1,12 +1,14 @@
 import './DeviceLookup.css'
 import { useState, useRef, useContext } from 'react'
 import { AppContext } from '../../contexts/AppContext'
+import { flexRender } from '@tanstack/react-table'
 import useToggle from '../../hooks/useToggle'
 import { sleep } from '../../utils'
 import { findAllDevices } from '../../services/tools'
 import useFormState from '../../hooks/useFormState'
 import Spreadsheet from '../Spreadsheet'
 import LoadingIcon from '../LoadingIcon'
+import Barcode from '../Barcode'
 
 const DeviceLookup = () => {
   const headerTypes = {
@@ -29,11 +31,19 @@ const DeviceLookup = () => {
         header: 'Hostname',
         accessorKey: 'hostname'
       },
+      {
+        header: 'Asset Tag Barcode',
+        accessorKey: 'assetTagBarcode',
+        cell: (info) => flexRender(Barcode, { value: info.getValue() })
+      },
       { header: 'Rack', accessorKey: 'rack' },
       { header: 'Height', accessorKey: 'height' },
       { header: 'Serial #', accessorKey: 'serialNum' },
-      { header: 'Asset Tag', accessorKey: 'assetTag' },
-      { header: 'GPC', accessorKey: 'gpc' }
+      {
+        header: 'GPC Barcode',
+        accessorKey: 'gpcBarcode',
+        cell: (info) => flexRender(Barcode, { value: info.getValue() })
+      }
     ]
   }
 
@@ -41,6 +51,8 @@ const DeviceLookup = () => {
   const [hosts, handleHostsChange] = useFormState('')
   const [type, handleTypeChange] = useFormState('regular')
   const [rowData, setRowData] = useState([])
+  const [regularData, setRegularData] = useState(null)
+  const [barcodesData, setBarcodesData] = useState(null)
   const [headers, setHeaders] = useState(headerTypes.regular)
   const [isCopyClick, toggleIsCopyClick] = useToggle(false)
   const tableRef = useRef()
@@ -54,22 +66,24 @@ const DeviceLookup = () => {
     )
 
     if (res) {
-      const rowHostnames = []
+      const devicesData = []
       res.devices.forEach((d) => {
-        rowHostnames.push({
-          hostname: d.info.assetName,
-          assetTag: d.info.assetTag,
-          inventoryNum: d.info.invNo,
-          rack: d.info.deployment.rack,
-          height: d.info.deployment.zPosition,
-          status: d.info.subStatus,
-          serialNum: d.info.serialNo,
-          model: d.info.model,
-          gpc: d.info.catalogID
+        devicesData.push({
+          hostname: d.hostname,
+          assetTag: d.info ? d.info.assetTag : 'Not Found',
+          inventoryNum: d.info ? d.info.invNo : 'Not Found',
+          rack: d.info ? d.info.deployment.rack : 'Not Found',
+          height: d.info ? d.info.deployment.zPosition : 'Not Found',
+          status: d.info ? d.info.subStatus : 'Not Found',
+          serialNum: d.info ? d.info.serialNo : 'Not Found',
+          model: d.info ? d.info.model : 'Not Found',
+          gpc: d.info ? d.info.catalogID : 'Not Found',
+          assetTagBarcode: d.info ? d.info.assetTag : 'Not Found',
+          gpcBarcode: d.info ? d.info.catalogID : 'Not Found'
         })
       })
 
-      setRowData(rowHostnames)
+      setRowData(devicesData)
     } else {
       appContext.showPopup("Couldn't find devices")
     }
