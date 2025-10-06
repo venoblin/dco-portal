@@ -51,8 +51,6 @@ const DeviceLookup = () => {
   const [hosts, handleHostsChange] = useFormState('')
   const [type, handleTypeChange] = useFormState('regular')
   const [rowData, setRowData] = useState([])
-  const [regularData, setRegularData] = useState(null)
-  const [barcodesData, setBarcodesData] = useState(null)
   const [headers, setHeaders] = useState(headerTypes.regular)
   const [isCopyClick, toggleIsCopyClick] = useToggle(false)
   const tableRef = useRef()
@@ -61,8 +59,10 @@ const DeviceLookup = () => {
     event.preventDefault()
     const hostsArr = hosts.split('\n')
 
+    const cleanedHosts = hostsArr.filter((h) => h !== '')
+
     const res = await appContext.load(() =>
-      findAllDevices(hostsArr, appContext.auth.credentials)
+      findAllDevices(cleanedHosts, appContext.auth.credentials)
     )
 
     if (res) {
