@@ -26,7 +26,7 @@ class Client {
       }
 
       if (accessToken) {
-        options.headers.Authorization = accessToken
+        options.headers.Authorization = `Bearer ${accessToken}`
       }
 
       const res = await fetch(`${this.#constructUrl(endpoint)}`, options)
