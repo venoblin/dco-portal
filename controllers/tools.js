@@ -78,7 +78,6 @@ const parseCsvFile = async (req, res) => {
 }
 
 const findAllDevices = async (req, res) => {
-  console.log('hi')
   try {
     const { hostnames } = req.body
     const authHeader = req.headers.authorization
