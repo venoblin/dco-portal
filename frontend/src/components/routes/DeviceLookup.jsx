@@ -17,18 +17,21 @@ const DeviceLookup = () => {
       },
       { header: 'Asset Tag', accessorKey: 'assetTag' },
       { header: 'Serial #', accessorKey: 'serialNum' },
-      { header: 'Inventory #', accessorKey: 'inventoryNum' },
       { header: 'Rack', accessorKey: 'rack' },
       { header: 'Height', accessorKey: 'height' },
       { header: 'Status', accessorKey: 'status' },
+      { header: 'GPC', accessorKey: 'gpc' },
       { header: 'Model', accessorKey: 'model' },
-      { header: 'GPC', accessorKey: 'gpc' }
+      { header: 'Inventory #', accessorKey: 'inventoryNum' }
     ],
     barcodes: [
       {
         header: 'Hostname',
         accessorKey: 'hostname'
       },
+      { header: 'Rack', accessorKey: 'rack' },
+      { header: 'Height', accessorKey: 'height' },
+      { header: 'Serial #', accessorKey: 'serialNum' },
       { header: 'Asset Tag', accessorKey: 'assetTag' },
       { header: 'GPC', accessorKey: 'gpc' }
     ]
