@@ -53,6 +53,8 @@ const DeviceLookup = () => {
       findAllDevices(hostsArr, appContext.auth.credentials)
     )
 
+    console.log(devices)
+
     if (res) {
       const rowHostnames = []
       res.devices.forEach((d) => {
