@@ -90,6 +90,7 @@ const findAllDevices = async (req, res) => {
 
     const devicePromises = hostnames.map(async (hostname) => {
       const device = await deviceLookup(clientToken, hostname)
+      console.log(device, clientToken, hostname)
 
       const newDevice = { hostname: hostname }
 
