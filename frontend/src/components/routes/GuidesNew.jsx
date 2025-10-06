@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../contexts/AppContext'
 import useFormState from '../../hooks/useFormState'
 import { postGuide } from '../../services/guides'
-import Loading from '../Loading'
+import LoadingIcon from '../LoadingIcon'
 
 const GuidesNew = () => {
   const appContext = useContext(AppContext)
@@ -133,7 +133,7 @@ const GuidesNew = () => {
           </form>
         </div>
       ) : (
-        <Loading />
+        <LoadingIcon />
       )}
     </div>
   )

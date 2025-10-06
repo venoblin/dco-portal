@@ -5,7 +5,7 @@ import { AppContext } from '../../contexts/AppContext'
 import { getAllGuides, getGuidesByTitle } from '../../services/guides'
 import Panel from '../ui/Panel'
 import GuideCard from '../GuideCard'
-import Loading from '../Loading'
+import LoadingIcon from '../LoadingIcon'
 import Search from '../Search'
 
 const Guides = () => {
@@ -60,7 +60,7 @@ const Guides = () => {
             <p>No guides found!</p>
           )
         ) : (
-          <Loading />
+          <LoadingIcon />
         )}
       </Panel>
     </div>

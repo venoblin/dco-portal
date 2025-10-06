@@ -5,7 +5,7 @@ import useFormState from '../../hooks/useFormState'
 import { login } from '../../services/login'
 import Logo from '../Logo'
 import Panel from '../ui/Panel'
-import Loading from '../Loading'
+import LoadingIcon from '../LoadingIcon'
 import { storageGet, storageRemove, storageSet } from '../../utils/localStorage'
 
 const Login = () => {
@@ -83,7 +83,7 @@ const Login = () => {
             <button>Login</button>
           </form>
         ) : (
-          <Loading />
+          <LoadingIcon />
         )}
       </Panel>
     </div>

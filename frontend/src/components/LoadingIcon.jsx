@@ -1,8 +1,8 @@
-import './Loading.css'
+import './LoadingIcon.css'
 
-const Loading = () => {
+const LoadingIcon = () => {
   return (
-    <div className="Loading">
+    <div className="LoadingIcon">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="48"
@@ -50,4 +50,4 @@ const Loading = () => {
   )
 }
 
-export default Loading
+export default LoadingIcon

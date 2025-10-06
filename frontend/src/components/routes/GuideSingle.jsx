@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom'
 import { AppContext } from '../../contexts/AppContext'
 import { cleanTime } from '../../utils'
 import { getSingleGuide } from '../../services/guides'
-import Loading from '../Loading'
+import LoadingIcon from '../LoadingIcon'
 
 const GuideSingle = () => {
   const appContext = useContext(AppContext)
@@ -53,7 +53,7 @@ const GuideSingle = () => {
           </div>
         )
       ) : (
-        <Loading />
+        <LoadingIcon />
       )}
     </div>
   )

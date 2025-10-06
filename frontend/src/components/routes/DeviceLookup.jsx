@@ -6,7 +6,7 @@ import { sleep } from '../../utils'
 import { findAllDevices } from '../../services/tools'
 import useFormState from '../../hooks/useFormState'
 import Spreadsheet from '../Spreadsheet'
-import Loading from '../Loading'
+import LoadingIcon from '../LoadingIcon'
 
 const DeviceLookup = () => {
   const headerTypes = {
@@ -141,7 +141,7 @@ const DeviceLookup = () => {
               isCopyClick={isCopyClick}
             />
           ) : (
-            <Loading />
+            <LoadingIcon />
           )}
         </div>
       </div>

@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 import { getAllGuides } from '../../services/guides'
 import { AppContext } from '../../contexts/AppContext'
 import GuideCard from '../GuideCard'
-import Loading from '../Loading'
+import LoadingIcon from '../LoadingIcon'
 
 const Dashboard = () => {
   const appContext = useContext(AppContext)
@@ -72,7 +72,7 @@ const Dashboard = () => {
               <p>No guides found!</p>
             )
           ) : (
-            <Loading />
+            <LoadingIcon />
           )}
         </Panel>
       </div>

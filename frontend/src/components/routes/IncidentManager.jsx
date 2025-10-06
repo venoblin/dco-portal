@@ -7,7 +7,7 @@ import Panel from '../ui/Panel'
 import IncidentCard from '../IncidentCard'
 import Search from '../Search'
 import IncidentPrint from '../IncidentPrint'
-import Loading from '../Loading'
+import LoadingIcon from '../LoadingIcon'
 
 const IncidentManager = () => {
   const appContext = useContext(AppContext)
@@ -228,7 +228,7 @@ const IncidentManager = () => {
           )}
         </Panel>
       ) : (
-        <Loading />
+        <LoadingIcon />
       )}
 
       {/* Only renders when printing */}
