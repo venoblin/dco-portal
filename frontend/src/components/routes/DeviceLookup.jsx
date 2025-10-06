@@ -50,14 +50,26 @@ const DeviceLookup = () => {
       findAllDevices(hostsArr, appContext.auth.credentials)
     )
 
-    console.log(res)
+    if (res) {
+      const rowHostnames = []
+      res.devices.forEach((d) => {
+        rowHostnames.push({
+          hostname: d.hostname,
+          assetTag: d.assetTag,
+          inventoryNum: d.invNo,
+          rack: d.deployment.rack,
+          height: d.deployment.zPosition,
+          status: d.subStatus,
+          serialNum: d.serialNo,
+          model: d.model,
+          gpc: d.catalogID
+        })
+      })
 
-    const rowHostnames = []
-    hostsArr.forEach((h) => {
-      rowHostnames.push({ hostname: h })
-    })
-
-    setRowData(rowHostnames)
+      setRowData(rowHostnames)
+    } else {
+      appContext.showPopup("Couldn't find devices")
+    }
   }
 
   const switchHeaders = (state) => {

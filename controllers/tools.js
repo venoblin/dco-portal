@@ -65,7 +65,7 @@ const parseCsvFile = async (req, res) => {
     await fs.unlink(filePath)
 
     return res.status(200).json({
-      data: finalData
+      incidents: finalData
     })
   } catch {
     if (filePath) {
@@ -104,7 +104,7 @@ const findAllDevices = async (req, res) => {
 
     const finalData = await Promise.all(devicePromises)
 
-    return res.status(200).json({ data: finalData })
+    return res.status(200).json({ devices: finalData })
   } catch {
     return res.status(500).json({ message: 'Failed to find devices' })
   }
