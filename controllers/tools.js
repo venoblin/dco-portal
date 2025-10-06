@@ -81,11 +81,11 @@ const findAllDevices = async (req, res) => {
   try {
     const { hostnames } = req.body
     const authHeader = req.headers.authorization
-    console.log('hi')
 
     if (!authHeader || !authHeader.startsWith('Bearer ') || !hostnames) {
       return res.status(401).json({ error: 'Missing token or hostnames' })
     }
+    console.log('hi')
 
     console.log(hostnames, clientToken)
 
