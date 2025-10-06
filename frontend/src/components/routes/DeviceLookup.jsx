@@ -10,6 +10,7 @@ import Spreadsheet from '../Spreadsheet'
 import LoadingIcon from '../LoadingIcon'
 import Barcode from '../Barcode'
 import Print from '../Print'
+import { storageGet, storageSet } from '../../utils/localStorage'
 
 const DeviceLookup = () => {
   const headerTypes = {
@@ -85,6 +86,7 @@ const DeviceLookup = () => {
         })
       })
 
+      storageSet('devicesLookup', devicesData)
       setRowData(devicesData)
     } else {
       appContext.showPopup("Couldn't find devices")
@@ -108,7 +110,17 @@ const DeviceLookup = () => {
     toggleIsPrinting()
   }
 
+  const checkDevices = () => {
+    const devices = storageGet('devicesLookup')
+
+    if (devices) {
+      setRowData(devices)
+    }
+  }
+
   useEffect(() => {
+    checkDevices()
+
     if (isPrinting) {
       window.print()
 
