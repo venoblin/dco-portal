@@ -59,15 +59,15 @@ const DeviceLookup = () => {
       const rowHostnames = []
       res.devices.forEach((d) => {
         rowHostnames.push({
-          hostname: d.hostname,
-          assetTag: d.assetTag,
-          inventoryNum: d.invNo,
-          rack: d.deployment.rack,
-          height: d.deployment.zPosition,
-          status: d.subStatus,
-          serialNum: d.serialNo,
-          model: d.model,
-          gpc: d.catalogID
+          hostname: d.info.hostname,
+          assetTag: d.info.assetTag,
+          inventoryNum: d.info.invNo,
+          rack: d.info.deployment.rack,
+          height: d.info.deployment.zPosition,
+          status: d.info.subStatus,
+          serialNum: d.info.serialNo,
+          model: d.info.model,
+          gpc: d.info.catalogID
         })
       })
 
