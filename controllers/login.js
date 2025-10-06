@@ -5,7 +5,7 @@ const login = async (req, res) => {
     if (process.env.DCO_PORTAL_HOSTNAME) {
       const authRes = await service.loginUser(req)
 
-      res.status(200).json({
+      return res.status(200).json({
         data: {
           accessToken: authRes.access_token,
           refreshToken: authRes.refresh_token,
@@ -22,7 +22,7 @@ const login = async (req, res) => {
           req.body.username.toLowerCase() &&
         process.env.DEV_PASSWORD === req.body.password
       ) {
-        res.status(200).json({
+        return res.status(200).json({
           data: {
             accessToken: process.env.DEV_ACCESS_TOKEN,
             refreshToken: `REFRESH_${process.env.DEV_ACCESS_TOKEN}`,
@@ -32,11 +32,11 @@ const login = async (req, res) => {
       }
     }
 
-    res.status(400).json({
+    return res.status(400).json({
       message: 'Credentials are incorrect or not present'
     })
   } catch {
-    res.status(500).json({
+    return res.status(500).json({
       message: 'Failed to login user'
     })
   }

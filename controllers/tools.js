@@ -102,7 +102,7 @@ const findAllDevices = async (req, res) => {
 
     const finalData = await Promise.all(devicePromises)
 
-    res.status(200).json({ data: finalData })
+    return res.status(200).json({ data: finalData })
   } catch {
     return res.status(500).json({ message: 'Failed to find devices' })
   }
