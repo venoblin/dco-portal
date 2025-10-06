@@ -12,5 +12,4 @@ if [[ -n $1 ]]; then
   else
   current_branch=$(git symbolic-ref --short HEAD)
   git pull origin $current_branch
-  fi
 fi
