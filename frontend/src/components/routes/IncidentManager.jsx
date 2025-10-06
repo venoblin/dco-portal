@@ -39,7 +39,7 @@ const IncidentManager = () => {
       )
 
       let incidents = []
-      res.data.forEach((incident) => {
+      res.incidents.forEach((incident) => {
         incidents.push({ ...incident, isChecked: false })
       })
 

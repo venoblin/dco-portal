@@ -10,6 +10,7 @@ nav {
   bottom: 0;
   padding: var(--default-spacing);
   border-right: var(--default-border);
+  background: var(--bg-color);
   z-index: 100;
 }
 

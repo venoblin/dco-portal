@@ -17,18 +17,21 @@ const DeviceLookup = () => {
       },
       { header: 'Asset Tag', accessorKey: 'assetTag' },
       { header: 'Serial #', accessorKey: 'serialNum' },
-      { header: 'Inventory #', accessorKey: 'inventoryNum' },
       { header: 'Rack', accessorKey: 'rack' },
       { header: 'Height', accessorKey: 'height' },
       { header: 'Status', accessorKey: 'status' },
+      { header: 'GPC', accessorKey: 'gpc' },
       { header: 'Model', accessorKey: 'model' },
-      { header: 'GPC', accessorKey: 'gpc' }
+      { header: 'Inventory #', accessorKey: 'inventoryNum' }
     ],
     barcodes: [
       {
         header: 'Hostname',
         accessorKey: 'hostname'
       },
+      { header: 'Rack', accessorKey: 'rack' },
+      { header: 'Height', accessorKey: 'height' },
+      { header: 'Serial #', accessorKey: 'serialNum' },
       { header: 'Asset Tag', accessorKey: 'assetTag' },
       { header: 'GPC', accessorKey: 'gpc' }
     ]
@@ -50,14 +53,26 @@ const DeviceLookup = () => {
       findAllDevices(hostsArr, appContext.auth.credentials)
     )
 
-    console.log(res)
+    if (res) {
+      const rowHostnames = []
+      res.devices.forEach((d) => {
+        rowHostnames.push({
+          hostname: d.info.assetName,
+          assetTag: d.info.assetTag,
+          inventoryNum: d.info.invNo,
+          rack: d.info.deployment.rack,
+          height: d.info.deployment.zPosition,
+          status: d.info.subStatus,
+          serialNum: d.info.serialNo,
+          model: d.info.model,
+          gpc: d.info.catalogID
+        })
+      })
 
-    const rowHostnames = []
-    hostsArr.forEach((h) => {
-      rowHostnames.push({ hostname: h })
-    })
-
-    setRowData(rowHostnames)
+      setRowData(rowHostnames)
+    } else {
+      appContext.showPopup("Couldn't find devices")
+    }
   }
 
   const switchHeaders = (state) => {
