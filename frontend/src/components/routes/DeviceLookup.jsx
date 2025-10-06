@@ -45,7 +45,8 @@ const DeviceLookup = () => {
         header: 'GPC',
         accessorKey: 'gpcBarcode',
         cell: (info) => flexRender(Barcode, { value: info.getValue() })
-      }
+      },
+      { header: 'Status', accessorKey: 'status' }
     ]
   }
 
