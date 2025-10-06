@@ -95,6 +95,8 @@ const findAllDevices = async (req, res) => {
 
       if (device) {
         newDevice.info = { ...device }
+      } else {
+        newDevice.info = null
       }
 
       return newDevice
