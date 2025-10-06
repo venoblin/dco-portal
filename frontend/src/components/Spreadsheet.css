@@ -3,13 +3,19 @@
   width: 100%;
   background: var(--text-color);
   color: var(--bg-color);
-  padding: var(--default-spacing);
   border-radius: var(--default-border-radius);
-  overflow: scroll;
   font-family: var(--body-font-family);
+  position: relative;
 }
 
-.Spreadsheet.copied {
+.Spreadsheet .table-wrap {
+  padding: var(--default-spacing);
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+
+.Spreadsheet.copied .table-wrap {
   overflow: hidden;
 }
 
@@ -21,7 +27,6 @@
   border: var(--default-border);
   border-radius: var(--default-border-radius);
   border-color: lightgrey;
-  position: relative;
 }
 
 .Spreadsheet th,

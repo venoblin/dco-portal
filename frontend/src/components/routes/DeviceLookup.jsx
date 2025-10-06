@@ -1,5 +1,5 @@
 import './DeviceLookup.css'
-import { useState, useRef, useContext } from 'react'
+import { useState, useRef, useContext, useEffect } from 'react'
 import { AppContext } from '../../contexts/AppContext'
 import { flexRender } from '@tanstack/react-table'
 import useToggle from '../../hooks/useToggle'
@@ -9,6 +9,7 @@ import useFormState from '../../hooks/useFormState'
 import Spreadsheet from '../Spreadsheet'
 import LoadingIcon from '../LoadingIcon'
 import Barcode from '../Barcode'
+import Print from '../Print'
 
 const DeviceLookup = () => {
   const headerTypes = {
@@ -53,6 +54,7 @@ const DeviceLookup = () => {
   const [rowData, setRowData] = useState([])
   const [headers, setHeaders] = useState(headerTypes.regular)
   const [isCopyClick, toggleIsCopyClick] = useToggle(false)
+  const [isPrinting, toggleIsPrinting] = useToggle(false)
   const tableRef = useRef()
 
   const handleSubmit = async (event) => {
@@ -102,6 +104,18 @@ const DeviceLookup = () => {
     toggleIsCopyClick()
   }
 
+  const handlePrint = () => {
+    toggleIsPrinting()
+  }
+
+  useEffect(() => {
+    if (isPrinting) {
+      window.print()
+
+      toggleIsPrinting()
+    }
+  }, [isPrinting])
+
   return (
     <div className="DeviceLookup">
       <header>
@@ -139,9 +153,17 @@ const DeviceLookup = () => {
                 <option value="barcodes">Barcodes</option>
               </select>
               {rowData.length > 0 && (
-                <button type="button" onClick={handleCopy}>
-                  Copy
-                </button>
+                <div>
+                  <button type="button" onClick={handlePrint}>
+                    Print
+                  </button>
+
+                  {type !== 'barcodes' && (
+                    <button type="button" onClick={handleCopy}>
+                      Copy
+                    </button>
+                  )}
+                </div>
               )}
             </div>
           ) : (
@@ -155,22 +177,30 @@ const DeviceLookup = () => {
                 <option value="barcodes">Barcodes</option>
               </select>
               {rowData.length > 0 && (
-                <button disabled type="button" onClick={handleCopy}>
-                  Copy
-                </button>
+                <div>
+                  <button type="button" onClick={handlePrint}>
+                    Print
+                  </button>
+
+                  {type !== 'barcodes' && (
+                    <button type="button" onClick={handleCopy}>
+                      Copy
+                    </button>
+                  )}
+                </div>
               )}
             </div>
           )}
 
           {!appContext.isLoading ? (
-            <div className="print">
+            <Print>
               <Spreadsheet
                 rowData={rowData}
                 columns={headers}
                 tableRef={tableRef}
                 isCopyClick={isCopyClick}
               />
-            </div>
+            </Print>
           ) : (
             <LoadingIcon />
           )}

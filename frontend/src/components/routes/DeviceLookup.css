@@ -4,10 +4,19 @@
 }
 
 .DeviceLookup .inputs {
+  display: flex;
   margin-bottom: var(--default-spacing);
   width: max-content;
   border: var(--default-border);
   border-radius: var(--default-border-radius);
+}
+
+.DeviceLookup .inputs button {
+  margin-right: 0.5rem;
+}
+
+.DeviceLookup .inputs button:last-of-type {
+  margin-right: 0;
 }
 
 .DeviceLookup form button {
