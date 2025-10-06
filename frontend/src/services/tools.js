@@ -1,19 +1,19 @@
 import { api } from '../api'
 
-export const uploadCsv = async (formData, credentials) => {
+export const uploadCsv = async (payload, credentials) => {
   const res = await api.upload(
     '/tools/parse-csv',
-    formData,
+    payload,
     credentials.accessToken
   )
 
   return res
 }
 
-export const findAllDevices = async (hostnames, credentials) => {
-  const res = await api.upload(
+export const findAllDevices = async (payload, credentials) => {
+  const res = await api.post(
     '/tools/find-devices',
-    { hostnames: hostnames },
+    { hostnames: payload },
     credentials.accessToken
   )
 

@@ -15,15 +15,21 @@ class Client {
     return `${this.#baseUrl}/${cleanedEndpoint}`
   }
 
-  async post(endpoint, payload) {
+  async post(endpoint, payload, accessToken) {
     try {
-      const res = await fetch(`${this.#constructUrl(endpoint)}`, {
+      const options = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(payload)
-      })
+      }
+
+      if (accessToken) {
+        options.headers.Authorization = accessToken
+      }
+
+      const res = await fetch(`${this.#constructUrl(endpoint)}`, options)
 
       if (res.ok) {
         return res.json()
@@ -49,7 +55,7 @@ class Client {
     try {
       const res = await fetch(this.#constructUrl(endpoint), {
         method: 'POST',
-        body: JSON.stringify(payload),
+        body: payload,
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
