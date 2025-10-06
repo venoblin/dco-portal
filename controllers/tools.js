@@ -8,7 +8,7 @@ const parseCsvFile = async (req, res) => {
   const filePath = req.file ? req.file.path : null
 
   if (!authHeader || !authHeader.startsWith('Bearer ') || !filePath) {
-    return res.status(401).json({ error: 'Missing token or file.' })
+    return res.status(401).json({ error: 'Missing token or file' })
   }
 
   const clientToken = authHeader.split(' ')[1]
@@ -82,8 +82,8 @@ const findAllDevices = async (req, res) => {
     const { hostnames } = req.body
     const authHeader = req.headers.authorization
 
-    if (!authHeader || !authHeader.startsWith('Bearer ') || !filePath) {
-      return res.status(401).json({ error: 'Missing token or file.' })
+    if (!authHeader || !authHeader.startsWith('Bearer ') || !hostnames) {
+      return res.status(401).json({ error: 'Missing token or hostnames' })
     }
 
     const clientToken = authHeader.split(' ')[1]
