@@ -1,0 +1,8 @@
+.Barcode svg rect {
+  fill: var(--text-color);
+}
+
+.Barcode {
+  height: fit-content;
+  width: fit-content;
+}

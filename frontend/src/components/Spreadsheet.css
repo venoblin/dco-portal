@@ -23,35 +23,6 @@
   padding: var(--default-spacing);
 }
 
-.Spreadsheet table {
-  border: var(--default-border);
-  border-radius: var(--default-border-radius);
-  border-color: lightgrey;
-}
-
-.Spreadsheet th,
-.Spreadsheet td {
-  padding: calc(var(--default-spacing) / 2) var(--default-spacing);
-  border-top: var(--default-border);
-  border-right: var(--default-border);
-  border-color: lightgrey;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.Spreadsheet th:last-of-type,
-.Spreadsheet td:last-of-type {
-  border-right: none;
-}
-
-.Spreadsheet thead th {
-  border-top: none;
-}
-
 .Spreadsheet .copy-msg {
   position: absolute;
   width: 100%;

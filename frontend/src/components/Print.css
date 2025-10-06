@@ -5,7 +5,7 @@
 @media print {
   @page {
     size: landscape;
-    margin: 0.6in;
+    margin: 0in;
   }
 
   body,
@@ -42,11 +42,20 @@
 
   table {
     page-break-inside: auto !important;
+    width: 100%;
   }
 
   tr {
     page-break-inside: avoid !important;
     page-break-after: auto !important;
+  }
+
+  td {
+    padding: 0.5rem 0.2rem;
+  }
+
+  th {
+    padding: 0.5rem 0.2rem;
   }
 
   .Print .to-print {
