@@ -94,7 +94,7 @@ const findAllDevices = async (req, res) => {
       const newDevice = { hostname: hostname }
 
       if (device) {
-        newDevice.info = { ...device }
+        newDevice.info = device
       } else {
         newDevice.info = null
       }
