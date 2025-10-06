@@ -85,8 +85,7 @@ const findAllDevices = async (req, res) => {
     if (!authHeader || !authHeader.startsWith('Bearer ') || !hostnames) {
       return res.status(401).json({ error: 'Missing token or hostnames' })
     }
-
-    const clientToken = authHeader.split(' ')[1]
+    console.log(hostnames)
 
     const devicePromises = hostnames.map(async (hostname) => {
       const device = await deviceLookup(clientToken, hostname)
