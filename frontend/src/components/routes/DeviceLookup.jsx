@@ -38,7 +38,7 @@ const DeviceLookup = () => {
   const [hosts, handleHostsChange] = useFormState('')
   const [type, handleTypeChange] = useFormState('regular')
   const [rowData, setRowData] = useState([])
-  const [headers, setHeaders] = useState(headerTypes[type])
+  const [headers, setHeaders] = useState(headerTypes.regular)
   const [isCopyClick, toggleIsCopyClick] = useToggle(false)
   const tableRef = useRef()
 
