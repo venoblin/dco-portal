@@ -19,7 +19,9 @@ const Spreadsheet = (props) => {
   })
 
   return (
-    <div className={`Spreadsheet${props.isCopyClick ? ' copied' : ''}`}>
+    <div
+      className={`Spreadsheet to-print${props.isCopyClick ? ' copied' : ''}`}
+    >
       <table ref={props.tableRef}>
         {props.isCopyClick === true && (
           <div className="copy-msg">Successfully copied!</div>

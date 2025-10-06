@@ -8,6 +8,7 @@ import IncidentCard from '../IncidentCard'
 import Search from '../Search'
 import IncidentPrint from '../IncidentPrint'
 import LoadingIcon from '../LoadingIcon'
+import Print from '../Print'
 
 const IncidentManager = () => {
   const appContext = useContext(AppContext)
@@ -45,7 +46,6 @@ const IncidentManager = () => {
 
       setAllIncidents(incidents)
       storageSet('incidents', incidents)
-      storageSet('incidents-file-name', selectedFile.name)
     } catch (error) {
       appContext.showPopup(error.message)
     }
@@ -126,14 +126,6 @@ const IncidentManager = () => {
     }
   }
 
-  const populateSelectedFile = () => {
-    const name = storageGet('incidents-file-name')
-
-    if (name) {
-      setSelectedFile({ name: name })
-    }
-  }
-
   const printSingle = (incident) => {
     setToPrint([incident])
   }
@@ -146,7 +138,6 @@ const IncidentManager = () => {
     if (search === '') {
       populateIncidents()
     }
-    populateSelectedFile()
 
     if (toPrint.length > 0) {
       window.print()
@@ -232,11 +223,11 @@ const IncidentManager = () => {
       )}
 
       {/* Only renders when printing */}
-      <div className="print">
+      <Print isHidden={true}>
         {toPrint &&
           toPrint.length > 0 &&
           toPrint.map((i) => <IncidentPrint key={i.number} incident={i} />)}
-      </div>
+      </Print>
     </div>
   )
 }

@@ -163,12 +163,14 @@ const DeviceLookup = () => {
           )}
 
           {!appContext.isLoading ? (
-            <Spreadsheet
-              rowData={rowData}
-              columns={headers}
-              tableRef={tableRef}
-              isCopyClick={isCopyClick}
-            />
+            <div className="print">
+              <Spreadsheet
+                rowData={rowData}
+                columns={headers}
+                tableRef={tableRef}
+                isCopyClick={isCopyClick}
+              />
+            </div>
           ) : (
             <LoadingIcon />
           )}

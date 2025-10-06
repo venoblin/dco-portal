@@ -3,7 +3,7 @@ import Barcode from './Barcode'
 
 const IncidentPrint = (props) => {
   return (
-    <div className="IncidentPrint">
+    <div className="IncidentPrint to-print">
       <div className="info">
         <div className="machine-info">
           <h2>Machine Info</h2>
