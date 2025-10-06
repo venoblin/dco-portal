@@ -1,3 +1,4 @@
+import './Barcode'
 import { useEffect, useRef } from 'react'
 import JsBarcode from 'jsbarcode'
 
@@ -9,15 +10,17 @@ function BarcodeDisplay(props) {
       JsBarcode(barcodeRef.current, props.value, {
         displayValue: true,
         text: props.value,
-        height: 20,
+        height: 14,
         width: 1,
-        fontSize: 14
+        fontSize: 14,
+        lineColor: '#262424',
+        background: '#f6f7eb'
       })
     }
   }, [props.value])
 
   return (
-    <div>
+    <div className="Barcode">
       <svg ref={barcodeRef} />
     </div>
   )

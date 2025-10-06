@@ -34,7 +34,7 @@ const DeviceLookup = () => {
         accessorKey: 'hostname'
       },
       {
-        header: 'Asset Tag Barcode',
+        header: 'Asset Tag',
         accessorKey: 'assetTagBarcode',
         cell: (info) => flexRender(Barcode, { value: info.getValue() })
       },
@@ -42,7 +42,7 @@ const DeviceLookup = () => {
       { header: 'Height', accessorKey: 'height' },
       { header: 'Serial #', accessorKey: 'serialNum' },
       {
-        header: 'GPC Barcode',
+        header: 'GPC',
         accessorKey: 'gpcBarcode',
         cell: (info) => flexRender(Barcode, { value: info.getValue() })
       }
@@ -205,7 +205,7 @@ const DeviceLookup = () => {
           )}
 
           {!appContext.isLoading ? (
-            <Print>
+            <Print isNoPadding={true}>
               <Spreadsheet
                 rowData={rowData}
                 columns={headers}
