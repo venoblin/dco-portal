@@ -205,7 +205,7 @@ const DeviceLookup = () => {
           )}
 
           {!appContext.isLoading ? (
-            <Print>
+            <Print isNoPadding={true}>
               <Spreadsheet
                 rowData={rowData}
                 columns={headers}

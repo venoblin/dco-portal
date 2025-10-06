@@ -27,17 +27,26 @@
   }
 
   main {
-    padding: 0rem;
-    margin: 0;
+    padding: 0rem !important;
+    margin: 0 !important;
+  }
+
+  .Print.no-padding {
+    padding: 0.5rem !important;
   }
 
   .Print {
-    color: var(--bg-color);
-    background: white;
+    padding: 1rem 5rem !important;
+    color: var(--bg-color) !important;
+    background: white !important;
     display: block !important;
     overflow: visible !important;
     height: auto !important;
     max-height: none !important;
+  }
+
+  .table-wrap {
+    padding: 0 !important;
   }
 
   table {
@@ -51,17 +60,17 @@
   }
 
   td {
-    padding: 0.5rem 0.2rem;
+    padding: 0.5rem 0.2rem !important;
   }
 
   th {
-    padding: 0.5rem 0.2rem;
+    padding: 0.5rem 0.2rem !important;
   }
 
   .Print .to-print {
     page-break-after: always;
     break-after: page;
-    background: white;
+    background: white !important;
     display: block !important;
     overflow: visible !important;
     height: auto !important;
