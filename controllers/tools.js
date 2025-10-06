@@ -36,6 +36,8 @@ const parseCsvFile = async (req, res) => {
       const rawArms = incident.description.match(/ARM\d{10}/g)
       incident.arms = null
 
+      console.log(rawArms)
+
       if (rawArms && rawArms.length > 0) {
         incident.arms = []
 
