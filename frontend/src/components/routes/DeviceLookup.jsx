@@ -57,7 +57,7 @@ const DeviceLookup = () => {
       const rowHostnames = []
       res.devices.forEach((d) => {
         rowHostnames.push({
-          hostname: d.info.hostname,
+          hostname: d.info.assetName,
           assetTag: d.info.assetTag,
           inventoryNum: d.info.invNo,
           rack: d.info.deployment.rack,
