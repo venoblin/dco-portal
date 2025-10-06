@@ -46,7 +46,9 @@ const DeviceLookup = () => {
     event.preventDefault()
     const hostsArr = hosts.split('\n')
 
-    const res = await appContext.load(() => findAllDevices(hostsArr))
+    const res = await appContext.load(() =>
+      findAllDevices(hostsArr, appContext.auth.credentials)
+    )
 
     console.log(res)
 
