@@ -36,8 +36,6 @@ const parseCsvFile = async (req, res) => {
       const rawArms = incident.description.match(/ARM\d{10}/g)
       incident.arms = null
 
-      console.log(rawArms)
-
       if (rawArms && rawArms.length > 0) {
         incident.arms = []
 
@@ -46,6 +44,8 @@ const parseCsvFile = async (req, res) => {
             number: a,
             link: snowBaseUrl ? `${snowBaseUrl}${a}` : null
           }
+
+          console.log(newArm)
 
           incident.arms.push(newArm)
         })
