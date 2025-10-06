@@ -5,4 +5,6 @@ git checkout --ours ./package-lock.json
 git checkout --ours ./frontend/package.json 
 git checkout --ours ./frontend/package-lock.json 
 
-git pull origin dco
+current_branch=$(git symbolic-ref --short HEAD)
+
+git pull origin $current_branch
