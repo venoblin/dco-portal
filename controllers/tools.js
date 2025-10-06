@@ -88,7 +88,6 @@ const findAllDevices = async (req, res) => {
 
     const clientToken = authHeader.split(' ')[1]
 
-    console.log(hostnames, clientToken)
     const devicePromises = hostnames.map(async (hostname) => {
       const device = await deviceLookup(clientToken, hostname)
 
