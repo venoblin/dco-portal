@@ -1,7 +1,7 @@
 <br/>
 <div align="center">
 <a href="https://github.com/user/repo">
-<img src=".project-images/project-logo.svg" alt="Logo" height="128px">
+<img src=".project-images/project-logo.svg" alt="Logo" style="height:128px">
 </a>
 <h3 align="center">DCO Portal</h3>
 <p align="center">
