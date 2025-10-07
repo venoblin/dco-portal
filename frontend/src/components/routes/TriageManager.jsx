@@ -1,7 +1,9 @@
 import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Panel from '../ui/Panel'
+import { getAllTriages } from '../../services/triages'
 import { AppContext } from '../../contexts/AppContext'
+import Panel from '../ui/Panel'
+import LoadingIcon from '../LoadingIcon'
 
 const TriageManager = () => {
   const appContext = useContext(AppContext)
@@ -9,13 +11,17 @@ const TriageManager = () => {
 
   const getTriages = async () => {
     try {
-      const res = await appContext.load()
+      const res = await appContext.load(() => getAllTriages())
+
+      setTriages(res.triages)
     } catch (error) {
       appContext.showPopup(error.message)
     }
   }
 
-  useEffect(() => {}, [])
+  useEffect(() => {
+    getAllTriages()
+  }, [])
 
   return (
     <div>
@@ -27,7 +33,19 @@ const TriageManager = () => {
         </Link>
       </header>
 
-      <Panel></Panel>
+      <Panel>
+        {!appContext.isLoading ? (
+          <div>
+            {triages && triages.length > 0 ? (
+              triages.map((t) => <p key={t.id}>{t.name}</p>)
+            ) : (
+              <p>No triages found!</p>
+            )}
+          </div>
+        ) : (
+          <LoadingIcon />
+        )}
+      </Panel>
     </div>
   )
 }

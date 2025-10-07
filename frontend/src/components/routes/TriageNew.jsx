@@ -8,6 +8,10 @@ const TriageNew = () => {
           <Link to="/tools/triage-manager">← Back</Link>
           <h1>New Triage</h1>
         </div>
+
+        <div className="inputs">
+          <button>Download</button>
+        </div>
       </header>
     </div>
   )
