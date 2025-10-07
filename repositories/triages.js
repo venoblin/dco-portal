@@ -11,6 +11,22 @@ const getAllTriages = async (options) => {
   return triages
 }
 
+const getSingleTriage = async (id) => {
+  const triage = await Triage.findByPk(id)
+
+  return triage
+}
+
+const patchTriage = async (id, payload) => {
+  const [count] = await Triage.update(payload, {
+    where: {
+      id: id
+    }
+  })
+
+  return count
+}
+
 const postTriage = async (payload) => {
   const triage = await Triage.create({
     name: payload.name,
@@ -20,7 +36,33 @@ const postTriage = async (payload) => {
   return triage
 }
 
+const deleteTriage = async (id) => {
+  const count = await Triage.destroy({
+    where: {
+      id: id
+    }
+  })
+
+  return count
+}
+
+const getTriageByName = async (name) => {
+  const triage = await Triage.findAll({
+    where: {
+      name: {
+        [Op.like]: `%${name}%`
+      }
+    }
+  })
+
+  return triage
+}
+
 module.exports = {
   getAllTriages,
-  postTriage
+  postTriage,
+  getSingleTriage,
+  patchTriage,
+  getTriageByName,
+  deleteTriage
 }
