@@ -19,7 +19,7 @@
 
 ## About The Project
 
-DCO Portal allows you to create guides for future reference, lookup devices, and allows you to import incidents and have the affected devices automatically populated.
+DCO Portal allows you to create guides for future reference, lookup devices, and allows you to import incidents and have the affected devices automatically populated. With more features to come.
 
 ### Built With
 
