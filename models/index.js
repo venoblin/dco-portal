@@ -6,8 +6,10 @@ const sequelize = new Sequelize({
 })
 
 const Guide = require('./guides')(sequelize)
+const Triage = require('./triages')(sequelize)
 
 module.exports = {
   sequelize,
-  Guide
+  Guide,
+  Triage
 }
