@@ -56,7 +56,7 @@ const patchGuide = async (req, res) => {
     }
   } catch {
     return res.status(500).json({
-      message: 'Failed to create guide'
+      message: 'Failed to update guide'
     })
   }
 }
@@ -91,16 +91,16 @@ const deleteGuide = async (req, res) => {
     }
   } catch {
     return res.status(500).json({
-      message: 'Failed to delete user'
+      message: 'Failed to delete guide'
     })
   }
 }
 
-const getBySearch = async (req, res) => {
+const getGuidesBySearch = async (req, res) => {
   try {
     const title = req.query.title
 
-    if (title === '') {
+    if (!title || title === '') {
       const guides = await repo.getAllGuides({
         order: [['createdAt', 'DESC']]
       })
@@ -110,7 +110,7 @@ const getBySearch = async (req, res) => {
       })
     }
 
-    const guides = await repo.getGuideByTitle(title)
+    const guides = await repo.getGuidesByTitle(title)
 
     return res.status(200).json({
       guides: guides
@@ -128,5 +128,5 @@ module.exports = {
   patchGuide,
   postGuide,
   deleteGuide,
-  getBySearch
+  getGuidesBySearch
 }
