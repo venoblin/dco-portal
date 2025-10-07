@@ -10,6 +10,21 @@ const getAllTriages = async (req, res) => {
   }
 }
 
+const postTriage = async (req, res) => {
+  try {
+    const triage = await repo.postTriage(req.body)
+
+    return res.status(201).json({
+      triage: triage
+    })
+  } catch {
+    return res.status(500).json({
+      message: 'Failed to create triage'
+    })
+  }
+}
+
 module.exports = {
-  getAllTriages
+  getAllTriages,
+  postTriage
 }

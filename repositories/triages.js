@@ -11,6 +11,16 @@ const getAllTriages = async (options) => {
   return triages
 }
 
+const postTriage = async (payload) => {
+  const triage = await Triage.create({
+    name: payload.name,
+    rack: payload.rack
+  })
+
+  return triage
+}
+
 module.exports = {
-  getAllTriages
+  getAllTriages,
+  postTriage
 }
