@@ -17,7 +17,7 @@ const parseCsvFile = async (req, res) => {
     const parsedData = await parseCsv(filePath)
 
     const enrichedDataPromises = parsedData.map(async (incident) => {
-      incident.description = incident.description.replace(/\\n/g, '<br>')
+      incident.description = incident.description.replace('\n', '<br>')
 
       const startDateRegex = /(\d{1,2})\/(\d{1,2}) @ (\d{4})/
       const shortDescriptionMatch =
