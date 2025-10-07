@@ -1,3 +1,4 @@
+const { Op } = require('sequelize')
 const { Triage } = require('../models')
 
 const getAllTriages = async (options) => {

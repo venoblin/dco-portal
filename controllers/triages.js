@@ -87,7 +87,7 @@ const getTriagesBySearch = async (req, res) => {
   try {
     const name = req.query.name
 
-    if (name === '') {
+    if (!name || name === '') {
       const triages = await repo.getAllTriages({
         order: [['createdAt', 'DESC']]
       })

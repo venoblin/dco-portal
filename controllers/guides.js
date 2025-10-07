@@ -100,7 +100,7 @@ const getGuidesBySearch = async (req, res) => {
   try {
     const title = req.query.title
 
-    if (title === '') {
+    if (!title || title === '') {
       const guides = await repo.getAllGuides({
         order: [['createdAt', 'DESC']]
       })
