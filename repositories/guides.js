@@ -49,7 +49,7 @@ const deleteGuide = async (id) => {
   return count
 }
 
-const getGuideByTitle = async (title) => {
+const getGuidesByTitle = async (title) => {
   const guide = await Guide.findAll({
     where: {
       title: {
@@ -67,5 +67,5 @@ module.exports = {
   patchGuide,
   postGuide,
   deleteGuide,
-  getGuideByTitle
+  getGuidesByTitle
 }

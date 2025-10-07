@@ -46,7 +46,7 @@ const deleteTriage = async (id) => {
   return count
 }
 
-const getTriageByName = async (name) => {
+const getTriagesByName = async (name) => {
   const triage = await Triage.findAll({
     where: {
       name: {
@@ -63,6 +63,6 @@ module.exports = {
   postTriage,
   getSingleTriage,
   patchTriage,
-  getTriageByName,
+  getTriagesByName,
   deleteTriage
 }
