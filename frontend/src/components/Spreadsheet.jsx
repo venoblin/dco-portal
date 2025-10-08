@@ -58,10 +58,6 @@ const Spreadsheet = (props) => {
             ))}
           </tbody>
         </table>
-
-        {props.rowData.length === 0 && (
-          <p className="msg">No hostnames entered!</p>
-        )}
       </div>
     </div>
   )

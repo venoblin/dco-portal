@@ -1,7 +1,7 @@
 .DeviceLookup form {
   display: flex;
   flex-direction: column;
-  margin-right: 0.5rem;
+  margin-right: var(--default-spacing);
   width: max-content;
 }
 
