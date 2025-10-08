@@ -51,7 +51,7 @@ const DeviceLookup = () => {
   }
 
   const appContext = useContext(AppContext)
-  const [hosts, handleHostsChange] = useFormState('')
+  const [textData, handleTextDataChange] = useFormState('')
   const [type, handleTypeChange] = useFormState('regular')
   const [rowData, setRowData] = useState([])
   const [headers, setHeaders] = useState(headerTypes.regular)
@@ -63,12 +63,16 @@ const DeviceLookup = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const hostsArr = hosts.split('\n')
+    const dataArr = textData.split('\n')
 
-    const cleanedHosts = hostsArr.filter((h) => h !== '')
-
+    const queries = dataArr.map((data) => {
+      if (data !== '') {
+        const newQuery = {}
+        newQuery[searchType] = searchType
+      }
+    })
     const res = await appContext.load(() =>
-      findAllDevices(cleanedHosts, appContext.auth.credentials)
+      findAllDevices(queries, appContext.auth.credentials)
     )
 
     if (res) {
@@ -133,6 +137,17 @@ const DeviceLookup = () => {
     }
   }
 
+  const getCurrentSearchTypeName = () => {
+    switch (searchType) {
+      case 'assetName':
+        return 'hostnames'
+        break
+      case 'assetTag':
+        return 'asset tags'
+        break
+    }
+  }
+
   useEffect(() => {
     checkDevices()
     checkSearchType()
@@ -182,12 +197,12 @@ const DeviceLookup = () => {
           )}
 
           <textarea
-            onChange={handleHostsChange}
-            name="hostnames"
-            id="hostnames"
-            value={hosts}
+            onChange={handleTextDataChange}
+            name="textData"
+            id="textData"
+            value={textData}
             required
-            placeholder="Paste hostnames here..."
+            placeholder={`Paste ${getCurrentSearchTypeName()} here`}
           ></textarea>
         </form>
 

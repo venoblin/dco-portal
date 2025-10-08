@@ -29,7 +29,9 @@ const parseCsvFile = async (req, res) => {
         incident.startDate = incident.description.match(startDateRegex)
       }
 
-      const device = await deviceLookup(clientToken, incident.cmdb_ci)
+      const device = await deviceLookup(clientToken, {
+        assetName: incident.cmdb_ci
+      })
 
       incident.device = device
 
@@ -79,19 +81,19 @@ const parseCsvFile = async (req, res) => {
 
 const findAllDevices = async (req, res) => {
   try {
-    const { hostnames } = req.body
+    const { queries } = req.body
     const authHeader = req.headers.authorization
 
-    if (!authHeader || !authHeader.startsWith('Bearer ') || !hostnames) {
-      return res.status(401).json({ error: 'Missing token or hostnames' })
+    if (!authHeader || !authHeader.startsWith('Bearer ') || !queries) {
+      return res.status(401).json({ error: 'Missing token or devices payload' })
     }
 
     const clientToken = authHeader.split(' ')[1]
 
-    const devicePromises = hostnames.map(async (hostname) => {
-      const device = await deviceLookup(clientToken, hostname)
+    const devicePromises = queries.map(async (query) => {
+      const device = await deviceLookup(clientToken, query)
 
-      const newDevice = { hostname: hostname }
+      const newDevice = { ...query }
 
       if (device) {
         newDevice.info = device
