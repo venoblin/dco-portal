@@ -20,7 +20,7 @@ const TriageManager = () => {
   }
 
   useEffect(() => {
-    getAllTriages()
+    getTriages()
   }, [])
 
   return (
