@@ -6,6 +6,11 @@
   border-radius: var(--default-border-radius);
   font-family: var(--body-font-family);
   position: relative;
+  transition: opacity var(--default-transition);
+}
+
+.Spreadsheet.disabled {
+  opacity: 0.5;
 }
 
 .Spreadsheet .table-wrap {

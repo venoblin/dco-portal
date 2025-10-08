@@ -10,6 +10,9 @@ const Spreadsheet = (props) => {
   if (!props.rowData) {
     return null
   }
+  const classes = `Spreadsheet to-print${props.isCopyClick ? ' copied' : ''} ${
+    props.className ? props.className : ''
+  }`
 
   const table = useReactTable({
     data: props.rowData,
@@ -19,9 +22,7 @@ const Spreadsheet = (props) => {
   })
 
   return (
-    <div
-      className={`Spreadsheet to-print${props.isCopyClick ? ' copied' : ''}`}
-    >
+    <div className={classes}>
       {props.isCopyClick === true && (
         <div className="copy-msg">Successfully copied!</div>
       )}

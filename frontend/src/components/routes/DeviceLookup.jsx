@@ -179,7 +179,7 @@ const DeviceLookup = () => {
       <div className="wrapper">
         <form onSubmit={handleSubmit}>
           {!appContext.isLoading ? (
-            <div>
+            <div className="inputs">
               <select
                 value={searchType}
                 onChange={(event) =>
@@ -192,7 +192,7 @@ const DeviceLookup = () => {
               <button type="submit">Search</button>
             </div>
           ) : (
-            <div>
+            <div className="inputs">
               <select
                 disabled
                 value={searchType}
@@ -270,6 +270,7 @@ const DeviceLookup = () => {
           {!appContext.isLoading ? (
             <Print isNoPadding={true}>
               <Spreadsheet
+                className={rowData.length === 0 ? 'disabled' : ''}
                 rowData={rowData}
                 columns={headers}
                 tableRef={tableRef}
