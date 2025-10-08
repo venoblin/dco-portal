@@ -76,7 +76,7 @@ const DeviceLookup = () => {
     })
 
     const res = await appContext.load(() =>
-      findAllDevices({ queries: queries }, appContext.auth.credentials)
+      findAllDevices({ queriesArr: queries }, appContext.auth.credentials)
     )
 
     if (res) {

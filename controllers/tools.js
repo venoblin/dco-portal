@@ -81,16 +81,16 @@ const parseCsvFile = async (req, res) => {
 
 const findAllDevices = async (req, res) => {
   try {
-    const { queries } = req.body
+    const { queriesArr } = req.body
     const authHeader = req.headers.authorization
 
-    if (!authHeader || !authHeader.startsWith('Bearer ') || !queries) {
+    if (!authHeader || !authHeader.startsWith('Bearer ') || !queriesArr) {
       return res.status(401).json({ error: 'Missing token or devices payload' })
     }
 
     const clientToken = authHeader.split(' ')[1]
 
-    const devicePromises = queries.map(async (query) => {
+    const devicePromises = queriesArr.map(async (query) => {
       const device = await deviceLookup(clientToken, query)
 
       const newDevice = { ...query }

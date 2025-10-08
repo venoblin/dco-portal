@@ -10,10 +10,10 @@ export const uploadCsv = async (payload, credentials) => {
   return res
 }
 
-export const findAllDevices = async (payload, credentials) => {
+export const findAllDevices = async (queriesArr, credentials) => {
   const res = await api.post(
     '/tools/find-devices',
-    payload,
+    queriesArr,
     credentials.accessToken
   )
 
