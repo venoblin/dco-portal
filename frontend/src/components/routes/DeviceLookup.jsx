@@ -57,6 +57,8 @@ const DeviceLookup = () => {
   const [headers, setHeaders] = useState(headerTypes.regular)
   const [isCopyClick, toggleIsCopyClick] = useToggle(false)
   const [isPrinting, toggleIsPrinting] = useToggle(false)
+  const [searchType, handleSearchTypeChange, setSearchType] =
+    useFormState('assetName')
   const tableRef = useRef()
 
   const handleSubmit = async (event) => {
@@ -94,8 +96,12 @@ const DeviceLookup = () => {
     }
   }
 
-  const switchHeaders = (state) => {
-    setHeaders(headerTypes[state])
+  const switchHeaders = (newHeader) => {
+    setHeaders(headerTypes[newHeader])
+  }
+
+  const switchSearchType = (newSearchType) => {
+    storageSet('deviceLookupSearchType', newSearchType)
   }
 
   const handleCopy = async () => {
@@ -111,6 +117,14 @@ const DeviceLookup = () => {
     toggleIsPrinting()
   }
 
+  const checkSearchType = () => {
+    const searchType = storageGet('deviceLookupSearchType')
+
+    if (searchType) {
+      setSearchType(searchType)
+    }
+  }
+
   const checkDevices = () => {
     const devices = storageGet('devicesLookup')
 
@@ -121,6 +135,7 @@ const DeviceLookup = () => {
 
   useEffect(() => {
     checkDevices()
+    checkSearchType()
 
     if (isPrinting) {
       window.print()
@@ -138,11 +153,32 @@ const DeviceLookup = () => {
       <div className="wrapper">
         <form onSubmit={handleSubmit}>
           {!appContext.isLoading ? (
-            <button type="submit">Search</button>
+            <div>
+              <select
+                value={searchType}
+                onChange={(event) =>
+                  handleSearchTypeChange(event, switchSearchType)
+                }
+              >
+                <option value="assetName">By Hostname</option>
+                <option value="assetTag">By Asset Tag</option>
+              </select>
+              <button type="submit">Search</button>
+            </div>
           ) : (
-            <button type="submit" disabled>
-              Search
-            </button>
+            <div>
+              <select
+                disabled
+                value={searchType}
+                onChange={handleSearchTypeChange}
+              >
+                <option value="assetName">By Hostname</option>
+                <option value="assetTag">By Asset Tag</option>
+              </select>
+              <button disabled type="submit">
+                Search
+              </button>
+            </div>
           )}
 
           <textarea

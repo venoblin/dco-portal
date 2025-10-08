@@ -1,6 +1,6 @@
 const { getBestDevice } = require('../utils')
 
-const deviceLookup = async (clientToken, hostname) => {
+const deviceLookup = async (clientToken, query) => {
   if (
     !process.env.DCO_PORTAL_VERUM_URL_START ||
     !process.env.DCO_PORTAL_VERUM_URL_END
@@ -8,7 +8,16 @@ const deviceLookup = async (clientToken, hostname) => {
     return null
   }
 
-  const verumUrl = `${process.env.DCO_PORTAL_VERUM_URL_START}${hostname}${process.env.DCO_PORTAL_VERUM_URL_END}`
+  let cleanedQuery = ''
+
+  if (!query || Object.keys(query).length === 0) {
+    throw new Error('Query is missing')
+  } else {
+    Object.keys(query).forEach((key) => {
+      cleanedQuery += `${key}=${query[key]}`
+    })
+  }
+  const verumUrl = `${process.env.DCO_PORTAL_VERUM_URL_START}${cleanedQuery}${process.env.DCO_PORTAL_VERUM_URL_END}`
 
   const verumResponse = await fetch(verumUrl, {
     method: 'GET',

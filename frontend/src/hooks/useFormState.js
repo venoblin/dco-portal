@@ -15,7 +15,7 @@ const useFormState = (initial) => {
     setState(initial)
   }
 
-  return [state, onChange, resetState]
+  return [state, onChange, setState, resetState]
 }
 
 export default useFormState
