@@ -21,10 +21,6 @@
   margin-right: 0;
 }
 
-.DeviceLookup form button {
-  margin-bottom: var(--default-spacing);
-}
-
 .DeviceLookup textarea {
   width: 100%;
   height: 500px;
