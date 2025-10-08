@@ -5,7 +5,9 @@ const deviceLookup = async (clientToken, query) => {
     !process.env.DCO_PORTAL_VERUM_URL_START ||
     !process.env.DCO_PORTAL_VERUM_URL_END
   ) {
-    return null
+    throw new Error(
+      'Error looking for devices, exeternal API variables missing'
+    )
   }
 
   let cleanedQuery = ''
