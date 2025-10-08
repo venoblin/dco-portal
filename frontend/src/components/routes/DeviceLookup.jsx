@@ -213,7 +213,7 @@ const DeviceLookup = () => {
             id="textData"
             value={textData}
             required
-            placeholder={`Paste ${getCurrentSearchTypeName()} here`}
+            placeholder={`Paste ${getCurrentSearchTypeName()} here...`}
           ></textarea>
         </form>
 
