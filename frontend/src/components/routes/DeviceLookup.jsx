@@ -51,7 +51,7 @@ const DeviceLookup = () => {
   }
 
   const appContext = useContext(AppContext)
-  const [textData, handleTextDataChange] = useFormState('')
+  const [textData, handleTextDataChange, setTextData] = useFormState('')
   const [type, handleTypeChange] = useFormState('regular')
   const [rowData, setRowData] = useState([])
   const [headers, setHeaders] = useState(headerTypes.regular)
@@ -63,46 +63,50 @@ const DeviceLookup = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const dataArr = textData.split('\n')
-    const cleanedArr = dataArr.filter((data) => data !== '')
+    try {
+      const dataArr = textData.split('\n')
+      const cleanedArr = dataArr.filter((data) => data !== '')
 
-    const queries = cleanedArr.map((data) => {
-      if (data !== '') {
-        const newQuery = {}
-        newQuery[searchType] = data
+      const queries = cleanedArr.map((data) => {
+        if (data !== '') {
+          const newQuery = {}
+          newQuery[searchType] = data
 
-        return newQuery
-      }
-    })
-
-    const res = await appContext.load(() =>
-      findAllDevices({ queriesArr: queries }, appContext.auth.credentials)
-    )
-
-    if (res) {
-      const devicesData = []
-      res.devices.forEach((d) => {
-        devicesData.push({
-          hostname: d.info.assetName ? d.info.assetName : 'Not Found',
-          assetTag: d.info.assetTag ? d.info.assetTag : 'Not Found',
-          inventoryNum: d.info.invNo ? d.info.invNo : 'Not Found',
-          rack: d.info.deployment.rack ? d.info.deployment.rack : 'Not Found',
-          height: d.info.deployment.zPosition
-            ? d.info.deployment.zPosition
-            : 'Not Found',
-          status: d.info.subStatus ? d.info.subStatus : 'Not Found',
-          serialNum: d.info.serialNo ? d.info.serialNo : 'Not Found',
-          model: d.info.model ? d.info.model : 'Not Found',
-          gpc: d.info.catalogID ? d.info.catalogID : 'Not Found',
-          assetTagBarcode: d.info.assetTag ? d.info.assetTag : 'Not Found',
-          gpcBarcode: d.info.catalogID ? d.info.catalogID : 'Not Found'
-        })
+          return newQuery
+        }
       })
 
-      storageSet('devicesLookup', devicesData)
-      setRowData(devicesData)
-    } else {
-      appContext.showPopup("Couldn't find devices")
+      const res = await appContext.load(() =>
+        findAllDevices({ queriesArr: queries }, appContext.auth.credentials)
+      )
+
+      if (res) {
+        const devicesData = []
+        res.devices.forEach((d) => {
+          devicesData.push({
+            hostname: d.info.assetName ? d.info.assetName : 'Not Found',
+            assetTag: d.info.assetTag ? d.info.assetTag : 'Not Found',
+            inventoryNum: d.info.invNo ? d.info.invNo : 'Not Found',
+            rack: d.info.deployment.rack ? d.info.deployment.rack : 'Not Found',
+            height: d.info.deployment.zPosition
+              ? d.info.deployment.zPosition
+              : 'Not Found',
+            status: d.info.subStatus ? d.info.subStatus : 'Not Found',
+            serialNum: d.info.serialNo ? d.info.serialNo : 'Not Found',
+            model: d.info.model ? d.info.model : 'Not Found',
+            gpc: d.info.catalogID ? d.info.catalogID : 'Not Found',
+            assetTagBarcode: d.info.assetTag ? d.info.assetTag : 'Not Found',
+            gpcBarcode: d.info.catalogID ? d.info.catalogID : 'Not Found'
+          })
+        })
+
+        storageSet('devicesLookup', devicesData)
+        setRowData(devicesData)
+      } else {
+        appContext.showPopup("Couldn't find devices")
+      }
+    } catch {
+      appContext.showPopup(`Couln't find devices by ${searchType}`)
     }
   }
 
@@ -111,6 +115,7 @@ const DeviceLookup = () => {
   }
 
   const switchSearchType = (newSearchType) => {
+    setTextData('')
     storageSet('deviceLookupSearchType', newSearchType)
   }
 
