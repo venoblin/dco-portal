@@ -64,13 +64,17 @@ const DeviceLookup = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     const dataArr = textData.split('\n')
+    const cleanedArr = dataArr.filter((data) => data !== '')
 
-    const queries = dataArr.map((data) => {
+    const queries = cleanedArr.map((data) => {
       if (data !== '') {
         const newQuery = {}
-        newQuery[searchType] = searchType
+        newQuery[searchType] = data
+
+        return newQuery
       }
     })
+
     const res = await appContext.load(() =>
       findAllDevices(queries, appContext.auth.credentials)
     )

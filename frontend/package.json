@@ -7,6 +7,15 @@
     "dev": "parcel index.html",
     "build": "parcel build index.html"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "@tanstack/react-table": "^8.21.3",
+    "jsbarcode": "^3.12.1",
+    "quill": "^2.0.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^6.30.1"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.0"
+  }
 }
