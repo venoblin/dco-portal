@@ -83,17 +83,19 @@ const DeviceLookup = () => {
       const devicesData = []
       res.devices.forEach((d) => {
         devicesData.push({
-          hostname: d.hostname,
-          assetTag: d.info ? d.info.assetTag : 'Not Found',
-          inventoryNum: d.info ? d.info.invNo : 'Not Found',
-          rack: d.info ? d.info.deployment.rack : 'Not Found',
-          height: d.info ? d.info.deployment.zPosition : 'Not Found',
-          status: d.info ? d.info.subStatus : 'Not Found',
-          serialNum: d.info ? d.info.serialNo : 'Not Found',
-          model: d.info ? d.info.model : 'Not Found',
-          gpc: d.info ? d.info.catalogID : 'Not Found',
-          assetTagBarcode: d.info ? d.info.assetTag : 'Not Found',
-          gpcBarcode: d.info ? d.info.catalogID : 'Not Found'
+          hostname: d.info.assetName ? d.info.assetName : 'Not Found',
+          assetTag: d.info.assetTag ? d.info.assetTag : 'Not Found',
+          inventoryNum: d.info.invNo ? d.info.invNo : 'Not Found',
+          rack: d.info.deployment.rack ? d.info.deployment.rack : 'Not Found',
+          height: d.info.deployment.zPosition
+            ? d.info.deployment.zPosition
+            : 'Not Found',
+          status: d.info.subStatus ? d.info.subStatus : 'Not Found',
+          serialNum: d.info.serialNo ? d.info.serialNo : 'Not Found',
+          model: d.info.model ? d.info.model : 'Not Found',
+          gpc: d.info.catalogID ? d.info.catalogID : 'Not Found',
+          assetTagBarcode: d.info.assetTag ? d.info.assetTag : 'Not Found',
+          gpcBarcode: d.info.catalogID ? d.info.catalogID : 'Not Found'
         })
       })
 
