@@ -23,7 +23,7 @@ const IncidentManager = () => {
   }
 
   const handleUpload = async () => {
-    if (storageGet.incidents) {
+    if (storageGet('incidents')) {
       storageRemove('incidents')
     }
 
