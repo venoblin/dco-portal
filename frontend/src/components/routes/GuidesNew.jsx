@@ -10,7 +10,8 @@ import Editor from '../Editor'
 const GuidesNew = () => {
   const appContext = useContext(AppContext)
   const navigate = useNavigate()
-  const [author, onAuthorChange, resetAuthor] = useFormState('Admin')
+  const [quillInstance, setQuillInstance] = useState(null)
+  const [author, onAuthorChange, setAuthor, resetAuthor] = useFormState('Admin')
   const [title, onTitleChange, setTitle, resetTitle] = useFormState('')
   const [content, setContent] = useState('')
 
@@ -81,7 +82,11 @@ const GuidesNew = () => {
               />
             </div>
 
-            <Editor setContent={setContent} />
+            <Editor
+              setContent={setContent}
+              quillInstance={quillInstance}
+              setQuillInstance={setQuillInstance}
+            />
           </form>
         </div>
       ) : (

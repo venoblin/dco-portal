@@ -1,14 +1,13 @@
 import './Editor.css'
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect } from 'react'
 import Quill from 'quill'
 
 const Editor = (props) => {
   const editorRef = useRef(null)
-  const [quillInstance, setQuillInstance] = useState(null)
 
   const toolbarOptions = [
     [
-      { header: [2, 3, 4, 5, 6, false] },
+      { header: [1, 2, 3, 4, 5, 6, false] },
       { size: ['small', false, 'large', 'huge'] }
     ],
 
@@ -33,7 +32,7 @@ const Editor = (props) => {
   ]
 
   useEffect(() => {
-    if (editorRef.current && !quillInstance) {
+    if (editorRef.current && !props.quillInstance) {
       const editor = new Quill(editorRef.current, {
         theme: 'snow',
         placeholder: 'Enter content...',
@@ -42,13 +41,17 @@ const Editor = (props) => {
         }
       })
 
-      setQuillInstance(editor)
+      props.setQuillInstance(editor)
+
+      if (props.content) {
+        editor.root.innerHTML = props.content
+      }
 
       editor.on('text-change', () => {
         props.setContent(editor.root.innerHTML)
       })
     }
-  }, [quillInstance])
+  }, [props.quillInstance])
 
   return (
     <div className="Editor">
