@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../contexts/AppContext'
 import useFormState from '../../hooks/useFormState'
-import { getSingleGuide } from '../../services/guides'
+import { getSingleGuide, patchGuide } from '../../services/guides'
 import useFormState from '../../hooks/useFormState'
 import LoadingIcon from '../LoadingIcon'
 import Editor from '../Editor'
@@ -16,6 +16,27 @@ const GuideEdit = () => {
   const [title, onTitleChange, setTitle] = useFormState('')
   const [content, setContent] = useState('')
   const { id } = useParams()
+
+  const onSubmit = async (event) => {
+    event.preventDefault()
+    try {
+      const res = await appContext.load(() =>
+        patchGuide(id, {
+          author: author,
+          title: title,
+          content: content
+        })
+      )
+
+      if (res) {
+        navigate(`/guides/${id}`)
+      } else {
+        throw new Error()
+      }
+    } catch {
+      appContext.showPopup('Could not update guide')
+    }
+  }
 
   const getGuide = async () => {
     try {
@@ -43,7 +64,7 @@ const GuideEdit = () => {
 
         <div className="inputs">
           <button form="edit-guide-form">Update</button>
-          <button className="danger">Delete</button>
+          <button className="danger-bg">Delete</button>
         </div>
       </header>
 
@@ -81,6 +102,7 @@ const GuideEdit = () => {
             </div>
 
             <Editor
+              guideId={id}
               content={content}
               setContent={setContent}
               quillInstance={quillInstance}

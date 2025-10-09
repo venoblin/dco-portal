@@ -39,6 +39,26 @@ class Client {
     }
   }
 
+  async post(endpoint, payload) {
+    try {
+      const options = {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      }
+
+      const res = await fetch(`${this.#constructUrl(endpoint)}`, options)
+
+      if (res.ok) {
+        return res.json()
+      }
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
   async get(endpoint) {
     try {
       const res = await fetch(`${this.#constructUrl(endpoint)}`)

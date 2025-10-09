@@ -231,11 +231,15 @@ a:hover {
 }
 
 .danger {
-  background: #c13642;
+  color: #c13642;
 }
 
 .warning {
-  background: #de6b48;
+  color: #de6b48;
+}
+
+.danger-bg {
+  background: #c13642;
 }
 
 .svg-btn {

@@ -6,6 +6,12 @@ export const postGuide = async (payload) => {
   return res
 }
 
+export const patchGuide = async (id, payload) => {
+  const res = await api.patch(`/guides/${id}`, payload)
+
+  return res
+}
+
 export const getAllGuides = async (query) => {
   let res
   if (query) {

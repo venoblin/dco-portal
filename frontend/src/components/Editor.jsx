@@ -41,17 +41,23 @@ const Editor = (props) => {
         }
       })
 
-      props.setQuillInstance(editor)
-
       if (props.content) {
-        editor.root.innerHTML = props.content
+        editor.clipboard.dangerouslyPasteHTML('<h1>HELLO</h1>')
       }
+
+      props.setQuillInstance(editor)
 
       editor.on('text-change', () => {
         props.setContent(editor.root.innerHTML)
       })
     }
   }, [props.quillInstance])
+
+  useEffect(() => {
+    if (props.quillInstance && props.content) {
+      props.quillInstance.clipboard.dangerouslyPasteHTML(props.content)
+    }
+  }, [props.content])
 
   return (
     <div className="Editor">
