@@ -1,46 +1,18 @@
 import './GuidesNew.css'
-import Quill from 'quill'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../contexts/AppContext'
 import useFormState from '../../hooks/useFormState'
 import { postGuide } from '../../services/guides'
 import LoadingIcon from '../LoadingIcon'
+import Editor from '../Editor'
 
 const GuidesNew = () => {
   const appContext = useContext(AppContext)
   const navigate = useNavigate()
   const [author, onAuthorChange, resetAuthor] = useFormState('Admin')
   const [title, onTitleChange, setTitle, resetTitle] = useFormState('')
-  const [quillInstance, setQuillInstance] = useState(null)
   const [content, setContent] = useState('')
-  const editorRef = useRef(null)
-
-  const toolbarOptions = [
-    [
-      { header: [2, 3, 4, 5, 6, false] },
-      { size: ['small', false, 'large', 'huge'] }
-    ],
-
-    [
-      'bold',
-      'italic',
-      'underline',
-      'strike',
-      { color: [] },
-      { background: [] }
-    ],
-
-    ['link', 'image', 'video', 'formula', 'blockquote', 'code-block'],
-
-    [{ align: [] }, { direction: 'rtl' }, { indent: '-1' }, { indent: '+1' }],
-
-    [{ list: 'ordered' }, { list: 'bullet' }, { list: 'check' }],
-
-    [{ script: 'sub' }, { script: 'super' }],
-
-    ['clean']
-  ]
 
   const onSubmit = async (event) => {
     event.preventDefault()
@@ -64,24 +36,6 @@ const GuidesNew = () => {
       appContext.showPopup(error.message)
     }
   }
-
-  useEffect(() => {
-    if (editorRef.current && !quillInstance) {
-      const editor = new Quill(editorRef.current, {
-        theme: 'snow',
-        placeholder: 'Enter content...',
-        modules: {
-          toolbar: toolbarOptions
-        }
-      })
-
-      setQuillInstance(editor)
-
-      editor.on('text-change', () => {
-        setContent(editor.root.innerHTML)
-      })
-    }
-  }, [quillInstance])
 
   return (
     <div>
@@ -127,9 +81,7 @@ const GuidesNew = () => {
               />
             </div>
 
-            <div className="editor-container">
-              <div ref={editorRef}></div>
-            </div>
+            <Editor setContent={setContent} />
           </form>
         </div>
       ) : (

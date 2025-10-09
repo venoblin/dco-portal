@@ -1,7 +1,8 @@
 import './Editor.css'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
+import Quill from 'quill'
 
-const Editor = () => {
+const Editor = (props) => {
   const editorRef = useRef(null)
   const [quillInstance, setQuillInstance] = useState(null)
 
