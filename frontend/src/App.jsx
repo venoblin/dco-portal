@@ -16,6 +16,7 @@ import IncidentManager from './components/routes/IncidentManager'
 import NotFound from './components/routes/NotFound'
 import Login from './components/routes/Login'
 import TriageNew from './components/routes/TriageNew'
+import GuideEdit from './components/routes/GuideEdit'
 
 const App = () => {
   const appContext = useContext(AppContext)
@@ -35,6 +36,7 @@ const App = () => {
             <Route path="/guides" element={<Guides />} />
             <Route path="/guides/new" element={<GuidesNew />} />
             <Route path="/guides/:id" element={<GuideSingle />} />
+            <Route path="/guides/:id/edit" element={<GuideEdit />} />
             <Route path="/tools" element={<Tools />} />
             <Route path="/tools/triage-manager" element={<TriageManager />} />
             <Route path="/tools/triage-manager/new" element={<TriageNew />} />

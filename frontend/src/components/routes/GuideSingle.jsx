@@ -44,6 +44,12 @@ const GuideSingle = () => {
                   </p>
                 )}
               </div>
+
+              <div className="inputs">
+                <Link className="btn" to={`/guides/${id}/edit`}>
+                  Edit
+                </Link>
+              </div>
             </header>
 
             <div

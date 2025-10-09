@@ -1,0 +1,7 @@
+.GuideEdit header .inputs button {
+  margin-right: var(--default-spacing);
+}
+
+.GuideEdit header .inputs button:last-of-type {
+  margin-right: 0;
+}
