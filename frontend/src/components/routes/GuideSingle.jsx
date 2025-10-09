@@ -15,7 +15,11 @@ const GuideSingle = () => {
     try {
       const res = await appContext.load(() => getSingleGuide(id))
 
-      setGuide(res.guide)
+      if (res) {
+        setGuide(res.guide)
+      } else {
+        appContext.showPopup('Guide was not found!')
+      }
     } catch (error) {
       appContext.showPopup(error.message)
     }

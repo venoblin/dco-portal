@@ -295,3 +295,18 @@ td:last-of-type {
 thead th {
   border-top: none;
 }
+
+.guide-form {
+  margin-top: var(--default-spacing);
+  width: 100%;
+}
+
+.guide-form div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+
+.guide-form div:last-of-type {
+  margin-bottom: var(--default-spacing);
+}

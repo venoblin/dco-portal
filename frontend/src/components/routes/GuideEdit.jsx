@@ -42,7 +42,7 @@ const GuideEdit = () => {
         </div>
 
         <div className="inputs">
-          <button>Update</button>
+          <button form="edit-guide-form">Update</button>
           <button className="danger">Delete</button>
         </div>
       </header>
@@ -50,7 +50,7 @@ const GuideEdit = () => {
       {!appContext.isLoading ? (
         <div>
           <form
-            className="edit-guide-form"
+            className="guide-form"
             id="edit-guide-form"
             onSubmit={(event) => onSubmit(event)}
           >

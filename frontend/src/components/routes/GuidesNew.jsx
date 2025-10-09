@@ -1,4 +1,3 @@
-import './GuidesNew.css'
 import { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../contexts/AppContext'
@@ -52,7 +51,7 @@ const GuidesNew = () => {
           </header>
 
           <form
-            className="new-guide-form"
+            className="guide-form"
             id="new-guide-form"
             onSubmit={(event) => onSubmit(event)}
           >
