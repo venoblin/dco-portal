@@ -11,7 +11,7 @@ const GuidesNew = () => {
   const appContext = useContext(AppContext)
   const navigate = useNavigate()
   const [author, onAuthorChange, resetAuthor] = useFormState('Admin')
-  const [title, onTitleChange, resetTitle] = useFormState('')
+  const [title, onTitleChange, setTitle, resetTitle] = useFormState('')
   const [quillInstance, setQuillInstance] = useState(null)
   const [content, setContent] = useState('')
   const editorRef = useRef(null)
