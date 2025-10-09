@@ -39,7 +39,7 @@ class Client {
     }
   }
 
-  async post(endpoint, payload) {
+  async patch(endpoint, payload) {
     try {
       const options = {
         method: 'PATCH',

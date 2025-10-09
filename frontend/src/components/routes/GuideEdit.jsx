@@ -20,13 +20,9 @@ const GuideEdit = () => {
   const onSubmit = async (event) => {
     event.preventDefault()
     try {
-      const res = await appContext.load(() =>
-        patchGuide(id, {
-          author: author,
-          title: title,
-          content: content
-        })
-      )
+      const update = { author: author, title: title, content: content }
+
+      const res = await appContext.load(() => patchGuide(id, update))
 
       if (res) {
         navigate(`/guides/${id}`)

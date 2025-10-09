@@ -2,7 +2,7 @@ import { api } from '../api'
 
 export const postGuide = async (payload) => {
   const res = await api.post('/guides', payload)
-
+  console.log('post')
   return res
 }
 

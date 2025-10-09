@@ -1,6 +1,5 @@
 import './Editor.css'
 import { useRef, useEffect } from 'react'
-import Quill from 'quill'
 
 const Editor = (props) => {
   const editorRef = useRef(null)
@@ -32,32 +31,34 @@ const Editor = (props) => {
   ]
 
   useEffect(() => {
-    if (editorRef.current && !props.quillInstance) {
-      const editor = new Quill(editorRef.current, {
-        theme: 'snow',
-        placeholder: 'Enter content...',
-        modules: {
-          toolbar: toolbarOptions
+    import('quill').then(({ default: Quill }) => {
+      if (editorRef.current && props.quillInstance === null) {
+        const editor = new Quill(editorRef.current, {
+          theme: 'snow',
+          placeholder: 'Enter content...',
+          modules: {
+            toolbar: toolbarOptions
+          }
+        })
+
+        if (props.content) {
+          editor.clipboard.dangerouslyPasteHTML(props.content)
         }
-      })
 
-      if (props.content) {
-        editor.clipboard.dangerouslyPasteHTML('<h1>HELLO</h1>')
+        props.setQuillInstance(editor)
+
+        editor.on('text-change', () => {
+          props.setContent(editor.root.innerHTML)
+        })
       }
-
-      props.setQuillInstance(editor)
-
-      editor.on('text-change', () => {
-        props.setContent(editor.root.innerHTML)
-      })
-    }
-  }, [props.quillInstance])
+    })
+  }, [props.quillInstance, editorRef])
 
   useEffect(() => {
     if (props.quillInstance && props.content) {
       props.quillInstance.clipboard.dangerouslyPasteHTML(props.content)
     }
-  }, [props.content])
+  }, [props.quillInstance, props.content])
 
   return (
     <div className="Editor">
