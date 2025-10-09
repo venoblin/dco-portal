@@ -1,5 +1,7 @@
 import './Editor.css'
 import { useRef, useEffect } from 'react'
+import Quill from 'quill'
+const Delta = Quill.import('delta')
 
 const Editor = (props) => {
   const editorRef = useRef(null)
@@ -40,10 +42,6 @@ const Editor = (props) => {
             toolbar: toolbarOptions
           }
         })
-
-        if (props.content) {
-          editor.clipboard.dangerouslyPasteHTML(props.content)
-        }
 
         props.setQuillInstance(editor)
 
