@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../contexts/AppContext'
 import useFormState from '../../hooks/useFormState'
-import { getSingleGuide, patchGuide } from '../../services/guides'
+import { getSingleGuide, patchGuide, deleteGuide } from '../../services/guides'
 import useFormState from '../../hooks/useFormState'
 import LoadingIcon from '../LoadingIcon'
 import Editor from '../Editor'
@@ -47,15 +47,21 @@ const GuideEdit = () => {
   }
 
   const handleDelete = () => {
-    const deleteGuide = async () => {
-      const res = await appContext.load()
+    const handler = async () => {
+      const res = await appContext.load(() => deleteGuide(id))
+      if (res) {
+        appContext.showPopup()
+        navigate('/guides')
+      } else {
+        appContext.showPopup("Couldn't delete guide")
+      }
     }
 
     appContext.showPopup({
       msg: 'Are you sure?',
       dismissBtnText: 'Cancel',
       component: (
-        <button className="danger-bg" onClick={deleteGuide}>
+        <button className="danger-bg" onClick={handler}>
           Delete
         </button>
       )
