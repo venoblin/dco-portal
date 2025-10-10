@@ -19,6 +19,7 @@ const GuideEdit = () => {
 
   const onSubmit = async (event) => {
     event.preventDefault()
+
     try {
       const update = { author: author, title: title, content: content }
 
