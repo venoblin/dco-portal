@@ -7,7 +7,7 @@ export const AppContext = createContext()
 
 export const AppProvider = (props) => {
   const [isLoading, toggleIsLoading] = useToggle(false)
-  const [popupMsg, setPopupMsg] = useState('')
+  const [popupOptions, setPopupOptions] = useState({ msg: '' })
   const [isPopup, setIsPopup] = useState(false)
   const [auth, setAuth] = useState({
     isAuthenticated: false,
@@ -30,11 +30,15 @@ export const AppProvider = (props) => {
       })
   }
 
-  const showPopup = (msg) => {
+  const showPopup = (config) => {
     document.body.style.overflow = 'hidden'
-    setPopupMsg(msg)
+    if (typeof config === 'string') {
+      setPopupOptions({ ...popupOptions, msg: config })
+    } else {
+      setPopupOptions({ ...config })
+    }
 
-    if (msg) {
+    if (config) {
       setIsPopup(true)
     } else {
       setIsPopup(false)
@@ -58,7 +62,7 @@ export const AppProvider = (props) => {
   return (
     <AppContext.Provider value={{ showPopup, isLoading, load, auth, setAuth }}>
       {isPopup === true && !isLoading && (
-        <Popup msg={popupMsg} showPopup={showPopup} />
+        <Popup options={popupOptions} showPopup={showPopup} />
       )}
       {props.children}
     </AppContext.Provider>

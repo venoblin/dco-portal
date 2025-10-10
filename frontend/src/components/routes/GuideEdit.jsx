@@ -46,6 +46,22 @@ const GuideEdit = () => {
     }
   }
 
+  const handleDelete = () => {
+    const deleteGuide = async () => {
+      const res = await appContext.load()
+    }
+
+    appContext.showPopup({
+      msg: 'Are you sure?',
+      dismissBtnText: 'Cancel',
+      component: (
+        <button className="danger-bg" onClick={deleteGuide}>
+          Delete
+        </button>
+      )
+    })
+  }
+
   useEffect(() => {
     getGuide()
   }, [])
@@ -60,7 +76,9 @@ const GuideEdit = () => {
 
         <div className="inputs">
           <button form="edit-guide-form">Update</button>
-          <button className="danger-bg">Delete</button>
+          <button onClick={handleDelete} className="danger-bg">
+            Delete
+          </button>
         </div>
       </header>
 

@@ -12,9 +12,12 @@ const Popup = (props) => {
 
   return (
     <div className="Popup">
-      <h2>{props.msg ? props.msg : 'Something happened!'}</h2>
+      {props.options.msg && <h2>{props.options.msg}</h2>}
+
+      {props.options.component && props.options.component}
+
       <button type="button" onClick={onClickHandler}>
-        Ok
+        {props.options.dismissBtnText ? props.options.dismissBtnText : 'Ok'}
       </button>
     </div>
   )
