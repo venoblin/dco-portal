@@ -6,8 +6,7 @@ const Popup = (props) => {
   const appContext = useContext(AppContext)
 
   const onClickHandler = () => {
-    appContext.showPopup()
-    document.body.style.overflow = 'initial'
+    appContext.dismissPopup()
   }
 
   return (

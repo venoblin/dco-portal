@@ -38,11 +38,13 @@ export const AppProvider = (props) => {
       setPopupOptions({ ...config })
     }
 
-    if (config) {
-      setIsPopup(true)
-    } else {
-      setIsPopup(false)
-    }
+    setIsPopup(true)
+  }
+
+  const dismissPopup = () => {
+    document.body.style.overflow = 'initial'
+    setPopupOptions({ msg: '' })
+    setIsPopup(false)
   }
 
   const checkToken = () => {
@@ -60,7 +62,9 @@ export const AppProvider = (props) => {
   }, [])
 
   return (
-    <AppContext.Provider value={{ showPopup, isLoading, load, auth, setAuth }}>
+    <AppContext.Provider
+      value={{ showPopup, dismissPopup, isLoading, load, auth, setAuth }}
+    >
       {isPopup === true && !isLoading && (
         <Popup options={popupOptions} showPopup={showPopup} />
       )}

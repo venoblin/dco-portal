@@ -51,7 +51,7 @@ const GuideEdit = () => {
     const handler = async () => {
       const res = await appContext.load(() => deleteGuide(id))
       if (res) {
-        appContext.showPopup()
+        appContext.dismissPopup()
         navigate('/guides')
       } else {
         appContext.showPopup("Couldn't delete guide")
