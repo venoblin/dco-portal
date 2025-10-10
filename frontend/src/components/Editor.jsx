@@ -1,6 +1,7 @@
 import './Editor.css'
 import { useRef, useEffect } from 'react'
 import useToggle from '../hooks/useToggle'
+import { Delta } from 'quill'
 
 const Editor = (props) => {
   const editorRef = useRef(null)
@@ -50,14 +51,14 @@ const Editor = (props) => {
         })
       }
     })
-  }, [props.quillInstance, editorRef])
+  }, [])
 
   useEffect(() => {
     if (props.quillInstance && props.content && !isContentLoaded) {
       props.quillInstance.clipboard.dangerouslyPasteHTML(props.content)
       toggleIsContentLoaded()
     }
-  }, [props.quillInstance, props.content])
+  }, [props.content])
 
   return (
     <div className="Editor">
