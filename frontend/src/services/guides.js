@@ -11,6 +11,12 @@ export const patchGuide = async (id, payload) => {
   return res
 }
 
+export const deleteGuide = async (id) => {
+  const res = await api.delete(`/guides/${id}`)
+
+  return res
+}
+
 export const getAllGuides = async (query) => {
   let res
   if (query) {

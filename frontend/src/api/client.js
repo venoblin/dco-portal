@@ -71,6 +71,22 @@ class Client {
     }
   }
 
+  async delete(endpoint) {
+    try {
+      const options = {
+        method: 'DELETE'
+      }
+
+      const res = await fetch(`${this.#constructUrl(endpoint)}`, options)
+
+      if (res.ok) {
+        return res.json()
+      }
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
   async upload(endpoint, payload, accessToken) {
     try {
       const res = await fetch(this.#constructUrl(endpoint), {
