@@ -1,10 +1,10 @@
 import './Editor.css'
 import { useRef, useEffect } from 'react'
-import Quill from 'quill'
-const Delta = Quill.import('delta')
+import useToggle from '../hooks/useToggle'
 
 const Editor = (props) => {
   const editorRef = useRef(null)
+  const [isContentLoaded, toggleIsContentLoaded] = useToggle(false)
 
   const toolbarOptions = [
     [
@@ -53,8 +53,9 @@ const Editor = (props) => {
   }, [props.quillInstance, editorRef])
 
   useEffect(() => {
-    if (props.quillInstance && props.content) {
+    if (props.quillInstance && props.content && !isContentLoaded) {
       props.quillInstance.clipboard.dangerouslyPasteHTML(props.content)
+      toggleIsContentLoaded()
     }
   }, [props.quillInstance, props.content])
 
