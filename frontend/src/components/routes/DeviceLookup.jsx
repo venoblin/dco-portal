@@ -64,7 +64,8 @@ const DeviceLookup = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
-      const dataArr = textData.split('\n')
+      const dataArr = textData.split(/[\n ]/)
+
       const cleanedArr = dataArr.filter((data) => data !== '')
 
       const queries = cleanedArr.map((data) => {
