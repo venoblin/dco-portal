@@ -32,8 +32,8 @@ const GuidesNew = () => {
       setContent('')
 
       navigate(`/guides/${res.guide.id}`)
-    } catch (error) {
-      appContext.showPopup(error.message)
+    } catch {
+      appContext.showPopup("Couldn't create guide")
     }
   }
 

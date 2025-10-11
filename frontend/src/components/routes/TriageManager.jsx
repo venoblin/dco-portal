@@ -1,13 +1,16 @@
 import { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { getAllTriages } from '../../services/triages'
+import { getAllTriages, postTriage } from '../../services/triages'
 import { AppContext } from '../../contexts/AppContext'
 import Panel from '../ui/Panel'
 import LoadingIcon from '../LoadingIcon'
+import useFormState from '../../hooks/useFormState'
+import { useNavigate } from 'react-router-dom'
 
 const TriageManager = () => {
   const appContext = useContext(AppContext)
   const [triages, setTriages] = useState(null)
+  const [name, onNameChange, setName, resetName] = useFormState('')
+  const navigate = useNavigate()
 
   const getTriages = async () => {
     try {
@@ -16,6 +19,23 @@ const TriageManager = () => {
       setTriages(res.triages)
     } catch (error) {
       appContext.showPopup(error.message)
+    }
+  }
+
+  const onSubmit = async (event) => {
+    event.preventDefault()
+
+    try {
+      const res = await appContext.load(() => postTriage({ name: name }))
+
+      if (res) {
+        resetName()
+        navigate(`/triages/${res.triage.id}`)
+      } else {
+        throw new Error()
+      }
+    } catch {
+      appContext.showPopup("Couldn't create triage")
     }
   }
 
@@ -28,9 +48,18 @@ const TriageManager = () => {
       <header>
         <h1>Triage Manager</h1>
 
-        <Link to="/tools/triage-manager/new" className="btn">
-          Create Triage
-        </Link>
+        <form onSubmit={onSubmit}>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Name"
+            value={name}
+            onChange={onNameChange}
+            required
+          />
+          <button>Create Triage</button>
+        </form>
       </header>
 
       <Panel>
