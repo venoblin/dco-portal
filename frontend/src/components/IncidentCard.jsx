@@ -97,8 +97,8 @@ const IncidentCard = (props) => {
               </div>
 
               <div className="machine-info">
-                <p className="muted-text">Asset:</p>
-                <p>{props.incident.device && props.incident.device.assetTag}</p>
+                <p className="muted-text">Model:</p>
+                <p>{props.incident.device && props.incident.device.model}</p>
               </div>
 
               <div className="machine-info">
