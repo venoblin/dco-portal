@@ -11,6 +11,7 @@ import Editor from '../Editor'
 const GuideEdit = () => {
   const appContext = useContext(AppContext)
   const navigate = useNavigate()
+  const [quillInstance, setQuillInstance] = useState(null)
   const [author, onAuthorChange, setAuthor] = useFormState('Admin')
   const [title, onTitleChange, setTitle] = useFormState('')
   const [content, setContent] = useState('')
@@ -20,7 +21,12 @@ const GuideEdit = () => {
     event.preventDefault()
 
     try {
-      const update = { author: author, title: title, content: content }
+      const update = {
+        author: author,
+        title: title,
+        content: content,
+        shortDescription: quillInstance.getText().slice(0, 255)
+      }
 
       const res = await appContext.load(() => patchGuide(id, update))
 
@@ -121,7 +127,11 @@ const GuideEdit = () => {
               />
             </div>
 
-            <Editor content={content} setContent={setContent} />
+            <Editor
+              setQuillInstance={setQuillInstance}
+              content={content}
+              setContent={setContent}
+            />
           </form>
         </div>
       ) : (

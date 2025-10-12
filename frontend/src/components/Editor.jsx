@@ -1,7 +1,10 @@
 import './Editor.css'
+import { useEffect, useRef } from 'react'
 import ReactQuill from 'react-quill-new'
 
 const Editor = (props) => {
+  const quillRef = useRef()
+
   const modules = {
     toolbar: [
       [
@@ -30,9 +33,20 @@ const Editor = (props) => {
     ]
   }
 
+  useEffect(() => {
+    if (quillRef.current && props.setQuillInstance) {
+      const editor = quillRef.current.getEditor()
+
+      const unprivilegedEditor = quillRef.current.makeUnprivilegedEditor(editor)
+
+      props.setQuillInstance(unprivilegedEditor)
+    }
+  }, [])
+
   return (
     <div className="Editor">
       <ReactQuill
+        ref={quillRef}
         theme="snow"
         modules={modules}
         value={props.content}
