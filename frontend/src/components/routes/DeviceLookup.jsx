@@ -66,7 +66,7 @@ const DeviceLookup = () => {
 
     try {
       const lowerCase = textData.toLowerCase()
-      const dataArr = lowerCase.split(/[\n]/)
+      const dataArr = lowerCase.split(/[\n ]/)
 
       const cleanedArr = dataArr.filter((data) => data !== '')
 
