@@ -31,7 +31,7 @@ const patchTriage = async (req, res) => {
     const count = await repo.patchTriage(id, req.body)
 
     if (count === 1) {
-      const triage = await getSingleTriage(req, res)
+      const triage = await repo.getSingleTriage(id)
 
       return res.status(201).json({
         triage: triage

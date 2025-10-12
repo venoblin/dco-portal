@@ -64,7 +64,7 @@ Make sure Node and Git are installed.
 1. **Clone the DCO branch**
 
 ```sh
-git clone -b dco git@github.com:venoblin/dco-portal.git
+git clone -b dco https://github.com/venoblin/dco-portal.git
 ```
 
 2. **Change directory to project directory**
