@@ -8,10 +8,6 @@ module.exports = (sequelize) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false
-      },
-      rack: {
-        type: DataTypes.STRING,
-        allowNull: false
       }
     },
     {
