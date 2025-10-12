@@ -44,7 +44,7 @@ const patchGuide = async (req, res) => {
     const count = await repo.patchGuide(id, req.body)
 
     if (count === 1) {
-      const guide = await getSingleGuide(req, res)
+      const guide = await repo.getSingleGuide(id)
 
       return res.status(201).json({
         guide: guide
