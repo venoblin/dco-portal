@@ -21,7 +21,12 @@ const GuideEdit = () => {
     event.preventDefault()
 
     try {
-      const update = { author: author, title: title, content: content }
+      const update = {
+        author: author,
+        title: title,
+        content: content,
+        shortDescription: quillInstance.getText().slice(0, 255)
+      }
 
       const res = await appContext.load(() => patchGuide(id, update))
 
@@ -123,11 +128,9 @@ const GuideEdit = () => {
             </div>
 
             <Editor
-              guideId={id}
+              setQuillInstance={setQuillInstance}
               content={content}
               setContent={setContent}
-              quillInstance={quillInstance}
-              setQuillInstance={setQuillInstance}
             />
           </form>
         </div>

@@ -22,7 +22,7 @@ const GuidesNew = () => {
         author: author,
         title: title,
         content: content,
-        shortDescription: quillInstance.root.innerText.slice(0, 255)
+        shortDescription: quillInstance.getText().slice(0, 255)
       }
 
       const res = await appContext.load(() => postGuide(newGuide))
@@ -82,9 +82,9 @@ const GuidesNew = () => {
             </div>
 
             <Editor
-              setContent={setContent}
-              quillInstance={quillInstance}
               setQuillInstance={setQuillInstance}
+              content={content}
+              setContent={setContent}
             />
           </form>
         </div>
