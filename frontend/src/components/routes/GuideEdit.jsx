@@ -11,7 +11,6 @@ import Editor from '../Editor'
 const GuideEdit = () => {
   const appContext = useContext(AppContext)
   const navigate = useNavigate()
-  const [quillInstance, setQuillInstance] = useState(null)
   const [author, onAuthorChange, setAuthor] = useFormState('Admin')
   const [title, onTitleChange, setTitle] = useFormState('')
   const [content, setContent] = useState('')
@@ -122,13 +121,7 @@ const GuideEdit = () => {
               />
             </div>
 
-            <Editor
-              guideId={id}
-              content={content}
-              setContent={setContent}
-              quillInstance={quillInstance}
-              setQuillInstance={setQuillInstance}
-            />
+            <Editor content={content} setContent={setContent} />
           </form>
         </div>
       ) : (

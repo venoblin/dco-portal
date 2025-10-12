@@ -1,4 +1,4 @@
-import 'quill/dist/quill.snow.css'
+import 'react-quill-new/dist/quill.snow.css'
 import './styles/App.css'
 import { useContext } from 'react'
 import { Route, Routes } from 'react-router-dom'
