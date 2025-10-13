@@ -5,6 +5,7 @@ import { AppContext } from '../../contexts/AppContext'
 import { getSingleTriage } from '../../services/triages'
 import LoadingIcon from '../LoadingIcon'
 import Panel from '../ui/Panel'
+import DeviceTriageCard from '../DeviceTriageCard'
 
 const TriageNew = () => {
   const appContext = useContext(AppContext)
@@ -40,7 +41,7 @@ const TriageNew = () => {
 
         {triage && (
           <div className="inputs">
-            <button>New Path</button>
+            <button>Create Device</button>
             <button>Download</button>
           </div>
         )}
@@ -49,10 +50,12 @@ const TriageNew = () => {
       <Panel>
         {!appContext.isLoading ? (
           <div>
-            {triage && triage.paths && triage.paths.length ? (
-              <div>Paths</div>
+            {triage && triage.devices && triage.devices.length ? (
+              triage.devices.map((d) => (
+                <DeviceTriageCard key={d.id} device={d} />
+              ))
             ) : (
-              <p>There are no paths!</p>
+              <p>There are no devices!</p>
             )}
           </div>
         ) : (
