@@ -1,3 +1,4 @@
+import './TriageManager.css'
 import { useContext, useEffect, useState } from 'react'
 import { getAllTriages, postTriage } from '../../services/triages'
 import { AppContext } from '../../contexts/AppContext'
@@ -44,7 +45,7 @@ const TriageManager = () => {
   }, [])
 
   return (
-    <div>
+    <div className="TriageManager">
       <header>
         <h1>Triage Manager</h1>
 
