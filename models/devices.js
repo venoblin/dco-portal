@@ -8,18 +8,6 @@ module.exports = (sequelize, DataTypes) => {
       hostname: {
         type: DataTypes.STRING,
         allowNull: false
-      },
-      assetTag: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      rack: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      height: {
-        type: DataTypes.INTEGER,
-        allowNull: false
       }
     },
     {

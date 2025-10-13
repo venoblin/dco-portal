@@ -8,7 +8,8 @@ const sequelize = new Sequelize({
 const models = {
   Guide: require('./guides')(sequelize, DataTypes),
   Triage: require('./triages')(sequelize, DataTypes),
-  Device: require('./devices')(sequelize, DataTypes)
+  Device: require('./devices')(sequelize, DataTypes),
+  Path: require('./paths')(sequelize, DataTypes)
 }
 
 Object.keys(models).forEach((modelName) => {

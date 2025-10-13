@@ -17,10 +17,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false
       },
-      destAssetTag: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
       destPort: {
         type: DataTypes.STRING,
         allowNull: false

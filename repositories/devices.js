@@ -30,10 +30,7 @@ const patchDevice = async (id, payload) => {
 const postDevice = async (payload) => {
   const device = await Device.create({
     triageId: payload.triageId,
-    hostname: payload.hostname,
-    assetTag: payload.assetTag,
-    rack: payload.rack,
-    height: payload.height
+    hostname: payload.hostname
   })
 
   return device
