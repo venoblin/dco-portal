@@ -34,10 +34,10 @@ module.exports = (sequelize, DataTypes) => {
       as: 'triage'
     })
 
-    // Device.hasMany(models.Path, {
-    //   foreignKey: 'deviceId',
-    //   as: 'paths'
-    // })
+    Device.hasMany(models.Path, {
+      foreignKey: 'deviceId',
+      as: 'paths'
+    })
   }
 
   return Device
