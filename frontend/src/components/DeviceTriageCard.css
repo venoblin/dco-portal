@@ -1,0 +1,7 @@
+.DeviceTriageCard {
+  padding: var(--default-spacing);
+}
+
+.DeviceTriageCard h2 {
+  margin-bottom: var(--default-spacing);
+}

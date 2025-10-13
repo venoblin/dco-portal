@@ -1,10 +1,11 @@
+import './DeviceTriageCard.css'
 import PathTriageCard from './PathTriageCard'
 
 const DeviceTriageCard = (props) => {
   return (
-    <div>
+    <div className="DeviceTriageCard">
       <div className="device">
-        <p>{props.device.hostname}</p>
+        <h2>{props.device.hostname}</h2>
       </div>
 
       <div className="paths">
