@@ -1,8 +1,9 @@
 const { Op } = require('sequelize')
-const { Triage } = require('../models')
+const { Triage, Device } = require('../models')
 
 const getAllTriages = async (options) => {
   let triages
+
   if (options) {
     triages = await Triage.findAll(options)
   } else {
@@ -13,7 +14,14 @@ const getAllTriages = async (options) => {
 }
 
 const getSingleTriage = async (id) => {
-  const triage = await Triage.findByPk(id)
+  const triage = await Triage.findByPk(id, {
+    include: [
+      {
+        model: Device,
+        as: 'devices'
+      }
+    ]
+  })
 
   return triage
 }

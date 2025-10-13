@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   )
 
-  Triage.associations = function (models) {
+  Triage.associate = function (models) {
     Triage.hasMany(models.Device, {
       foreignKey: 'triageId',
       as: 'devices'
