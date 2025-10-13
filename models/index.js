@@ -5,11 +5,16 @@ const sequelize = new Sequelize({
   storage: './db.sqlite'
 })
 
-const Guide = require('./guides')(sequelize, DataTypes)
-const Triage = require('./triages')(sequelize, DataTypes)
-
-module.exports = {
-  sequelize,
-  Guide,
-  Triage
+const models = {
+  Guide: require('./guides')(sequelize, DataTypes),
+  Triage: require('./triages')(sequelize, DataTypes),
+  Device: require('./devices')(sequelize, DataTypes)
 }
+
+Object.keys(models).forEach((modelName) => {
+  if (models[modelName].associate) {
+    models[modelName].associate(models)
+  }
+})
+
+module.exports = { sequelize, ...models }

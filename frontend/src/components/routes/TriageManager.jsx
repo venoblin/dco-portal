@@ -31,7 +31,7 @@ const TriageManager = () => {
 
       if (res) {
         resetName()
-        navigate(`/triages/${res.triage.id}`)
+        navigate(`/tools/triage-manager/${res.triage.id}`)
       } else {
         throw new Error()
       }

@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false
       },
-      rack: {
+      assetTag: {
         type: DataTypes.STRING,
         allowNull: false
       },
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       },
       height: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false
       }
     },
@@ -27,6 +27,18 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'Device'
     }
   )
+
+  Device.associate = function (models) {
+    Device.belongsTo(models.Triage, {
+      foreignKey: 'triageId',
+      as: 'triage'
+    })
+
+    // Device.hasMany(models.Path, {
+    //   foreignKey: 'deviceId',
+    //   as: 'paths'
+    // })
+  }
 
   return Device
 }
