@@ -1,3 +1,4 @@
+import './TriageEdit.css'
 import { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { AppContext } from '../../contexts/AppContext'
@@ -29,7 +30,7 @@ const TriageNew = () => {
   }, [])
 
   return (
-    <div>
+    <div className="TriageEdit">
       <header>
         <div>
           <Link to="/tools/triage-manager">← Back</Link>
@@ -46,9 +47,9 @@ const TriageNew = () => {
       </header>
 
       <Panel>
-        {appContext.isLoading ? (
+        {!appContext.isLoading ? (
           <div>
-            {triage.paths && triage.paths.length ? (
+            {triage && triage.paths && triage.paths.length ? (
               <div>Paths</div>
             ) : (
               <p>There are no paths!</p>

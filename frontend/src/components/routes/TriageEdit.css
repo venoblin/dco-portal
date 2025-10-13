@@ -1,0 +1,7 @@
+.TriageEdit header button {
+  margin-right: var(--default-spacing);
+}
+
+.TriageEdit header button:last-of-type {
+  margin-right: 0;
+}
