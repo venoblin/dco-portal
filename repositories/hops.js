@@ -29,6 +29,7 @@ const patchHop = async (id, payload) => {
 
 const postHop = async (payload) => {
   const hop = await Hop.create({
+    pathId: payload.pathId,
     hop: payload.hop
   })
 
