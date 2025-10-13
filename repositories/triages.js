@@ -1,5 +1,5 @@
 const { Op } = require('sequelize')
-const { Triage, Device } = require('../models')
+const { Triage, Device, Path } = require('../models')
 
 const getAllTriages = async (options) => {
   let triages
@@ -18,7 +18,8 @@ const getSingleTriage = async (id) => {
     include: [
       {
         model: Device,
-        as: 'devices'
+        as: 'devices',
+        include: [{ model: Path, as: 'paths' }]
       }
     ]
   })
