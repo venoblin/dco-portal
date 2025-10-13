@@ -1,6 +1,6 @@
-const { Model, DataTypes } = require('sequelize')
+const { Model } = require('sequelize')
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class Triage extends Model {}
 
   Triage.init(
@@ -15,6 +15,13 @@ module.exports = (sequelize) => {
       modelName: 'Triage'
     }
   )
+
+  Triage.associations = function (models) {
+    Triage.hasMany(models.Device, {
+      foreignKey: 'triageId',
+      as: 'devices'
+    })
+  }
 
   return Triage
 }
