@@ -37,6 +37,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'deviceId',
       as: 'device'
     })
+
+    Path.hasMany(models.Hop, {
+      foreignKey: 'pathId',
+      as: 'hops'
+    })
   }
 
   return Path

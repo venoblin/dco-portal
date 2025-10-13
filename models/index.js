@@ -9,7 +9,8 @@ const models = {
   Guide: require('./guides')(sequelize, DataTypes),
   Triage: require('./triages')(sequelize, DataTypes),
   Device: require('./devices')(sequelize, DataTypes),
-  Path: require('./paths')(sequelize, DataTypes)
+  Path: require('./paths')(sequelize, DataTypes),
+  Hop: require('./hops')(sequelize, DataTypes)
 }
 
 Object.keys(models).forEach((modelName) => {
