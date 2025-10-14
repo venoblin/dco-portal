@@ -10,7 +10,7 @@ import { postPath } from '../services/paths'
 const DeviceTriageCard = (props) => {
   const appContext = useContext(AppContext)
   const [port, onPortChange, setPort, resetPort] = useFormState('')
-  const [isPortActice, toggleIsPortActice, setIsPortActive, resetIsPortActive] =
+  const [isPortActive, toggleIsPortActive, setIsPortActive, resetIsPortActive] =
     useToggle(false)
   const [
     destHostname,
@@ -35,24 +35,23 @@ const DeviceTriageCard = (props) => {
         postPath({
           deviceId: props.device.id,
           port: port,
-          isPortActice: isPortActice,
+          isPortActive: isPortActive,
           destHostname: destHostname,
           destPort: destPort,
           destIsPortActive: destIsPortActive
         })
       )
 
-      console.log(res)
-
       if (res) {
-        const newDevices = props.devices.map((d) => {
+        const updatedDevices = props.triage.devices.map((d) => {
           if (d.id === props.device.id) {
             d.paths.push(res.path)
           }
+
           return d
         })
 
-        props.setTriage({ ...props.triage, devices: newDevices })
+        props.setTriage({ ...props.triage, devices: updatedDevices })
       } else {
         throw new Error()
       }
@@ -62,8 +61,9 @@ const DeviceTriageCard = (props) => {
       resetDestHostname()
       resetDestPort()
       resetDestIsPortActive()
-    } catch {
-      appContext.showPopup("Couldn't create device")
+    } catch (err) {
+      console.log(err)
+      appContext.showPopup("Couldn't create path")
     }
   }
 
@@ -81,7 +81,7 @@ const DeviceTriageCard = (props) => {
         )}
       </div>
 
-      <form>
+      <form onSubmit={onPathSubmit}>
         <div className="inner-wrap">
           <div className="form-section">
             <label htmlFor={`port_${props.device.id}`}>Port</label>
@@ -98,16 +98,16 @@ const DeviceTriageCard = (props) => {
             <div className="checkbox-wrap">
               <label
                 className="show"
-                htmlFor={`isPortActice_${props.device.id}`}
+                htmlFor={`isPortActive_${props.device.id}`}
               >
                 UP:
               </label>
               <input
-                id={`isPortActice_${props.device.id}`}
-                name="isPortActice"
+                id={`isPortActive_${props.device.id}`}
+                name="isPortActive"
                 type="checkbox"
-                checked={isPortActice}
-                onChange={toggleIsPortActice}
+                checked={isPortActive}
+                onChange={toggleIsPortActive}
               />
             </div>
           </div>
@@ -127,7 +127,7 @@ const DeviceTriageCard = (props) => {
             </g>
           </svg>
 
-          <div className="form-section" onSubmit={onPathSubmit}>
+          <div className="form-section">
             <label htmlFor={`destHostname_${props.device.id}`}>
               Destination
             </label>

@@ -55,7 +55,8 @@ const postPath = async (req, res) => {
     return res.status(201).json({
       path: path
     })
-  } catch {
+  } catch (err) {
+    console.log(err)
     return res.status(500).json({
       message: 'Failed to create path'
     })
