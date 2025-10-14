@@ -3,13 +3,54 @@ import PathTriageCard from './PathTriageCard'
 import Panel from './ui/Panel'
 import useFormState from '../hooks/useFormState'
 import useToggle from '../hooks/useToggle'
+import { useContext } from 'react'
+import { AppContext } from '../contexts/AppContext'
+import { postPath } from '../services/paths'
 
 const DeviceTriageCard = (props) => {
-  const [port, onPortChange] = useFormState('')
-  const [isPortActice, toggleIsPortActice] = useToggle(false)
-  const [destHostname, onDestHostnameChange] = useFormState('')
-  const [destPort, onDestPortChange] = useFormState('')
-  const [destIsPortActive, onDestIsPortActive] = useToggle(false)
+  const appContext = useContext(AppContext)
+  const [port, onPortChange, setPort, resetPort] = useFormState('')
+  const [isPortActice, toggleIsPortActice, setIsPortActive, resetIsPortActive] =
+    useToggle(false)
+  const [
+    destHostname,
+    onDestHostnameChange,
+    setDestHostname,
+    resetDestHostname
+  ] = useFormState('')
+  const [destPort, onDestPortChange, setDestPort, resetDestPort] =
+    useFormState('')
+  const [
+    destIsPortActive,
+    onDestIsPortActive,
+    setDestIsPortActive,
+    resetDestIsPortActive
+  ] = useToggle(false)
+
+  const onPathSubmit = async (event) => {
+    event.preventDefault()
+
+    try {
+      const res = await appContext.load(() =>
+        postPath({
+          deviceId: props.device.id,
+          port: port,
+          isPortActice: isPortActice,
+          destHostname: destHostname,
+          destPort: destPort,
+          destIsPortActive: destIsPortActive
+        })
+      )
+
+      resetPort()
+      resetIsPortActive()
+      resetDestHostname()
+      resetDestPort()
+      resetDestIsPortActive()
+    } catch {
+      appContext.showPopup("Couldn't create device")
+    }
+  }
 
   return (
     <Panel className="DeviceTriageCard">
@@ -71,7 +112,7 @@ const DeviceTriageCard = (props) => {
             </g>
           </svg>
 
-          <div className="form-section">
+          <div className="form-section" onSubmit={onPathSubmit}>
             <label htmlFor={`destHostname_${props.device.id}`}>
               Destination
             </label>
