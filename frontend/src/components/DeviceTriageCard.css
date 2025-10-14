@@ -5,3 +5,12 @@
 .DeviceTriageCard .paths {
   margin: var(--default-spacing) 0;
 }
+
+.DeviceTriageCard form .inner-wrap {
+  display: flex;
+}
+
+.DeviceTriageCard form .form-section {
+  display: flex;
+  flex-direction: column;
+}

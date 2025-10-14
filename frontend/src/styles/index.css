@@ -108,6 +108,11 @@ label {
   left: -999999px;
 }
 
+label.show {
+  position: initial;
+  left: initial;
+}
+
 .btn,
 button,
 .file-label {

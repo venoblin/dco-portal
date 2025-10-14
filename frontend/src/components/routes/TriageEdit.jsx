@@ -91,7 +91,7 @@ const TriageNew = () => {
           <div>
             {triage && triage.devices && triage.devices.length ? (
               triage.devices.map((d) => (
-                <DeviceTriageCard key={d.id} device={d} />
+                <DeviceTriageCard key={d.id} triage={triage} device={d} />
               ))
             ) : (
               <p>There are no devices!</p>
