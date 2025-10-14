@@ -12,7 +12,7 @@ const DeviceTriageCard = (props) => {
         {props.device.paths && props.device.paths.length > 0 ? (
           props.device.paths.map((p) => <PathTriageCard key={p.id} path={p} />)
         ) : (
-          <p>There are no paths</p>
+          <p>There are no paths!</p>
         )}
       </div>
     </div>

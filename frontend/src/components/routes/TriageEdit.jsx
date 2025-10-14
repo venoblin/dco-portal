@@ -79,7 +79,7 @@ const TriageNew = () => {
                 onChange={onHostnameChange}
                 required
               />
-              <button>Create Device</button>
+              <button>Add Device</button>
             </form>
 
             <button>Download</button>
