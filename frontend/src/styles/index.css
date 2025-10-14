@@ -106,6 +106,7 @@ h2 {
 label {
   position: absolute;
   left: -999999px;
+  cursor: pointer;
 }
 
 label.show {
