@@ -1,9 +1,10 @@
 import './DeviceTriageCard.css'
 import PathTriageCard from './PathTriageCard'
+import Panel from './ui/Panel'
 
 const DeviceTriageCard = (props) => {
   return (
-    <div className="DeviceTriageCard">
+    <Panel className="DeviceTriageCard">
       <div className="device">
         <h2>{props.device.hostname}</h2>
       </div>
@@ -15,7 +16,9 @@ const DeviceTriageCard = (props) => {
           <p>There are no paths!</p>
         )}
       </div>
-    </div>
+
+      <button>Add Path</button>
+    </Panel>
   )
 }
 

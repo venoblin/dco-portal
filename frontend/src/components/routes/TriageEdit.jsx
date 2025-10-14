@@ -5,7 +5,6 @@ import { AppContext } from '../../contexts/AppContext'
 import { getSingleTriage } from '../../services/triages'
 import useFormState from '../../hooks/useFormState'
 import LoadingIcon from '../LoadingIcon'
-import Panel from '../ui/Panel'
 import DeviceTriageCard from '../DeviceTriageCard'
 import { postDevice } from '../../services/devices'
 
@@ -87,7 +86,7 @@ const TriageNew = () => {
         )}
       </header>
 
-      <Panel>
+      <div>
         {!appContext.isLoading ? (
           <div>
             {triage && triage.devices && triage.devices.length ? (
@@ -101,7 +100,7 @@ const TriageNew = () => {
         ) : (
           <LoadingIcon />
         )}
-      </Panel>
+      </div>
     </div>
   )
 }

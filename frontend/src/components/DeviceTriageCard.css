@@ -2,6 +2,6 @@
   padding: var(--default-spacing);
 }
 
-.DeviceTriageCard h2 {
-  margin-bottom: var(--default-spacing);
+.DeviceTriageCard .paths {
+  margin: var(--default-spacing) 0;
 }

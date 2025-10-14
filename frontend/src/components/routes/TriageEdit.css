@@ -1,3 +1,11 @@
 .TriageEdit header form {
   margin-right: var(--default-spacing);
 }
+
+.TriageEdit .DeviceTriageCard {
+  margin-bottom: var(--default-spacing);
+}
+
+.TriageEdit .DeviceTriageCard:last-of-type {
+  margin-bottom: 0;
+}
