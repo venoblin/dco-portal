@@ -3,12 +3,16 @@ import { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { AppContext } from '../../contexts/AppContext'
 import { getSingleTriage } from '../../services/triages'
+import useFormState from '../../hooks/useFormState'
 import LoadingIcon from '../LoadingIcon'
 import Panel from '../ui/Panel'
 import DeviceTriageCard from '../DeviceTriageCard'
+import { postDevice } from '../../services/devices'
 
 const TriageNew = () => {
   const appContext = useContext(AppContext)
+  const [hostname, onHostnameChange, setHostname, resetHostname] =
+    useFormState('')
   const [triage, setTriage] = useState(null)
   const { id } = useParams()
 
@@ -26,6 +30,29 @@ const TriageNew = () => {
     }
   }
 
+  const onSubmit = async (event) => {
+    event.preventDefault()
+
+    try {
+      const res = await appContext.load(() =>
+        postDevice({
+          triageId: id,
+          hostname: hostname
+        })
+      )
+
+      resetHostname()
+
+      if (res) {
+        getTriage()
+      } else {
+        throw new Error()
+      }
+    } catch {
+      appContext.showPopup("Couldn't create device")
+    }
+  }
+
   useEffect(() => {
     getTriage()
   }, [])
@@ -39,9 +66,22 @@ const TriageNew = () => {
           {triage && <h1>{triage.name}</h1>}
         </div>
 
-        {triage && (
+        {triage && !appContext.isLoading && (
           <div className="inputs">
-            <button>Create Device</button>
+            <form className="input-button-combine" onSubmit={onSubmit}>
+              <label htmlFor="hostname">Hostname</label>
+              <input
+                type="text"
+                name="hostname"
+                id="hostname"
+                placeholder="Hostname"
+                value={hostname}
+                onChange={onHostnameChange}
+                required
+              />
+              <button>Create Device</button>
+            </form>
+
             <button>Download</button>
           </div>
         )}
