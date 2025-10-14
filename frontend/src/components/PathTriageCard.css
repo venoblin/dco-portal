@@ -1,4 +1,10 @@
 .PathTriageCard {
+  padding: var(--default-spacing) 0;
+  border-bottom: var(--default-border);
+  border-color: var(--bg-color);
+}
+
+.PathTriageCard .main-wrap {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -9,4 +15,9 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
+}
+
+.PathTriageCard form {
+  display: flex;
+  flex-direction: column;
 }

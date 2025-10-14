@@ -2,8 +2,8 @@
   padding: var(--default-spacing);
 }
 
-.DeviceTriageCard .paths {
-  margin: var(--default-spacing) 0;
+.DeviceTriageCard form {
+  margin-top: var(--default-spacing);
 }
 
 .DeviceTriageCard form button {

@@ -86,6 +86,7 @@ const DeviceTriageCard = (props) => {
           <div className="form-section">
             <label htmlFor={`port_${props.device.id}`}>Port</label>
             <input
+              className="small"
               type="text"
               name="port"
               id={`port_${props.device.id}`}
@@ -142,6 +143,7 @@ const DeviceTriageCard = (props) => {
 
             <label htmlFor={`destPort_${props.device.id}`}>Port</label>
             <input
+              className="small"
               type="text"
               name="destPort"
               id={`destPort_${props.device.id}`}
