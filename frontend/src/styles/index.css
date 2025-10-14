@@ -314,3 +314,19 @@ thead th {
 .guide-form div:last-of-type {
   margin-bottom: var(--default-spacing);
 }
+
+.input-button-combine {
+  display: flex;
+  border: var(--default-border);
+  border-radius: var(--default-border-radius);
+}
+
+.input-button-combine input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-button-combine button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
