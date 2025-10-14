@@ -2,7 +2,9 @@ const repo = require('../repositories/triages')
 
 const getAllTriages = async (req, res) => {
   try {
-    const triages = await repo.getAllTriages()
+    const triages = await repo.getAllTriages({
+      order: [['createdAt', 'DESC']]
+    })
 
     return res.status(200).json({ triages: triages })
   } catch {

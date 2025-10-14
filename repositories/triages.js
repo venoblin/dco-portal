@@ -19,8 +19,23 @@ const getSingleTriage = async (id) => {
       {
         model: Device,
         as: 'devices',
+        separate: true,
+        order: [['createdAt', 'ASC']],
         include: [
-          { model: Path, as: 'paths', include: [{ model: Hop, as: 'hops' }] }
+          {
+            model: Path,
+            as: 'paths',
+            separate: true,
+            order: [['createdAt', 'ASC']],
+            include: [
+              {
+                model: Hop,
+                as: 'hops',
+                separate: true,
+                order: [['createdAt', 'ASC']]
+              }
+            ]
+          }
         ]
       }
     ]
