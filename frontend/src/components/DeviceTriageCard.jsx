@@ -42,6 +42,21 @@ const DeviceTriageCard = (props) => {
         })
       )
 
+      console.log(res)
+
+      if (res) {
+        const newDevices = props.devices.map((d) => {
+          if (d.id === props.device.id) {
+            d.paths.push(res.path)
+          }
+          return d
+        })
+
+        props.setTriage({ ...props.triage, devices: newDevices })
+      } else {
+        throw new Error()
+      }
+
       resetPort()
       resetIsPortActive()
       resetDestHostname()

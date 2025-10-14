@@ -43,7 +43,7 @@ const TriageNew = () => {
       resetHostname()
 
       if (res) {
-        getTriage()
+        setTriage({ ...triage, devices: [...triage.devices, res.device] })
       } else {
         throw new Error()
       }
@@ -91,7 +91,12 @@ const TriageNew = () => {
           <div>
             {triage && triage.devices && triage.devices.length ? (
               triage.devices.map((d) => (
-                <DeviceTriageCard key={d.id} device={d} />
+                <DeviceTriageCard
+                  key={d.id}
+                  triage={triage}
+                  setTriage={setTriage}
+                  device={d}
+                />
               ))
             ) : (
               <p>There are no devices!</p>
