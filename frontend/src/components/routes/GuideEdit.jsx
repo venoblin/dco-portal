@@ -15,6 +15,7 @@ const GuideEdit = () => {
   const [author, onAuthorChange, setAuthor] = useFormState('Admin')
   const [title, onTitleChange, setTitle] = useFormState('')
   const [content, setContent] = useState('')
+  const [guide, setGuide] = useState(null)
   const { id } = useParams()
 
   const onSubmit = async (event) => {
@@ -44,6 +45,7 @@ const GuideEdit = () => {
     try {
       const res = await appContext.load(() => getSingleGuide(id))
 
+      setGuide(res.guide)
       setAuthor(res.guide.author)
       setTitle(res.guide.title)
       setContent(res.guide.content)
@@ -64,7 +66,7 @@ const GuideEdit = () => {
     }
 
     appContext.showPopup({
-      msg: 'Are you sure?',
+      msg: `Are you sure you want to delete "${guide.title}"?`,
       dismissBtnText: 'Cancel',
       component: (
         <button className="danger-bg" onClick={handler}>

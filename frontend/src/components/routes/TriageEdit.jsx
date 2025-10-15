@@ -95,7 +95,7 @@ const TriageNew = () => {
     }
 
     appContext.showPopup({
-      msg: 'Are you sure?',
+      msg: `Are you sure you want to delete "${triage.name}"?`,
       dismissBtnText: 'Cancel',
       component: (
         <button className="danger-bg" onClick={handler}>
