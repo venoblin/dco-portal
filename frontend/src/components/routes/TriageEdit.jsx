@@ -140,9 +140,9 @@ const TriageNew = () => {
               ) : (
                 <div className="name-wrap">
                   <h1>{triage.name}</h1>
-                  <button onClick={toggleIsEditMode}>Rename</button>
+                  <button onClick={toggleIsEditMode}>Rename Triage</button>
                   <button onClick={handleDelete} className="danger-bg">
-                    Delete
+                    Delete Triage
                   </button>
                 </div>
               )}

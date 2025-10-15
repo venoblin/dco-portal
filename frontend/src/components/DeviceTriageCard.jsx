@@ -6,6 +6,7 @@ import useToggle from '../hooks/useToggle'
 import { useContext } from 'react'
 import { AppContext } from '../contexts/AppContext'
 import { postPath } from '../services/paths'
+import { deleteDevice } from '../services/devices'
 
 const DeviceTriageCard = (props) => {
   const appContext = useContext(AppContext)
@@ -26,6 +27,7 @@ const DeviceTriageCard = (props) => {
     setDestIsPortActive,
     resetDestIsPortActive
   ] = useToggle(false)
+  const [isEditMode, toggleIsEditMode] = useToggle(false)
 
   const onPathSubmit = async (event) => {
     event.preventDefault()
@@ -67,12 +69,44 @@ const DeviceTriageCard = (props) => {
     }
   }
 
+  const handleDelete = () => {
+    const handler = async () => {
+      const res = await appContext.load(() => deleteDevice(props.device.id))
+      if (res) {
+        const updatedDevices = props.triage.devices.filter(
+          (d) => d.id !== props.device.id
+        )
+
+        props.setTriage({ ...props.triage, devices: updatedDevices })
+
+        appContext.dismissPopup()
+      } else {
+        appContext.dismissPopup()
+        appContext.showPopup("Couldn't delete guide")
+      }
+    }
+
+    appContext.showPopup({
+      msg: `Are you sure you want to delete "${props.device.hostname}"?`,
+      dismissBtnText: 'Cancel',
+      component: (
+        <button className="danger-bg" onClick={handler}>
+          Delete
+        </button>
+      )
+    })
+  }
+
   return (
     <Panel className="DeviceTriageCard">
       <header className="device">
-        <h2>{props.device.hostname}</h2>
-
-        <div></div>
+        <div>
+          <h2>{props.device.hostname}</h2>
+          <button onClick={toggleIsEditMode}>Rename Device</button>
+          <button onClick={handleDelete} className="danger-bg">
+            Delete Device
+          </button>
+        </div>
       </header>
 
       <div className="paths">

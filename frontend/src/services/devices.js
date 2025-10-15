@@ -5,3 +5,9 @@ export const postDevice = async (payload) => {
 
   return res
 }
+
+export const deleteDevice = async (id) => {
+  const res = await api.delete(`/devices/${id}`)
+
+  return res
+}
