@@ -4,6 +4,16 @@
   border-color: var(--bg-color);
 }
 
+.PathTriageCard:hover .device p,
+.PathTriageCard:hover .destination p {
+  color: var(--accent-color);
+}
+
+.PathTriageCard:hover .device p,
+.PathTriageCard:hover .destination p {
+  transition: color var(--default-transition);
+}
+
 .PathTriageCard .main-wrap {
   display: flex;
   justify-content: space-between;
