@@ -69,9 +69,11 @@ const DeviceTriageCard = (props) => {
 
   return (
     <Panel className="DeviceTriageCard">
-      <div className="device">
+      <header className="device">
         <h2>{props.device.hostname}</h2>
-      </div>
+
+        <div></div>
+      </header>
 
       <div className="paths">
         {props.device.paths && props.device.paths.length > 0 ? (
@@ -89,7 +91,7 @@ const DeviceTriageCard = (props) => {
         )}
       </div>
 
-      <form onSubmit={onPathSubmit}>
+      <form onSubmit={onPathSubmit} className="device-form">
         <div className="inner-wrap">
           <div className="form-section">
             <label htmlFor={`port_${props.device.id}`}>Port</label>

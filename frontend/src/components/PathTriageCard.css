@@ -25,6 +25,7 @@
 .PathTriageCard .hops {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin: 0 var(--default-spacing);
 }
 
