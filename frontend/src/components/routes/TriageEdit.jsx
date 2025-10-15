@@ -138,7 +138,7 @@ const TriageNew = () => {
                   </button>
                 </form>
               ) : (
-                <div className="name-wrap">
+                <div className="header-wrap">
                   <h1>{triage.name}</h1>
                   <button onClick={toggleIsEditMode}>Rename Triage</button>
                   <button onClick={handleDelete} className="danger-bg">

@@ -6,7 +6,7 @@ import useToggle from '../hooks/useToggle'
 import { useContext } from 'react'
 import { AppContext } from '../contexts/AppContext'
 import { postPath } from '../services/paths'
-import { deleteDevice } from '../services/devices'
+import { deleteDevice, patchDevice } from '../services/devices'
 
 const DeviceTriageCard = (props) => {
   const appContext = useContext(AppContext)
@@ -28,6 +28,9 @@ const DeviceTriageCard = (props) => {
     resetDestIsPortActive
   ] = useToggle(false)
   const [isEditMode, toggleIsEditMode] = useToggle(false)
+  const [hostname, onHostnameChange, setHostname, resetHostname] = useFormState(
+    props.device.hostname
+  )
 
   const onPathSubmit = async (event) => {
     event.preventDefault()
@@ -64,8 +67,35 @@ const DeviceTriageCard = (props) => {
       resetDestPort()
       resetDestIsPortActive()
     } catch (err) {
-      console.log(err)
       appContext.showPopup("Couldn't create path")
+    }
+  }
+
+  const onRenameSubmit = (event) => {
+    event.preventDefault()
+
+    try {
+      const res = appContext.load(() =>
+        patchDevice(props.device.id, { hostname: hostname })
+      )
+
+      if (res) {
+        const updatedDevices = props.triage.devices.map((d) => {
+          if (d.id === props.device.id) {
+            d.hostname = hostname
+          }
+
+          return d
+        })
+
+        props.setTriage({ ...props.triage, devices: updatedDevices })
+        resetHostname()
+        toggleIsEditMode()
+      } else {
+        throw new Error()
+      }
+    } catch {
+      appContext.showPopup("Couldn't rename device")
     }
   }
 
@@ -100,13 +130,32 @@ const DeviceTriageCard = (props) => {
   return (
     <Panel className="DeviceTriageCard">
       <header className="device">
-        <div>
-          <h2>{props.device.hostname}</h2>
-          <button onClick={toggleIsEditMode}>Rename Device</button>
-          <button onClick={handleDelete} className="danger-bg">
-            Delete Device
-          </button>
-        </div>
+        {isEditMode ? (
+          <form className="input-button-combine" onSubmit={onRenameSubmit}>
+            <label htmlFor="hostname">Hostname</label>
+            <input
+              type="text"
+              name="hostname"
+              id="hostname"
+              placeholder="Hostname"
+              value={hostname}
+              onChange={onHostnameChange}
+              required
+            />
+            <button type="submit">Rename</button>
+            <button onClick={toggleIsEditMode} className="normalize">
+              Cancel
+            </button>
+          </form>
+        ) : (
+          <div className="header-wrap">
+            <h2>{props.device.hostname}</h2>
+            <button onClick={toggleIsEditMode}>Rename Device</button>
+            <button onClick={handleDelete} className="danger-bg">
+              Delete Device
+            </button>
+          </div>
+        )}
       </header>
 
       <div className="paths">

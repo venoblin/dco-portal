@@ -1,3 +1,13 @@
+.DeviceTriageCard header form {
+  margin-top: 0;
+  margin-right: 0;
+  flex-direction: row;
+}
+
+.DeviceTriageCard header form button {
+  margin-top: 0;
+}
+
 .DeviceTriageCard form {
   margin-top: var(--default-spacing);
   display: flex;

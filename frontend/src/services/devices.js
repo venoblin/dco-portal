@@ -11,3 +11,9 @@ export const deleteDevice = async (id) => {
 
   return res
 }
+
+export const patchDevice = async (id, payload) => {
+  const res = await api.patch(`/devices/${id}`, payload)
+
+  return res
+}
