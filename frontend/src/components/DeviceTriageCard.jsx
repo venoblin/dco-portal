@@ -75,7 +75,15 @@ const DeviceTriageCard = (props) => {
 
       <div className="paths">
         {props.device.paths && props.device.paths.length > 0 ? (
-          props.device.paths.map((p) => <PathTriageCard key={p.id} path={p} />)
+          props.device.paths.map((p) => (
+            <PathTriageCard
+              key={p.id}
+              triage={props.triage}
+              setTriage={props.setTriage}
+              device={props.device}
+              path={p}
+            />
+          ))
         ) : (
           <p>There are no paths!</p>
         )}

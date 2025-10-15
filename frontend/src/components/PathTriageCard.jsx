@@ -1,8 +1,47 @@
+import { useContext } from 'react'
 import useFormState from '../hooks/useFormState'
 import './PathTriageCard.css'
+import { AppContext } from '../contexts/AppContext'
+import { postHop } from '../services/hops'
 
 const PathTriageCard = (props) => {
-  const [hop, onHopChange] = useFormState('')
+  const appContext = useContext(AppContext)
+  const [hop, onHopChange, setHop, resetHop] = useFormState('')
+
+  const onSubmit = async (event) => {
+    event.preventDefault()
+
+    try {
+      const res = await appContext.load(() =>
+        postHop({
+          pathId: props.path.id,
+          hop: hop
+        })
+      )
+
+      if (res) {
+        const updatedDevices = props.triage.devices.map((d) => {
+          if (d.id === props.device.id) {
+            d.paths.map((p) => {
+              if (p.id === props.path.id) {
+                p.hops.push()
+              }
+            })
+          }
+
+          return d
+        })
+
+        props.setTriage({ ...props.triage, devices: updatedDevices })
+      } else {
+        throw new Error()
+      }
+
+      resetHop()
+    } catch {
+      appContext.showPopup("Couldn't create hop")
+    }
+  }
 
   return (
     <div className="PathTriageCard">
@@ -40,7 +79,7 @@ const PathTriageCard = (props) => {
         </div>
       </div>
 
-      <form>
+      <form onSubmit={onSubmit}>
         <label htmlFor="hop">Hop</label>
         <input
           className="small"
