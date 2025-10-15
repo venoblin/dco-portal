@@ -6,6 +6,12 @@ export const postTriage = async (payload) => {
   return res
 }
 
+export const deleteTriage = async (id) => {
+  const res = await api.delete(`/triages/${id}`)
+
+  return res
+}
+
 export const patchTriage = async (id, payload) => {
   const res = await api.patch(`/triages/${id}`, payload)
 

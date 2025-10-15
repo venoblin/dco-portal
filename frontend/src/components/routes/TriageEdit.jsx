@@ -1,8 +1,12 @@
 import './TriageEdit.css'
 import { useContext, useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { AppContext } from '../../contexts/AppContext'
-import { getSingleTriage, patchTriage } from '../../services/triages'
+import {
+  deleteTriage,
+  getSingleTriage,
+  patchTriage
+} from '../../services/triages'
 import useFormState from '../../hooks/useFormState'
 import LoadingIcon from '../LoadingIcon'
 import DeviceTriageCard from '../DeviceTriageCard'
@@ -17,6 +21,7 @@ const TriageNew = () => {
   const [name, onNameChange, setName, resetName] = useFormState('')
   const [isEditMode, toggleIsEditMode] = useToggle(false)
   const { id } = useParams()
+  const navigate = useNavigate()
 
   const getTriage = async () => {
     try {
@@ -77,6 +82,29 @@ const TriageNew = () => {
     }
   }
 
+  const handleDelete = () => {
+    const handler = async () => {
+      const res = await appContext.load(() => deleteTriage(id))
+      if (res) {
+        appContext.dismissPopup()
+        navigate('/tools/triage-manager')
+      } else {
+        appContext.dismissPopup()
+        appContext.showPopup("Couldn't delete guide")
+      }
+    }
+
+    appContext.showPopup({
+      msg: 'Are you sure?',
+      dismissBtnText: 'Cancel',
+      component: (
+        <button className="danger-bg" onClick={handler}>
+          Delete
+        </button>
+      )
+    })
+  }
+
   useEffect(() => {
     getTriage()
   }, [])
@@ -113,7 +141,9 @@ const TriageNew = () => {
                 <div className="name-wrap">
                   <h1>{triage.name}</h1>
                   <button onClick={toggleIsEditMode}>Rename</button>
-                  <button className="danger-bg">Delete</button>
+                  <button onClick={handleDelete} className="danger-bg">
+                    Delete
+                  </button>
                 </div>
               )}
             </div>
