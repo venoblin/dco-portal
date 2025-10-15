@@ -229,7 +229,7 @@ const DeviceTriageCard = (props) => {
               type="text"
               name="destHostname"
               id={`destHostname_${props.device.id}`}
-              placeholder="Destination"
+              placeholder="Destination (optional)"
               value={destHostname}
               onChange={onDestHostnameChange}
             />
@@ -240,7 +240,7 @@ const DeviceTriageCard = (props) => {
               type="text"
               name="destPort"
               id={`destPort_${props.device.id}`}
-              placeholder="Port"
+              placeholder="Port (optional)"
               value={destPort}
               onChange={onDestPortChange}
             />
