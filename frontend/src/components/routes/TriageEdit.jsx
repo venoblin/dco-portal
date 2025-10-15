@@ -7,12 +7,15 @@ import useFormState from '../../hooks/useFormState'
 import LoadingIcon from '../LoadingIcon'
 import DeviceTriageCard from '../DeviceTriageCard'
 import { postDevice } from '../../services/devices'
+import useToggle from '../../hooks/useToggle'
 
 const TriageNew = () => {
   const appContext = useContext(AppContext)
   const [hostname, onHostnameChange, setHostname, resetHostname] =
     useFormState('')
   const [triage, setTriage] = useState(null)
+  const [name, onNameChange, setName, resetName] = useFormState('')
+  const [isEditMode, toggleIsEditMode] = useToggle(false)
   const { id } = useParams()
 
   const getTriage = async () => {
@@ -29,7 +32,7 @@ const TriageNew = () => {
     }
   }
 
-  const onSubmit = async (event) => {
+  const onDeviceSubmit = async (event) => {
     event.preventDefault()
 
     try {
@@ -52,6 +55,15 @@ const TriageNew = () => {
     }
   }
 
+  const onRenameSubmit = async (event) => {
+    event.preventDefault()
+
+    try {
+    } catch {
+      appContext.showPopup("Couldn't rename triage")
+    }
+  }
+
   useEffect(() => {
     getTriage()
   }, [])
@@ -62,12 +74,42 @@ const TriageNew = () => {
         <div>
           <Link to="/tools/triage-manager">← Back</Link>
 
-          {triage && <h1>{triage.name}</h1>}
+          {triage && (
+            <div>
+              {isEditMode ? (
+                <form
+                  className="input-button-combine"
+                  onSubmit={onRenameSubmit}
+                >
+                  <label htmlFor="name">Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="Name"
+                    value={name}
+                    onChange={onNameChange}
+                    required
+                  />
+                  <button type="submit">Rename</button>
+                  <button className="normalize" onClick={toggleIsEditMode}>
+                    Cancel
+                  </button>
+                </form>
+              ) : (
+                <div className="name-wrap">
+                  <h1>{triage.name}</h1>
+                  <button onClick={toggleIsEditMode}>Rename</button>
+                  <button className="danger-bg">Delete</button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {triage && (
           <div className="inputs">
-            <form className="input-button-combine" onSubmit={onSubmit}>
+            <form className="input-button-combine" onSubmit={onDeviceSubmit}>
               <label htmlFor="hostname">Hostname</label>
               <input
                 type="text"
