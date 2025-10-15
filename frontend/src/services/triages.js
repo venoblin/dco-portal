@@ -6,6 +6,12 @@ export const postTriage = async (payload) => {
   return res
 }
 
+export const patchTriage = async (id, payload) => {
+  const res = await api.patch(`/triages/${id}`, payload)
+
+  return res
+}
+
 export const getAllTriages = async (query) => {
   let res
   if (query) {

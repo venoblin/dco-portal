@@ -2,7 +2,7 @@ import './TriageEdit.css'
 import { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { AppContext } from '../../contexts/AppContext'
-import { getSingleTriage } from '../../services/triages'
+import { getSingleTriage, patchTriage } from '../../services/triages'
 import useFormState from '../../hooks/useFormState'
 import LoadingIcon from '../LoadingIcon'
 import DeviceTriageCard from '../DeviceTriageCard'
@@ -24,6 +24,7 @@ const TriageNew = () => {
 
       if (res) {
         setTriage(res.triage)
+        setName(res.triage.name)
       } else {
         throw new Error()
       }
@@ -59,6 +60,18 @@ const TriageNew = () => {
     event.preventDefault()
 
     try {
+      const res = await appContext.load(() =>
+        patchTriage(triage.id, { name: name })
+      )
+
+      if (res) {
+        setTriage(res.triage)
+      } else {
+        throw new Error()
+      }
+
+      resetName()
+      toggleIsEditMode()
     } catch {
       appContext.showPopup("Couldn't rename triage")
     }
