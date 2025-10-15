@@ -4,7 +4,7 @@ const getAllGuides = async (req, res) => {
   try {
     const limit = req.query.limit
     const options = {
-      order: [['createdAt', 'DESC']]
+      order: [['updatedAt', 'DESC']]
     }
 
     if (limit) {
