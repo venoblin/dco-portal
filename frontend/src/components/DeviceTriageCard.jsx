@@ -41,8 +41,8 @@ const DeviceTriageCard = (props) => {
           deviceId: props.device.id,
           port: port,
           isPortActive: isPortActive,
-          destHostname: destHostname,
-          destPort: destPort,
+          destHostname: destHostname === '' ? 'N/A' : destHostname,
+          destPort: destPort === '' ? 'N/A' : destPort,
           destIsPortActive: destIsPortActive
         })
       )
