@@ -21,3 +21,17 @@
   display: flex;
   flex-direction: column;
 }
+
+.PathTriageCard .hops {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 var(--default-spacing);
+}
+
+.PathTriageCard .hops p {
+  margin-right: 0.5rem;
+}
+
+.PathTriageCard .hops p:last-of-type {
+  margin-right: 0;
+}

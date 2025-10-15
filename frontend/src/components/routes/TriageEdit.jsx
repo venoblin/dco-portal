@@ -65,7 +65,7 @@ const TriageNew = () => {
           {triage && <h1>{triage.name}</h1>}
         </div>
 
-        {triage && !appContext.isLoading && (
+        {triage && (
           <div className="inputs">
             <form className="input-button-combine" onSubmit={onSubmit}>
               <label htmlFor="hostname">Hostname</label>
@@ -87,24 +87,20 @@ const TriageNew = () => {
       </header>
 
       <div>
-        {!appContext.isLoading ? (
-          <div>
-            {triage && triage.devices && triage.devices.length ? (
-              triage.devices.map((d) => (
-                <DeviceTriageCard
-                  key={d.id}
-                  triage={triage}
-                  setTriage={setTriage}
-                  device={d}
-                />
-              ))
-            ) : (
-              <p>There are no devices!</p>
-            )}
-          </div>
-        ) : (
-          <LoadingIcon />
-        )}
+        <div>
+          {triage && triage.devices && triage.devices.length ? (
+            triage.devices.map((d) => (
+              <DeviceTriageCard
+                key={d.id}
+                triage={triage}
+                setTriage={setTriage}
+                device={d}
+              />
+            ))
+          ) : (
+            <p>There are no devices!</p>
+          )}
+        </div>
       </div>
     </div>
   )

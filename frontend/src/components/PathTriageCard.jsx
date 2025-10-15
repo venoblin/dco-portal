@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useRef } from 'react'
 import useFormState from '../hooks/useFormState'
 import './PathTriageCard.css'
 import { AppContext } from '../contexts/AppContext'
@@ -7,6 +7,7 @@ import { postHop } from '../services/hops'
 const PathTriageCard = (props) => {
   const appContext = useContext(AppContext)
   const [hop, onHopChange, setHop, resetHop] = useFormState('')
+  const inputRef = useRef()
 
   const onSubmit = async (event) => {
     event.preventDefault()
@@ -24,7 +25,7 @@ const PathTriageCard = (props) => {
           if (d.id === props.device.id) {
             d.paths.map((p) => {
               if (p.id === props.path.id) {
-                p.hops.push()
+                p.hops.push(res.hop)
               }
             })
           }
@@ -38,6 +39,8 @@ const PathTriageCard = (props) => {
       }
 
       resetHop()
+
+      inputRef.current.focus()
     } catch {
       appContext.showPopup("Couldn't create hop")
     }
@@ -58,7 +61,11 @@ const PathTriageCard = (props) => {
 
         <div className="hops">
           {props.path.hops && props.path.hops.length > 0 ? (
-            props.path.hops.map((h) => <p key={h.id}>{h.hop}</p>)
+            props.path.hops.map((h, index) => (
+              <p key={h.id}>{`${h.hop}${
+                index === props.path.hops.length - 1 ? '' : ' →'
+              }`}</p>
+            ))
           ) : (
             <p>There are no hops!</p>
           )}
@@ -82,6 +89,7 @@ const PathTriageCard = (props) => {
       <form onSubmit={onSubmit}>
         <label htmlFor="hop">Hop</label>
         <input
+          ref={inputRef}
           className="small"
           type="text"
           name="hop"
