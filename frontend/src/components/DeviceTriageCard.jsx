@@ -175,7 +175,7 @@ const DeviceTriageCard = (props) => {
         )}
       </div>
 
-      <form onSubmit={onPathSubmit} className="device-form">
+      <form onSubmit={onPathSubmit} className="path-form">
         <div className="inner-wrap">
           <div className="form-section">
             <label htmlFor={`port_${props.device.id}`}>Port</label>

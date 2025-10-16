@@ -4,6 +4,25 @@
   border-color: var(--bg-color);
 }
 
+.PathTriageCard form.path-form {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+}
+
+.PathTriageCard .path-form .inputs {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.PathTriageCard .path-form button {
+  margin-right: var(--default-spacing);
+}
+
+.PathTriageCard .path-form button:last-of-type {
+  margin-right: 0;
+}
+
 .PathTriageCard:hover .device p,
 .PathTriageCard:hover .destination p {
   color: var(--accent-color);
@@ -17,7 +36,6 @@
 .PathTriageCard .main-wrap {
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 .PathTriageCard .device p,
