@@ -1,14 +1,27 @@
+import './TriageEdit.css'
 import { useContext, useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { AppContext } from '../../contexts/AppContext'
-import { getSingleTriage } from '../../services/triages'
+import {
+  deleteTriage,
+  getSingleTriage,
+  patchTriage
+} from '../../services/triages'
+import useFormState from '../../hooks/useFormState'
 import LoadingIcon from '../LoadingIcon'
-import Panel from '../ui/Panel'
+import DeviceTriageCard from '../DeviceTriageCard'
+import { postDevice } from '../../services/devices'
+import useToggle from '../../hooks/useToggle'
 
 const TriageNew = () => {
   const appContext = useContext(AppContext)
+  const [hostname, onHostnameChange, setHostname, resetHostname] =
+    useFormState('')
   const [triage, setTriage] = useState(null)
+  const [name, onNameChange, setName, resetName] = useFormState('')
+  const [isEditMode, toggleIsEditMode] = useToggle(false)
   const { id } = useParams()
+  const navigate = useNavigate()
 
   const getTriage = async () => {
     try {
@@ -16,6 +29,7 @@ const TriageNew = () => {
 
       if (res) {
         setTriage(res.triage)
+        setName(res.triage.name)
       } else {
         throw new Error()
       }
@@ -24,40 +38,155 @@ const TriageNew = () => {
     }
   }
 
+  const onDeviceSubmit = async (event) => {
+    event.preventDefault()
+
+    try {
+      const res = await appContext.load(() =>
+        postDevice({
+          triageId: id,
+          hostname: hostname
+        })
+      )
+
+      resetHostname()
+
+      if (res) {
+        setTriage({ ...triage, devices: [...triage.devices, res.device] })
+      } else {
+        throw new Error()
+      }
+    } catch {
+      appContext.showPopup("Couldn't create device")
+    }
+  }
+
+  const onRenameSubmit = async (event) => {
+    event.preventDefault()
+
+    try {
+      const res = await appContext.load(() =>
+        patchTriage(triage.id, { name: name })
+      )
+
+      if (res) {
+        setTriage(res.triage)
+      } else {
+        throw new Error()
+      }
+
+      resetName()
+      toggleIsEditMode()
+    } catch {
+      appContext.showPopup("Couldn't rename triage")
+    }
+  }
+
+  const handleDelete = () => {
+    const handler = async () => {
+      const res = await appContext.load(() => deleteTriage(id))
+      if (res) {
+        appContext.dismissPopup()
+        navigate('/tools/triage-manager')
+      } else {
+        appContext.dismissPopup()
+        appContext.showPopup("Couldn't delete guide")
+      }
+    }
+
+    appContext.showPopup({
+      msg: `Are you sure you want to delete "${triage.name}"?`,
+      dismissBtnText: 'Cancel',
+      component: (
+        <button className="danger-bg" onClick={handler}>
+          Delete
+        </button>
+      )
+    })
+  }
+
   useEffect(() => {
     getTriage()
   }, [])
 
   return (
-    <div>
+    <div className="TriageEdit">
       <header>
         <div>
           <Link to="/tools/triage-manager">← Back</Link>
 
-          {triage && <h1>{triage.name}</h1>}
+          {triage && (
+            <div>
+              {isEditMode ? (
+                <form
+                  className="input-button-combine"
+                  onSubmit={onRenameSubmit}
+                >
+                  <label htmlFor="name">Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="Name"
+                    value={name}
+                    onChange={onNameChange}
+                    required
+                  />
+                  <button type="submit">Rename</button>
+                  <button className="normalize" onClick={toggleIsEditMode}>
+                    Cancel
+                  </button>
+                </form>
+              ) : (
+                <div className="header-wrap">
+                  <h1>{triage.name}</h1>
+                  <button onClick={toggleIsEditMode}>Rename Triage</button>
+                  <button onClick={handleDelete} className="danger-bg">
+                    Delete Triage
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {triage && (
           <div className="inputs">
-            <button>New Path</button>
+            <form className="input-button-combine" onSubmit={onDeviceSubmit}>
+              <label htmlFor="hostname">Hostname</label>
+              <input
+                type="text"
+                name="hostname"
+                id="hostname"
+                placeholder="Hostname"
+                value={hostname}
+                onChange={onHostnameChange}
+                required
+              />
+              <button>Add Device</button>
+            </form>
+
             <button>Download</button>
           </div>
         )}
       </header>
 
-      <Panel>
-        {appContext.isLoading ? (
-          <div>
-            {triage.paths && triage.paths.length ? (
-              <div>Paths</div>
-            ) : (
-              <p>There are no paths!</p>
-            )}
-          </div>
-        ) : (
-          <LoadingIcon />
-        )}
-      </Panel>
+      <div>
+        <div>
+          {triage && triage.devices && triage.devices.length ? (
+            triage.devices.map((d) => (
+              <DeviceTriageCard
+                key={d.id}
+                triage={triage}
+                setTriage={setTriage}
+                device={d}
+              />
+            ))
+          ) : (
+            <p>There are no devices!</p>
+          )}
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,4 +1,3 @@
-import './Search.css'
 import useFormState from '../hooks/useFormState'
 
 const Search = (props) => {
@@ -25,7 +24,10 @@ const Search = (props) => {
 
   return (
     <div className="Search">
-      <form className="search" onSubmit={(event) => onSearchSubmit(event)}>
+      <form
+        className="search input-button-combine"
+        onSubmit={(event) => onSearchSubmit(event)}
+      >
         {props.filters && props.filters.length > 0 && (
           <select
             className="filters-wrap"

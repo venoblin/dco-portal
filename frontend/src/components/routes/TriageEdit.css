@@ -1,0 +1,20 @@
+.TriageEdit header form {
+  margin-right: var(--default-spacing);
+}
+
+.TriageEdit .DeviceTriageCard {
+  margin-bottom: calc(var(--default-spacing) * 2);
+}
+
+.TriageEdit .DeviceTriageCard:last-of-type {
+  margin-bottom: 0;
+}
+
+.TriageEdit .name-wrap button {
+  margin-left: var(--default-spacing);
+}
+
+.TriageEdit button.normalize {
+  margin-left: var(--default-spacing);
+  border-radius: var(--default-border-radius);
+}

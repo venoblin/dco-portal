@@ -39,7 +39,7 @@ const App = () => {
             <Route path="/guides/:id/edit" element={<GuideEdit />} />
             <Route path="/tools" element={<Tools />} />
             <Route path="/tools/triage-manager" element={<TriageManager />} />
-            <Route path="/tools/triage-manager/edit" element={<TriageEdit />} />
+            <Route path="/tools/triage-manager/:id" element={<TriageEdit />} />
             <Route path="/tools/device-lookup" element={<DeviceLookup />} />
             <Route
               path="/tools/incident-manager"

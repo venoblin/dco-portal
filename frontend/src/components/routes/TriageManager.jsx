@@ -1,10 +1,11 @@
+import './TriageManager.css'
 import { useContext, useEffect, useState } from 'react'
 import { getAllTriages, postTriage } from '../../services/triages'
 import { AppContext } from '../../contexts/AppContext'
 import Panel from '../ui/Panel'
 import LoadingIcon from '../LoadingIcon'
 import useFormState from '../../hooks/useFormState'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const TriageManager = () => {
   const appContext = useContext(AppContext)
@@ -30,7 +31,7 @@ const TriageManager = () => {
 
       if (res) {
         resetName()
-        navigate(`/triages/${res.triage.id}`)
+        navigate(`/tools/triage-manager/${res.triage.id}`)
       } else {
         throw new Error()
       }
@@ -44,11 +45,12 @@ const TriageManager = () => {
   }, [])
 
   return (
-    <div>
+    <div className="TriageManager">
       <header>
         <h1>Triage Manager</h1>
 
-        <form onSubmit={onSubmit}>
+        <form className="input-button-combine" onSubmit={onSubmit}>
+          <label htmlFor="name">Name</label>
           <input
             type="text"
             name="name"
@@ -66,7 +68,15 @@ const TriageManager = () => {
         {!appContext.isLoading ? (
           <div>
             {triages && triages.length > 0 ? (
-              triages.map((t) => <p key={t.id}>{t.name}</p>)
+              triages.map((t) => (
+                <Link
+                  className="block-link"
+                  to={`/tools/triage-manager/${t.id}`}
+                  key={t.id}
+                >
+                  {t.name}
+                </Link>
+              ))
             ) : (
               <p>No triages found!</p>
             )}

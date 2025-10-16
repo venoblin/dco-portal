@@ -12,7 +12,6 @@ export const patchGuide = async (id, payload) => {
 }
 
 export const deleteGuide = async (id) => {
-  console.log('delete')
   const res = await api.delete(`/guides/${id}`)
 
   return res

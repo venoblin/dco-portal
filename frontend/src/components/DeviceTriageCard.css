@@ -1,0 +1,71 @@
+.DeviceTriageCard:hover {
+  border-color: var(--accent-color);
+}
+
+.DeviceTriageCard:hover h2 {
+  color: var(--accent-color);
+}
+
+.DeviceTriageCard h2 {
+  transition: color var(--default-transition);
+}
+
+.DeviceTriageCard {
+  border: var(--default-border);
+  transition: border var(--default-transition);
+}
+
+.DeviceTriageCard header form {
+  margin-top: 0;
+  margin-right: 0;
+  flex-direction: row;
+}
+
+.DeviceTriageCard header form button {
+  margin-top: 0;
+}
+
+.DeviceTriageCard form {
+  margin-top: var(--default-spacing);
+  display: flex;
+  flex-direction: column;
+}
+
+.DeviceTriageCard form button {
+  margin-top: 0.5rem;
+}
+
+.DeviceTriageCard .device-form {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+
+.DeviceTriageCard .device-form .inner-wrap {
+  display: flex;
+}
+
+.DeviceTriageCard form svg {
+  margin: auto var(--default-spacing);
+}
+
+.DeviceTriageCard form .form-section {
+  display: flex;
+  align-items: center;
+}
+
+.DeviceTriageCard .form-section input {
+  margin-right: 0.5rem;
+}
+
+.DeviceTriageCard .form-section input:last-of-type {
+  margin-right: 0.5rem;
+}
+
+.DeviceTriageCard .checkbox-wrap label {
+  margin-right: 0.25rem;
+}
+
+.DeviceTriageCard .PathTriageCard:first-of-type {
+  padding-top: 0;
+}
