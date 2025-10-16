@@ -3,7 +3,7 @@ import useFormState from '../hooks/useFormState'
 import './PathTriageCard.css'
 import { AppContext } from '../contexts/AppContext'
 import { postHop } from '../services/hops'
-import { deletePath } from '../services/paths'
+import { deletePath, patchPath } from '../services/paths'
 import useToggle from '../hooks/useToggle'
 
 const PathTriageCard = (props) => {
@@ -67,8 +67,41 @@ const PathTriageCard = (props) => {
     }
   }
 
-  const onUpdateSubmit = async () => {
+  const onUpdateSubmit = async (event) => {
+    event.preventDefault()
+
     try {
+      const res = await appContext.load(() =>
+        patchPath(props.path.id, {
+          port: port,
+          isPortActive: isPortActive,
+          destHostname: destHostname === '' ? 'N/A' : destHostname,
+          destPort: destPort === '' ? 'N/A' : destPort,
+          destIsPortActive: destIsPortActive
+        })
+      )
+
+      if (res) {
+        const updatedDevices = props.triage.devices.map((d) => {
+          if (d.id === props.device.id) {
+            d.paths = d.paths.map((p) => {
+              if (p.id === props.path.id) {
+                p = { ...p, ...res.path }
+              }
+
+              return p
+            })
+          }
+
+          return d
+        })
+
+        props.setTriage({ ...props.triage, devices: updatedDevices })
+
+        toggleIsEditMode()
+      } else {
+        throw new Error()
+      }
     } catch (error) {
       appContext.showPopup(error.message)
     }
@@ -104,6 +137,15 @@ const PathTriageCard = (props) => {
         </button>
       )
     })
+  }
+
+  const editHandler = () => {
+    resetPort()
+    resetIsPortActive()
+    resetDestHostname()
+    resetDestPort()
+    resetDestIsPortActive()
+    toggleIsEditMode()
   }
 
   return (
@@ -200,7 +242,7 @@ const PathTriageCard = (props) => {
 
           <div className="inputs">
             <button type="submit">Update Path</button>
-            <button onClick={toggleIsEditMode}>Cancel</button>
+            <button onClick={editHandler}>Cancel</button>
           </div>
         </form>
       ) : (

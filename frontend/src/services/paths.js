@@ -11,3 +11,9 @@ export const deletePath = async (id) => {
 
   return res
 }
+
+export const patchPath = async (id, payload) => {
+  const res = await api.patch(`/paths/${id}`, payload)
+
+  return res
+}
