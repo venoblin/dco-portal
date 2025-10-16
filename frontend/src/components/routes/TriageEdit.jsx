@@ -52,7 +52,10 @@ const TriageNew = () => {
       resetHostname()
 
       if (res) {
-        setTriage({ ...triage, devices: [...triage.devices, res.device] })
+        setTriage({
+          ...triage,
+          devices: [...triage.devices, { ...res.device, paths: [] }]
+        })
       } else {
         throw new Error()
       }

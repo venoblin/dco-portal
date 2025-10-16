@@ -50,7 +50,7 @@ const DeviceTriageCard = (props) => {
       if (res) {
         const updatedDevices = props.triage.devices.map((d) => {
           if (d.id === props.device.id) {
-            d.paths.push(res.path)
+            d.paths.push({ ...res.path, hops: [] })
           }
 
           return d
@@ -67,6 +67,7 @@ const DeviceTriageCard = (props) => {
       resetDestPort()
       resetDestIsPortActive()
     } catch (err) {
+      console.log(err.message)
       appContext.showPopup("Couldn't create path")
     }
   }
