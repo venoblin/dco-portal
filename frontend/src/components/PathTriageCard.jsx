@@ -3,6 +3,7 @@ import useFormState from '../hooks/useFormState'
 import './PathTriageCard.css'
 import { AppContext } from '../contexts/AppContext'
 import { postHop } from '../services/hops'
+import { deletePath } from '../services/paths'
 
 const PathTriageCard = (props) => {
   const appContext = useContext(AppContext)
@@ -46,11 +47,45 @@ const PathTriageCard = (props) => {
     }
   }
 
+  const handleDelete = () => {
+    const handler = async () => {
+      const res = await appContext.load(() => deletePath(props.path.id))
+      if (res) {
+        const updatedDevices = props.triage.devices.map((d) => {
+          if (d.id === props.device.id) {
+            d.paths = d.paths.filter((p) => p.id !== props.path.id)
+          }
+
+          return d
+        })
+
+        props.setTriage({ ...props.triage, devices: updatedDevices })
+
+        appContext.dismissPopup()
+      } else {
+        appContext.dismissPopup()
+        appContext.showPopup("Couldn't delete path")
+      }
+    }
+
+    appContext.showPopup({
+      msg: `Are you sure you want to delete "${props.path.port}"?`,
+      dismissBtnText: 'Cancel',
+      component: (
+        <button className="danger-bg" onClick={handler}>
+          Delete
+        </button>
+      )
+    })
+  }
+
   return (
     <div className="PathTriageCard">
       <div className="inputs">
         <button>Edit Path</button>
-        <button className="danger-bg">Delete Path</button>
+        <button className="danger-bg" onClick={handleDelete}>
+          Delete Path
+        </button>
       </div>
       <div className="main-wrap">
         <div className="device">

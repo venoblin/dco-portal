@@ -5,3 +5,9 @@ export const postPath = async (payload) => {
 
   return res
 }
+
+export const deletePath = async (id) => {
+  const res = await api.delete(`/paths/${id}`)
+
+  return res
+}
