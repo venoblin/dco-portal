@@ -46,3 +46,17 @@
 .PathTriageCard .hops p:last-of-type {
   margin-right: 0;
 }
+
+.PathTriageCard .inputs {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: var(--default-spacing);
+}
+
+.PathTriageCard .inputs button {
+  margin-right: var(--default-spacing);
+}
+
+.PathTriageCard .inputs button:last-of-type {
+  margin-right: 0;
+}

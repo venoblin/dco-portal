@@ -48,6 +48,10 @@ const PathTriageCard = (props) => {
 
   return (
     <div className="PathTriageCard">
+      <div className="inputs">
+        <button>Edit Path</button>
+        <button className="danger-bg">Delete Path</button>
+      </div>
       <div className="main-wrap">
         <div className="device">
           <p>
