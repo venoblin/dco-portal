@@ -11,3 +11,9 @@ export const deleteHop = async (id) => {
 
   return res
 }
+
+export const patchHop = async (id, payload) => {
+  const res = await api.delete(`/hops/${id}`, payload)
+
+  return res
+}

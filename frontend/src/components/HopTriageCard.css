@@ -27,3 +27,7 @@
 .HopTriageCard .inputs button:last-of-type {
   margin-right: 0;
 }
+
+.HopTriageCard input.small {
+  width: 100%;
+}
