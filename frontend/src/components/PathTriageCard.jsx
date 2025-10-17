@@ -270,10 +270,23 @@ const PathTriageCard = (props) => {
               {props.path.hops && props.path.hops.length > 0 ? (
                 props.path.hops.map((h, index) =>
                   index === props.path.hops.length - 1 ? (
-                    <HopTriageCard key={h.id} hop={h} />
+                    <HopTriageCard
+                      key={h.id}
+                      hop={h}
+                      triage={props.triage}
+                      setTriage={props.setTriage}
+                      device={props.device}
+                      path={props.path}
+                    />
                   ) : (
                     <div className="hop-wrap" key={h.id}>
-                      <HopTriageCard hop={h} />
+                      <HopTriageCard
+                        hop={h}
+                        triage={props.triage}
+                        setTriage={props.setTriage}
+                        device={props.device}
+                        path={props.path}
+                      />
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width={15}
