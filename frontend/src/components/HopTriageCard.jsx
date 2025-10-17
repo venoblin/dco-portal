@@ -14,9 +14,11 @@ const HopTriageCard = (props) => {
     event.preventDefault()
 
     try {
-      const res = await appContext.load(() => patchHop(props.hop.id), {
-        hop: hop
-      })
+      const res = await appContext.load(() =>
+        patchHop(props.hop.id, {
+          hop: hop
+        })
+      )
 
       if (res) {
         const updatedDevices = props.triage.devices.map((d) => {

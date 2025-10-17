@@ -13,7 +13,7 @@ export const deleteHop = async (id) => {
 }
 
 export const patchHop = async (id, payload) => {
-  const res = await api.delete(`/hops/${id}`, payload)
+  const res = await api.patch(`/hops/${id}`, payload)
 
   return res
 }
