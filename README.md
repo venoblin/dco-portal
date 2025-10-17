@@ -16,6 +16,7 @@
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Roadmap](#roadmap)
+- [Dependencies](#dependencies)
 
 ## About The Project
 
@@ -86,3 +87,7 @@ bash runApp.sh
 The roadmap includes both completed and future goals. Here's what we have accomplished and looking forward to:
 
 - [ ] Create a triage manager
+
+## Dependencies
+
+- SheetJS (https://sheetjs.com/) - Excel file processing
