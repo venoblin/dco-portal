@@ -8,10 +8,10 @@ import {
   patchTriage
 } from '../../services/triages'
 import useFormState from '../../hooks/useFormState'
-import LoadingIcon from '../LoadingIcon'
 import DeviceTriageCard from '../DeviceTriageCard'
 import { postDevice } from '../../services/devices'
 import useToggle from '../../hooks/useToggle'
+import { generateXlsxFile } from '../../utils/xlsx'
 
 const TriageNew = () => {
   const appContext = useContext(AppContext)
@@ -107,6 +107,14 @@ const TriageNew = () => {
     })
   }
 
+  const handleDownload = () => {
+    generateXlsxFile('file', [
+      ['Name', 'Age', 'Country'],
+      ['John Doe', 30, 'USA'],
+      ['Jane Smith', 25, 'Canada']
+    ])
+  }
+
   const renameHandler = () => {
     setName(triage.name)
     toggleIsEditMode()
@@ -173,7 +181,7 @@ const TriageNew = () => {
               <button>Add Device</button>
             </form>
 
-            <button>Download</button>
+            <button onClick={handleDownload}>Download</button>
           </div>
         )}
       </header>

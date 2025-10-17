@@ -14,7 +14,7 @@
     "react-dom": "^19.2.0",
     "react-quill-new": "^3.6.0",
     "react-router-dom": "^6.26.2",
-    "xlsx": "^0.18.5"
+    "xlsx-style": "^0.8.13"
   },
   "devDependencies": {
     "parcel": "^2.16.0"
