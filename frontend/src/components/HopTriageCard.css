@@ -1,0 +1,33 @@
+.HopTriageCard {
+  border: var(--default-border);
+  border-radius: var(--default-border-radius);
+  border-color: var(--bg-color);
+  width: fit-content;
+  height: fit-content;
+  padding: var(--default-spacing);
+  transition: border var(--default-transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.HopTriageCard:hover {
+  border-color: var(--accent-color);
+}
+
+.HopTriageCard .inputs {
+  display: flex;
+  justify-content: center;
+}
+
+.HopTriageCard .inputs button {
+  margin-right: var(--default-spacing);
+}
+
+.HopTriageCard .inputs button:last-of-type {
+  margin-right: 0;
+}
+
+.HopTriageCard input.small {
+  width: 100%;
+}

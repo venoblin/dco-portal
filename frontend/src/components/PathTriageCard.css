@@ -4,20 +4,40 @@
   border-color: var(--bg-color);
 }
 
+.PathTriageCard form.path-form {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+}
+
+.PathTriageCard .path-form .inputs {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.PathTriageCard .path-form button {
+  margin-right: var(--default-spacing);
+}
+
+.PathTriageCard .path-form button:last-of-type {
+  margin-right: 0;
+}
+
 .PathTriageCard:hover .device p,
-.PathTriageCard:hover .destination p {
+.PathTriageCard:hover .destination p,
+.PathTriageCard:hover .hops {
   color: var(--accent-color);
 }
 
 .PathTriageCard:hover .device p,
-.PathTriageCard:hover .destination p {
+.PathTriageCard:hover .destination p,
+.PathTriageCard:hover .hops {
   transition: color var(--default-transition);
 }
 
 .PathTriageCard .main-wrap {
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 .PathTriageCard .device p,
@@ -39,10 +59,33 @@
   margin: 0 var(--default-spacing);
 }
 
-.PathTriageCard .hops p {
+.PathTriageCard .hop-wrap {
+  display: flex;
   margin-right: 0.5rem;
 }
 
-.PathTriageCard .hops p:last-of-type {
+.PathTriageCard .hop-wrap svg {
+  margin: auto 0;
+}
+
+.PathTriageCard .hop-wrap .HopTriageCard {
+  margin-right: 0.25rem;
+}
+
+.PathTriageCard .hop-wrap:last-of-type {
+  margin-right: 0;
+}
+
+.PathTriageCard .inputs {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: var(--default-spacing);
+}
+
+.PathTriageCard .inputs button {
+  margin-right: var(--default-spacing);
+}
+
+.PathTriageCard .inputs button:last-of-type {
   margin-right: 0;
 }

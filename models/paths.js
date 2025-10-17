@@ -40,6 +40,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Path.hasMany(models.Hop, {
       foreignKey: 'pathId',
+      onDelete: 'CASCADE',
       as: 'hops'
     })
   }

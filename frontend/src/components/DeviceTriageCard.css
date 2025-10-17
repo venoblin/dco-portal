@@ -35,13 +35,13 @@
   margin-top: 0.5rem;
 }
 
-.DeviceTriageCard .device-form {
+.DeviceTriageCard .path-form {
   margin-left: auto;
   margin-right: auto;
   width: fit-content;
 }
 
-.DeviceTriageCard .device-form .inner-wrap {
+.DeviceTriageCard .path-form .inner-wrap {
   display: flex;
 }
 

@@ -5,3 +5,15 @@ export const postHop = async (payload) => {
 
   return res
 }
+
+export const deleteHop = async (id) => {
+  const res = await api.delete(`/hops/${id}`)
+
+  return res
+}
+
+export const patchHop = async (id, payload) => {
+  const res = await api.patch(`/hops/${id}`, payload)
+
+  return res
+}
