@@ -1,10 +1,11 @@
+import './PathTriageCard.css'
 import { useContext, useRef } from 'react'
 import useFormState from '../hooks/useFormState'
-import './PathTriageCard.css'
 import { AppContext } from '../contexts/AppContext'
 import { postHop } from '../services/hops'
 import { deletePath, patchPath } from '../services/paths'
 import useToggle from '../hooks/useToggle'
+import HopTriageCard from './HopTriageCard'
 
 const PathTriageCard = (props) => {
   const appContext = useContext(AppContext)
@@ -267,11 +268,16 @@ const PathTriageCard = (props) => {
 
             <div className="hops">
               {props.path.hops && props.path.hops.length > 0 ? (
-                props.path.hops.map((h, index) => (
-                  <p key={h.id}>{`${h.hop}${
-                    index === props.path.hops.length - 1 ? '' : ' →'
-                  }`}</p>
-                ))
+                props.path.hops.map((h, index) =>
+                  index === props.path.hops.length - 1 ? (
+                    <HopTriageCard key={h.id} hop={h} />
+                  ) : (
+                    <div className="hop-wrap" key={h.id}>
+                      <HopTriageCard hop={h} />
+                      <p> →</p>
+                    </div>
+                  )
+                )
               ) : (
                 <p>There are no hops!</p>
               )}

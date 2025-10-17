@@ -1,0 +1,13 @@
+.HopTriageCard {
+  border: var(--default-border);
+  border-radius: var(--default-border-radius);
+  border-color: var(--bg-color);
+  width: fit-content;
+  height: fit-content;
+  padding: var(--default-spacing);
+  transition: border var(--default-transition);
+}
+
+.HopTriageCard:hover {
+  border-color: var(--accent-color);
+}
