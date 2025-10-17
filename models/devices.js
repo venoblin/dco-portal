@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Device.hasMany(models.Path, {
       foreignKey: 'deviceId',
+      onDelete: 'CASCADE',
       as: 'paths'
     })
   }

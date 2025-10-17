@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   Triage.associate = function (models) {
     Triage.hasMany(models.Device, {
       foreignKey: 'triageId',
+      onDelete: 'CASCADE',
       as: 'devices'
     })
   }
