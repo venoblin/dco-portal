@@ -18,7 +18,7 @@ const TriageNew = () => {
   const [hostname, onHostnameChange, setHostname, resetHostname] =
     useFormState('')
   const [triage, setTriage] = useState(null)
-  const [name, onNameChange, setName, resetName] = useFormState('')
+  const [name, onNameChange, setName] = useFormState('')
   const [isEditMode, toggleIsEditMode] = useToggle(false)
   const { id } = useParams()
   const navigate = useNavigate()
@@ -78,7 +78,6 @@ const TriageNew = () => {
         throw new Error()
       }
 
-      resetName()
       toggleIsEditMode()
     } catch {
       appContext.showPopup("Couldn't rename triage")
@@ -106,6 +105,11 @@ const TriageNew = () => {
         </button>
       )
     })
+  }
+
+  const renameHandler = () => {
+    setName(triage.name)
+    toggleIsEditMode()
   }
 
   useEffect(() => {
@@ -143,7 +147,7 @@ const TriageNew = () => {
               ) : (
                 <div className="header-wrap">
                   <h1>{triage.name}</h1>
-                  <button onClick={toggleIsEditMode}>Rename Triage</button>
+                  <button onClick={renameHandler}>Rename Triage</button>
                   <button onClick={handleDelete} className="danger-bg">
                     Delete Triage
                   </button>
