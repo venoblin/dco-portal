@@ -64,6 +64,10 @@
   margin-right: 0.5rem;
 }
 
+.PathTriageCard .hop-wrap svg {
+  margin: auto 0;
+}
+
 .PathTriageCard .hop-wrap .HopTriageCard {
   margin-right: 0.25rem;
 }
