@@ -10,7 +10,7 @@ import Spreadsheet from '../Spreadsheet'
 import LoadingIcon from '../LoadingIcon'
 import Barcode from '../Barcode'
 import Print from '../Print'
-import { storageGet, storageSet } from '../../utils/localStorage'
+import { storageGet, storageRemove, storageSet } from '../../utils/localStorage'
 
 const DeviceLookup = () => {
   const headerTypes = {
