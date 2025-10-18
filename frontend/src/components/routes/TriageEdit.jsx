@@ -110,29 +110,38 @@ const TriageNew = () => {
   const handleDownload = () => {
     const data = []
 
+    const getHops = (path) => {
+      return path.hops.map((h) => h.hop)
+    }
+
     triage.devices.forEach((d) => {
       data.push([d.hostname])
 
       d.paths.forEach((p, index) => {
-        const path = [`'${p.port}`, p.isPortActive ? 'UP' : 'DOWN']
+        const port = [`'${p.port}`, p.isPortActive ? 'UP' : 'DOWN']
+        const destination = [
+          p.destHostname,
+          `'${p.destPort}`,
+          p.destIsPortActive ? 'UP' : 'DOWN'
+        ]
+
+        const row = [...port, ...getHops(p), ...destination]
 
         switch (index) {
           case 0:
-            data[data.length - 1].push(...path)
+            data[data.length - 1].push(...row)
             break
           case d.paths.length - 1:
-            data.push(['', ...path])
+            data.push(['', ...row])
             data.push([])
             break
           default:
-            data.push(['', ...path])
+            data.push(['', ...row])
         }
       })
     })
 
-    console.log(data)
-
-    // generateXlsxFile(triage.name, data)
+    generateXlsxFile(triage.name, data)
   }
 
   const renameHandler = () => {
