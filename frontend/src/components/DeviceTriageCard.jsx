@@ -128,6 +128,11 @@ const DeviceTriageCard = (props) => {
     })
   }
 
+  const editHandler = () => {
+    resetHostname()
+    toggleIsEditMode()
+  }
+
   return (
     <Panel className="DeviceTriageCard">
       <header className="device">
@@ -151,7 +156,7 @@ const DeviceTriageCard = (props) => {
         ) : (
           <div className="header-wrap">
             <h2>{props.device.hostname}</h2>
-            <button onClick={toggleIsEditMode}>Rename Device</button>
+            <button onClick={editHandler}>Rename Device</button>
             <button onClick={handleDelete} className="danger-bg">
               Delete Device
             </button>
