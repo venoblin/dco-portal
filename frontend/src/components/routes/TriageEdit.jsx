@@ -108,11 +108,31 @@ const TriageNew = () => {
   }
 
   const handleDownload = () => {
-    generateXlsxFile('file', [
-      ['Name', 'Age', 'Country'],
-      ['John Doe', 30, 'USA'],
-      ['Jane Smith', 25, 'Canada']
-    ])
+    const data = []
+
+    triage.devices.forEach((d) => {
+      data.push([d.hostname])
+
+      d.paths.forEach((p, index) => {
+        const path = [`'${p.port}`, p.isPortActive ? 'UP' : 'DOWN']
+
+        switch (index) {
+          case 0:
+            data[data.length - 1].push(...path)
+            break
+          case d.paths.length - 1:
+            data.push(['', ...path])
+            data.push([])
+            break
+          default:
+            data.push(['', ...path])
+        }
+      })
+    })
+
+    console.log(data)
+
+    // generateXlsxFile(triage.name, data)
   }
 
   const renameHandler = () => {

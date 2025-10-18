@@ -1,4 +1,4 @@
-import * as XLSX from 'xlsx'
+import * as XLSX from 'xlsx-js-style'
 
 export const generateXlsxFile = (name, data) => {
   const worksheet = XLSX.utils.aoa_to_sheet(data)
