@@ -109,102 +109,107 @@ const TriageNew = () => {
   }
 
   const handleDownload = async () => {
-    let longestPath = 0
-    // const data = []
-
-    const getHops = (path) => {
-      const hops = path.hops
-
-      if (hops.length - 1 < longestPath) {
-        const difference = longestPath - hops.length - 1
-
-        for (let i = 0; i <= difference; i++) {
-          hops.push("'==>")
-        }
-      }
-
-      return path.hops.map((h) => h.hop)
-    }
-
     try {
-      const promises = triage.devices.map(async (d) => {
-        const deviceArr = [[d.hostname]]
+      let longestPath = 0
+      triage.devices.forEach((device) => {
+        device.paths.forEach((path) => {
+          if (path.hops.length > longestPath) {
+            longestPath = path.hops.length
+          }
+        })
+      })
 
-        const res = await appContext.load(() =>
+      const devicePromises = triage.devices.map(async (device) => {
+        const deviceRows = []
+
+        const sourceDeviceRes = await appContext.load(() =>
           findAllDevices(
-            { queriesArr: [d.hostname] },
+            { queriesArr: [device.hostname] },
             appContext.auth.credentials
           )
         )
 
-        if (res) {
-          deviceArr.push(
-            res.device[0].info.assetTag
-              ? res.device[0].info.assetTag
-              : 'Not Found',
-            res.device[0].info.deployment.rack
-              ? res.device[0].info.deployment.rack
-              : 'Not Found',
-            res.device[0].info.deployment.zPosition
-              ? d.info.deployment.zPosition
-              : 'Not Found'
-          )
-        }
+        const sourceDeviceInfo = sourceDeviceRes?.devices?.[0]?.info
 
-        d.paths.forEach(async (p, index) => {
-          const res = await appContext.load(() =>
+        const baseDeviceInfo = [
+          device.hostname,
+          sourceDeviceInfo?.assetTag || 'Not Found',
+          sourceDeviceInfo?.deployment?.rack || 'Not Found',
+          sourceDeviceInfo?.deployment?.zPosition || 'Not Found'
+        ]
+
+        const pathPromises = device.paths.map(async (path, pathIndex) => {
+          const destDeviceRes = await appContext.load(() =>
             findAllDevices(
-              { queriesArr: [p.destHostname] },
+              { queriesArr: [path.destHostname] },
               appContext.auth.credentials
             )
           )
 
-          if (p.hops.length - 1 > longestPath) {
-            longestPath = p.hops.length
+          const destDeviceInfo = destDeviceRes?.devices?.[0]?.info
+
+          const hops = path.hops.map((hop) => hop.hop)
+          const hopsWithPadding = [...hops]
+
+          while (hopsWithPadding.length < longestPath) {
+            hopsWithPadding.push('')
           }
 
-          const port = [`'${p.port}`, p.isPortActive ? 'UP' : 'DOWN']
-          let destination = []
-          if (res) {
-            destination.push(
-              p.destHostname,
-              `'${p.destPort}`,
-              p.destIsPortActive ? 'UP' : 'DOWN'
-            )
+          const pathRow = [
+            `'${path.port}`,
+            path.isPortActive ? 'UP' : 'DOWN',
+            ...hopsWithPadding,
+            path.destHostname,
+            destDeviceInfo?.assetTag || 'Not Found',
+            `'${path.destPort}`,
+            path.destIsPortActive ? 'UP' : 'DOWN'
+          ]
+
+          if (pathIndex === 0) {
+            return [...baseDeviceInfo, ...pathRow]
           } else {
-            destination.push(
-              p.destHostname,
-              res.devices[0].info.assetTag
-                ? res.devices[0].info.assetTag
-                : 'Not Found',
-              `'${p.destPort}`,
-              p.destIsPortActive ? 'UP' : 'DOWN'
-            )
-          }
-
-          const row = [...port, ...getHops(p), ...destination]
-
-          switch (index) {
-            case 0:
-              deviceArr[deviceArr.length - 1].push(...row)
-              break
-            case d.paths.length - 1:
-              deviceArr.push(['', '', '', ...row])
-              deviceArr.push([])
-              break
-            default:
-              deviceArr.push(['', '', '', ...row])
+            return ['', '', '', '', ...pathRow]
           }
         })
 
-        return deviceArr
+        const pathRows = await Promise.all(pathPromises)
+
+        if (pathRows.length > 0) {
+          deviceRows.push(...pathRows, [])
+        }
+
+        return deviceRows
       })
 
-      const finalData = await Promise.all(promises)
+      const allDeviceData = await Promise.all(devicePromises)
 
-      generateXlsxFile(triage.name, ...finalData)
+      const flattenedData = allDeviceData.flat()
+
+      const hopHeaders = Array.from(
+        { length: longestPath },
+        (_, i) => `Hop ${i + 1}`
+      )
+
+      const headers = [
+        'Hostname',
+        'Asset Tag',
+        'Rack',
+        'Height',
+        'Port',
+        'Status',
+        ...hopHeaders,
+        'Destination Hostname',
+        'Destination Tag',
+        'Destination Port',
+        'Destination Status'
+      ]
+
+      const finalData = [headers, ...flattenedData]
+
+      generateXlsxFile(triage.name, finalData)
     } catch (error) {
-      appContext.showPopup(error.message)
+      console.error('Download error:', error)
+      appContext.showPopup('Failed to generate spreadsheet')
     }
   }
 
