@@ -12,6 +12,7 @@ import DeviceTriageCard from '../DeviceTriageCard'
 import { postDevice } from '../../services/devices'
 import useToggle from '../../hooks/useToggle'
 import { generateXlsxFile } from '../../utils/xlsx'
+import { findAllDevices } from '../../services/tools'
 
 const TriageNew = () => {
   const appContext = useContext(AppContext)
@@ -107,41 +108,104 @@ const TriageNew = () => {
     })
   }
 
-  const handleDownload = () => {
-    const data = []
+  const handleDownload = async () => {
+    let longestPath = 0
+    // const data = []
 
     const getHops = (path) => {
+      const hops = path.hops
+
+      if (hops.length - 1 < longestPath) {
+        const difference = longestPath - hops.length - 1
+
+        for (let i = 0; i <= difference; i++) {
+          hops.push("'==>")
+        }
+      }
+
       return path.hops.map((h) => h.hop)
     }
 
-    triage.devices.forEach((d) => {
-      data.push([d.hostname])
+    try {
+      const promises = triage.devices.map(async (d) => {
+        const deviceArr = [[d.hostname]]
 
-      d.paths.forEach((p, index) => {
-        const port = [`'${p.port}`, p.isPortActive ? 'UP' : 'DOWN']
-        const destination = [
-          p.destHostname,
-          `'${p.destPort}`,
-          p.destIsPortActive ? 'UP' : 'DOWN'
-        ]
+        const res = await appContext.load(() =>
+          findAllDevices(
+            { queriesArr: [d.hostname] },
+            appContext.auth.credentials
+          )
+        )
 
-        const row = [...port, ...getHops(p), ...destination]
-
-        switch (index) {
-          case 0:
-            data[data.length - 1].push(...row)
-            break
-          case d.paths.length - 1:
-            data.push(['', ...row])
-            data.push([])
-            break
-          default:
-            data.push(['', ...row])
+        if (res) {
+          deviceArr.push(
+            res.device[0].info.assetTag
+              ? res.device[0].info.assetTag
+              : 'Not Found',
+            res.device[0].info.deployment.rack
+              ? res.device[0].info.deployment.rack
+              : 'Not Found',
+            res.device[0].info.deployment.zPosition
+              ? d.info.deployment.zPosition
+              : 'Not Found'
+          )
         }
-      })
-    })
 
-    generateXlsxFile(triage.name, data)
+        d.paths.forEach(async (p, index) => {
+          const res = await appContext.load(() =>
+            findAllDevices(
+              { queriesArr: [p.destHostname] },
+              appContext.auth.credentials
+            )
+          )
+
+          if (p.hops.length - 1 > longestPath) {
+            longestPath = p.hops.length
+          }
+
+          const port = [`'${p.port}`, p.isPortActive ? 'UP' : 'DOWN']
+          let destination = []
+          if (res) {
+            destination.push(
+              p.destHostname,
+              `'${p.destPort}`,
+              p.destIsPortActive ? 'UP' : 'DOWN'
+            )
+          } else {
+            destination.push(
+              p.destHostname,
+              res.devices[0].info.assetTag
+                ? res.devices[0].info.assetTag
+                : 'Not Found',
+              `'${p.destPort}`,
+              p.destIsPortActive ? 'UP' : 'DOWN'
+            )
+          }
+
+          const row = [...port, ...getHops(p), ...destination]
+
+          switch (index) {
+            case 0:
+              deviceArr[deviceArr.length - 1].push(...row)
+              break
+            case d.paths.length - 1:
+              deviceArr.push(['', '', '', ...row])
+              deviceArr.push([])
+              break
+            default:
+              deviceArr.push(['', '', '', ...row])
+          }
+        })
+
+        return deviceArr
+      })
+
+      const finalData = await Promise.all(promises)
+
+      generateXlsxFile(triage.name, ...finalData)
+    } catch (error) {
+      appContext.showPopup(error.message)
+    }
   }
 
   const renameHandler = () => {
