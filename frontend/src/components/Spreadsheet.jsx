@@ -10,9 +10,9 @@ const Spreadsheet = (props) => {
   if (!props.rowData) {
     return null
   }
-  const classes = `Spreadsheet to-print${props.isCopyClick ? ' copied' : ''} ${
-    props.className ? props.className : ''
-  }`
+  const classes = `Spreadsheet to-print light${
+    props.isCopyClick ? ' copied' : ''
+  } ${props.className ? props.className : ''}`
 
   const table = useReactTable({
     data: props.rowData,

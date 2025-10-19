@@ -31,3 +31,8 @@
 .HopTriageCard input.small {
   width: 100%;
 }
+
+.HopTriageCard .hop {
+  width: max-content;
+  margin: 0 auto;
+}

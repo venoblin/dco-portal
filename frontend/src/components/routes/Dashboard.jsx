@@ -6,8 +6,9 @@ import { getAllGuides } from '../../services/guides'
 import { AppContext } from '../../contexts/AppContext'
 import GuideCard from '../GuideCard'
 import LoadingIcon from '../LoadingIcon'
+import ThemeToggle from '../ThemeToggle'
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   const appContext = useContext(AppContext)
   const [guides, setGuides] = useState(null)
 
@@ -31,6 +32,8 @@ const Dashboard = () => {
     <div className="Dashboard">
       <header>
         <h1>Dashboard</h1>
+
+        <ThemeToggle currentTheme={props.themeName} setTheme={props.setTheme} />
       </header>
 
       <div className="dashboard">

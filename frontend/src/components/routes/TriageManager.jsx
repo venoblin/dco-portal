@@ -52,6 +52,7 @@ const TriageManager = () => {
         <form className="input-button-combine" onSubmit={onSubmit}>
           <label htmlFor="name">Name</label>
           <input
+            className="light"
             type="text"
             name="name"
             id="name"

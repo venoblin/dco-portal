@@ -157,7 +157,7 @@ const PathTriageCard = (props) => {
             <div className="form-section">
               <label htmlFor={`port_${props.device.id}`}>Port</label>
               <input
-                className="small"
+                className="small light"
                 type="text"
                 name="port"
                 id={`port_${props.device.id}`}
@@ -175,6 +175,7 @@ const PathTriageCard = (props) => {
                   UP:
                 </label>
                 <input
+                  className="light"
                   id={`isPortActive_${props.device.id}`}
                   name="isPortActive"
                   type="checkbox"
@@ -204,6 +205,7 @@ const PathTriageCard = (props) => {
                 Destination
               </label>
               <input
+                className="light"
                 type="text"
                 name="destHostname"
                 id={`destHostname_${props.device.id}`}
@@ -214,7 +216,7 @@ const PathTriageCard = (props) => {
 
               <label htmlFor={`destPort_${props.device.id}`}>Port</label>
               <input
-                className="small"
+                className="small light"
                 type="text"
                 name="destPort"
                 id={`destPort_${props.device.id}`}
@@ -231,6 +233,7 @@ const PathTriageCard = (props) => {
                   UP:
                 </label>
                 <input
+                  className="light"
                   id={`destIsPortActive_${props.device.id}`}
                   name="destIsPortActive"
                   type="checkbox"
@@ -328,7 +331,7 @@ const PathTriageCard = (props) => {
             <label htmlFor="hop">Hop</label>
             <input
               ref={inputRef}
-              className="small"
+              className="small light"
               type="text"
               name="hop"
               id="hop"

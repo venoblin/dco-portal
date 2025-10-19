@@ -44,6 +44,7 @@ const Search = (props) => {
 
         <label htmlFor="search">Search</label>
         <input
+          className="light"
           id="search"
           type="text"
           name="search"

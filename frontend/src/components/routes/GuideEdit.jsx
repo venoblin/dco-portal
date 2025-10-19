@@ -106,6 +106,7 @@ const GuideEdit = () => {
             <div>
               <label htmlFor="author">Author</label>
               <input
+                className="light"
                 required
                 type="text"
                 name="author"
@@ -119,6 +120,7 @@ const GuideEdit = () => {
             <div>
               <label htmlFor="title">Title</label>
               <input
+                className="light"
                 required
                 type="text"
                 name="title"
