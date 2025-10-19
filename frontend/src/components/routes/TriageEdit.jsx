@@ -13,11 +13,11 @@ import { postDevice } from '../../services/devices'
 import useToggle from '../../hooks/useToggle'
 import { generateXlsxFile } from '../../utils/xlsx'
 import { findAllDevices } from '../../services/tools'
+import { constructQueries } from '../../utils'
 
 const TriageNew = () => {
   const appContext = useContext(AppContext)
-  const [textData, handleTextDataChange, setTextData] = useFormState('')
-  const [hostname, onHostnameChange, setHostname, resetHostname] =
+  const [textData, handleTextDataChange, setTextData, resetTextData] =
     useFormState('')
   const [triage, setTriage] = useState(null)
   const [name, onNameChange, setName] = useFormState('')
@@ -44,25 +44,38 @@ const TriageNew = () => {
     event.preventDefault()
 
     try {
-      const res = await appContext.load(() =>
-        postDevice({
-          triageId: id,
-          hostname: hostname
-        })
-      )
+      const queries = constructQueries(textData, 'hostname')
 
-      resetHostname()
+      const hostnamesPromises = queries.map(async (query) => {
+        const res = await appContext.load(() =>
+          postDevice({
+            triageId: id,
+            hostname: query.hostname
+          })
+        )
 
-      if (res) {
-        setTriage({
-          ...triage,
-          devices: [...triage.devices, { ...res.device, paths: [] }]
-        })
-      } else {
-        throw new Error()
-      }
-    } catch {
-      appContext.showPopup("Couldn't create device")
+        if (res) {
+          return res.device
+        } else {
+          throw new Error("Couldn't create device/s")
+        }
+      })
+
+      const allDeviceData = await Promise.all(hostnamesPromises)
+
+      const pathedDevices = allDeviceData.map((device) => {
+        device.paths = []
+        return device
+      })
+
+      resetTextData()
+
+      setTriage({
+        ...triage,
+        devices: pathedDevices
+      })
+    } catch (error) {
+      appContext.showPopup(error.message)
     }
   }
 
