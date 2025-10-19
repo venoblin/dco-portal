@@ -3,7 +3,7 @@ import { useState, useRef, useContext, useEffect } from 'react'
 import { AppContext } from '../../contexts/AppContext'
 import { flexRender } from '@tanstack/react-table'
 import useToggle from '../../hooks/useToggle'
-import { sleep } from '../../utils'
+import { constructQueries, sleep } from '../../utils'
 import { findAllDevices } from '../../services/tools'
 import useFormState from '../../hooks/useFormState'
 import Spreadsheet from '../Spreadsheet'
@@ -65,19 +65,7 @@ const DeviceLookup = () => {
     event.preventDefault()
 
     try {
-      const lowerCase = textData.toLowerCase()
-      const dataArr = lowerCase.split(/[\n ]/)
-
-      const cleanedArr = dataArr.filter((data) => data !== '')
-
-      const queries = cleanedArr.map((data) => {
-        if (data !== '') {
-          const newQuery = {}
-          newQuery[searchType] = data
-
-          return newQuery
-        }
-      })
+      const queries = constructQueries(textData, searchType)
 
       const res = await appContext.load(() =>
         findAllDevices({ queriesArr: queries }, appContext.auth.credentials)
@@ -106,10 +94,10 @@ const DeviceLookup = () => {
         storageSet('devicesLookup', devicesData)
         setRowData(devicesData)
       } else {
-        appContext.showPopup("Couldn't find devices")
+        throw new Error("Couldn't find devices")
       }
-    } catch {
-      appContext.showPopup(`Couln't find devices by ${searchType}`)
+    } catch (error) {
+      appContext.showPopup(error.message)
     }
   }
 
