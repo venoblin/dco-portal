@@ -140,6 +140,7 @@ const DeviceTriageCard = (props) => {
           <form className="input-button-combine" onSubmit={onRenameSubmit}>
             <label htmlFor="hostname">Hostname</label>
             <input
+              className="light"
               type="text"
               name="hostname"
               id="hostname"
@@ -185,7 +186,7 @@ const DeviceTriageCard = (props) => {
           <div className="form-section">
             <label htmlFor={`port_${props.device.id}`}>Port</label>
             <input
-              className="small"
+              className="small light"
               type="text"
               name="port"
               id={`port_${props.device.id}`}
@@ -203,6 +204,7 @@ const DeviceTriageCard = (props) => {
                 UP:
               </label>
               <input
+                className="light"
                 id={`isPortActive_${props.device.id}`}
                 name="isPortActive"
                 type="checkbox"
@@ -232,6 +234,7 @@ const DeviceTriageCard = (props) => {
               Destination
             </label>
             <input
+              className="light"
               type="text"
               name="destHostname"
               id={`destHostname_${props.device.id}`}
@@ -242,7 +245,7 @@ const DeviceTriageCard = (props) => {
 
             <label htmlFor={`destPort_${props.device.id}`}>Port</label>
             <input
-              className="small"
+              className="small light"
               type="text"
               name="destPort"
               id={`destPort_${props.device.id}`}
@@ -259,6 +262,7 @@ const DeviceTriageCard = (props) => {
                 UP:
               </label>
               <input
+                className="light"
                 id={`destIsPortActive_${props.device.id}`}
                 name="destIsPortActive"
                 type="checkbox"

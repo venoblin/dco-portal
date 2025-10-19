@@ -212,6 +212,7 @@ const DeviceLookup = () => {
 
           <textarea
             onChange={handleTextDataChange}
+            className="light"
             name="textData"
             id="textData"
             value={textData}

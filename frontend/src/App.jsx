@@ -1,6 +1,6 @@
 import 'react-quill-new/dist/quill.snow.css'
 import './styles/App.css'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { AppContext } from './contexts/AppContext'
 import NavBar from './components/NavBar'
@@ -17,9 +17,25 @@ import NotFound from './components/routes/NotFound'
 import Login from './components/routes/Login'
 import TriageEdit from './components/routes/TriageEdit'
 import GuideEdit from './components/routes/GuideEdit'
+import { storageGet, storageSet } from './utils/localStorage'
 
 const App = () => {
   const appContext = useContext(AppContext)
+  const [themeName, setThemeName] = useState('dark')
+
+  const setTheme = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme)
+    storageSet('theme', theme)
+    setThemeName(theme)
+  }
+
+  useEffect(() => {
+    const theme = storageGet('theme')
+
+    if (theme) {
+      setTheme(theme)
+    }
+  }, [])
 
   return (
     <div
@@ -32,7 +48,10 @@ const App = () => {
       <main>
         {appContext.auth.isAuthenticated === true ? (
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route
+              path="/"
+              element={<Dashboard setTheme={setTheme} themeName={themeName} />}
+            />
             <Route path="/guides" element={<Guides />} />
             <Route path="/guides/new" element={<GuidesNew />} />
             <Route path="/guides/:id" element={<GuideSingle />} />

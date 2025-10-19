@@ -101,7 +101,7 @@ const HopTriageCard = (props) => {
         <form onSubmit={onSubmit}>
           <label htmlFor="hop">Hop</label>
           <input
-            className="small"
+            className="small light"
             type="text"
             name="hop"
             id="hop"

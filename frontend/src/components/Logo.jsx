@@ -1,6 +1,6 @@
 import './Logo.css'
 
-const Logo = (props) => {
+const Logo = () => {
   return (
     <div className="Logo">
       <svg

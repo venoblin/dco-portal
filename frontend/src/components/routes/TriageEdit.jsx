@@ -237,6 +237,7 @@ const TriageNew = () => {
                 >
                   <label htmlFor="name">Name</label>
                   <input
+                    className="light"
                     type="text"
                     name="name"
                     id="name"
@@ -268,6 +269,7 @@ const TriageNew = () => {
             <form className="input-button-combine" onSubmit={onDeviceSubmit}>
               <label htmlFor="hostname">Hostname</label>
               <input
+                className="light"
                 type="text"
                 name="hostname"
                 id="hostname"

@@ -44,8 +44,9 @@ const Editor = (props) => {
   }, [])
 
   return (
-    <div className="Editor">
+    <div className="Editor light">
       <ReactQuill
+        className="light"
         ref={quillRef}
         theme="snow"
         modules={modules}

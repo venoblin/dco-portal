@@ -60,6 +60,7 @@ const Login = () => {
           <form onSubmit={(event) => handleLogin(event)}>
             <label htmlFor="username">Username</label>
             <input
+              className="light"
               id="username"
               name="username"
               type="text"
@@ -71,6 +72,7 @@ const Login = () => {
 
             <label htmlFor="password">Password</label>
             <input
+              className="light"
               id="password"
               name="password"
               type="password"
