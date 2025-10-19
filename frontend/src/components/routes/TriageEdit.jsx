@@ -44,13 +44,13 @@ const TriageNew = () => {
     event.preventDefault()
 
     try {
-      const queries = constructQueries(textData, 'hostname')
+      const queries = constructQueries(textData, 'assetName')
 
       const hostnamesPromises = queries.map(async (query) => {
         const res = await appContext.load(() =>
           postDevice({
             triageId: id,
-            hostname: query.hostname
+            hostname: query.assetName
           })
         )
 
@@ -153,9 +153,11 @@ const TriageNew = () => {
       const devicePromises = triage.devices.map(async (device) => {
         const deviceRows = []
 
+        const deviceQuery = constructQueries(device.hostname, 'assetName')
+
         const sourceDeviceRes = await appContext.load(() =>
           findAllDevices(
-            { queriesArr: [device.hostname] },
+            { queriesArr: deviceQuery },
             appContext.auth.credentials
           )
         )
@@ -170,9 +172,14 @@ const TriageNew = () => {
         ]
 
         const pathPromises = device.paths.map(async (path, pathIndex) => {
+          const destDeviceQuery = constructQueries(
+            path.destHostname,
+            'assetName'
+          )
+
           const destDeviceRes = await appContext.load(() =>
             findAllDevices(
-              { queriesArr: [path.destHostname] },
+              { queriesArr: destDeviceQuery },
               appContext.auth.credentials
             )
           )
@@ -192,7 +199,7 @@ const TriageNew = () => {
             ...hopsWithPadding,
             path.destHostname,
             destDeviceInfo?.assetTag || 'Not Found',
-            `'${path.destPort}`,
+            path.destPort,
             path.destIsPortActive ? 'UP' : 'DOWN'
           ]
 
