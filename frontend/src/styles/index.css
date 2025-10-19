@@ -7,7 +7,8 @@
   --danger-color: #c13642;
   --warning-color: #de6b48;
   --border-width: 1px;
-  --nav-width: 200px;
+  --nav-icons-size: 35px;
+  --nav-width: 65px;
   --nav-height: 100px;
   --default-transition: 0.1s ease-in-out;
   --default-spacing: 1rem;
