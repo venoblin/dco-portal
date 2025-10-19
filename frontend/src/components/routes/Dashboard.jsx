@@ -79,6 +79,8 @@ const Dashboard = (props) => {
           )}
         </Panel>
       </div>
+
+      <LoadingIcon />
     </div>
   )
 }
