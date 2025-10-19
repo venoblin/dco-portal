@@ -21,7 +21,7 @@ import { storageGet, storageSet } from './utils/localStorage'
 
 const App = () => {
   const appContext = useContext(AppContext)
-  const [themeName, setThemeName] = useState('dark')
+  const [themeName, setThemeName] = useState('')
 
   const setTheme = (theme) => {
     document.documentElement.setAttribute('data-theme', theme)
@@ -34,6 +34,8 @@ const App = () => {
 
     if (theme) {
       setTheme(theme)
+    } else {
+      setTheme('dark')
     }
   }, [])
 
