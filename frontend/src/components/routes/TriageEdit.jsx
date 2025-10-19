@@ -217,12 +217,12 @@ const TriageNew = () => {
         { v: 'Rack', t: 's', s: hostStyles },
         { v: 'Height', t: 's', s: hostStyles },
         { v: 'Port', t: 's', s: hostStyles },
-        { v: 'Status', t: 's', s: hostStyles },
+        { v: 'Port Status', t: 's', s: hostStyles },
         ...hopHeaders,
-        { v: 'Destination Hostname', t: 's', s: destStyles },
-        { v: 'Destination Tag', t: 's', s: destStyles },
-        { v: 'Destination Port', t: 's', s: destStyles },
-        { v: 'Destination Status', t: 's', s: destStyles }
+        { v: 'Destination', t: 's', s: destStyles },
+        { v: 'Asset Tag', t: 's', s: destStyles },
+        { v: 'Port', t: 's', s: destStyles },
+        { v: 'Port Status', t: 's', s: destStyles }
       ]
 
       const finalData = [headers, ...flattenedData]
