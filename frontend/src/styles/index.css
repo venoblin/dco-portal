@@ -36,8 +36,6 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  transition: background var(--default-transition),
-    color var(--default-transition), border-color var(--default-transition);
 }
 
 @font-face {
