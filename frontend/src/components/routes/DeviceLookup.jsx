@@ -154,10 +154,10 @@ const DeviceLookup = () => {
   const getCurrentSearchTypeName = () => {
     switch (searchType) {
       case 'assetName':
-        return 'hostnames'
+        return 'hostname/s'
         break
       case 'assetTag':
-        return 'asset tags'
+        return 'asset tag/s'
         break
     }
   }
