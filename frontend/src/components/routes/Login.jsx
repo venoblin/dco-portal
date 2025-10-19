@@ -54,7 +54,10 @@ const Login = () => {
   return (
     <div className="Login">
       <Panel>
-        <Logo msg={'Login'} />
+        <div className="logo-wrap">
+          <Logo />
+          <p>DCO Portal</p>
+        </div>
 
         {!appContext.isLoading ? (
           <form onSubmit={(event) => handleLogin(event)}>
