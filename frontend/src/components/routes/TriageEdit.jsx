@@ -153,7 +153,7 @@ const TriageNew = () => {
       const devicePromises = triage.devices.map(async (device) => {
         const deviceRows = []
 
-        const deviceQuery = constructQueries([device.hostname], 'assetName')
+        const deviceQuery = constructQueries(device.hostname, 'assetName')
 
         const sourceDeviceRes = await appContext.load(() =>
           findAllDevices(
@@ -173,7 +173,7 @@ const TriageNew = () => {
 
         const pathPromises = device.paths.map(async (path, pathIndex) => {
           const destDeviceQuery = constructQueries(
-            [path.destHostname],
+            path.destHostname,
             'assetName'
           )
 
