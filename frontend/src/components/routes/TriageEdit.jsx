@@ -13,10 +13,11 @@ import { postDevice } from '../../services/devices'
 import useToggle from '../../hooks/useToggle'
 import { generateXlsxFile } from '../../utils/xlsx'
 import { findAllDevices } from '../../services/tools'
+import { constructQueries } from '../../utils'
 
 const TriageNew = () => {
   const appContext = useContext(AppContext)
-  const [hostname, onHostnameChange, setHostname, resetHostname] =
+  const [textData, handleTextDataChange, setTextData, resetTextData] =
     useFormState('')
   const [triage, setTriage] = useState(null)
   const [name, onNameChange, setName] = useFormState('')
@@ -43,25 +44,38 @@ const TriageNew = () => {
     event.preventDefault()
 
     try {
-      const res = await appContext.load(() =>
-        postDevice({
-          triageId: id,
-          hostname: hostname
-        })
-      )
+      const queries = constructQueries(textData, 'hostname')
 
-      resetHostname()
+      const hostnamesPromises = queries.map(async (query) => {
+        const res = await appContext.load(() =>
+          postDevice({
+            triageId: id,
+            hostname: query.hostname
+          })
+        )
 
-      if (res) {
-        setTriage({
-          ...triage,
-          devices: [...triage.devices, { ...res.device, paths: [] }]
-        })
-      } else {
-        throw new Error()
-      }
-    } catch {
-      appContext.showPopup("Couldn't create device")
+        if (res) {
+          return res.device
+        } else {
+          throw new Error("Couldn't create device/s")
+        }
+      })
+
+      const allDeviceData = await Promise.all(hostnamesPromises)
+
+      const pathedDevices = allDeviceData.map((device) => {
+        device.paths = []
+        return device
+      })
+
+      resetTextData()
+
+      setTriage({
+        ...triage,
+        devices: pathedDevices
+      })
+    } catch (error) {
+      appContext.showPopup(error.message)
     }
   }
 
@@ -118,6 +132,23 @@ const TriageNew = () => {
           }
         })
       })
+
+      const baseHeaderStyles = {
+        font: { bold: true, color: { rgb: '000000' } },
+        alignment: { horizontal: 'center', vertical: 'center' }
+      }
+      const hostStyles = {
+        ...baseHeaderStyles,
+        fill: { fgColor: { rgb: '3A5683' } }
+      }
+      const destStyles = {
+        ...baseHeaderStyles,
+        fill: { fgColor: { rgb: '4F6D7A' } }
+      }
+      const hopStytles = {
+        ...baseHeaderStyles,
+        fill: { fgColor: { rgb: 'EEB868' } }
+      }
 
       const devicePromises = triage.devices.map(async (device) => {
         const deviceRows = []
@@ -185,23 +216,27 @@ const TriageNew = () => {
 
       const flattenedData = allDeviceData.flat()
 
-      const hopHeaders = Array.from(
-        { length: longestPath },
-        (_, i) => `Hop ${i + 1}`
-      )
+      const hopHeaders = []
+      for (let i = 0; i < longestPath; i++) {
+        hopHeaders.push({
+          v: `Hop ${i + 1}`,
+          t: 's',
+          s: hopStytles
+        })
+      }
 
       const headers = [
-        'Hostname',
-        'Asset Tag',
-        'Rack',
-        'Height',
-        'Port',
-        'Status',
+        { v: 'Hostname', t: 's', s: hostStyles },
+        { v: 'Asset Tag', t: 's', s: hostStyles },
+        { v: 'Rack', t: 's', s: hostStyles },
+        { v: 'Height', t: 's', s: hostStyles },
+        { v: 'Port', t: 's', s: hostStyles },
+        { v: 'Port Status', t: 's', s: hostStyles },
         ...hopHeaders,
-        'Destination Hostname',
-        'Destination Tag',
-        'Destination Port',
-        'Destination Status'
+        { v: 'Destination', t: 's', s: destStyles },
+        { v: 'Asset Tag', t: 's', s: destStyles },
+        { v: 'Port', t: 's', s: destStyles },
+        { v: 'Port Status', t: 's', s: destStyles }
       ]
 
       const finalData = [headers, ...flattenedData]
@@ -267,18 +302,17 @@ const TriageNew = () => {
         {triage && (
           <div className="inputs">
             <form className="input-button-combine" onSubmit={onDeviceSubmit}>
-              <label htmlFor="hostname">Hostname</label>
-              <input
+              <textarea
+                onChange={handleTextDataChange}
                 className="light"
-                type="text"
-                name="hostname"
-                id="hostname"
-                placeholder="Hostname"
-                value={hostname}
-                onChange={onHostnameChange}
+                name="textData"
+                id="textData"
+                value={textData}
                 required
-              />
-              <button>Add Device</button>
+                placeholder={`Paste hostname/s here...`}
+              ></textarea>
+
+              <button>Add Device/s</button>
             </form>
 
             <button onClick={handleDownload}>Download</button>

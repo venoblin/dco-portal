@@ -24,3 +24,21 @@ export const getBasePathname = (pathname) => {
 export const sleep = async (time) => {
   return new Promise((res) => setTimeout(res, time))
 }
+
+export const constructQueries = (textData, searchType) => {
+  const lowerCase = textData.toLowerCase()
+  const dataArr = lowerCase.split(/[\n ]/)
+
+  const cleanedArr = dataArr.filter((data) => data !== '')
+
+  const queries = cleanedArr.map((data) => {
+    if (data !== '') {
+      const newQuery = {}
+      newQuery[searchType] = data
+
+      return newQuery
+    }
+  })
+
+  return queries
+}
