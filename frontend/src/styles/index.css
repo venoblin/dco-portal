@@ -9,7 +9,6 @@
   --default-border: var(--border-width) solid var(--overlay-bg-color);
   --body-font-family: 'Poppins', Helvetica, Arial, sans-serif;
   --popup-bg-color: rgba(0, 0, 0, 0.85);
-  --muted-text-color: #989898;
   --accent-color: #2175d9;
   --danger-color: #c13642;
   --warning-color: #de6b48;
@@ -18,12 +17,14 @@
 :root[data-theme='dark'] {
   --bg-color: #171c1b;
   --text-color: #f6f7eb;
+  --muted-text-color: #989898;
   --overlay-bg-color: #262424;
 }
 
 :root[data-theme='light'] {
   --bg-color: #f6f7eb;
   --text-color: #171c1b;
+  --muted-text-color: #565656;
   --overlay-bg-color: #c9c9c9;
 }
 
