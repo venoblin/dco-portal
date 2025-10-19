@@ -1,5 +1,10 @@
 .TriageEdit header form {
   margin-right: var(--default-spacing);
+  display: flex;
+}
+
+.TriageEdit header form textarea {
+  width: 250px;
 }
 
 .TriageEdit .DeviceTriageCard {

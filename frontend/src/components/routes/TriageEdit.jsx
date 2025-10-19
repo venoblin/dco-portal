@@ -16,6 +16,7 @@ import { findAllDevices } from '../../services/tools'
 
 const TriageNew = () => {
   const appContext = useContext(AppContext)
+  const [textData, handleTextDataChange, setTextData] = useFormState('')
   const [hostname, onHostnameChange, setHostname, resetHostname] =
     useFormState('')
   const [triage, setTriage] = useState(null)
@@ -288,18 +289,17 @@ const TriageNew = () => {
         {triage && (
           <div className="inputs">
             <form className="input-button-combine" onSubmit={onDeviceSubmit}>
-              <label htmlFor="hostname">Hostname</label>
-              <input
+              <textarea
+                onChange={handleTextDataChange}
                 className="light"
-                type="text"
-                name="hostname"
-                id="hostname"
-                placeholder="Hostname"
-                value={hostname}
-                onChange={onHostnameChange}
+                name="textData"
+                id="textData"
+                value={textData}
                 required
-              />
-              <button>Add Device</button>
+                placeholder={`Paste hostname/s here...`}
+              ></textarea>
+
+              <button>Add Device/s</button>
             </form>
 
             <button onClick={handleDownload}>Download</button>

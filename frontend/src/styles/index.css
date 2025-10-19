@@ -347,7 +347,8 @@ thead th {
   border-radius: var(--default-border-radius);
 }
 
-.input-button-combine input {
+.input-button-combine input,
+.input-button-combine textarea {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
