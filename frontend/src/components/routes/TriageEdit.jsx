@@ -119,6 +119,23 @@ const TriageNew = () => {
         })
       })
 
+      const baseHeaderStyles = {
+        font: { bold: true, color: { rgb: '000000' } },
+        alignment: { horizontal: 'center', vertical: 'center' }
+      }
+      const hostStyles = {
+        ...baseHeaderStyles,
+        fill: { fgColor: { rgb: '3A5683' } }
+      }
+      const destStyles = {
+        ...baseHeaderStyles,
+        fill: { fgColor: { rgb: '4F6D7A' } }
+      }
+      const hopStytles = {
+        ...baseHeaderStyles,
+        fill: { fgColor: { rgb: 'EEB868' } }
+      }
+
       const devicePromises = triage.devices.map(async (device) => {
         const deviceRows = []
 
@@ -185,23 +202,27 @@ const TriageNew = () => {
 
       const flattenedData = allDeviceData.flat()
 
-      const hopHeaders = Array.from(
-        { length: longestPath },
-        (_, i) => `Hop ${i + 1}`
-      )
+      const hopHeaders = []
+      for (let i = 0; i < longestPath; i++) {
+        hopHeaders.push({
+          v: `Hop ${i + 1}`,
+          t: 's',
+          s: hopStytles
+        })
+      }
 
       const headers = [
-        'Hostname',
-        'Asset Tag',
-        'Rack',
-        'Height',
-        'Port',
-        'Status',
+        { v: 'Hostname', t: 's', s: hostStyles },
+        { v: 'Asset Tag', t: 's', s: hostStyles },
+        { v: 'Rack', t: 's', s: hostStyles },
+        { v: 'Height', t: 's', s: hostStyles },
+        { v: 'Port', t: 's', s: hostStyles },
+        { v: 'Status', t: 's', s: hostStyles },
         ...hopHeaders,
-        'Destination Hostname',
-        'Destination Tag',
-        'Destination Port',
-        'Destination Status'
+        { v: 'Destination Hostname', t: 's', s: destStyles },
+        { v: 'Destination Tag', t: 's', s: destStyles },
+        { v: 'Destination Port', t: 's', s: destStyles },
+        { v: 'Destination Status', t: 's', s: destStyles }
       ]
 
       const finalData = [headers, ...flattenedData]
