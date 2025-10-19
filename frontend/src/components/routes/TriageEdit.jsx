@@ -22,6 +22,7 @@ const TriageNew = () => {
   const [triage, setTriage] = useState(null)
   const [name, onNameChange, setName] = useFormState('')
   const [isEditMode, toggleIsEditMode] = useToggle(false)
+  const [isDownloading, toggleIsDownloading] = useToggle(false)
   const { id } = useParams()
   const navigate = useNavigate()
 
@@ -123,6 +124,8 @@ const TriageNew = () => {
   }
 
   const handleDownload = async () => {
+    toggleIsDownloading()
+
     try {
       let longestPath = 0
       triage.devices.forEach((device) => {
@@ -249,6 +252,8 @@ const TriageNew = () => {
       const finalData = [headers, ...flattenedData]
 
       generateXlsxFile(triage.name, finalData)
+
+      toggleIsDownloading()
     } catch (error) {
       console.error('Download error:', error)
       appContext.showPopup('Failed to generate spreadsheet')
@@ -319,10 +324,14 @@ const TriageNew = () => {
                 placeholder={`Paste hostname/s here...`}
               ></textarea>
 
-              <button>Add Device/s</button>
+              <button>Add Device/s</button>
             </form>
 
-            <button onClick={handleDownload}>Download</button>
+            {!isDownloading ? (
+              <button onClick={handleDownload}>Download</button>
+            ) : (
+              <button disabled>Downloading...</button>
+            )}
           </div>
         )}
       </header>
