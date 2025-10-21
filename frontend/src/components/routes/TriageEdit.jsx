@@ -197,7 +197,7 @@ const TriageNew = () => {
           }
 
           const pathRow = [
-            `'${path.port}`,
+            path.port,
             path.isPortActive ? 'UP' : 'DOWN',
             ...hopsWithPadding,
             path.destHostname,
