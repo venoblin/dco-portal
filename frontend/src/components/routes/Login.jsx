@@ -7,8 +7,9 @@ import Logo from '../Logo'
 import Panel from '../ui/Panel'
 import LoadingIcon from '../LoadingIcon'
 import { storageGet, storageRemove, storageSet } from '../../utils/localStorage'
+import ThemeToggle from '../ThemeToggle'
 
-const Login = () => {
+const Login = (props) => {
   const appContext = useContext(AppContext)
   const [username, onUsernameChange, resetUsername] = useFormState('')
   const [password, onPasswordChange, resetPassword] = useFormState('')
@@ -53,7 +54,9 @@ const Login = () => {
 
   return (
     <div className="Login">
-      <Panel>
+      <ThemeToggle currentTheme={props.themeName} setTheme={props.setTheme} />
+
+      <Panel className="login-wrap">
         <div className="logo-wrap">
           <Logo />
           <p>DCO Portal</p>

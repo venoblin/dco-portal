@@ -23,6 +23,7 @@ const ThemeToggle = (props) => {
 
   return (
     <div className="ThemeToggle">
+      <p className="theme-name">{props.currentTheme.toUpperCase()}</p>
       <div className="toggle-switch">
         <label className="switch-label show">
           <input

@@ -5,6 +5,7 @@
   --nav-height: 100px;
   --default-transition: 0.1s ease-in-out;
   --default-spacing: 1rem;
+  --default-half-spacing: calc(var(--default-spacing) / 2);
   --default-border-radius: 1rem;
   --default-border: var(--border-width) solid var(--overlay-bg-color);
   --body-font-family: 'Poppins', Helvetica, Arial, sans-serif;
@@ -126,8 +127,8 @@ label {
 }
 
 label.show {
-  position: initial;
   left: initial;
+  position: initial;
 }
 
 .btn,
