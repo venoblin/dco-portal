@@ -1,6 +1,9 @@
+import { useContext } from 'react'
 import useFormState from '../hooks/useFormState'
+import { AppContext } from '../contexts/AppContext'
 
 const Search = (props) => {
+  const appContext = useContext(AppContext)
   const [search, handleSearchChange] = useFormState('')
   const [activeFilter, setActiveFilter] = useFormState(
     props.filters ? props.filters[0] : null
@@ -44,6 +47,7 @@ const Search = (props) => {
 
         <label htmlFor="search">Search</label>
         <input
+          disabled={appContext.isLoading ? true : false}
           className="light"
           id="search"
           type="text"
@@ -53,7 +57,12 @@ const Search = (props) => {
           onChange={(event) => handleSearchChange(event)}
         />
 
-        <button className="search">Search</button>
+        <button
+          className="search"
+          disabled={appContext.isLoading ? true : false}
+        >
+          Search
+        </button>
       </form>
     </div>
   )

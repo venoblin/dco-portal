@@ -71,7 +71,10 @@ const App = () => {
           </Routes>
         ) : (
           <Routes>
-            <Route path="/*" element={<Login />} />
+            <Route
+              path="/*"
+              element={<Login setTheme={setTheme} themeName={themeName} />}
+            />
           </Routes>
         )}
       </main>
