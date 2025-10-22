@@ -59,6 +59,7 @@ const DeviceLookup = () => {
   const [isPrinting, toggleIsPrinting] = useToggle(false)
   const [searchType, handleSearchTypeChange, setSearchType] =
     useFormState('assetName')
+  const [isDowloading, toggleIsDownloading] = useToggle(false)
   const tableRef = useRef()
 
   const handleSubmit = async (event) => {
@@ -119,6 +120,8 @@ const DeviceLookup = () => {
     toggleIsCopyClick()
   }
 
+  const handleDownload = () => {}
+
   const handlePrint = () => {
     toggleIsPrinting()
   }
@@ -169,34 +172,24 @@ const DeviceLookup = () => {
 
       <div className="wrapper">
         <form onSubmit={handleSubmit}>
-          {!appContext.isLoading ? (
-            <div className="inputs">
-              <select
-                value={searchType}
-                onChange={(event) =>
-                  handleSearchTypeChange(event, switchSearchType)
-                }
-              >
-                <option value="assetName">By Hostname</option>
-                <option value="assetTag">By Asset Tag</option>
-              </select>
-              <button type="submit">Search</button>
-            </div>
-          ) : (
-            <div className="inputs">
-              <select
-                disabled
-                value={searchType}
-                onChange={handleSearchTypeChange}
-              >
-                <option value="assetName">By Hostname</option>
-                <option value="assetTag">By Asset Tag</option>
-              </select>
-              <button disabled type="submit">
-                Search
-              </button>
-            </div>
-          )}
+          <div className="inputs">
+            <select
+              disabled={appContext.isLoading ? true : false}
+              value={searchType}
+              onChange={(event) =>
+                handleSearchTypeChange(event, switchSearchType)
+              }
+            >
+              <option value="assetName">By Hostname</option>
+              <option value="assetTag">By Asset Tag</option>
+            </select>
+            <button
+              type="submit"
+              disabled={appContext.isLoading ? true : false}
+            >
+              Search
+            </button>
+          </div>
 
           <textarea
             disabled={appContext.isLoading ? true : false}
@@ -211,54 +204,31 @@ const DeviceLookup = () => {
         </form>
 
         <div className="spreadsheet-wrapper">
-          {!appContext.isLoading ? (
-            <div className="inputs">
-              <select
-                value={type}
-                onChange={(event) => handleTypeChange(event, switchHeaders)}
-              >
-                <option value="regular">Regular</option>
-                <option value="barcodes">Barcodes</option>
-              </select>
-              {rowData.length > 0 && (
-                <div>
-                  <button type="button" onClick={handlePrint}>
-                    Print
-                  </button>
+          <div className="inputs">
+            <select
+              disabled={appContext.isLoading ? true : false}
+              value={type}
+              onChange={(event) => handleTypeChange(event, switchHeaders)}
+            >
+              <option value="regular">Regular</option>
+              <option value="barcodes">Barcodes</option>
+            </select>
+            {rowData.length > 0 && (
+              <div className="btns-wrap">
+                <button type="button" onClick={handlePrint}>
+                  Print
+                </button>
 
-                  {type !== 'barcodes' && (
+                {type !== 'barcodes' && (
+                  <div className="btns">
                     <button type="button" onClick={handleCopy}>
                       Copy
                     </button>
-                  )}
-                </div>
-              )}
-            </div>
-          ) : (
-            <div className="inputs">
-              <select
-                disabled
-                value={type}
-                onChange={(event) => handleTypeChange(event, switchHeaders)}
-              >
-                <option value="regular">Regular</option>
-                <option value="barcodes">Barcodes</option>
-              </select>
-              {rowData.length > 0 && (
-                <div>
-                  <button type="button" onClick={handlePrint}>
-                    Print
-                  </button>
-
-                  {type !== 'barcodes' && (
-                    <button type="button" onClick={handleCopy}>
-                      Copy
-                    </button>
-                  )}
-                </div>
-              )}
-            </div>
-          )}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
 
           {!appContext.isLoading ? (
             <Print isNoPadding={true}>

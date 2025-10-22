@@ -13,11 +13,19 @@
   border-radius: var(--default-border-radius);
 }
 
-.DeviceLookup .inputs button {
-  margin-right: 0.5rem;
+.DeviceLookup .btns-wrap {
+  display: flex;
 }
 
-.DeviceLookup .inputs button:last-of-type {
+.DeviceLookup .btns {
+  margin-left: var(--default-half-spacing);
+}
+
+.DeviceLookup .btns-wrap button {
+  margin-right: var(--default-half-spacing);
+}
+
+.DeviceLookup .btns-wrap button:last-of-type {
   margin-right: 0;
 }
 
