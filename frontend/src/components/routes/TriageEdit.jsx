@@ -23,6 +23,7 @@ const TriageNew = () => {
   const [name, onNameChange, setName] = useFormState('')
   const [isEditMode, toggleIsEditMode] = useToggle(false)
   const [isDownloading, toggleIsDownloading] = useToggle(false)
+  const [isPostingDevices, toggleIsPostingDevices] = useToggle(false)
   const { id } = useParams()
   const navigate = useNavigate()
 
@@ -43,6 +44,8 @@ const TriageNew = () => {
 
   const onDeviceSubmit = async (event) => {
     event.preventDefault()
+
+    toggleIsPostingDevices()
 
     try {
       const queries = constructQueries(textData, 'assetName')
@@ -75,7 +78,10 @@ const TriageNew = () => {
         ...triage,
         devices: pathedDevices
       })
+
+      toggleIsPostingDevices()
     } catch (error) {
+      toggleIsPostingDevices()
       appContext.showPopup(error.message)
     }
   }
@@ -125,7 +131,6 @@ const TriageNew = () => {
 
   const handleDownload = async () => {
     toggleIsDownloading()
-
     try {
       let longestPath = 0
       triage.devices.forEach((device) => {
@@ -255,7 +260,7 @@ const TriageNew = () => {
 
       toggleIsDownloading()
     } catch (error) {
-      console.error('Download error:', error)
+      toggleIsDownloading()
       appContext.showPopup('Failed to generate spreadsheet')
     }
   }
@@ -315,6 +320,7 @@ const TriageNew = () => {
           <div className="inputs">
             <form className="input-button-combine" onSubmit={onDeviceSubmit}>
               <textarea
+                disabled={isPostingDevices ? true : false}
                 onChange={handleTextDataChange}
                 className="light"
                 name="textData"
@@ -324,7 +330,9 @@ const TriageNew = () => {
                 placeholder={`Paste hostname/s here...`}
               ></textarea>
 
-              <button>Add Device/s</button>
+              <button disabled={isPostingDevices ? true : false}>
+                Add Device/s
+              </button>
             </form>
 
             {!isDownloading ? (

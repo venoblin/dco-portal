@@ -42,3 +42,7 @@ export const constructQueries = (textData, searchType) => {
 
   return queries
 }
+
+export const removeWhiteSpace = (text) => {
+  return text.replaceAll(' ', '')
+}
