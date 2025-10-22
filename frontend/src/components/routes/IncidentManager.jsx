@@ -135,6 +135,8 @@ const IncidentManager = () => {
   }
 
   useEffect(() => {
+    appContext.checkToken({ isCheckingExpired: true })
+
     if (search === '') {
       populateIncidents()
     }

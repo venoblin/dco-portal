@@ -59,7 +59,6 @@ const DeviceLookup = () => {
   const [isPrinting, toggleIsPrinting] = useToggle(false)
   const [searchType, handleSearchTypeChange, setSearchType] =
     useFormState('assetName')
-  const [isDowloading, toggleIsDownloading] = useToggle(false)
   const tableRef = useRef()
 
   const handleSubmit = async (event) => {
@@ -154,6 +153,8 @@ const DeviceLookup = () => {
   }
 
   useEffect(() => {
+    appContext.checkToken({ isCheckingExpired: true })
+
     checkDevices()
     checkSearchType()
 

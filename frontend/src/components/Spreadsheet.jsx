@@ -27,7 +27,7 @@ const Spreadsheet = (props) => {
         <div className="copy-msg">Successfully copied!</div>
       )}
 
-      <div className="table-wrap">
+      <div className="table-wrap light">
         <table ref={props.tableRef}>
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
