@@ -52,6 +52,7 @@ const TriageManager = () => {
         <form className="input-button-combine" onSubmit={onSubmit}>
           <label htmlFor="name">Name</label>
           <input
+            disabled={appContext.isLoading ? true : false}
             className="light"
             type="text"
             name="name"
@@ -61,7 +62,9 @@ const TriageManager = () => {
             onChange={onNameChange}
             required
           />
-          <button>Create Triage</button>
+          <button disabled={appContext.isLoading ? true : false}>
+            Create Triage
+          </button>
         </form>
       </header>
 

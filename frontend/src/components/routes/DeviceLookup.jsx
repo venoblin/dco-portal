@@ -199,6 +199,7 @@ const DeviceLookup = () => {
           )}
 
           <textarea
+            disabled={appContext.isLoading ? true : false}
             onChange={handleTextDataChange}
             className="light"
             name="textData"

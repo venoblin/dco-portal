@@ -339,7 +339,12 @@ const TriageEdit = () => {
             </form>
 
             {!isDownloading ? (
-              <button onClick={handleDownload}>Download</button>
+              <button
+                onClick={handleDownload}
+                disabled={isPostingDevices ? true : false}
+              >
+                Download
+              </button>
             ) : (
               <button disabled>Downloading...</button>
             )}

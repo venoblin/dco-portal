@@ -39,60 +39,54 @@ const GuidesNew = () => {
 
   return (
     <div>
-      {!appContext.isLoading ? (
+      <header>
         <div>
-          <header>
-            <div>
-              <Link to="/guides">← Back</Link>
-              <h1>New Guide</h1>
-            </div>
-
-            <button form="new-guide-form">Submit</button>
-          </header>
-
-          <form
-            className="guide-form"
-            id="new-guide-form"
-            onSubmit={(event) => onSubmit(event)}
-          >
-            <div>
-              <label htmlFor="author">Author</label>
-              <input
-                className="light"
-                required
-                type="text"
-                name="author"
-                id="author"
-                placeholder="Author"
-                value={author}
-                onChange={(event) => onAuthorChange(event)}
-                disabled
-              />
-            </div>
-            <div>
-              <label htmlFor="title">Title</label>
-              <input
-                className="light"
-                required
-                type="text"
-                name="title"
-                id="title"
-                placeholder="Title"
-                value={title}
-                onChange={(event) => onTitleChange(event)}
-              />
-            </div>
-
-            <Editor
-              setQuillInstance={setQuillInstance}
-              content={content}
-              setContent={setContent}
-            />
-          </form>
+          <Link to="/guides">← Back</Link>
+          <h1>New Guide</h1>
         </div>
-      ) : (
-        <LoadingIcon />
-      )}
+
+        <button form="new-guide-form">Submit</button>
+      </header>
+
+      <form
+        className="guide-form"
+        id="new-guide-form"
+        onSubmit={(event) => onSubmit(event)}
+      >
+        <div>
+          <label htmlFor="author">Author</label>
+          <input
+            className="light"
+            required
+            type="text"
+            name="author"
+            id="author"
+            placeholder="Author"
+            value={author}
+            onChange={(event) => onAuthorChange(event)}
+            disabled
+          />
+        </div>
+        <div>
+          <label htmlFor="title">Title</label>
+          <input
+            className="light"
+            required
+            type="text"
+            name="title"
+            id="title"
+            placeholder="Title"
+            value={title}
+            onChange={(event) => onTitleChange(event)}
+          />
+        </div>
+
+        <Editor
+          setQuillInstance={setQuillInstance}
+          content={content}
+          setContent={setContent}
+        />
+      </form>
     </div>
   )
 }
