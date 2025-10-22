@@ -7,6 +7,21 @@
     "dev": "parcel index.html",
     "build": "parcel build index.html"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "@tanstack/react-table": "^8.21.3",
+    "jsbarcode": "^3.12.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-quill-new": "^3.6.0",
+    "react-router-dom": "^6.26.2",
+    "xlsx-js-style": "^1.2.0"
+  },
+  "devDependencies": {
+    "crypto-browserify": "^3.12.1",
+    "events": "^3.3.0",
+    "parcel": "^2.16.0",
+    "process": "^0.11.10",
+    "stream-browserify": "^3.0.0",
+    "vm-browserify": "^1.1.2"
+  }
 }
