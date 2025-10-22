@@ -14,8 +14,9 @@ import useToggle from '../../hooks/useToggle'
 import { generateXlsxFile } from '../../utils/xlsx'
 import { findAllDevices } from '../../services/tools'
 import { constructQueries } from '../../utils'
+import LoadingIcon from '../LoadingIcon'
 
-const TriageNew = () => {
+const TriageEdit = () => {
   const appContext = useContext(AppContext)
   const [textData, handleTextDataChange, setTextData, resetTextData] =
     useFormState('')
@@ -74,9 +75,11 @@ const TriageNew = () => {
 
       resetTextData()
 
+      const newDevices = [...triage.devices, ...pathedDevices]
+
       setTriage({
         ...triage,
-        devices: pathedDevices
+        devices: newDevices
       })
 
       toggleIsPostingDevices()
@@ -344,7 +347,7 @@ const TriageNew = () => {
         )}
       </header>
 
-      <div>
+      {!isDownloading ? (
         <div>
           {triage && triage.devices && triage.devices.length ? (
             triage.devices.map((d) => (
@@ -359,9 +362,11 @@ const TriageNew = () => {
             <p>There are no devices!</p>
           )}
         </div>
-      </div>
+      ) : (
+        <LoadingIcon />
+      )}
     </div>
   )
 }
 
-export default TriageNew
+export default TriageEdit
