@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from 'react'
 import { storageGet, storageRemove } from '../utils/localStorage'
 import useToggle from '../hooks/useToggle'
 import Popup from '../components/Popup'
+import { useNavigate } from 'react-router-dom'
 
 export const AppContext = createContext()
 
@@ -14,6 +15,7 @@ export const AppProvider = (props) => {
     credentials: null
   }
   const [auth, setAuth] = useState(authInitial)
+  const navigate = useNavigate()
 
   const load = (promise) => {
     toggleIsLoading()
@@ -31,12 +33,12 @@ export const AppProvider = (props) => {
       })
   }
 
-  const showPopup = (config) => {
+  const showPopup = (msg) => {
     document.body.style.overflow = 'hidden'
-    if (typeof config === 'string') {
-      setPopupOptions({ ...popupOptions, msg: config })
+    if (typeof msg === 'string') {
+      setPopupOptions({ ...popupOptions, msg: msg })
     } else {
-      setPopupOptions({ ...config })
+      setPopupOptions({ ...msg })
     }
 
     setIsPopup(true)
@@ -48,13 +50,18 @@ export const AppProvider = (props) => {
     setIsPopup(false)
   }
 
-  const checkToken = () => {
+  const checkToken = (options) => {
     const credentials = storageGet('credentials')
 
     if (credentials && Date.now() / 1000 < credentials.expiresAt) {
       setAuth({ isAuthenticated: true, credentials: credentials })
     } else {
       setAuth({ isAuthenticated: false, credentials: null })
+
+      if (options && options.isCheckingExpired) {
+        showPopup('Token expired please log in')
+        navigate('/')
+      }
     }
   }
 
@@ -76,7 +83,8 @@ export const AppProvider = (props) => {
         load,
         auth,
         setAuth,
-        logout
+        logout,
+        checkToken
       }}
     >
       {isPopup === true && !isLoading && (

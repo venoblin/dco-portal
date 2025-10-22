@@ -274,6 +274,8 @@ const TriageEdit = () => {
   }
 
   useEffect(() => {
+    appContext.checkToken({ isCheckingExpired: true })
+
     getTriage()
   }, [])
 

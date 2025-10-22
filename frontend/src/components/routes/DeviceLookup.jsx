@@ -153,6 +153,8 @@ const DeviceLookup = () => {
   }
 
   useEffect(() => {
+    appContext.checkToken({ isCheckingExpired: true })
+
     checkDevices()
     checkSearchType()
 
