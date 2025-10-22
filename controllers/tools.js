@@ -98,7 +98,19 @@ const findAllDevices = async (req, res) => {
       if (device) {
         newDevice.info = device
       } else {
-        newDevice.info = null
+        newDevice.info = {
+          assetName: query,
+          assetTag: 'Not Found',
+          invNo: 'Not Found',
+          deployment: {
+            rack: 'Not Found',
+            zPosition: 'Not Found'
+          },
+          subStatus: 'Not Found',
+          serialNo: 'Not Found',
+          model: 'Not Found',
+          catalogID: 'Not Found'
+        }
       }
 
       return newDevice
