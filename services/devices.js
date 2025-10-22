@@ -34,6 +34,8 @@ const deviceLookup = async (clientToken, query) => {
   }
   const verumData = await verumResponse.json()
 
+  console.log(verumData)
+
   let device = null
   if (verumData.totalCount > 1) {
     device = getBestDevice(verumData.verumObjectList)
