@@ -108,8 +108,8 @@ const findAllDevices = async (req, res) => {
         newDevice.info = device
       } else {
         newDevice.info = {
-          assetName: query.assetName,
-          assetTag: 'Not Found',
+          assetName: query.assetName ? query.assetName : 'Not Found',
+          assetTag: query.assetTag ? query.assetTag : 'Not Found',
           invNo: 'Not Found',
           deployment: {
             rack: 'Not Found',
