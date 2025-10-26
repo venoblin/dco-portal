@@ -71,8 +71,6 @@ const DeviceLookup = () => {
         findAllDevices({ queriesArr: queries }, appContext.auth.credentials)
       )
 
-      console.log(res)
-
       if (res) {
         const devicesData = []
         res.devices.forEach((d) => {

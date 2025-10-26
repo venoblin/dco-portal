@@ -1,6 +1,13 @@
 const { getBestDevice } = require('../utils')
 
 const deviceLookup = async (clientToken, query) => {
+  if (
+    process.env.DCO_PORTAL_VERUM_URL_START === 'devstart' ||
+    process.env.DCO_PORTAL_VERUM_URL_END === 'devend'
+  ) {
+    return null
+  }
+
   let cleanedQuery = ''
 
   if (!query || Object.keys(query).length === 0) {
