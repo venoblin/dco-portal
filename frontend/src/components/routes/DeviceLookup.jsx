@@ -1,7 +1,6 @@
 import './DeviceLookup.css'
 import { useState, useRef, useContext, useEffect } from 'react'
 import { AppContext } from '../../contexts/AppContext'
-import { flexRender } from '@tanstack/react-table'
 import useToggle from '../../hooks/useToggle'
 import { constructQueries, sleep } from '../../utils'
 import { findAllDevices } from '../../services/tools'
@@ -35,16 +34,14 @@ const DeviceLookup = () => {
       },
       {
         header: 'Asset Tag',
-        accessorKey: 'assetTagBarcode',
-        cell: (info) => flexRender(Barcode, { value: info.getValue() })
+        accessorKey: 'assetTagBarcode'
       },
       { header: 'Rack', accessorKey: 'rack' },
       { header: 'Height', accessorKey: 'height' },
       { header: 'Serial #', accessorKey: 'serialNum' },
       {
         header: 'GPC',
-        accessorKey: 'gpcBarcode',
-        cell: (info) => flexRender(Barcode, { value: info.getValue() })
+        accessorKey: 'gpcBarcode'
       },
       { header: 'Status', accessorKey: 'status' }
     ]
