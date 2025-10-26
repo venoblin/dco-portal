@@ -71,6 +71,8 @@ const DeviceLookup = () => {
         findAllDevices({ queriesArr: queries }, appContext.auth.credentials)
       )
 
+      console.log(res)
+
       if (res) {
         const devicesData = []
         res.devices.forEach((d) => {
@@ -93,10 +95,9 @@ const DeviceLookup = () => {
 
         storageSet('devicesLookup', devicesData)
         setRowData(devicesData)
-      } else {
-        throw new Error("Couldn't find devices")
       }
     } catch (error) {
+      console.log(error)
       appContext.showPopup(error.message)
     }
   }
@@ -118,8 +119,6 @@ const DeviceLookup = () => {
     await sleep(1000)
     toggleIsCopyClick()
   }
-
-  const handleDownload = () => {}
 
   const handlePrint = () => {
     toggleIsPrinting()
