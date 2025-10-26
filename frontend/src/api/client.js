@@ -15,9 +15,8 @@ class Client {
     return `${this.#baseUrl}/${cleanedEndpoint}`
   }
 
-  #getData = (res) => {
-    const data = res.json()
-
+  #getData = async (res) => {
+    const data = await res.json()
     if (!res.ok) {
       throw new Error(data.message || `HTTP ${res.status}`)
     }
@@ -39,7 +38,8 @@ class Client {
     }
 
     const res = await fetch(`${this.#constructUrl(endpoint)}`, options)
-    return this.#getData(res)
+    const data = this.#getData(res)
+    return data
   }
 
   async patch(endpoint, payload) {
@@ -53,7 +53,8 @@ class Client {
 
     const res = await fetch(`${this.#constructUrl(endpoint)}`, options)
 
-    return this.#getData(res)
+    const data = this.#getData(res)
+    return data
   }
 
   async get(endpoint) {
@@ -71,7 +72,8 @@ class Client {
 
     const res = await fetch(`${this.#constructUrl(endpoint)}`, options)
 
-    return this.#getData(res)
+    const data = this.#getData(res)
+    return data
   }
 
   async upload(endpoint, payload, accessToken) {
@@ -83,7 +85,8 @@ class Client {
       }
     })
 
-    return this.#getData(res)
+    const data = this.#getData(res)
+    return data
   }
 }
 
