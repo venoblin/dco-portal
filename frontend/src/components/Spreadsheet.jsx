@@ -1,11 +1,12 @@
 import { Spreadsheet as ReactSpreadsheet } from 'react-spreadsheet'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const Spreadsheet = (props) => {
-  const [data, setData] = useState([
-    [{ value: 'A1' }, { value: 'B1' }],
-    [{ value: 'A2' }, { value: 'B2' }]
-  ])
+  if (!props.data) {
+    return null
+  }
+
+  const [data, setData] = useState(props.data)
 
   const classes = `Spreadsheet to-print light${
     props.isCopyClick ? ' copied' : ''
