@@ -15,99 +15,75 @@ class Client {
     return `${this.#baseUrl}/${cleanedEndpoint}`
   }
 
-  async post(endpoint, payload, accessToken) {
-    try {
-      const options = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      }
+  #getData = (res) => {
+    const data = res.json()
 
-      if (accessToken) {
-        options.headers.Authorization = `Bearer ${accessToken}`
-      }
-
-      const res = await fetch(`${this.#constructUrl(endpoint)}`, options)
-
-      if (res.ok) {
-        return res.json()
-      }
-    } catch (error) {
-      throw new Error(error)
+    if (!res.ok) {
+      throw new Error(data.message || `HTTP ${res.status}`)
     }
+
+    return data
+  }
+
+  async post(endpoint, payload, accessToken) {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    }
+
+    if (accessToken) {
+      options.headers.Authorization = `Bearer ${accessToken}`
+    }
+
+    const res = await fetch(`${this.#constructUrl(endpoint)}`, options)
+    return this.#getData(res)
   }
 
   async patch(endpoint, payload) {
-    try {
-      const options = {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      }
-
-      const res = await fetch(`${this.#constructUrl(endpoint)}`, options)
-
-      if (res.ok) {
-        return res.json()
-      }
-    } catch (error) {
-      throw new Error(error)
+    const options = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
     }
+
+    const res = await fetch(`${this.#constructUrl(endpoint)}`, options)
+
+    return this.#getData(res)
   }
 
   async get(endpoint) {
-    try {
-      const res = await fetch(`${this.#constructUrl(endpoint)}`)
+    const res = await fetch(`${this.#constructUrl(endpoint)}`)
 
-      if (res.ok) {
-        return res.json()
-      }
-    } catch (error) {
-      throw new Error(error)
+    if (res.ok) {
+      return res.json()
     }
   }
 
   async delete(endpoint) {
-    try {
-      const options = {
-        method: 'DELETE'
-      }
-
-      const res = await fetch(`${this.#constructUrl(endpoint)}`, options)
-
-      if (res.ok) {
-        return res.json()
-      }
-    } catch (error) {
-      throw new Error(error)
+    const options = {
+      method: 'DELETE'
     }
+
+    const res = await fetch(`${this.#constructUrl(endpoint)}`, options)
+
+    return this.#getData(res)
   }
 
   async upload(endpoint, payload, accessToken) {
-    try {
-      const res = await fetch(this.#constructUrl(endpoint), {
-        method: 'POST',
-        body: payload,
-        headers: {
-          Authorization: `Bearer ${accessToken}`
-        }
-      })
-
-      if (res.ok) {
-        return res.json()
-      } else {
-        const errorBody = await res
-          .json()
-          .catch(() => ({ message: res.statusText }))
-        throw new Error(`API Error ${res.status}: ${errorBody.message}`)
+    const res = await fetch(this.#constructUrl(endpoint), {
+      method: 'POST',
+      body: payload,
+      headers: {
+        Authorization: `Bearer ${accessToken}`
       }
-    } catch (error) {
-      throw new Error(error)
-    }
+    })
+
+    return this.#getData(res)
   }
 }
 

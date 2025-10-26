@@ -88,6 +88,15 @@ const findAllDevices = async (req, res) => {
       throw new Error('Missing token or devices payload')
     }
 
+    if (
+      !process.env.DCO_PORTAL_VERUM_URL_START ||
+      !process.env.DCO_PORTAL_VERUM_URL_END
+    ) {
+      throw new Error(
+        'Error looking for devices, exeternal API variables missing'
+      )
+    }
+
     const clientToken = authHeader.split(' ')[1]
 
     const devicePromises = queriesArr.map(async (query) => {

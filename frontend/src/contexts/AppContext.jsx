@@ -20,17 +20,11 @@ export const AppProvider = (props) => {
   const load = (promise) => {
     toggleIsLoading()
 
-    return promise()
-      .then((res) => {
-        toggleIsLoading()
+    return promise().then((res) => {
+      toggleIsLoading()
 
-        return res
-      })
-      .catch((err) => {
-        toggleIsLoading()
-
-        showPopup(<p>{err.message}</p>)
-      })
+      return res
+    })
   }
 
   const showPopup = (msg) => {

@@ -1,15 +1,6 @@
 const { getBestDevice } = require('../utils')
 
 const deviceLookup = async (clientToken, query) => {
-  if (
-    !process.env.DCO_PORTAL_VERUM_URL_START ||
-    !process.env.DCO_PORTAL_VERUM_URL_END
-  ) {
-    throw new Error(
-      'Error looking for devices, exeternal API variables missing'
-    )
-  }
-
   let cleanedQuery = ''
 
   if (!query || Object.keys(query).length === 0) {
