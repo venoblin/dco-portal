@@ -1,14 +1,15 @@
-import { Spreadsheet as ReactSpreadsheet } from 'react-spreadsheet'
+import './SpreadsheetGrid.css'
+import { Spreadsheet } from 'react-spreadsheet'
 import { useMemo, useState } from 'react'
 
-const Spreadsheet = (props) => {
+const SpreadsheetGrid = (props) => {
   if (!props.data) {
     return null
   }
 
   const [selected, setSelected] = useState([])
 
-  const classes = `Spreadsheet to-print light${
+  const classes = `SpreadsheetGrid to-print light${
     props.isCopyClick ? ' copied' : ''
   } ${props.className ? props.className : ''}`
 
@@ -50,9 +51,9 @@ const Spreadsheet = (props) => {
 
   return (
     <div className={classes}>
-      <ReactSpreadsheet data={data} onSelect={setSelected} />
+      <Spreadsheet data={data} onSelect={setSelected} />
     </div>
   )
 }
 
-export default Spreadsheet
+export default SpreadsheetGrid

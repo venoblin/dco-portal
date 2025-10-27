@@ -1,11 +1,11 @@
 import './DeviceLookup.css'
-import { useState, useRef, useContext, useEffect } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { AppContext } from '../../contexts/AppContext'
 import useToggle from '../../hooks/useToggle'
 import { constructQueries, sleep } from '../../utils'
 import { findAllDevices } from '../../services/tools'
 import useFormState from '../../hooks/useFormState'
-import Spreadsheet from '../Spreadsheet'
+import SpreadsheetGrid from '../SpreadsheetGrid'
 import LoadingIcon from '../LoadingIcon'
 import Barcode from '../Barcode'
 import Print from '../Print'
@@ -211,7 +211,7 @@ const DeviceLookup = () => {
 
           {!appContext.isLoading ? (
             <Print isNoPadding={true}>
-              <Spreadsheet
+              <SpreadsheetGrid
                 className={rowData.length === 0 ? 'disabled' : ''}
                 data={rowData}
                 headers={headers}

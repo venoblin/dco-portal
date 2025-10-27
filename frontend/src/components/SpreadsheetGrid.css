@@ -1,4 +1,4 @@
-.Spreadsheet {
+.SpreadsheetGrid {
   height: 500px;
   width: 100%;
   border-radius: var(--default-border-radius);
@@ -6,13 +6,14 @@
   position: relative;
   transition: opacity var(--default-transition);
   border: var(--default-border);
+  overflow: scroll;
 }
 
-.Spreadsheet.disabled {
+.SpreadsheetGrid.disabled {
   opacity: 0.5;
 }
 
-.Spreadsheet .table-wrap {
+.SpreadsheetGrid .table-wrap {
   padding: var(--default-spacing);
   width: 100%;
   height: 100%;
@@ -20,15 +21,15 @@
   border-radius: var(--default-border-radius);
 }
 
-.Spreadsheet.copied .table-wrap {
+.SpreadsheetGrid.copied .table-wrap {
   overflow: hidden;
 }
 
-.Spreadsheet .msg {
+.SpreadsheetGrid .msg {
   padding: var(--default-spacing);
 }
 
-.Spreadsheet .copy-msg {
+.SpreadsheetGrid .copy-msg {
   position: absolute;
   width: 100%;
   height: 100%;
