@@ -7,12 +7,17 @@ const Spreadsheet = (props) => {
   }
 
   const [data, setData] = useState(props.data)
+  const [selected, setSelected] = useState([])
 
   const classes = `Spreadsheet to-print light${
     props.isCopyClick ? ' copied' : ''
   } ${props.className ? props.className : ''}`
 
-  const [selected, setSelected] = useState([])
+  useEffect(() => {
+    if (props.headers) {
+      setData([props.header, ...props.data])
+    }
+  }, [])
 
   return (
     <div className={classes}>
