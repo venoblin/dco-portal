@@ -14,19 +14,23 @@ const Spreadsheet = (props) => {
   } ${props.className ? props.className : ''}`
 
   useEffect(() => {
-    const cleanedData = props.data.map((row) => {
-      const cleanedRow = row.map((item) => {
-        return {
-          value: item,
-          readOnly: props.readOnly ? true : false,
-          className: 'header-cell'
-        }
+    let cleanedData = []
+
+    if (props.data.length > 0) {
+      cleanedData = props.data.map((row) => {
+        const cleanedRow = row.map((item) => {
+          return {
+            value: item,
+            readOnly: props.readOnly ? true : false,
+            className: 'header-cell'
+          }
+        })
+
+        return cleanedRow
       })
 
-      return cleanedRow
-    })
-
-    setData([...cleanedData])
+      setData([...cleanedData])
+    }
 
     if (props.headers) {
       const cleanedHeaders = props.headers.map((h) => {
@@ -41,7 +45,7 @@ const Spreadsheet = (props) => {
     }
 
     console.log('hi')
-  }, [props.headers])
+  }, [])
 
   return (
     <div className={classes}>
