@@ -6,7 +6,7 @@
   position: relative;
   transition: opacity var(--default-transition);
   border: var(--default-border);
-  overflow: scroll;
+  overflow: auto;
 }
 
 .SpreadsheetGrid.disabled {
