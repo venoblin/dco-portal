@@ -14,36 +14,24 @@ import { storageGet, storageSet } from '../../utils/localStorage'
 const DeviceLookup = () => {
   const headerTypes = {
     regular: [
-      {
-        header: 'Hostname',
-        accessorKey: 'hostname'
-      },
-      { header: 'Asset Tag', accessorKey: 'assetTag' },
-      { header: 'Serial #', accessorKey: 'serialNum' },
-      { header: 'Rack', accessorKey: 'rack' },
-      { header: 'Height', accessorKey: 'height' },
-      { header: 'Status', accessorKey: 'status' },
-      { header: 'GPC', accessorKey: 'gpc' },
-      { header: 'Model', accessorKey: 'model' },
-      { header: 'Inventory #', accessorKey: 'inventoryNum' }
+      'Hostname',
+      'Asset Tag',
+      'Serial #',
+      'Rack',
+      'Height',
+      'Status',
+      'GPC',
+      'Model',
+      'Inventory #'
     ],
     barcodes: [
-      {
-        header: 'Hostname',
-        accessorKey: 'hostname'
-      },
-      {
-        header: 'Asset Tag',
-        accessorKey: 'assetTagBarcode'
-      },
-      { header: 'Rack', accessorKey: 'rack' },
-      { header: 'Height', accessorKey: 'height' },
-      { header: 'Serial #', accessorKey: 'serialNum' },
-      {
-        header: 'GPC',
-        accessorKey: 'gpcBarcode'
-      },
-      { header: 'Status', accessorKey: 'status' }
+      'Hostname',
+      'Asset Tag',
+      'Rack',
+      'Height',
+      'Serial #',
+      'GPC',
+      'Status'
     ]
   }
 
@@ -56,7 +44,6 @@ const DeviceLookup = () => {
   const [isPrinting, toggleIsPrinting] = useToggle(false)
   const [searchType, handleSearchTypeChange, setSearchType] =
     useFormState('assetName')
-  const tableRef = useRef()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -226,10 +213,10 @@ const DeviceLookup = () => {
             <Print isNoPadding={true}>
               <Spreadsheet
                 className={rowData.length === 0 ? 'disabled' : ''}
-                rowData={rowData}
-                columns={headers}
-                tableRef={tableRef}
+                data={rowData}
+                headers={headers}
                 isCopyClick={isCopyClick}
+                readOnly={true}
               />
             </Print>
           ) : (

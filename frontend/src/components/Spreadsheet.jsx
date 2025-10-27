@@ -6,7 +6,7 @@ const Spreadsheet = (props) => {
     return null
   }
 
-  const [data, setData] = useState(props.data)
+  const [data, setData] = useState([])
   const [selected, setSelected] = useState([])
 
   const classes = `Spreadsheet to-print light${
@@ -14,10 +14,34 @@ const Spreadsheet = (props) => {
   } ${props.className ? props.className : ''}`
 
   useEffect(() => {
+    const cleanedData = props.data.map((row) => {
+      const cleanedRow = row.map((item) => {
+        return {
+          value: item,
+          readOnly: props.readOnly ? true : false,
+          className: 'header-cell'
+        }
+      })
+
+      return cleanedRow
+    })
+
+    setData([...cleanedData])
+
     if (props.headers) {
-      setData([props.header, ...props.data])
+      const cleanedHeaders = props.headers.map((h) => {
+        return {
+          value: h,
+          readOnly: true,
+          className: 'header-cell'
+        }
+      })
+
+      setData([cleanedHeaders, ...cleanedData])
     }
-  }, [])
+
+    console.log('hi')
+  }, [props.headers])
 
   return (
     <div className={classes}>
