@@ -1,55 +1,56 @@
 import { Spreadsheet as ReactSpreadsheet } from 'react-spreadsheet'
-import { useEffect, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 const Spreadsheet = (props) => {
   if (!props.data) {
     return null
   }
 
-  const [data, setData] = useState([])
   const [selected, setSelected] = useState([])
 
   const classes = `Spreadsheet to-print light${
     props.isCopyClick ? ' copied' : ''
   } ${props.className ? props.className : ''}`
 
-  useEffect(() => {
+  const data = useMemo(() => {
     let cleanedData = []
 
-    if (props.data.length > 0) {
+    if (props.data && Array.isArray(props.data) && props.data.length > 0) {
       cleanedData = props.data.map((row) => {
-        const cleanedRow = row.map((item) => {
-          return {
-            value: item,
-            readOnly: props.readOnly ? true : false,
-            className: 'header-cell'
+        if (!Array.isArray(row)) {
+          if (typeof row === 'object' && row !== null) {
+            return Object.values(row).map((item) => ({
+              value: item,
+              readOnly: !!props.readOnly,
+              className: 'header-cell'
+            }))
           }
-        })
-
-        return cleanedRow
-      })
-
-      setData([...cleanedData])
-    }
-
-    if (props.headers) {
-      const cleanedHeaders = props.headers.map((h) => {
-        return {
-          value: h,
-          readOnly: true,
-          className: 'header-cell'
+          return []
         }
-      })
 
-      setData([cleanedHeaders, ...cleanedData])
+        return row.map((item) => ({
+          value: item,
+          readOnly: !!props.readOnly,
+          className: 'header-cell'
+        }))
+      })
     }
 
-    console.log('hi')
-  }, [])
+    if (props.headers && Array.isArray(props.headers)) {
+      const cleanedHeaders = props.headers.map((h) => ({
+        value: h,
+        readOnly: true,
+        className: 'header-cell'
+      }))
+      return [cleanedHeaders, ...cleanedData]
+    }
+
+    return cleanedData
+  }, [props.headers, props.data, props.readOnly])
 
   return (
     <div className={classes}>
-      <ReactSpreadsheet data={data} onChange={setData} onSelect={setSelected} />
+      <ReactSpreadsheet data={data} onSelect={setSelected} />
     </div>
   )
 }
