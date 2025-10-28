@@ -58,18 +58,31 @@ const DeviceLookup = () => {
       if (res) {
         const devicesData = []
         res.devices.forEach((d) => {
+          // devicesData.push({
+          //   hostname: d.info.assetName,
+          //   assetTag: d.info.assetTag,
+          //   inventoryNum: d.info.invNo,
+          //   rack: d.info.deployment.rack,
+          //   height: d.info.deployment.zPosition,
+          //   status: d.info.subStatus,
+          //   serialNum: d.info.serialNo,
+          //   model: d.info.model,
+          //   gpc: d.info.catalogID,
+          //   assetTagBarcode: d.info.assetTag,
+          //   gpcBarcode: d.info.catalogID
+          // })
           devicesData.push({
-            hostname: d.info.assetName,
-            assetTag: d.info.assetTag,
-            inventoryNum: d.info.invNo,
-            rack: d.info.deployment.rack,
-            height: d.info.deployment.zPosition,
-            status: d.info.subStatus,
-            serialNum: d.info.serialNo,
-            model: d.info.model,
-            gpc: d.info.catalogID,
-            assetTagBarcode: d.info.assetTag,
-            gpcBarcode: d.info.catalogID
+            hostname: 'assetName',
+            assetTag: 'assetTag',
+            inventoryNum: 'invNo',
+            rack: 'deployment',
+            height: 'deployment',
+            status: 'subStatus',
+            serialNum: 'serialNo',
+            model: 'model',
+            gpc: 'catalogID',
+            assetTagBarcode: 'assetTag',
+            gpcBarcode: 'catalogID'
           })
         })
 
