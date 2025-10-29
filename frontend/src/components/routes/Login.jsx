@@ -44,12 +44,14 @@ const Login = (props) => {
             : 'Username or password are incorrect'
         )
       }
+
+      resetUsername()
+      resetPassword()
     } catch (error) {
+      resetUsername()
+      resetPassword()
       appContext.showPopup(error.message)
     }
-
-    resetUsername()
-    resetPassword()
   }
 
   return (
