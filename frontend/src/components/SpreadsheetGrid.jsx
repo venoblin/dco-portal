@@ -20,8 +20,9 @@ const SpreadsheetGrid = (props) => {
       cleanedData = props.data.map((row) => {
         if (!Array.isArray(row)) {
           if (typeof row === 'object' && row !== null) {
-            return Object.values(row).map((item) => ({
-              value: item,
+            return Object.keys(row).map((key) => ({
+              value: row[key],
+              identifier: key,
               readOnly: !!props.readOnly,
               className: 'header-cell'
             }))
@@ -39,10 +40,12 @@ const SpreadsheetGrid = (props) => {
 
     if (props.headers && Array.isArray(props.headers)) {
       const cleanedHeaders = props.headers.map((h) => ({
-        value: h,
+        value: h.value,
+        identifier: h.identifier,
         readOnly: true,
         className: 'header-cell'
       }))
+
       return [cleanedHeaders, ...cleanedData]
     }
 

@@ -14,24 +14,24 @@ import { storageGet, storageSet } from '../../utils/localStorage'
 const DeviceLookup = () => {
   const headerTypes = {
     regular: [
-      'Hostname',
-      'Asset Tag',
-      'Serial #',
-      'Rack',
-      'Height',
-      'Status',
-      'GPC',
-      'Model',
-      'Inventory #'
+      { value: 'Hostname', identifier: 'hostname' },
+      { value: 'Asset Tag', identifier: 'assetTag' },
+      { value: 'Serial #', identifier: 'serialNum' },
+      { value: 'Rack', identifier: 'rack' },
+      { value: 'Height', identifier: 'height' },
+      { value: 'Status', identifier: 'status' },
+      { value: 'GPC', identifier: 'gpc' },
+      { value: 'Model', identifier: 'model' },
+      { value: 'Inventory #', identifier: 'inventoryNum' }
     ],
     barcodes: [
-      'Hostname',
-      'Asset Tag',
-      'Rack',
-      'Height',
-      'Serial #',
-      'GPC',
-      'Status'
+      { value: 'Hostname', identifier: 'hostname' },
+      { value: 'Asset Tag', identifier: 'assetTagBarcode' },
+      { value: 'Rack', identifier: 'rack' },
+      { value: 'Height', identifier: 'height' },
+      { value: 'Serial #', identifier: 'serialNum' },
+      { value: 'GPC', identifier: 'gpcBarcode' },
+      { value: 'Status', identifier: 'status' }
     ]
   }
 
