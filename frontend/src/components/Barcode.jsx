@@ -2,7 +2,7 @@ import './Barcode'
 import { useEffect, useRef } from 'react'
 import JsBarcode from 'jsbarcode'
 
-function BarcodeDisplay(props) {
+function Barcode(props) {
   const barcodeRef = useRef(null)
 
   useEffect(() => {
@@ -26,4 +26,4 @@ function BarcodeDisplay(props) {
   )
 }
 
-export default BarcodeDisplay
+export default Barcode

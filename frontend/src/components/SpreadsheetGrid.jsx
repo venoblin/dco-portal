@@ -1,6 +1,7 @@
 import './SpreadsheetGrid.css'
 import { Spreadsheet } from 'react-spreadsheet'
 import { useMemo, useState } from 'react'
+import Barcode from './Barcode'
 
 const SpreadsheetGrid = (props) => {
   if (!props.data) {
@@ -12,6 +13,28 @@ const SpreadsheetGrid = (props) => {
   const classes = `SpreadsheetGrid to-print light${
     props.isCopyClick ? ' copied' : ''
   } ${props.className ? props.className : ''}`
+
+  const customCellRenderer = (dataViewerProps) => {
+    const { cell, row, column, evaluatedCell } = dataViewerProps
+    const cellData = cell || evaluatedCell
+    const isBarcodeCell = cellData?.identifier && cellData.identifier.toLowerCase().includes('barcode')
+
+    if (isBarcodeCell && cellData?.value && cellData.value !== 'Not Found') {
+      return (
+        <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100%',
+            padding: '2px 0'
+          }}>
+          <Barcode value={cellData.value} />
+        </div>
+      )
+    }
+
+    return <div style={{ padding: '4px' }}>{cellData?.value}</div>
+  }
 
   const data = useMemo(() => {
     if (!props.headers || !Array.isArray(props.headers)) {
@@ -51,6 +74,7 @@ const SpreadsheetGrid = (props) => {
 
     const headerRow = props.headers.map((header) => ({
       value: header.value,
+      identifier: header.identifier,
       readOnly: true,
       className: 'header-cell'
     }))
@@ -71,6 +95,7 @@ const SpreadsheetGrid = (props) => {
             if (headerInfo) {
               newRow[headerInfo.index] = {
                 value: cell.value,
+                identifier: cell.identifier,
                 readOnly: !!props.readOnly,
                 className: 'cell'
               }
@@ -83,6 +108,7 @@ const SpreadsheetGrid = (props) => {
           if (headerInfo) {
             newRow[headerInfo.index] = {
               value: value,
+              identifier: identifier,
               readOnly: !!props.readOnly,
               className: 'cell'
             }
@@ -98,7 +124,11 @@ const SpreadsheetGrid = (props) => {
 
   return (
     <div className={classes}>
-      <Spreadsheet data={data} onSelect={setSelected} />
+      <Spreadsheet
+        data={data}
+        onSelect={setSelected}
+        DataViewer={customCellRenderer}
+      />
     </div>
   )
 }

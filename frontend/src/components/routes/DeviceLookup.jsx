@@ -7,7 +7,6 @@ import { findAllDevices } from '../../services/tools'
 import useFormState from '../../hooks/useFormState'
 import SpreadsheetGrid from '../SpreadsheetGrid'
 import LoadingIcon from '../LoadingIcon'
-import Barcode from '../Barcode'
 import Print from '../Print'
 import { storageGet, storageSet } from '../../utils/localStorage'
 
@@ -81,8 +80,8 @@ const DeviceLookup = () => {
             serialNum: 'serialNo',
             model: 'model',
             gpc: 'catalogID',
-            assetTagBarcode: 'assetTag',
-            gpcBarcode: 'catalogID'
+            assetTagBarcode: 'assetTagBarcode',
+            gpcBarcode: 'gpcBarcode'
           })
         })
 
