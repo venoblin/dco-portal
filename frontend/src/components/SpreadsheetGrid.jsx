@@ -14,36 +14,23 @@ const SpreadsheetGrid = (props) => {
     props.isCopyClick ? ' copied' : ''
   } ${props.className ? props.className : ''}`
 
-  // Custom DataViewer for barcode cells
   const CustomDataViewer = (dataViewerProps) => {
-    console.log("DataViewer called:", dataViewerProps)
-
     const { cell, evaluatedCell } = dataViewerProps
     const cellData = cell || evaluatedCell
-
-    // Check if this should be a barcode cell
-    const isBarcodeCell = cellData?.identifier &&
-                         cellData.identifier.toLowerCase().includes('barcode')
+    const isBarcodeCell = cellData?.identifier && cellData.identifier.toLowerCase().includes('barcode')
 
     if (isBarcodeCell && cellData?.value && cellData.value !== 'Not Found') {
       return (
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100%',
-          padding: '2px 0'
-        }}>
+        <div className='barcode-container'>
           <Barcode value={cellData.value} />
         </div>
       )
     }
 
-    return <div style={{ padding: '4px' }}>{cellData?.value}</div>
+    return cellData?.value
   }
 
   const data = useMemo(() => {
-    // If no headers, use original data structure
     if (!props.headers || !Array.isArray(props.headers)) {
       let cleanedData = []
       if (props.data && Array.isArray(props.data) && props.data.length > 0) {
@@ -69,7 +56,6 @@ const SpreadsheetGrid = (props) => {
       return cleanedData
     }
 
-    // Create header index mapping for data organization
     const headerMap = new Map()
     props.headers.forEach((header, index) => {
       headerMap.set(header.identifier, {
@@ -80,7 +66,6 @@ const SpreadsheetGrid = (props) => {
       })
     })
 
-    // Process data rows according to header order
     const processedData = props.data.map((row) => {
       const newRow = Array(props.headers.length)
         .fill(null)
@@ -124,7 +109,6 @@ const SpreadsheetGrid = (props) => {
     return processedData
   }, [props.headers, props.data, props.readOnly])
 
-  // Extract column labels from headers
   const columnLabels = useMemo(() => {
     if (!props.headers || !Array.isArray(props.headers)) return undefined
     return props.headers.map(header => header.value)
@@ -136,7 +120,7 @@ const SpreadsheetGrid = (props) => {
         data={data}
         onSelect={setSelected}
         DataViewer={CustomDataViewer}
-        columnLabels={columnLabels}  // Use columnLabels for headers
+        columnLabels={columnLabels}
       />
     </div>
   )

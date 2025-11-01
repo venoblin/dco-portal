@@ -11,7 +11,7 @@ function Barcode(props) {
         displayValue: true,
         text: props.value,
         height: 14,
-        width: 1,
+        width: 0.8,
         fontSize: 14,
         lineColor: 'black',
         background: 'transparent'

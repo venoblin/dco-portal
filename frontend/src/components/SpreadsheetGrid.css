@@ -46,3 +46,10 @@
   border-radius: var(--default-border-radius);
   z-index: 5;
 }
+
+.SpreadsheetGrid .barcode-container {
+    width: 175px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+}
