@@ -14,20 +14,21 @@ const SpreadsheetGrid = (props) => {
     props.isCopyClick ? ' copied' : ''
   } ${props.className ? props.className : ''}`
 
-  const customCellRenderer = (dataViewerProps) => {
-    const { cell, row, column, evaluatedCell } = dataViewerProps
+  const CustomDataViewer = (dataViewerProps) => {
+    const { cell, evaluatedCell } = dataViewerProps
     const cellData = cell || evaluatedCell
+
     const isBarcodeCell = cellData?.identifier && cellData.identifier.toLowerCase().includes('barcode')
 
     if (isBarcodeCell && cellData?.value && cellData.value !== 'Not Found') {
       return (
         <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '100%',
-            padding: '2px 0'
-          }}>
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100%',
+          padding: '2px 0'
+        }}>
           <Barcode value={cellData.value} />
         </div>
       )
@@ -72,13 +73,6 @@ const SpreadsheetGrid = (props) => {
       })
     })
 
-    const headerRow = props.headers.map((header) => ({
-      value: header.value,
-      identifier: header.identifier,
-      readOnly: true,
-      className: 'header-cell'
-    }))
-
     const processedData = props.data.map((row) => {
       const newRow = Array(props.headers.length)
         .fill(null)
@@ -119,15 +113,21 @@ const SpreadsheetGrid = (props) => {
       return newRow
     })
 
-    return [headerRow, ...processedData]
+    return processedData
   }, [props.headers, props.data, props.readOnly])
+
+  const columnLabels = useMemo(() => {
+    if (!props.headers || !Array.isArray(props.headers)) return undefined
+    return props.headers.map(header => header.value)
+  }, [props.headers])
 
   return (
     <div className={classes}>
       <Spreadsheet
         data={data}
         onSelect={setSelected}
-        DataViewer={customCellRenderer}
+        DataViewer={CustomDataViewer}
+        columnLabels={columnLabels}
       />
     </div>
   )
