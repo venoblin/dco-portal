@@ -10,9 +10,7 @@ const SpreadsheetGrid = (props) => {
 
   const [selected, setSelected] = useState([])
 
-  const classes = `SpreadsheetGrid to-print light${
-    props.isCopyClick ? ' copied' : ''
-  } ${props.className ? props.className : ''}`
+  const classes = `SpreadsheetGrid to-print light${props.className ? props.className : ''}`
 
   const CustomDataViewer = (dataViewerProps) => {
     const { cell, evaluatedCell } = dataViewerProps

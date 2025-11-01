@@ -210,7 +210,6 @@ const DeviceLookup = () => {
                 className={rowData.length === 0 ? 'disabled' : ''}
                 data={rowData}
                 headers={headers}
-                isCopyClick={isCopyClick}
                 readOnly={true}
               />
             </Print>
