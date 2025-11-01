@@ -13,24 +13,24 @@ import { storageGet, storageSet } from '../../utils/localStorage'
 const DeviceLookup = () => {
   const headerTypes = {
     regular: [
-      { value: 'Hostname', identifier: 'hostname' },
-      { value: 'Asset Tag', identifier: 'assetTag' },
-      { value: 'Serial #', identifier: 'serialNum' },
-      { value: 'Rack', identifier: 'rack' },
-      { value: 'Height', identifier: 'height' },
-      { value: 'Status', identifier: 'status' },
-      { value: 'GPC', identifier: 'gpc' },
-      { value: 'Model', identifier: 'model' },
-      { value: 'Inventory #', identifier: 'inventoryNum' }
+      { value: 'Hostname', identifier: 'hostname', isHeader: true },
+      { value: 'Asset Tag', identifier: 'assetTag', isHeader: true },
+      { value: 'Serial #', identifier: 'serialNum', isHeader: true },
+      { value: 'Rack', identifier: 'rack', isHeader: true },
+      { value: 'Height', identifier: 'height', isHeader: true },
+      { value: 'Status', identifier: 'status', isHeader: true },
+      { value: 'GPC', identifier: 'gpc', isHeader: true },
+      { value: 'Model', identifier: 'model', isHeader: true },
+      { value: 'Inventory #', identifier: 'inventoryNum', isHeader: true }
     ],
     barcodes: [
-      { value: 'Hostname', identifier: 'hostname' },
-      { value: 'Asset Tag', identifier: 'assetTagBarcode' },
-      { value: 'Rack', identifier: 'rack' },
-      { value: 'Height', identifier: 'height' },
-      { value: 'Serial #', identifier: 'serialNum' },
-      { value: 'GPC', identifier: 'gpcBarcode' },
-      { value: 'Status', identifier: 'status' }
+      { value: 'Hostname', identifier: 'hostname', isHeader: true },
+      { value: 'Asset Tag', identifier: 'assetTagBarcode', isHeader: true },
+      { value: 'Rack', identifier: 'rack', isHeader: true },
+      { value: 'Height', identifier: 'height', isHeader: true },
+      { value: 'Serial #', identifier: 'serialNum', isHeader: true },
+      { value: 'GPC', identifier: 'gpcBarcode', isHeader: true },
+      { value: 'Status', identifier: 'status', isHeader: true }
     ]
   }
 
@@ -100,15 +100,6 @@ const DeviceLookup = () => {
   const switchSearchType = (newSearchType) => {
     setTextData('')
     storageSet('deviceLookupSearchType', newSearchType)
-  }
-
-  const handleCopy = async () => {
-    const tableHtml = tableRef.current.innerText
-
-    navigator.clipboard.writeText(tableHtml)
-    toggleIsCopyClick()
-    await sleep(1000)
-    toggleIsCopyClick()
   }
 
   const handlePrint = () => {
@@ -209,14 +200,6 @@ const DeviceLookup = () => {
                 <button type="button" onClick={handlePrint}>
                   Print
                 </button>
-
-                {type !== 'barcodes' && (
-                  <div className="btns">
-                    <button type="button" onClick={handleCopy}>
-                      Copy
-                    </button>
-                  </div>
-                )}
               </div>
             )}
           </div>
