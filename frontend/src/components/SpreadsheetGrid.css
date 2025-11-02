@@ -53,3 +53,13 @@
     display: flex;
     justify-content: center;
 }
+
+.SpreadsheetGrid .Spreadsheet {
+    background: #f6f7eb;
+    color: #171c1b;
+}
+
+.SpreadsheetGrid .Spreadsheet__header,
+.SpreadsheetGrid .Spreadsheet__cell {
+    border-color: #c9c9c9;
+}
