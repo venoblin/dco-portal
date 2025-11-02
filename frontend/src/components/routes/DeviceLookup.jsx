@@ -2,7 +2,7 @@ import './DeviceLookup.css'
 import { useState, useContext, useEffect } from 'react'
 import { AppContext } from '../../contexts/AppContext'
 import useToggle from '../../hooks/useToggle'
-import { constructQueries, sleep } from '../../utils'
+import { constructQueries } from '../../utils'
 import { findAllDevices } from '../../services/tools'
 import useFormState from '../../hooks/useFormState'
 import SpreadsheetGrid from '../SpreadsheetGrid'
@@ -13,24 +13,24 @@ import { storageGet, storageSet } from '../../utils/localStorage'
 const DeviceLookup = () => {
   const headerTypes = {
     regular: [
-      { value: 'Hostname', identifier: 'hostname'},
-      { value: 'Asset Tag', identifier: 'assetTag'},
-      { value: 'Serial #', identifier: 'serialNum'},
-      { value: 'Rack', identifier: 'rack'},
-      { value: 'Height', identifier: 'height'},
-      { value: 'Status', identifier: 'status'},
-      { value: 'GPC', identifier: 'gpc'},
-      { value: 'Model', identifier: 'model'},
-      { value: 'Inventory #', identifier: 'inventoryNum'}
+      { value: 'Hostname', identifier: 'hostname' },
+      { value: 'Asset Tag', identifier: 'assetTag' },
+      { value: 'Serial #', identifier: 'serialNum' },
+      { value: 'Rack', identifier: 'rack' },
+      { value: 'Height', identifier: 'height' },
+      { value: 'Status', identifier: 'status' },
+      { value: 'GPC', identifier: 'gpc' },
+      { value: 'Model', identifier: 'model' },
+      { value: 'Inventory #', identifier: 'inventoryNum' }
     ],
     barcodes: [
-      { value: 'Hostname', identifier: 'hostname'},
-      { value: 'Asset Tag', identifier: 'assetTagBarcode'},
-      { value: 'Rack', identifier: 'rack'},
-      { value: 'Height', identifier: 'height'},
-      { value: 'Serial #', identifier: 'serialNum'},
-      { value: 'GPC', identifier: 'gpcBarcode'},
-      { value: 'Status', identifier: 'status'}
+      { value: 'Hostname', identifier: 'hostname' },
+      { value: 'Asset Tag', identifier: 'assetTagBarcode' },
+      { value: 'Rack', identifier: 'rack' },
+      { value: 'Height', identifier: 'height' },
+      { value: 'Serial #', identifier: 'serialNum' },
+      { value: 'GPC', identifier: 'gpcBarcode' },
+      { value: 'Status', identifier: 'status' }
     ]
   }
 
@@ -39,7 +39,6 @@ const DeviceLookup = () => {
   const [type, handleTypeChange] = useFormState('regular')
   const [rowData, setRowData] = useState([])
   const [headers, setHeaders] = useState(headerTypes.regular)
-  const [isCopyClick, toggleIsCopyClick] = useToggle(false)
   const [isPrinting, toggleIsPrinting] = useToggle(false)
   const [searchType, handleSearchTypeChange, setSearchType] =
     useFormState('assetName')
@@ -57,31 +56,18 @@ const DeviceLookup = () => {
       if (res) {
         const devicesData = []
         res.devices.forEach((d) => {
-          // devicesData.push({
-          //   hostname: d.info.assetName,
-          //   assetTag: d.info.assetTag,
-          //   inventoryNum: d.info.invNo,
-          //   rack: d.info.deployment.rack,
-          //   height: d.info.deployment.zPosition,
-          //   status: d.info.subStatus,
-          //   serialNum: d.info.serialNo,
-          //   model: d.info.model,
-          //   gpc: d.info.catalogID,
-          //   assetTagBarcode: d.info.assetTag,
-          //   gpcBarcode: d.info.catalogID
-          // })
           devicesData.push({
-            hostname: 'assetName',
-            assetTag: 'assetTag',
-            inventoryNum: 'invNo',
-            rack: 'rack',
-            height: 'height',
-            status: 'subStatus',
-            serialNum: 'serialNo',
-            model: 'model',
-            gpc: 'catalogID',
-            assetTagBarcode: 'assetTagBarcode',
-            gpcBarcode: 'gpcBarcode'
+            hostname: d.info.assetName,
+            assetTag: d.info.assetTag,
+            inventoryNum: d.info.invNo,
+            rack: d.info.deployment.rack,
+            height: d.info.deployment.zPosition,
+            status: d.info.subStatus,
+            serialNum: d.info.serialNo,
+            model: d.info.model,
+            gpc: d.info.catalogID,
+            assetTagBarcode: d.info.assetTag,
+            gpcBarcode: d.info.catalogID
           })
         })
 
