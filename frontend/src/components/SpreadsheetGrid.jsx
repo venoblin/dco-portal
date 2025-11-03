@@ -10,16 +10,20 @@ const SpreadsheetGrid = (props) => {
 
   const [selected, setSelected] = useState([])
 
-  const classes = `SpreadsheetGrid to-print light${props.className ? props.className : ''}`
+  const classes = `SpreadsheetGrid to-print light ${
+    props.className ? props.className : ''
+  }`
 
   const CustomDataViewer = (dataViewerProps) => {
     const { cell, evaluatedCell } = dataViewerProps
     const cellData = cell || evaluatedCell
-    const isBarcodeCell = cellData?.identifier && cellData.identifier.toLowerCase().includes('barcode')
+    const isBarcodeCell =
+      cellData?.identifier &&
+      cellData.identifier.toLowerCase().includes('barcode')
 
     if (isBarcodeCell && cellData?.value && cellData.value !== 'Not Found') {
       return (
-        <div className='barcode-container'>
+        <div className="barcode-container">
           <Barcode value={cellData.value} />
         </div>
       )
@@ -109,7 +113,7 @@ const SpreadsheetGrid = (props) => {
 
   const columnLabels = useMemo(() => {
     if (!props.headers || !Array.isArray(props.headers)) return undefined
-    return props.headers.map(header => header.value)
+    return props.headers.map((header) => header.value)
   }, [props.headers])
 
   return (
