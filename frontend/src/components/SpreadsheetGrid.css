@@ -6,7 +6,6 @@
   position: relative;
   transition: opacity var(--default-transition);
   border: var(--default-border);
-  overflow: auto;
 }
 
 .SpreadsheetGrid.disabled {
@@ -14,7 +13,6 @@
 }
 
 .SpreadsheetGrid .table-wrap {
-  padding: var(--default-spacing);
   width: 100%;
   height: 100%;
   overflow: scroll;
@@ -47,19 +45,82 @@
   z-index: 5;
 }
 
-.SpreadsheetGrid .barcode-container {
-    width: 175px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
+.SpreadsheetGrid {
+  outline: none;
 }
 
-.SpreadsheetGrid .Spreadsheet {
-    background: #f6f7eb;
-    color: #171c1b;
+.SpreadsheetGrid table {
+  border-collapse: collapse;
+  user-select: none;
 }
 
-.SpreadsheetGrid .Spreadsheet__header,
-.SpreadsheetGrid .Spreadsheet__cell {
-    border-color: #c9c9c9;
+.SpreadsheetGrid td,
+.SpreadsheetGrid th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  position: relative;
+  cursor: cell;
+}
+
+.SpreadsheetGrid .row-header {
+  background-color: #f8f9fa;
+  font-weight: bold;
+  text-align: center;
+  min-width: 40px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.SpreadsheetGrid .corner-header {
+  background-color: #e9ecef;
+  cursor: pointer;
+}
+
+.SpreadsheetGrid .column-header {
+  background-color: #f8f9fa;
+  cursor: pointer;
+  user-select: none;
+  font-weight: bold;
+}
+
+.SpreadsheetGrid .data-cell {
+  background-color: white;
+  cursor: cell;
+}
+
+.SpreadsheetGrid .data-cell.selected,
+.SpreadsheetGrid .column-header.selected,
+.SpreadsheetGrid .corner-header.selected {
+  background-color: #0078d4;
+  color: white;
+}
+
+.SpreadsheetGrid .row-header.selected {
+  background-color: #f8f9fa !important;
+  color: inherit !important;
+}
+
+.SpreadsheetGrid .active-cell {
+  box-shadow: inset 0 0 0 2px #005a9e;
+}
+
+.SpreadsheetGrid .row-header:hover,
+.SpreadsheetGrid .column-header:hover,
+.SpreadsheetGrid .corner-header:hover {
+  background-color: #e9ecef;
+}
+
+.SpreadsheetGrid .data-cell:hover {
+  background-color: #f8f9fa;
+}
+
+.copy-msg {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #28a745;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  z-index: 1000;
 }

@@ -1,36 +1,52 @@
 import './DeviceLookup.css'
-import { useState, useContext, useEffect } from 'react'
+import { useState, useRef, useContext, useEffect } from 'react'
 import { AppContext } from '../../contexts/AppContext'
+import { flexRender } from '@tanstack/react-table'
 import useToggle from '../../hooks/useToggle'
-import { constructQueries } from '../../utils'
+import { constructQueries, sleep } from '../../utils'
 import { findAllDevices } from '../../services/tools'
 import useFormState from '../../hooks/useFormState'
 import SpreadsheetGrid from '../SpreadsheetGrid'
 import LoadingIcon from '../LoadingIcon'
+import Barcode from '../Barcode'
 import Print from '../Print'
 import { storageGet, storageSet } from '../../utils/localStorage'
 
 const DeviceLookup = () => {
   const headerTypes = {
     regular: [
-      { value: 'Hostname', identifier: 'hostname' },
-      { value: 'Asset Tag', identifier: 'assetTag' },
-      { value: 'Serial #', identifier: 'serialNum' },
-      { value: 'Rack', identifier: 'rack' },
-      { value: 'Height', identifier: 'height' },
-      { value: 'Status', identifier: 'status' },
-      { value: 'GPC', identifier: 'gpc' },
-      { value: 'Model', identifier: 'model' },
-      { value: 'Inventory #', identifier: 'inventoryNum' }
+      {
+        header: 'Hostname',
+        accessorKey: 'hostname'
+      },
+      { header: 'Asset Tag', accessorKey: 'assetTag' },
+      { header: 'Serial #', accessorKey: 'serialNum' },
+      { header: 'Rack', accessorKey: 'rack' },
+      { header: 'Height', accessorKey: 'height' },
+      { header: 'Status', accessorKey: 'status' },
+      { header: 'GPC', accessorKey: 'gpc' },
+      { header: 'Model', accessorKey: 'model' },
+      { header: 'Inventory #', accessorKey: 'inventoryNum' }
     ],
     barcodes: [
-      { value: 'Hostname', identifier: 'hostname' },
-      { value: 'Asset Tag', identifier: 'assetTagBarcode' },
-      { value: 'Rack', identifier: 'rack' },
-      { value: 'Height', identifier: 'height' },
-      { value: 'Serial #', identifier: 'serialNum' },
-      { value: 'GPC', identifier: 'gpcBarcode' },
-      { value: 'Status', identifier: 'status' }
+      {
+        header: 'Hostname',
+        accessorKey: 'hostname'
+      },
+      {
+        header: 'Asset Tag',
+        accessorKey: 'assetTagBarcode',
+        cell: (info) => flexRender(Barcode, { value: info.getValue() })
+      },
+      { header: 'Rack', accessorKey: 'rack' },
+      { header: 'Height', accessorKey: 'height' },
+      { header: 'Serial #', accessorKey: 'serialNum' },
+      {
+        header: 'GPC',
+        accessorKey: 'gpcBarcode',
+        cell: (info) => flexRender(Barcode, { value: info.getValue() })
+      },
+      { header: 'Status', accessorKey: 'status' }
     ]
   }
 
@@ -39,9 +55,11 @@ const DeviceLookup = () => {
   const [type, handleTypeChange] = useFormState('regular')
   const [rowData, setRowData] = useState([])
   const [headers, setHeaders] = useState(headerTypes.regular)
+  const [isCopyClick, toggleIsCopyClick] = useToggle(false)
   const [isPrinting, toggleIsPrinting] = useToggle(false)
   const [searchType, handleSearchTypeChange, setSearchType] =
     useFormState('assetName')
+  const tableRef = useRef()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -57,22 +75,26 @@ const DeviceLookup = () => {
         const devicesData = []
         res.devices.forEach((d) => {
           devicesData.push({
-            hostname: d.info.assetName,
-            assetTag: d.info.assetTag,
-            inventoryNum: d.info.invNo,
-            rack: d.info.deployment.rack,
-            height: d.info.deployment.zPosition,
-            status: d.info.subStatus,
-            serialNum: d.info.serialNo,
-            model: d.info.model,
-            gpc: d.info.catalogID,
-            assetTagBarcode: d.info.assetTag,
-            gpcBarcode: d.info.catalogID
+            hostname: d.info.assetName ? d.info.assetName : 'Not Found',
+            assetTag: d.info.assetTag ? d.info.assetTag : 'Not Found',
+            inventoryNum: d.info.invNo ? d.info.invNo : 'Not Found',
+            rack: d.info.deployment.rack ? d.info.deployment.rack : 'Not Found',
+            height: d.info.deployment.zPosition
+              ? d.info.deployment.zPosition
+              : 'Not Found',
+            status: d.info.subStatus ? d.info.subStatus : 'Not Found',
+            serialNum: d.info.serialNo ? d.info.serialNo : 'Not Found',
+            model: d.info.model ? d.info.model : 'Not Found',
+            gpc: d.info.catalogID ? d.info.catalogID : 'Not Found',
+            assetTagBarcode: d.info.assetTag ? d.info.assetTag : 'Not Found',
+            gpcBarcode: d.info.catalogID ? d.info.catalogID : 'Not Found'
           })
         })
 
         storageSet('devicesLookup', devicesData)
         setRowData(devicesData)
+      } else {
+        throw new Error("Couldn't find devices")
       }
     } catch (error) {
       appContext.showPopup(error.message)
@@ -86,6 +108,15 @@ const DeviceLookup = () => {
   const switchSearchType = (newSearchType) => {
     setTextData('')
     storageSet('deviceLookupSearchType', newSearchType)
+  }
+
+  const handleCopy = async () => {
+    const tableHtml = tableRef.current.innerText
+
+    navigator.clipboard.writeText(tableHtml)
+    toggleIsCopyClick()
+    await sleep(1000)
+    toggleIsCopyClick()
   }
 
   const handlePrint = () => {
@@ -186,6 +217,14 @@ const DeviceLookup = () => {
                 <button type="button" onClick={handlePrint}>
                   Print
                 </button>
+
+                {type !== 'barcodes' && (
+                  <div className="btns">
+                    <button type="button" onClick={handleCopy}>
+                      Copy
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -194,9 +233,10 @@ const DeviceLookup = () => {
             <Print isNoPadding={true}>
               <SpreadsheetGrid
                 className={rowData.length === 0 ? 'disabled' : ''}
-                data={rowData}
-                headers={headers}
-                readOnly={true}
+                rowData={rowData}
+                columns={headers}
+                tableRef={tableRef}
+                isCopyClick={isCopyClick}
               />
             </Print>
           ) : (

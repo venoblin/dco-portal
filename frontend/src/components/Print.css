@@ -45,7 +45,7 @@
   select,
   button,
   form,
- .inputs {
+  .inputs {
     display: none !important;
   }
 
@@ -85,28 +85,10 @@
     padding: 0 !important;
   }
 
-  .SpreadsheetGrid .Spreadsheet__header {
-      min-width: initial !important;
-  }
-
-  .SpreadsheetGrid .Spreadsheet__header,
-  .SpreadsheetGrid .Spreadsheet__cell {
-      border: 1px solid black !important;
-      color: black !important;
-  }
-
   .SpreadsheetGrid {
     border-radius: 0 !important;
-      border: none !important;
+    border: none !important;
   }
-
-  .SpreadsheetGrid .Spreadsheet {
-      display: block !important;
-      width: 100% !important;
-      overflow: visible !important;
-      height: auto !important;
-      page-break-inside: auto !important;
-    }
 
   .Print .to-print {
     page-break-after: always !important;
