@@ -55,11 +55,9 @@ const DeviceLookup = () => {
   const [type, handleTypeChange] = useFormState('regular')
   const [rowData, setRowData] = useState([])
   const [headers, setHeaders] = useState(headerTypes.regular)
-  const [isCopyClick, toggleIsCopyClick] = useToggle(false)
   const [isPrinting, toggleIsPrinting] = useToggle(false)
   const [searchType, handleSearchTypeChange, setSearchType] =
     useFormState('assetName')
-  const tableRef = useRef()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -108,15 +106,6 @@ const DeviceLookup = () => {
   const switchSearchType = (newSearchType) => {
     setTextData('')
     storageSet('deviceLookupSearchType', newSearchType)
-  }
-
-  const handleCopy = async () => {
-    const tableHtml = tableRef.current.innerText
-
-    navigator.clipboard.writeText(tableHtml)
-    toggleIsCopyClick()
-    await sleep(1000)
-    toggleIsCopyClick()
   }
 
   const handlePrint = () => {
@@ -217,14 +206,6 @@ const DeviceLookup = () => {
                 <button type="button" onClick={handlePrint}>
                   Print
                 </button>
-
-                {type !== 'barcodes' && (
-                  <div className="btns">
-                    <button type="button" onClick={handleCopy}>
-                      Copy
-                    </button>
-                  </div>
-                )}
               </div>
             )}
           </div>
@@ -235,8 +216,6 @@ const DeviceLookup = () => {
                 className={rowData.length === 0 ? 'disabled' : ''}
                 rowData={rowData}
                 columns={headers}
-                tableRef={tableRef}
-                isCopyClick={isCopyClick}
               />
             </Print>
           ) : (

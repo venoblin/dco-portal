@@ -28,7 +28,6 @@ const SpreadsheetGrid = (props) => {
     startColumn: null
   })
 
-  const tableRef = useRef(null)
   const isMouseDown = useRef(false)
   const startCellRef = useRef(null)
   const startRowRef = useRef(null)
@@ -456,7 +455,7 @@ const SpreadsheetGrid = (props) => {
         <div className="copy-msg">Successfully copied!</div>
       )}
 
-      <div className="table-wrap light" ref={tableRef}>
+      <div className="table-wrap light">
         <table>
           <thead>
             {headerGroups.map((headerGroup) => (
