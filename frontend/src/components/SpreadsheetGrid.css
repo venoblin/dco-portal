@@ -56,14 +56,14 @@
 
 .SpreadsheetGrid td,
 .SpreadsheetGrid th {
-  border: 1px solid #ddd;
+  border: 1px solid #989898;
   padding: 8px;
   position: relative;
   cursor: cell;
 }
 
 .SpreadsheetGrid .row-header {
-  background-color: #f8f9fa;
+  background-color: #f6f7eb;
   font-weight: bold;
   text-align: center;
   min-width: 40px;
@@ -72,19 +72,19 @@
 }
 
 .SpreadsheetGrid .corner-header {
-  background-color: #e9ecef;
+  background-color: #f6f7eb;
   cursor: pointer;
 }
 
 .SpreadsheetGrid .column-header {
-  background-color: #f8f9fa;
+  background-color: #f6f7eb;
   cursor: pointer;
   user-select: none;
   font-weight: bold;
 }
 
 .SpreadsheetGrid .data-cell {
-  background-color: white;
+  background-color: #f6f7eb;
   cursor: cell;
 }
 
@@ -92,26 +92,30 @@
 .SpreadsheetGrid .column-header.selected,
 .SpreadsheetGrid .corner-header.selected {
   background-color: #0078d4;
-  color: white;
+  color: #f6f7eb;
 }
 
 .SpreadsheetGrid .row-header.selected {
-  background-color: #f8f9fa !important;
+  background-color: #f6f7eb !important;
   color: inherit !important;
 }
 
 .SpreadsheetGrid .active-cell {
-  box-shadow: inset 0 0 0 2px #005a9e;
+  box-shadow: inset 0 0 0 2px var(--accent-color);
+}
+
+.SpreadsheetGrid .row-header,
+.SpreadsheetGrid .column-header,
+.SpreadsheetGrid .corner-header,
+.SpreadsheetGrid .data-cell {
+  transition: background var(--default-transition);
 }
 
 .SpreadsheetGrid .row-header:hover,
 .SpreadsheetGrid .column-header:hover,
-.SpreadsheetGrid .corner-header:hover {
-  background-color: #e9ecef;
-}
-
+.SpreadsheetGrid .corner-header:hover,
 .SpreadsheetGrid .data-cell:hover {
-  background-color: #f8f9fa;
+  background-color: #88c5ff;
 }
 
 .copy-msg {
