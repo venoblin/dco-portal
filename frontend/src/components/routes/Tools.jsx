@@ -20,6 +20,10 @@ const Tools = () => {
         <Link className="block-link" to="/tools/triage-manager">
           Tools/Triage Manager →
         </Link>
+
+        <Link className="block-link" to="/tools/barcode-generator">
+          Tools/Barcode Generator →
+        </Link>
       </Panel>
     </div>
   )

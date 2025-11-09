@@ -18,6 +18,7 @@ import Login from './components/routes/Login'
 import TriageEdit from './components/routes/TriageEdit'
 import GuideEdit from './components/routes/GuideEdit'
 import { storageGet, storageSet } from './utils/localStorage'
+import BarcodeGenerator from './components/routes/BarcodeGenerator'
 
 const App = () => {
   const appContext = useContext(AppContext)
@@ -65,6 +66,10 @@ const App = () => {
             <Route
               path="/tools/incident-manager"
               element={<IncidentManager />}
+            />
+            <Route
+              path="/tools/barcode-generator"
+              element={<BarcodeGenerator />}
             />
             <Route path="/profile" element={<Profile />} />
             <Route path="/*" element={<NotFound />} />

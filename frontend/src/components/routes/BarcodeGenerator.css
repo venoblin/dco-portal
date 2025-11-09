@@ -1,0 +1,27 @@
+.BarcodeGenerator form {
+  display: flex;
+  flex-direction: column;
+  margin-right: var(--default-spacing);
+  width: max-content;
+}
+
+.BarcodeGenerator .inputs {
+  display: flex;
+  margin-bottom: var(--default-spacing);
+  width: max-content;
+  border: var(--default-border);
+  border-radius: var(--default-border-radius);
+}
+
+.BarcodeGenerator textarea {
+  width: 100%;
+  height: 500px;
+}
+
+.BarcodeGenerator .form-wrapper {
+  display: flex;
+}
+
+.BarcodeGenerator .barcodes-wrapper {
+  width: 100%;
+}

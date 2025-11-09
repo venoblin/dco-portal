@@ -54,6 +54,10 @@ const Dashboard = (props) => {
             <Link className="block-link" to="/tools/triage-manager">
               Tools/Triage Manager →
             </Link>
+
+            <Link className="block-link" to="/tools/barcode-generator">
+              Tools/Barcode Generator →
+            </Link>
           </div>
         </Panel>
 
