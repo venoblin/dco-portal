@@ -100,6 +100,25 @@ const findAllDevices = async (req, res) => {
     const clientToken = authHeader.split(' ')[1]
 
     const devicePromises = queriesArr.map(async (query) => {
+      if (query.assetName === '' || query.assetTag === '') {
+        return {
+          ...query,
+          info: {
+            assetName: '',
+            assetTag: '',
+            invNo: '',
+            deployment: {
+              rack: '',
+              zPosition: ''
+            },
+            subStatus: '',
+            serialNo: '',
+            model: '',
+            catalogID: ''
+          }
+        }
+      }
+
       const device = await deviceLookup(clientToken, query)
 
       const newDevice = { ...query }
