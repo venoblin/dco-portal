@@ -94,7 +94,12 @@ const BarcodeGenerator = () => {
               <Print>
                 {barcodes.length > 0 ? (
                   barcodes.map((b, index) => (
-                    <Barcode key={`${b}_${index}`} value={b} />
+                    <Barcode
+                      key={`${b}_${index}`}
+                      value={b}
+                      width={2}
+                      height={25}
+                    />
                   ))
                 ) : (
                   <p className="msg">No barcodes!</p>

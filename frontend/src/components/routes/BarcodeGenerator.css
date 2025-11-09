@@ -28,6 +28,7 @@
 
 .BarcodeGenerator .barcodes {
   height: 500px;
+  overflow: scroll;
   border-radius: var(--default-border-radius);
   padding: var(--default-spacing);
 }
