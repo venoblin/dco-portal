@@ -96,14 +96,16 @@ const BarcodeGenerator = () => {
             {!appContext.isLoading ? (
               <Print>
                 {barcodes.length > 0 ? (
-                  barcodes.map((b, index) => (
-                    <Barcode
-                      key={`${b}_${index}`}
-                      value={b}
-                      width={2}
-                      height={25}
-                    />
-                  ))
+                  <div className="barcodes-grid">
+                    {barcodes.map((b, index) => (
+                      <Barcode
+                        key={`${b}_${index}`}
+                        value={b}
+                        width={1}
+                        height={20}
+                      />
+                    ))}
+                  </div>
                 ) : (
                   <p className="msg">No barcodes!</p>
                 )}
