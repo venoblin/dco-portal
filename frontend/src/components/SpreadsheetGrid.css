@@ -1,0 +1,84 @@
+.SpreadsheetGrid {
+  height: 500px;
+  width: 100%;
+  border-radius: var(--default-border-radius);
+  font-family: var(--body-font-family);
+  position: relative;
+  transition: opacity var(--default-transition);
+  border: var(--default-border);
+}
+
+.SpreadsheetGrid.disabled {
+  opacity: 0.5;
+}
+
+.SpreadsheetGrid .table-wrap {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  border-radius: var(--default-border-radius);
+}
+
+.SpreadsheetGrid.copied .table-wrap {
+  overflow: hidden;
+}
+
+.SpreadsheetGrid .msg {
+  padding: var(--default-spacing);
+}
+
+.SpreadsheetGrid {
+  outline: none;
+}
+
+.SpreadsheetGrid .row-header {
+  font-weight: bold;
+  text-align: center;
+  min-width: 40px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.SpreadsheetGrid .corner-header {
+  cursor: pointer;
+}
+
+.SpreadsheetGrid .column-header {
+  cursor: pointer;
+  user-select: none;
+  font-weight: bold;
+}
+
+.SpreadsheetGrid .data-cell {
+  cursor: cell;
+}
+
+.SpreadsheetGrid .data-cell.selected,
+.SpreadsheetGrid .column-header.selected,
+.SpreadsheetGrid .corner-header.selected {
+  background-color: var(--accent-color);
+  color: #f6f7eb;
+}
+
+.SpreadsheetGrid .row-header.selected {
+  background-color: #f6f7eb !important;
+  color: inherit !important;
+}
+
+.SpreadsheetGrid .active-cell {
+  box-shadow: inset 0 0 0 2px var(--accent-color);
+}
+
+.SpreadsheetGrid .row-header,
+.SpreadsheetGrid .column-header,
+.SpreadsheetGrid .corner-header,
+.SpreadsheetGrid .data-cell {
+  transition: background var(--default-transition);
+}
+
+.SpreadsheetGrid .row-header:hover,
+.SpreadsheetGrid .column-header:hover,
+.SpreadsheetGrid .corner-header:hover,
+.SpreadsheetGrid .data-cell:hover {
+  background-color: #88c5ff;
+}

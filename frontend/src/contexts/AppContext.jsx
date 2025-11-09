@@ -21,15 +21,15 @@ export const AppProvider = (props) => {
     toggleIsLoading()
 
     return promise()
-      .then((res) => {
+      .then((resonse) => {
         toggleIsLoading()
 
-        return res
+        return resonse
       })
-      .catch((err) => {
+      .catch((error) => {
         toggleIsLoading()
 
-        showPopup(<p>{err.message}</p>)
+        throw new Error(error)
       })
   }
 

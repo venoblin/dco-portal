@@ -5,11 +5,14 @@
 @media print {
   @page {
     size: landscape;
-    margin: 0in;
+    margin: 0.25in;
   }
   * {
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
+    color: black !important;
+    background: white !important;
+    box-shadow: none !important;
   }
 
   *::-webkit-scrollbar {
@@ -37,27 +40,26 @@
   }
 
   nav,
+  .NavBar,
   header,
   .Panel,
   footer,
   textarea,
   select,
-  button {
+  button,
+  form,
+  .inputs {
     display: none !important;
   }
 
   main {
-    padding: 0rem !important;
+    padding: 0 !important;
     margin: 0 !important;
   }
 
-  .Print.no-padding {
-    padding: 1rem !important;
-  }
-
   .Print {
-    padding: 1rem 5rem !important;
-    color: var(--bg-color) !important;
+    padding: 0 !important;
+    color: black !important;
     background: white !important;
     display: block !important;
     overflow: visible !important;
@@ -71,7 +73,6 @@
 
   table {
     page-break-inside: auto !important;
-    width: 100%;
   }
 
   tr {
@@ -79,17 +80,24 @@
     page-break-after: auto !important;
   }
 
+  th,
   td {
-    padding: 0.5rem 0.2rem !important;
+    padding: 0.75rem 0.25rem !important;
   }
 
-  th {
-    padding: 0.5rem 0.2rem !important;
+  .SpreadsheetGrid {
+    border-radius: 0 !important;
+    border: none !important;
+  }
+
+  .SpreadsheetGrid .corner-header,
+  .SpreadsheetGrid .row-header {
+    display: none !important;
   }
 
   .Print .to-print {
-    page-break-after: always;
-    break-after: page;
+    page-break-after: always !important;
+    break-after: page !important;
     background: white !important;
     display: block !important;
     overflow: visible !important;
@@ -98,7 +106,7 @@
   }
 
   .Print .to-print:last-of-type {
-    page-break-after: auto;
-    break-after: auto;
+    page-break-after: auto !important;
+    break-after: auto !important;
   }
 }

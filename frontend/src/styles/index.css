@@ -301,7 +301,6 @@ input[type='checkbox'] {
 
 table {
   border: var(--default-border);
-  border-radius: var(--default-border-radius);
   border-color: lightgrey;
 }
 

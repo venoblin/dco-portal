@@ -11,8 +11,10 @@ import ThemeToggle from '../ThemeToggle'
 
 const Login = (props) => {
   const appContext = useContext(AppContext)
-  const [username, onUsernameChange, resetUsername] = useFormState('')
-  const [password, onPasswordChange, resetPassword] = useFormState('')
+  const [username, onUsernameChange, setUsername, resetUsername] =
+    useFormState('')
+  const [password, onPasswordChange, setPassword, resetPassword] =
+    useFormState('')
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -37,7 +39,13 @@ const Login = (props) => {
           isAuthenticated: true,
           credentials: credentials
         })
+
+        resetUsername()
+        resetPassword()
       } else {
+        resetUsername()
+        resetPassword()
+
         appContext.showPopup(
           res && res.message
             ? res.message
@@ -45,11 +53,10 @@ const Login = (props) => {
         )
       }
     } catch (error) {
+      resetUsername()
+      resetPassword()
       appContext.showPopup(error.message)
     }
-
-    resetUsername()
-    resetPassword()
   }
 
   return (
