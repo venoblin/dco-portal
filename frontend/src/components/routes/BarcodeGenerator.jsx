@@ -4,6 +4,7 @@ import { AppContext } from '../../contexts/AppContext'
 import useFormState from '../../hooks/useFormState'
 import useToggle from '../../hooks/useToggle'
 import Print from '../Print'
+import Barcode from '../Barcode'
 
 const BarcodeGenerator = () => {
   const appContext = useContext(AppContext)
@@ -62,16 +63,34 @@ const BarcodeGenerator = () => {
 
         <div className="barcodes-wrapper">
           <div className="inputs">
-            {barcodes.length > 0 && (
-              <div className="btns-wrap">
-                <button type="button" onClick={handlePrint}>
-                  Print
-                </button>
-              </div>
-            )}
+            <div className="btns-wrap">
+              <button
+                type="button"
+                onClick={handlePrint}
+                disabled={
+                  appContext.isLoading || barcodes.length <= 0 ? true : false
+                }
+              >
+                Print
+              </button>
+            </div>
           </div>
 
-          {!appContext.isLoading ? <Print></Print> : <LoadingIcon />}
+          <div className="barcodes light">
+            {!appContext.isLoading ? (
+              <Print>
+                {barcodes.length > 0 ? (
+                  barcodes.map((b, index) => (
+                    <Barcode key={`${b}_${index}`} value={b} />
+                  ))
+                ) : (
+                  <p className="msg">No barcodes!</p>
+                )}
+              </Print>
+            ) : (
+              <LoadingIcon />
+            )}
+          </div>
         </div>
       </div>
     </div>
