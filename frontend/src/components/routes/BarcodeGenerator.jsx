@@ -4,7 +4,6 @@ import { AppContext } from '../../contexts/AppContext'
 import useFormState from '../../hooks/useFormState'
 import useToggle from '../../hooks/useToggle'
 import Print from '../Print'
-import SpreadsheetGrid from '../SpreadsheetGrid'
 
 const BarcodeGenerator = () => {
   const appContext = useContext(AppContext)
@@ -63,7 +62,7 @@ const BarcodeGenerator = () => {
 
         <div className="barcodes-wrapper">
           <div className="inputs">
-            {rowData.length > 0 && (
+            {barcodes.length > 0 && (
               <div className="btns-wrap">
                 <button type="button" onClick={handlePrint}>
                   Print
