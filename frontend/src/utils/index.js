@@ -27,11 +27,22 @@ export const sleep = async (time) => {
   return new Promise((res) => setTimeout(res, time))
 }
 
-export const splitTextData = (textData, isRemoveWhiteSpace = false) => {
-  const lowerCase = textData.toLowerCase()
-  const dataArr = lowerCase.split(/[\n ]/)
+export const splitTextData = (textData, options = {}) => {
+  const cleanedOptions = {
+    isRemoveWhiteSpace: false,
+    isLowerCase: true,
+    ...options
+  }
 
-  if (isRemoveWhiteSpace) {
+  let data = textData
+
+  if (options.isLowerCase) {
+    data = data.toLowerCase()
+  }
+
+  const dataArr = data.split(/[\n ]/)
+
+  if (cleanedOptions.isRemoveWhiteSpace) {
     return dataArr.filter((data) => data !== '')
   }
 

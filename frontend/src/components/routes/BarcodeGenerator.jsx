@@ -17,7 +17,10 @@ const BarcodeGenerator = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    const values = splitTextData(textData, true)
+    const values = splitTextData(textData, {
+      isRemoveWhiteSpace: true,
+      isLowerCase: false
+    })
 
     setBarcodes(values)
     storageSet('barcodes', values)
