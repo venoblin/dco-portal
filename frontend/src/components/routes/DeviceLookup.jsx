@@ -199,13 +199,18 @@ const DeviceLookup = () => {
               <option value="regular">Regular</option>
               <option value="barcodes">Barcodes</option>
             </select>
-            {rowData.length > 0 && (
-              <div className="btns-wrap">
-                <button type="button" onClick={handlePrint}>
-                  Print
-                </button>
-              </div>
-            )}
+
+            <div className="btns-wrap">
+              <button
+                type="button"
+                onClick={handlePrint}
+                disabled={
+                  appContext.isLoading || rowData.length <= 0 ? true : false
+                }
+              >
+                Print
+              </button>
+            </div>
           </div>
 
           {!appContext.isLoading ? (

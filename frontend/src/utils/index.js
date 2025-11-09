@@ -27,9 +27,19 @@ export const sleep = async (time) => {
   return new Promise((res) => setTimeout(res, time))
 }
 
-export const constructQueries = (textData, searchType) => {
+export const splitTextData = (textData, isRemoveWhiteSpace = false) => {
   const lowerCase = textData.toLowerCase()
   const dataArr = lowerCase.split(/[\n ]/)
+
+  if (isRemoveWhiteSpace) {
+    return dataArr.filter((data) => data !== '')
+  }
+
+  return dataArr
+}
+
+export const constructQueries = (textData, searchType) => {
+  const dataArr = splitTextData(textData)
 
   const queries = dataArr.map((data) => {
     const newQuery = {}
