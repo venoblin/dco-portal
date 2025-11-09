@@ -32,3 +32,9 @@
   border-radius: var(--default-border-radius);
   padding: var(--default-spacing);
 }
+
+.BarcodeGenerator .barcodes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--default-spacing);
+}
