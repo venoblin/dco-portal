@@ -1,3 +1,5 @@
+import e from 'cors'
+
 export const cleanTime = (time) => {
   return `${time.slice(5, 7)}/${time.slice(8, 10)}/${time.slice(0, 4)}`
 }
@@ -29,15 +31,16 @@ export const constructQueries = (textData, searchType) => {
   const lowerCase = textData.toLowerCase()
   const dataArr = lowerCase.split(/[\n ]/)
 
-  const cleanedArr = dataArr.filter((data) => data !== '')
+  const queries = dataArr.map((data) => {
+    const newQuery = {}
 
-  const queries = cleanedArr.map((data) => {
     if (data !== '') {
-      const newQuery = {}
       newQuery[searchType] = data
-
-      return newQuery
+    } else {
+      newQuery[searchType] = ''
     }
+
+    return newQuery
   })
 
   return queries

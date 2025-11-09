@@ -73,19 +73,17 @@ const DeviceLookup = () => {
         const devicesData = []
         res.devices.forEach((d) => {
           devicesData.push({
-            hostname: d.info.assetName ? d.info.assetName : 'Not Found',
-            assetTag: d.info.assetTag ? d.info.assetTag : 'Not Found',
-            inventoryNum: d.info.invNo ? d.info.invNo : 'Not Found',
-            rack: d.info.deployment.rack ? d.info.deployment.rack : 'Not Found',
-            height: d.info.deployment.zPosition
-              ? d.info.deployment.zPosition
-              : 'Not Found',
-            status: d.info.subStatus ? d.info.subStatus : 'Not Found',
-            serialNum: d.info.serialNo ? d.info.serialNo : 'Not Found',
-            model: d.info.model ? d.info.model : 'Not Found',
-            gpc: d.info.catalogID ? d.info.catalogID : 'Not Found',
-            assetTagBarcode: d.info.assetTag ? d.info.assetTag : 'Not Found',
-            gpcBarcode: d.info.catalogID ? d.info.catalogID : 'Not Found'
+            hostname: d.info.assetName,
+            assetTag: d.info.assetTag,
+            inventoryNum: d.info.invNo,
+            rack: d.info.deployment.rack,
+            height: d.info.deployment.zPosition,
+            status: d.info.subStatus,
+            serialNum: d.info.serialNo,
+            model: d.info.model,
+            gpc: d.info.catalogID,
+            assetTagBarcode: d.info.assetTag,
+            gpcBarcode: d.info.catalogID
           })
         })
 
