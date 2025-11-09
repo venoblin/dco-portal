@@ -5,22 +5,35 @@ import useFormState from '../../hooks/useFormState'
 import useToggle from '../../hooks/useToggle'
 import Print from '../Print'
 import Barcode from '../Barcode'
+import { splitTextData } from '../../utils'
+import { storageGet, storageSet } from '../../utils/localStorage'
 
 const BarcodeGenerator = () => {
   const appContext = useContext(AppContext)
-  const [textData, handleTextDataChange, setTextData] = useFormState('')
+  const [textData, handleTextDataChange] = useFormState('')
   const [barcodes, setBarcodes] = useState([])
   const [isPrinting, toggleIsPrinting] = useToggle(false)
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
+    const values = splitTextData(textData, true)
+
+    setBarcodes(values)
+    storageSet('barcodes', values)
   }
 
   const handlePrint = () => {
     toggleIsPrinting()
   }
 
-  const checkBarcodes = () => {}
+  const checkBarcodes = () => {
+    const storageBarcodes = storageGet('barcodes')
+
+    if (storageBarcodes) {
+      setBarcodes(storageBarcodes)
+    }
+  }
 
   useEffect(() => {
     checkBarcodes()
