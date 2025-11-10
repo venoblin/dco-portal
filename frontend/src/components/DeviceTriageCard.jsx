@@ -159,11 +159,7 @@ const DeviceTriageCard = (props) => {
           <div className="header-wrap">
             <h2>{props.device.hostname}</h2>
             <SvgButton onClick={editHandler} type="edit" />
-            <SvgButton
-              className="danger"
-              onClick={handleDelete}
-              type="delete"
-            />
+            <SvgButton onClick={handleDelete} type="delete" />
           </div>
         )}
       </header>

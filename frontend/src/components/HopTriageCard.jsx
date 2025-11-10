@@ -121,11 +121,7 @@ const HopTriageCard = (props) => {
         <div>
           <div className="inputs">
             <SvgButton onClick={toggleIsEditMode} type="edit" />
-            <SvgButton
-              className="danger"
-              onClick={handleDelete}
-              type="delete"
-            />
+            <SvgButton onClick={handleDelete} type="delete" />
           </div>
           <p className="hop">{props.hop.hop}</p>
         </div>
