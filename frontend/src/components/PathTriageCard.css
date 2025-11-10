@@ -23,6 +23,22 @@
   margin-right: 0;
 }
 
+.PathTriageCard .device {
+  display: flex;
+  align-items: center;
+}
+
+.PathTriageCard .destination {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 200px;
+}
+
+.PathTriageCard .device form {
+  margin-left: var(--default-spacing);
+}
+
 .PathTriageCard:hover .device p,
 .PathTriageCard:hover .destination p,
 .PathTriageCard:hover .hops {
@@ -55,7 +71,6 @@
 .PathTriageCard .hops {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   margin: 0 var(--default-spacing);
 }
 
