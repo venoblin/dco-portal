@@ -312,11 +312,12 @@ const TriageEdit = () => {
               ) : (
                 <div className="header-wrap">
                   <h1>{triage.name}</h1>
-                  <SvgButton type="edit" />
-                  <button onClick={renameHandler}>Rename Triage</button>
-                  <button onClick={handleDelete} className="danger-bg">
-                    Delete Triage
-                  </button>
+                  <SvgButton onClick={renameHandler} type="edit" />
+                  <SvgButton
+                    className="danger"
+                    onClick={handleDelete}
+                    type="delete"
+                  />
                 </div>
               )}
             </div>

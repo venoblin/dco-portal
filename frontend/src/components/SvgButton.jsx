@@ -36,7 +36,13 @@ const SvgButton = (props) => {
     )
   }
 
-  return <button className="SvgButton">{svgs[props.type]}</button>
+  const classes = `SvgButton ${props.className ? props.className : ''}`
+
+  return (
+    <button className={classes} onClick={props.onClick}>
+      {svgs[props.type]}
+    </button>
+  )
 }
 
 export default SvgButton
