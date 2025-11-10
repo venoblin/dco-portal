@@ -92,7 +92,11 @@ const BarcodeGenerator = () => {
             </div>
           </div>
 
-          <div className="barcodes light">
+          <div
+            className={`barcodes light ${
+              barcodes.length === 0 ? 'disabled' : ''
+            }`}
+          >
             {!appContext.isLoading ? (
               <Print>
                 {barcodes.length > 0 ? (
