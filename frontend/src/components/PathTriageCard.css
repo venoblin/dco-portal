@@ -28,6 +28,13 @@
   align-items: center;
 }
 
+.PathTriageCard .destination {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 200px;
+}
+
 .PathTriageCard .device form {
   margin-left: var(--default-spacing);
 }
