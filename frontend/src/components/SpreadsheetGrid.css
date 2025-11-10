@@ -8,10 +8,6 @@
   border: var(--default-border);
 }
 
-.SpreadsheetGrid.disabled {
-  opacity: 0.5;
-}
-
 .SpreadsheetGrid .table-wrap {
   width: 100%;
   height: 100%;

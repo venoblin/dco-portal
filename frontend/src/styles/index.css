@@ -254,6 +254,10 @@ a:hover {
   border-color: var(--accent-color);
 }
 
+.disabled {
+  opacity: 0.5;
+}
+
 .muted-text {
   color: var(--muted-text-color);
 }
