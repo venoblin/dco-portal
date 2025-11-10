@@ -36,7 +36,7 @@ export const splitTextData = (textData, options = {}) => {
 
   let data = textData
 
-  if (options.isLowerCase) {
+  if (cleanedOptions.isLowerCase) {
     data = data.toLowerCase()
   }
 

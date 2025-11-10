@@ -65,6 +65,8 @@ const DeviceLookup = () => {
     try {
       const queries = constructQueries(textData, searchType)
 
+      console.log(queries)
+
       const res = await appContext.load(() =>
         findAllDevices({ queriesArr: queries }, appContext.auth.credentials)
       )
