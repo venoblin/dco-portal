@@ -15,6 +15,7 @@ import { generateXlsxFile } from '../../utils/xlsx'
 import { findAllDevices } from '../../services/tools'
 import { constructQueries } from '../../utils'
 import LoadingIcon from '../LoadingIcon'
+import SvgButton from '../SvgButton'
 
 const TriageEdit = () => {
   const appContext = useContext(AppContext)
@@ -311,10 +312,8 @@ const TriageEdit = () => {
               ) : (
                 <div className="header-wrap">
                   <h1>{triage.name}</h1>
-                  <button onClick={renameHandler}>Rename Triage</button>
-                  <button onClick={handleDelete} className="danger-bg">
-                    Delete Triage
-                  </button>
+                  <SvgButton onClick={renameHandler} type="edit" />
+                  <SvgButton onClick={handleDelete} type="delete" />
                 </div>
               )}
             </div>

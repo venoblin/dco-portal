@@ -6,6 +6,7 @@ import { postHop } from '../services/hops'
 import { deletePath, patchPath } from '../services/paths'
 import useToggle from '../hooks/useToggle'
 import HopTriageCard from './HopTriageCard'
+import SvgButton from './SvgButton'
 
 const PathTriageCard = (props) => {
   const appContext = useContext(AppContext)
@@ -252,10 +253,8 @@ const PathTriageCard = (props) => {
       ) : (
         <div>
           <div className="inputs">
-            <button onClick={toggleIsEditMode}>Edit Path</button>
-            <button className="danger-bg" onClick={handleDelete}>
-              Delete Path
-            </button>
+            <SvgButton onClick={toggleIsEditMode} type="edit" />
+            <SvgButton onClick={handleDelete} type="delete" />
           </div>
 
           <div className="main-wrap">

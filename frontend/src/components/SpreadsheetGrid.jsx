@@ -12,8 +12,8 @@ const SpreadsheetGrid = (props) => {
     return null
   }
 
-  const classes = `SpreadsheetGrid to-print light${
-    props.isCopyClick ? ' copied' : ''
+  const classes = `SpreadsheetGrid to-print light ${
+    props.isCopyClick ? 'copied' : ''
   } ${props.className ? props.className : ''}`
 
   const [selection, setSelection] = useState({

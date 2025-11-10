@@ -7,6 +7,7 @@ import { useContext } from 'react'
 import { AppContext } from '../contexts/AppContext'
 import { postPath } from '../services/paths'
 import { deleteDevice, patchDevice } from '../services/devices'
+import SvgButton from './SvgButton'
 
 const DeviceTriageCard = (props) => {
   const appContext = useContext(AppContext)
@@ -157,10 +158,8 @@ const DeviceTriageCard = (props) => {
         ) : (
           <div className="header-wrap">
             <h2>{props.device.hostname}</h2>
-            <button onClick={editHandler}>Rename Device</button>
-            <button onClick={handleDelete} className="danger-bg">
-              Delete Device
-            </button>
+            <SvgButton onClick={editHandler} type="edit" />
+            <SvgButton onClick={handleDelete} type="delete" />
           </div>
         )}
       </header>
