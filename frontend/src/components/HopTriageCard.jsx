@@ -1,9 +1,10 @@
+import './HopTriageCard.css'
 import { useContext } from 'react'
 import { deleteHop, patchHop } from '../services/hops'
-import './HopTriageCard.css'
 import { AppContext } from '../contexts/AppContext'
 import useToggle from '../hooks/useToggle'
 import useFormState from '../hooks/useFormState'
+import SvgButton from './SvgButton'
 
 const HopTriageCard = (props) => {
   const appContext = useContext(AppContext)
@@ -112,17 +113,19 @@ const HopTriageCard = (props) => {
           />
 
           <div className="inputs">
-            <button>Update Hop</button>
+            <button type="submit">Update Hop</button>
             <button onClick={editHandler}>Cancel</button>
           </div>
         </form>
       ) : (
         <div>
           <div className="inputs">
-            <button onClick={toggleIsEditMode}>Edit Hop</button>
-            <button onClick={handleDelete} className="danger-bg">
-              Delete Hop
-            </button>
+            <SvgButton onClick={toggleIsEditMode} type="edit" />
+            <SvgButton
+              className="danger"
+              onClick={handleDelete}
+              type="delete"
+            />
           </div>
           <p className="hop">{props.hop.hop}</p>
         </div>
