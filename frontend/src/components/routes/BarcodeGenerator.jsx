@@ -73,7 +73,7 @@ const BarcodeGenerator = () => {
             id="textData"
             value={textData}
             required
-            placeholder={`Paste values here...`}
+            placeholder={`Input values here...`}
           ></textarea>
         </form>
 
