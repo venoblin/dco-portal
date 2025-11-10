@@ -1,0 +1,12 @@
+.SvgButton {
+  background: none;
+  padding: 0;
+}
+
+.SvgButton:hover {
+  opacity: 1;
+}
+
+.SvgButton:hover path {
+  fill: var(--accent-color);
+}
