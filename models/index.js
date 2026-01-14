@@ -6,6 +6,7 @@ const sequelize = new Sequelize({
 })
 
 const models = {
+  User: require('./users')(sequelize, DataTypes),
   Guide: require('./guides')(sequelize, DataTypes),
   Triage: require('./triages')(sequelize, DataTypes),
   Device: require('./devices')(sequelize, DataTypes),

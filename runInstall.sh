@@ -1,6 +1,6 @@
 #!/bin/bash
 
-npm install express sequelize sqlite3 cors dotenv bcrypt multer csv-parse
+npm install express sequelize sqlite3@5.1.6 cors dotenv bcrypt multer csv-parse
 npm install --save-dev nodemon
 
 cd frontend
