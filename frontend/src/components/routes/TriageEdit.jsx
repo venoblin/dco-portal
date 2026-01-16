@@ -14,6 +14,7 @@ import useToggle from '../../hooks/useToggle'
 import { generateXlsxFile } from '../../utils/xlsx'
 import { findAllDevices } from '../../services/tools'
 import { constructQueries } from '../../utils'
+import NotFound from '../routes/NotFound'
 import LoadingIcon from '../LoadingIcon'
 import SvgButton from '../SvgButton'
 
@@ -36,8 +37,6 @@ const TriageEdit = () => {
       if (res.triage) {
         setTriage(res.triage)
         setName(res.triage.name)
-      } else {
-        throw new Error()
       }
     } catch {
       appContext.showPopup("Couldn't find triage")
@@ -98,10 +97,8 @@ const TriageEdit = () => {
         patchTriage(triage.id, { name: name })
       )
 
-      if (res) {
+      if (res.triage) {
         setTriage(res.triage)
-      } else {
-        throw new Error()
       }
 
       toggleIsEditMode()
@@ -279,6 +276,10 @@ const TriageEdit = () => {
 
     getTriage()
   }, [])
+
+  if (triage === null) {
+    return <NotFound />
+  }
 
   return (
     <div className="TriageEdit">
