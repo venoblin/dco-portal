@@ -33,7 +33,7 @@ const TriageEdit = () => {
     try {
       const res = await appContext.load(() => getSingleTriage(id))
 
-      if (res) {
+      if (res.triage) {
         setTriage(res.triage)
         setName(res.triage.name)
       } else {

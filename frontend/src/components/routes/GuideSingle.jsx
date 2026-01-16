@@ -1,24 +1,24 @@
 import './GuideSingle.css'
 import { useContext, useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { AppContext } from '../../contexts/AppContext'
 import { cleanTime } from '../../utils'
 import { getSingleGuide } from '../../services/guides'
+import NotFound from '../routes/NotFound'
 import LoadingIcon from '../LoadingIcon'
 
 const GuideSingle = () => {
   const appContext = useContext(AppContext)
   const { id } = useParams()
+  const nav = useNavigate()
   const [guide, setGuide] = useState(null)
 
   const getGuide = async () => {
     try {
       const res = await appContext.load(() => getSingleGuide(id))
 
-      if (res) {
+      if (res.guide) {
         setGuide(res.guide)
-      } else {
-        appContext.showPopup('Guide was not found!')
       }
     } catch (error) {
       appContext.showPopup(error.message)
@@ -28,6 +28,10 @@ const GuideSingle = () => {
   useEffect(() => {
     getGuide()
   }, [])
+
+  if (guide === null) {
+    return <NotFound />
+  }
 
   return (
     <div className="GuideSingle">

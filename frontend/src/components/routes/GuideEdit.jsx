@@ -5,6 +5,7 @@ import { AppContext } from '../../contexts/AppContext'
 import useFormState from '../../hooks/useFormState'
 import { getSingleGuide, patchGuide, deleteGuide } from '../../services/guides'
 import useFormState from '../../hooks/useFormState'
+import NotFound from '../routes/NotFound'
 import LoadingIcon from '../LoadingIcon'
 import Editor from '../Editor'
 
@@ -45,10 +46,12 @@ const GuideEdit = () => {
     try {
       const res = await appContext.load(() => getSingleGuide(id))
 
-      setGuide(res.guide)
-      setAuthor(res.guide.author)
-      setTitle(res.guide.title)
-      setContent(res.guide.content)
+      if (res.guide) {
+        setGuide(res.guide)
+        setAuthor(res.guide.author)
+        setTitle(res.guide.title)
+        setContent(res.guide.content)
+      }
     } catch (error) {
       appContext.showPopup(error.message)
     }
@@ -79,6 +82,10 @@ const GuideEdit = () => {
   useEffect(() => {
     getGuide()
   }, [])
+
+  if (guide === null) {
+    return <NotFound />
+  }
 
   return (
     <div className="GuideEdit">
