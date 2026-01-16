@@ -41,7 +41,7 @@ const GuidesNew = () => {
     <div>
       <header>
         <div>
-          <Link to="-1">← Back</Link>
+          <Link to={-1}>← Back</Link>
           <h1>New Guide</h1>
         </div>
 

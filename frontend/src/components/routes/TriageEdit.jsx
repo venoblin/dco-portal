@@ -284,7 +284,7 @@ const TriageEdit = () => {
     <div className="TriageEdit">
       <header>
         <div>
-          <Link to="/tools/triage-manager">← Back</Link>
+          <Link to={-1}>← Back</Link>
 
           {triage && (
             <div>

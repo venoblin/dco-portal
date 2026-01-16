@@ -36,7 +36,7 @@ const GuideSingle = () => {
           <div>
             <header>
               <div>
-                <Link to="/guides">← Back</Link>
+                <Link to={-1}>← Back</Link>
                 <h1>{guide.title}</h1>
                 <p className="muted-text">By {guide.author}</p>
                 <p className="muted-text">
