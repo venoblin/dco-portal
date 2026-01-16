@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js",
+    "dev": "npm run build:frontend && nodemon index.js",
     "dev:frontend": "cd frontend && npm run dev",
     "build:frontend": "cd frontend && npm run build",
     "install:all": "npm i && cd frontend && npm i",
